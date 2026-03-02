@@ -4,17 +4,145 @@
 
   <url>
     <loc>https://www.designdistricthyd.com/</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+
+    <!-- Founder -->
     <image:image>
-      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/c_fill,w_1200,h_630,g_face/v1772159011/Aishwarya-Agarwal-DDH-001x1_kcphvi.jpg</image:loc>
-      <image:title>Aishwarya Agarwal — Founder, Design District Hyd</image:title>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772159011/Aishwarya-Agarwal-DDH-001x1_kcphvi.jpg</image:loc>
+      <image:title>Aishwarya Agarwal — Founder and Creative Director, Design District Hyd</image:title>
+      <image:caption>Aishwarya Agarwal, founder of Design District Hyd, a curated luxury fashion showcase in Hyderabad</image:caption>
     </image:image>
+
+    <!-- Hero Slider -->
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772185395/Aishwarya-Agarwal-DDH-002-Anuragh-Gupta-x1_yk6aua.jpg</image:loc>
+      <image:title>Design District Hyd Season 1 — Anuragh Gupta at Park Hyatt Hyderabad</image:title>
+      <image:caption>Independent Indian designer Anuragh Gupta at Design District Hyd Season 1, Park Hyatt Hyderabad</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772071983/design-district-hyderabad-_8_o35wmq.jpg</image:loc>
+      <image:title>Design District Hyd — Curated Fashion Showcase Hyderabad</image:title>
+      <image:caption>Curated fashion showcase at Design District Hyd featuring India's finest independent designers</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772071859/design-district-hyderabad-_16_azwxqy.jpg</image:loc>
+      <image:title>Design District Hyd Season 2 — Fashion Collections Hyderabad 2026</image:title>
+      <image:caption>Season 2 fashion collections at Design District Hyd, Park Hyatt Hyderabad, 24 March 2026</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772185968/Aishwarya-Agarwal-DDH-003-Parul-Priyanks-x1_i4hf8u.jpg</image:loc>
+      <image:title>Design District Hyd Season 1 — Parul and Priyanka at Park Hyatt Hyderabad</image:title>
+      <image:caption>Designers Parul and Priyanka showcasing at Design District Hyd Season 1, Hyderabad</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302586/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_DSC00238_1_sw2q47.jpg</image:loc>
+      <image:title>Design District Hyd by Aishwarya Agarwal — Season 1 Live Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 curated fashion event by Aishwarya Agarwal, Park Hyatt Hyderabad 2025</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772071851/design-district-hyderabad-_21_sgfhb4.jpg</image:loc>
+      <image:title>Design District Hyd — Park Hyatt Hyderabad Fashion Event</image:title>
+      <image:caption>Fashion showcase at Design District Hyd, Park Hyatt Hyderabad</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302589/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_5_zbjydl.jpg</image:loc>
+      <image:title>Design District Hyd Season 1 — Live Fashion Event Hyderabad 2025</image:title>
+      <image:caption>Live fashion showcase at Design District Hyd Season 1, Park Hyatt Hyderabad, September 2025</image:caption>
+    </image:image>
+
+    <!-- Gallery -->
     <image:image>
       <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302589/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_12_slovqy.jpg</image:loc>
-      <image:title>Design District Hyd Season 1 — Opening Night</image:title>
+      <image:title>Design District Hyd Season 1 — Opening Night Park Hyatt Hyderabad</image:title>
+      <image:caption>Opening night of Design District Hyd Season 1 by Aishwarya Agarwal, Park Hyatt Hyderabad, September 2025</image:caption>
     </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302585/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_9_1_n5drof.jpg</image:loc>
+      <image:title>Design District Hyd — Curated Designer Floor Season 1 Hyderabad</image:title>
+      <image:caption>Curated designer floor at Design District Hyd Season 1 featuring independent Indian fashion labels</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302585/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_20_gksory.jpg</image:loc>
+      <image:title>Design District Hyd — Indian Craft and Textile Detail Season 1</image:title>
+      <image:caption>Craft and textile detail at Design District Hyd Season 1 showcasing India's finest independent designers</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302584/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_15_1_hclpoc.jpg</image:loc>
+      <image:title>Design District Hyd — Luxury Fashion Experience Hyderabad</image:title>
+      <image:caption>The Design District Hyd experience — curated luxury fashion pop-up by Aishwarya Agarwal, Hyderabad</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302576/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_27_lncnnc.jpg</image:loc>
+      <image:title>Design District Hyd Season 1 — Abhishek Sharma and Monika Sagar</image:title>
+      <image:caption>Designer Abhishek Sharma and Monika Sagar at Design District Hyd Season 1, Park Hyatt Hyderabad</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302468/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_21_1_vzxbf7.jpg</image:loc>
+      <image:title>Design District Hyd Season 1 Live — Fashion Event Hyderabad 2025</image:title>
+      <image:caption>Live showcase at Design District Hyd Season 1, Hyderabad's premier curated independent fashion event</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302583/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_18_1_m8zkqm.jpg</image:loc>
+      <image:title>Design District Hyd — Independent Designer Collections Season 1</image:title>
+      <image:caption>Independent Indian designer collections on display at Design District Hyd Season 1, Park Hyatt Hyderabad</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302470/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_37_1_p7ex4f.jpg</image:loc>
+      <image:title>Design District Hyd Season 1 — Anaydara by Gunjan Hyderabad</image:title>
+      <image:caption>Designer Gunjan of Anaydara showcasing at Design District Hyd Season 1, Park Hyatt Hyderabad 2025</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302467/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_7_1_fx889n.jpg</image:loc>
+      <image:title>Design District Hyd — Master Crafts Indian Fashion Hyderabad</image:title>
+      <image:caption>Master craftsmanship on display at Design District Hyd celebrating India's finest independent fashion labels</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302464/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_14_1_apthzo.jpg</image:loc>
+      <image:title>Design District Hyd — Season 1 Experience Park Hyatt Hyderabad</image:title>
+      <image:caption>The Design District Hyd Season 1 experience at Park Hyatt Hyderabad, curated by Aishwarya Agarwal</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302464/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_17_1_igupqg.jpg</image:loc>
+      <image:title>Design District Hyd Season 2 Teaser — Luxury Fashion Hyderabad 2026</image:title>
+      <image:caption>Season 2 teaser for Design District Hyd returning to Park Hyatt Hyderabad on 24 March 2026</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302464/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_10_1_stcjsw.jpg</image:loc>
+      <image:title>Design District Hyd — Fashion Moments Season 1 Hyderabad</image:title>
+      <image:caption>Memorable fashion moments from Design District Hyd Season 1, Park Hyatt Hyderabad, September 2025</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302463/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_11_1_tacrnm.jpg</image:loc>
+      <image:title>Design District Hyd — Curated Fashion Experience Season 1</image:title>
+      <image:caption>Curated fashion experience at Design District Hyd Season 1, Park Hyatt Hyderabad 2025</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302465/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_16_lywmzz.jpg</image:loc>
+      <image:title>Design District Hyd — Season 1 Showcase Experience Hyderabad</image:title>
+      <image:caption>The immersive showcase experience at Design District Hyd Season 1 curated by Aishwarya Agarwal</image:caption>
+    </image:image>
+
   </url>
 
 </urlset>
