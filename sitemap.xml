@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://www.designdistricthyd.com/</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/c_fill,w_1200,h_630,g_face/v1772159011/Aishwarya-Agarwal-DDH-001x1_kcphvi.jpg</image:loc>
+      <image:title>Aishwarya Agarwal — Founder, Design District Hyd</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dfclvat2w/image/upload/f_auto,q_auto/v1772302589/design-distric-hyderabad-by-aishwarya-agarwal-season-01-_12_slovqy.jpg</image:loc>
+      <image:title>Design District Hyd Season 1 — Opening Night</image:title>
+    </image:image>
+  </url>
+
+</urlset>
