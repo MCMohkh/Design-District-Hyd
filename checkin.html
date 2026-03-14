@@ -543,19 +543,44 @@ function searchVisitor() {
   document.getElementById('searchSpinner').classList.add('show');
   document.getElementById('searchBtn').disabled = true;
   
-  // Simulate API call (replace with actual Google Sheets fetch)
-  setTimeout(() => {
-    const visitor = visitorsDatabase.find(v => v.phone === phone);
-    
-    document.getElementById('searchSpinner').classList.remove('show');
-    document.getElementById('searchBtn').disabled = false;
-    
-    if (visitor) {
-      showReturningVisitor(visitor);
-    } else {
+  // Real API call to Google Sheets
+  callAPI({ action: 'search', phone: phone })
+    .then(result => {
+      document.getElementById('searchSpinner').classList.remove('show');
+      document.getElementById('searchBtn').disabled = false;
+      if (result.found) {
+        showReturningVisitor(result.visitor);
+      } else {
+        showNewVisitorForm(phone);
+      }
+    })
+    .catch(err => {
+      document.getElementById('searchSpinner').classList.remove('show');
+      document.getElementById('searchBtn').disabled = false;
+      console.error('Search error:', err);
+      // Fallback: treat as new visitor if API unreachable
       showNewVisitorForm(phone);
-    }
-  }, 500);
+    });
+}
+
+// ============================================
+// SHARED API HELPER
+// ============================================
+
+async function callAPI(payload) {
+  const response = await fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    redirect: 'follow'
+  });
+  const text = await response.text();
+  const data = JSON.parse(text);
+
+  if (payload.action === 'search') {
+    return { found: data.success, visitor: data.data };
+  }
+  return data;
 }
 
 // ============================================
@@ -580,19 +605,31 @@ function showReturningVisitor(visitor) {
 }
 
 function checkInReturning(visitor) {
-  // Update visitor record
-  visitor.season2 = true;
-  visitor.season2Timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-  
-  // Update stats
-  stats.total++;
-  stats.returning++;
-  updateStats();
-  
-  // Save to Google Sheets (you'll implement this)
-  // saveToGoogleSheets(visitor);
-  
-  showSuccess(visitor.id);
+  const btn = document.getElementById('returningCheckinBtn');
+  btn.disabled = true;
+  btn.textContent = 'Checking in...';
+
+  callAPI({ action: 'checkin', phone: visitor.phone })
+    .then(result => {
+      if (result.success) {
+        stats.total++;
+        stats.returning++;
+        updateStats();
+        showSuccess(visitor.id);
+      } else {
+        btn.disabled = false;
+        btn.textContent = '✓ Check In for Season 2';
+        alert('Check-in failed: ' + result.message);
+      }
+    })
+    .catch(err => {
+      console.error('Check-in error:', err);
+      // Still show success locally so event isn't disrupted
+      stats.total++;
+      stats.returning++;
+      updateStats();
+      showSuccess(visitor.id);
+    });
 }
 
 // ============================================
@@ -624,43 +661,35 @@ function registerNewVisitor() {
   const companyType = document.querySelector('input[name="company"]:checked').value;
   const companyDetails = document.getElementById('companyDetails').value.trim() || companyType;
   
-  if (!name) {
-    alert('Please enter visitor name');
-    return;
-  }
-  
-  if (!area) {
-    alert('Please enter area or pincode');
-    return;
-  }
-  
-  // Generate new ID
-  const newID = generateUniqueID();
-  
-  // Create visitor object
-  const newVisitor = {
-    id: newID,
-    name: name,
-    phone: phone,
-    area: area,
-    company: companyDetails,
-    firstVisit: new Date().toLocaleDateString('en-IN'),
-    season2: true,
-    season2Timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
-  };
-  
-  // Add to database
-  visitorsDatabase.push(newVisitor);
-  
-  // Update stats
-  stats.total++;
-  stats.new++;
-  updateStats();
-  
-  // Save to Google Sheets (you'll implement this)
-  // saveToGoogleSheets(newVisitor);
-  
-  showSuccess(newID);
+  if (!name) { alert('Please enter visitor name'); return; }
+  if (!area) { alert('Please enter area or pincode'); return; }
+
+  const btn = document.getElementById('registerBtn');
+  btn.disabled = true;
+  btn.textContent = 'Registering...';
+
+  callAPI({ action: 'register', name, phone, area, company: companyDetails })
+    .then(result => {
+      btn.disabled = false;
+      btn.textContent = 'Register & Check In';
+      if (result.success) {
+        stats.total++;
+        stats.new++;
+        updateStats();
+        showSuccess(result.data.id);
+      } else {
+        alert('Registration failed: ' + result.message);
+      }
+    })
+    .catch(err => {
+      console.error('Registration error:', err);
+      btn.disabled = false;
+      btn.textContent = 'Register & Check In';
+      stats.total++;
+      stats.new++;
+      updateStats();
+      showSuccess('DDH-??? (sync pending — check sheets)');
+    });
 }
 
 // ============================================

@@ -415,18 +415,21 @@ let isLoading = false;
 // ============================================
 
 async function fetchFromAPI(action) {
+  // Google Apps Script requires redirect:follow and Content-Type text/plain (avoids CORS preflight)
   const response = await fetch(SCRIPT_URL, {
     method: 'POST',
     body: JSON.stringify({ action }),
-    headers: { 'Content-Type': 'text/plain' }
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    redirect: 'follow'
   });
-  const data = await response.json();
+  const text = await response.text();
+  const data = JSON.parse(text);
   if (!data.success) throw new Error(data.message);
   return data.data;
 }
 
 async function loadAllData() {
-  if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec') {
+  if (SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
     showBanner('⚠️ Demo Mode — paste your Google Apps Script URL into admin.html to go live', 'warning');
     return; // keep sample data
   }
