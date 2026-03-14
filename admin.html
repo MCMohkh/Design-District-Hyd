@@ -400,7 +400,7 @@
 // ============================================
 // CONFIGURATION — update after Google Apps Script is deployed
 // ============================================
-const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
 
 // ============================================
 // STATE
@@ -426,7 +426,7 @@ async function fetchFromAPI(action) {
 }
 
 async function loadAllData() {
-  if (SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+  if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec') {
     showBanner('⚠️ Demo Mode — paste your Google Apps Script URL into admin.html to go live', 'warning');
     return; // keep sample data
   }
