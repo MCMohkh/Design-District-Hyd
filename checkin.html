@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DDH Check-In | Design District Hyd</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --black: #0A0A0A;
+    --teal: #7AADA8;
+    --teal-dark: #4E8A85;
+    --cream: #F4EEE4;
+    --warm-white: #FAF7F2;
+    --terracotta: #C67B52;
+    --gold: #C4A35A;
+    --muted: #8A8070;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--black);
+    color: var(--cream);
+    min-height: 100vh;
+    padding-bottom: 2rem;
+  }
+  
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--black);
+    margin-bottom: 0.3rem;
+  }
+  
+  .header .subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.7);
+  }
+  
+  /* Stats Bar */
+  .stats-bar {
+    display: flex;
+    background: var(--warm-white);
+    padding: 1rem;
+    gap: 0.5rem;
+    justify-content: space-around;
+  }
+  
+  .stat-box {
+    flex: 1;
+    text-align: center;
+    padding: 0.8rem 0.5rem;
+    background: rgba(122, 173, 168, 0.1);
+    border-radius: 8px;
+  }
+  
+  .stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--teal-dark);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  
+  .stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  
+  /* Main Container */
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Search Section */
+  .search-section {
+    background: var(--warm-white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .search-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid var(--teal);
+    border-radius: 8px;
+    background: white;
+    color: var(--black);
+    font-weight: 500;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--teal-dark);
+    box-shadow: 0 0 0 3px rgba(122, 173, 168, 0.2);
+  }
+  
+  .search-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.8rem;
+    background: var(--teal);
+    color: var(--black);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .search-btn:active {
+    transform: scale(0.98);
+    background: var(--teal-dark);
+  }
+  
+  /* Result Card */
+  .result-card {
+    background: var(--warm-white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .result-card.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .visitor-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  
+  .badge-returning {
+    background: var(--gold);
+    color: var(--black);
+  }
+  
+  .badge-new {
+    background: var(--teal);
+    color: var(--black);
+  }
+  
+  .visitor-info {
+    color: var(--black);
+  }
+  
+  .visitor-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.3rem;
+  }
+  
+  .visitor-detail {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+  
+  .visitor-id {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--teal-dark);
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: rgba(122, 173, 168, 0.15);
+    border-radius: 8px;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Form Section */
+  .form-section {
+    background: var(--warm-white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .form-section.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    color: var(--black);
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(122, 173, 168, 0.15);
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .radio-option {
+    flex: 1;
+  }
+  
+  .radio-option input[type="radio"] {
+    display: none;
+  }
+  
+  .radio-label {
+    display: block;
+    padding: 0.8rem;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+    color: var(--black);
+  }
+  
+  .radio-option input[type="radio"]:checked + .radio-label {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: var(--black);
+    font-weight: 600;
+  }
+  
+  /* Action Buttons */
+  .btn-primary {
+    width: 100%;
+    padding: 1.1rem;
+    margin-top: 1rem;
+    background: var(--teal);
+    color: var(--black);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary:active {
+    transform: scale(0.98);
+    background: var(--teal-dark);
+  }
+  
+  .btn-secondary {
+    width: 100%;
+    padding: 0.9rem;
+    margin-top: 0.5rem;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--muted);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  /* Success Message */
+  .success-message {
+    background: var(--warm-white);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .success-message.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+  }
+  
+  .success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .success-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+  
+  .success-id {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--teal-dark);
+    margin: 1rem 0;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  /* Loading Spinner */
+  .spinner {
+    border: 3px solid rgba(122, 173, 168, 0.3);
+    border-top: 3px solid var(--teal);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 1rem auto;
+    display: none;
+  }
+  
+  .spinner.show {
+    display: block;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>DDH CHECK-IN</h1>
+  <div class="subtitle">Design District Hyd • Season 2</div>
+</div>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat-box">
+    <div class="stat-number" id="totalCount">0</div>
+    <div class="stat-label">Total</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-number" id="newCount">0</div>
+    <div class="stat-label">New</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-number" id="returningCount">0</div>
+    <div class="stat-label">Returning</div>
+  </div>
+</div>
+
+<!-- Main Container -->
+<div class="container">
+  
+  <!-- Search Section -->
+  <div class="search-section" id="searchSection">
+    <label class="search-label">Enter Phone Number</label>
+    <input 
+      type="tel" 
+      class="search-input" 
+      id="phoneInput" 
+      placeholder="10-digit number"
+      maxlength="10"
+      inputmode="numeric"
+    >
+    <button class="search-btn" id="searchBtn">Search Visitor</button>
+    <div class="spinner" id="searchSpinner"></div>
+  </div>
+  
+  <!-- Returning Visitor Result -->
+  <div class="result-card" id="returningCard">
+    <span class="visitor-badge badge-returning">🎉 Returning Visitor</span>
+    <div class="visitor-info">
+      <div class="visitor-name" id="returningName">—</div>
+      <div class="visitor-detail">📱 <span id="returningPhone">—</span></div>
+      <div class="visitor-detail">📍 <span id="returningArea">—</span></div>
+      <div class="visitor-detail">👥 <span id="returningCompany">—</span></div>
+      <div class="visitor-detail" style="margin-top: 0.5rem; color: var(--gold); font-weight: 600;">
+        Last visited: <span id="returningLastVisit">—</span>
+      </div>
+    </div>
+    <div class="visitor-id" id="returningID">DDH-XXX</div>
+    <button class="btn-primary" id="returningCheckinBtn">✓ Check In for Season 2</button>
+    <button class="btn-secondary" onclick="resetSearch()">Search Another</button>
+  </div>
+  
+  <!-- New Visitor Form -->
+  <div class="form-section" id="newVisitorForm">
+    <span class="visitor-badge badge-new">✨ New Visitor</span>
+    
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-input" id="nameInput" placeholder="Enter full name" required>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input type="tel" class="form-input" id="phoneInputForm" placeholder="10-digit number" maxlength="10" readonly>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Area / Pincode</label>
+      <input type="text" class="form-input" id="areaInput" placeholder="e.g., Banjara Hills or 500034">
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Coming with</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" id="alone" name="company" value="Alone">
+          <label for="alone" class="radio-label">Alone</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" id="company" name="company" value="With company" checked>
+          <label for="company" class="radio-label">With Company</label>
+        </div>
+      </div>
+      <input type="text" class="form-input" id="companyDetails" placeholder="e.g., 2 friends, family of 4" style="margin-top: 0.8rem;">
+    </div>
+    
+    <button class="btn-primary" id="registerBtn">Register & Check In</button>
+    <button class="btn-secondary" onclick="resetSearch()">Cancel</button>
+  </div>
+  
+  <!-- Success Message -->
+  <div class="success-message" id="successMessage">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Check-In Complete!</div>
+    <div class="success-id" id="successID">DDH-XXX</div>
+    <p style="color: var(--muted); margin-bottom: 1.5rem;">
+      Write this ID on the wrist band
+    </p>
+    <button class="btn-primary" onclick="resetSearch()">Next Visitor</button>
+  </div>
+  
+</div>
+
+<script>
+// ============================================
+// GOOGLE SHEETS INTEGRATION
+// ============================================
+
+// IMPORTANT: Replace this with your Google Apps Script Web App URL
+const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+// Sample data structure for demo (will be replaced with actual Google Sheets)
+let visitorsDatabase = [
+  // Season 1 data (placeholder - you'll replace this)
+  { id: 'DDH-001', name: 'Priya Sharma', phone: '9876543210', area: 'Banjara Hills', company: '2 friends', firstVisit: 'March 2025', season2: false },
+  { id: 'DDH-002', name: 'Rahul Kapoor', phone: '9123456789', area: '500034', company: 'Alone', firstVisit: 'March 2025', season2: false },
+  { id: 'DDH-003', name: 'Aisha Reddy', phone: '9988776655', area: 'Jubilee Hills', company: 'Family of 4', firstVisit: 'March 2025', season2: false }
+];
+
+let stats = {
+  total: 0,
+  new: 0,
+  returning: 0
+};
+
+// ============================================
+// PHONE SEARCH FUNCTION
+// ============================================
+
+document.getElementById('searchBtn').addEventListener('click', searchVisitor);
+document.getElementById('phoneInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') searchVisitor();
+});
+
+function searchVisitor() {
+  const phone = document.getElementById('phoneInput').value.trim();
+  
+  if (phone.length !== 10 || !/^\d{10}$/.test(phone)) {
+    alert('Please enter a valid 10-digit phone number');
+    return;
+  }
+  
+  // Show loading
+  document.getElementById('searchSpinner').classList.add('show');
+  document.getElementById('searchBtn').disabled = true;
+  
+  // Simulate API call (replace with actual Google Sheets fetch)
+  setTimeout(() => {
+    const visitor = visitorsDatabase.find(v => v.phone === phone);
+    
+    document.getElementById('searchSpinner').classList.remove('show');
+    document.getElementById('searchBtn').disabled = false;
+    
+    if (visitor) {
+      showReturningVisitor(visitor);
+    } else {
+      showNewVisitorForm(phone);
+    }
+  }, 500);
+}
+
+// ============================================
+// SHOW RETURNING VISITOR
+// ============================================
+
+function showReturningVisitor(visitor) {
+  // Hide search, show returning card
+  document.getElementById('searchSection').classList.add('hidden');
+  document.getElementById('returningCard').classList.add('show');
+  
+  // Populate data
+  document.getElementById('returningName').textContent = visitor.name;
+  document.getElementById('returningPhone').textContent = visitor.phone;
+  document.getElementById('returningArea').textContent = visitor.area;
+  document.getElementById('returningCompany').textContent = visitor.company;
+  document.getElementById('returningLastVisit').textContent = visitor.firstVisit;
+  document.getElementById('returningID').textContent = visitor.id;
+  
+  // Check-in button
+  document.getElementById('returningCheckinBtn').onclick = () => checkInReturning(visitor);
+}
+
+function checkInReturning(visitor) {
+  // Update visitor record
+  visitor.season2 = true;
+  visitor.season2Timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  
+  // Update stats
+  stats.total++;
+  stats.returning++;
+  updateStats();
+  
+  // Save to Google Sheets (you'll implement this)
+  // saveToGoogleSheets(visitor);
+  
+  showSuccess(visitor.id);
+}
+
+// ============================================
+// SHOW NEW VISITOR FORM
+// ============================================
+
+function showNewVisitorForm(phone) {
+  // Hide search, show form
+  document.getElementById('searchSection').classList.add('hidden');
+  document.getElementById('newVisitorForm').classList.add('show');
+  
+  // Pre-fill phone
+  document.getElementById('phoneInputForm').value = phone;
+  
+  // Focus on name input
+  document.getElementById('nameInput').focus();
+}
+
+// ============================================
+// REGISTER NEW VISITOR
+// ============================================
+
+document.getElementById('registerBtn').addEventListener('click', registerNewVisitor);
+
+function registerNewVisitor() {
+  const name = document.getElementById('nameInput').value.trim();
+  const phone = document.getElementById('phoneInputForm').value;
+  const area = document.getElementById('areaInput').value.trim();
+  const companyType = document.querySelector('input[name="company"]:checked').value;
+  const companyDetails = document.getElementById('companyDetails').value.trim() || companyType;
+  
+  if (!name) {
+    alert('Please enter visitor name');
+    return;
+  }
+  
+  if (!area) {
+    alert('Please enter area or pincode');
+    return;
+  }
+  
+  // Generate new ID
+  const newID = generateUniqueID();
+  
+  // Create visitor object
+  const newVisitor = {
+    id: newID,
+    name: name,
+    phone: phone,
+    area: area,
+    company: companyDetails,
+    firstVisit: new Date().toLocaleDateString('en-IN'),
+    season2: true,
+    season2Timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+  };
+  
+  // Add to database
+  visitorsDatabase.push(newVisitor);
+  
+  // Update stats
+  stats.total++;
+  stats.new++;
+  updateStats();
+  
+  // Save to Google Sheets (you'll implement this)
+  // saveToGoogleSheets(newVisitor);
+  
+  showSuccess(newID);
+}
+
+// ============================================
+// GENERATE UNIQUE ID
+// ============================================
+
+function generateUniqueID() {
+  const maxID = visitorsDatabase.reduce((max, v) => {
+    const num = parseInt(v.id.split('-')[1]);
+    return num > max ? num : max;
+  }, 0);
+  
+  const newNum = maxID + 1;
+  return `DDH-${String(newNum).padStart(3, '0')}`;
+}
+
+// ============================================
+// SHOW SUCCESS
+// ============================================
+
+function showSuccess(id) {
+  // Hide form/card
+  document.getElementById('returningCard').classList.remove('show');
+  document.getElementById('newVisitorForm').classList.remove('show');
+  
+  // Show success
+  document.getElementById('successMessage').classList.add('show');
+  document.getElementById('successID').textContent = id;
+  
+  // Play success sound (optional)
+  // new Audio('success.mp3').play();
+}
+
+// ============================================
+// UPDATE STATS
+// ============================================
+
+function updateStats() {
+  document.getElementById('totalCount').textContent = stats.total;
+  document.getElementById('newCount').textContent = stats.new;
+  document.getElementById('returningCount').textContent = stats.returning;
+}
+
+// ============================================
+// RESET SEARCH
+// ============================================
+
+function resetSearch() {
+  // Clear inputs
+  document.getElementById('phoneInput').value = '';
+  document.getElementById('nameInput').value = '';
+  document.getElementById('areaInput').value = '';
+  document.getElementById('companyDetails').value = '';
+  
+  // Hide all cards/forms
+  document.getElementById('returningCard').classList.remove('show');
+  document.getElementById('newVisitorForm').classList.remove('show');
+  document.getElementById('successMessage').classList.remove('show');
+  
+  // Show search
+  document.getElementById('searchSection').classList.remove('hidden');
+  
+  // Focus phone input
+  document.getElementById('phoneInput').focus();
+}
+
+// ============================================
+// PREVENT SCREEN SLEEP (MOBILE)
+// ============================================
+
+let wakeLock = null;
+
+async function requestWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      wakeLock = await navigator.wakeLock.request('screen');
+      console.log('Wake Lock activated');
+    }
+  } catch (err) {
+    console.log('Wake Lock error:', err);
+  }
+}
+
+// Request wake lock on load
+requestWakeLock();
+
+// Re-acquire wake lock on visibility change
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    requestWakeLock();
+  }
+});
+
+// ============================================
+// INITIALIZE
+// ============================================
+
+// Load stats on page load (from localStorage or Google Sheets)
+function loadStats() {
+  const saved = localStorage.getItem('ddhStats');
+  if (saved) {
+    stats = JSON.parse(saved);
+    updateStats();
+  }
+}
+
+// Save stats
+function saveStats() {
+  localStorage.setItem('ddhStats', JSON.stringify(stats));
+}
+
+// Auto-save stats every time they update
+setInterval(saveStats, 2000);
+
+// Initialize
+loadStats();
+document.getElementById('phoneInput').focus();
+
+</script>
+
+</body>
+</html>
