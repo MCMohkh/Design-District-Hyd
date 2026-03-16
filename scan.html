@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DDH Entry Scanner</title>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:      #0A0A0A;
+  --teal:       #7AADA8;
+  --teal-dark:  #4E8A85;
+  --cream:      #F4EEE4;
+  --warm-white: #FAF7F2;
+  --terracotta: #C67B52;
+  --gold:       #C4A35A;
+  --muted:      #8A8070;
+  --green-dark: #1B5E20;
+  --green:      #2E7D32;
+  --red-dark:   #7f1d1d;
+  --red:        #991b1b;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--black);
+  color: var(--cream);
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+  padding: 1rem;
+  text-align: center;
+}
+.header h1 { font-size: 1.2rem; font-weight: 700; color: var(--black); letter-spacing: 0.05em; }
+.header .subtitle { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(10,10,10,0.65); }
+
+/* ── Live headcount bar ── */
+.headcount-bar {
+  display: flex;
+  background: var(--warm-white);
+  padding: 0.8rem 1rem;
+}
+.hc-item { flex: 1; text-align: center; }
+.hc-num  { font-size: 1.8rem; font-weight: 900; color: var(--teal-dark); line-height: 1; }
+.hc-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 2px; }
+
+/* ── Main container ── */
+.main { max-width: 480px; margin: 0 auto; padding: 1rem; }
+
+/* ── Result card (overlays top of scanner area) ── */
+.result-card {
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: none;
+  animation: slideDown 0.25s ease;
+}
+.result-card.show { display: block; }
+.result-card.success  { background: linear-gradient(135deg, var(--green-dark), var(--green));  border: 2px solid #4CAF50; }
+.result-card.error    { background: linear-gradient(135deg, var(--red-dark),   var(--red));    border: 2px solid #EF5350; }
+.result-card.already  { background: linear-gradient(135deg, #78350f, #92400e); border: 2px solid var(--gold); }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.result-icon { font-size: 2.5rem; margin-bottom: 0.4rem; }
+.result-name { font-size: 1.4rem; font-weight: 800; color: #fff; }
+.result-id   { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 0.2rem 0; }
+.result-area { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+.result-msg  { font-size: 0.75rem; color: rgba(255,255,255,0.8); margin-top: 0.4rem; font-style: italic; }
+
+/* ── Camera viewfinder ── */
+.viewfinder-wrap { position: relative; margin-bottom: 0.8rem; }
+
+#reader { width: 100%; border-radius: 12px; overflow: hidden; border: 3px solid var(--teal); }
+
+/* fix html5-qrcode injected styles */
+#reader video { border-radius: 0 !important; }
+#reader__scan_region { border-radius: 0 !important; }
+#reader__header_message { display: none !important; }
+#reader__status_span { display: none !important; }
+#reader__camera_selection { 
+  width: 100%; padding: 0.5rem; background: rgba(255,255,255,0.1);
+  color: var(--cream); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px; font-size: 0.85rem; margin-bottom: 0.5rem;
+}
+
+/* ── Scan / Stop button ── */
+.scan-toggle {
+  width: 100%; padding: 1rem; border-radius: 12px; border: none;
+  font-size: 1rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; cursor: pointer; margin-bottom: 0.8rem; transition: all 0.2s;
+}
+.scan-toggle.start { background: var(--teal);       color: var(--black); }
+.scan-toggle.stop  { background: var(--terracotta); color: #fff; }
+.scan-toggle:active { transform: scale(0.98); }
+.scan-toggle:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Divider ── */
+.divider {
+  display: flex; align-items: center; gap: 1rem;
+  color: var(--muted); font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.1em; margin: 1rem 0;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.12);
+}
+
+/* ── Manual search ── */
+.manual-section {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem;
+}
+.section-title {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted); margin-bottom: 0.8rem;
+}
+.input-row { display: flex; gap: 0.5rem; }
+.manual-input {
+  flex: 1; padding: 0.8rem; border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15); color: var(--cream); font-size: 1rem;
+  outline: none; transition: border-color 0.2s;
+}
+.manual-input:focus { border-color: var(--teal); }
+.manual-input::placeholder { color: var(--muted); }
+.go-btn {
+  padding: 0.8rem 1.2rem; background: var(--teal); color: var(--black);
+  border: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem;
+  text-transform: uppercase; cursor: pointer; white-space: nowrap;
+}
+.go-btn:active { transform: scale(0.97); }
+
+/* ── Scan history ── */
+.history-section {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 1.2rem;
+}
+.scan-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.scan-item:last-child { border-bottom: none; }
+.si-name { font-size: 0.9rem; font-weight: 600; }
+.si-sub  { font-size: 0.7rem; color: var(--muted); margin-top: 1px; }
+.si-badge {
+  font-size: 0.65rem; font-weight: 700; padding: 0.25rem 0.6rem;
+  border-radius: 8px; text-transform: uppercase; white-space: nowrap;
+}
+.si-badge.ok  { background: rgba(76,175,80,0.2);  color: #4CAF50; }
+.si-badge.dup { background: rgba(196,163,90,0.2); color: var(--gold); }
+.si-badge.err { background: rgba(198,123,82,0.2); color: var(--terracotta); }
+
+.empty-history { font-size: 0.8rem; color: var(--muted); text-align: center; padding: 1rem 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔍 DDH Entry Scanner</h1>
+  <div class="subtitle">Design District Hyd · Season 2 · Volunteer View</div>
+</div>
+
+<div class="headcount-bar">
+  <div class="hc-item">
+    <div class="hc-num"   id="hcRegistered">—</div>
+    <div class="hc-label">Registered</div>
+  </div>
+  <div class="hc-item">
+    <div class="hc-num"   id="hcEntered">—</div>
+    <div class="hc-label">Entered Today</div>
+  </div>
+  <div class="hc-item">
+    <div class="hc-num"   id="hcNew">—</div>
+    <div class="hc-label">New Visitors</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- Result feedback card -->
+  <div class="result-card" id="resultCard">
+    <div class="result-icon" id="resultIcon">✓</div>
+    <div class="result-name" id="resultName">—</div>
+    <div class="result-id"   id="resultId">DDH-000</div>
+    <div class="result-area" id="resultArea">—</div>
+    <div class="result-msg"  id="resultMsg">—</div>
+  </div>
+
+  <!-- Camera viewfinder -->
+  <div class="viewfinder-wrap">
+    <div id="reader"></div>
+  </div>
+
+  <button id="scanToggle" class="scan-toggle start" onclick="toggleScanner()">
+    ▶ Start Camera Scanner
+  </button>
+
+  <div class="divider">or enter manually</div>
+
+  <!-- Manual phone / ID lookup -->
+  <div class="manual-section">
+    <div class="section-title">Phone number or Visitor ID</div>
+    <div class="input-row">
+      <input type="text" class="manual-input" id="manualInput"
+        placeholder="9876543210  or  DDH-142" inputmode="text" autocomplete="off">
+      <button class="go-btn" onclick="manualLookup()">Go</button>
+    </div>
+  </div>
+
+  <!-- Scan history -->
+  <div class="history-section">
+    <div class="section-title" style="margin-bottom:0.8rem;">Recent Scans (this session)</div>
+    <div id="scanHistory">
+      <div class="empty-history">No scans yet</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
+
+let html5QrCode   = null;
+let scanning      = false;
+let lastScanned   = '';
+let lastScannedAt = 0;
+let scanHistory   = [];
+
+// ── API ────────────────────────────────────
+async function callAPI(payload) {
+  const res  = await fetch(SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    redirect: 'follow'
+  });
+  return JSON.parse(await res.text());
+}
+
+// ── Scanner toggle ─────────────────────────
+async function toggleScanner() {
+  scanning ? await stopScanner() : await startScanner();
+}
+
+async function startScanner() {
+  const btn = document.getElementById('scanToggle');
+  btn.disabled = true;
+  btn.textContent = 'Starting camera...';
+
+  html5QrCode = new Html5Qrcode('reader');
+
+  try {
+    await html5QrCode.start(
+      { facingMode: 'environment' },
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      onQRDetected,
+      () => {} // silent per-frame non-match errors
+    );
+    scanning = true;
+    btn.className   = 'scan-toggle stop';
+    btn.textContent = '⏹ Stop Scanner';
+  } catch (err) {
+    html5QrCode = null;
+    btn.className   = 'scan-toggle start';
+    btn.textContent = '▶ Start Camera Scanner';
+    showResult('error', '📷', 'Camera Error', '', '', 'Tap Allow when asked for camera access, then try again');
+  }
+  btn.disabled = false;
+}
+
+async function stopScanner() {
+  const btn = document.getElementById('scanToggle');
+  scanning = false;
+  if (html5QrCode) {
+    try { await html5QrCode.stop(); html5QrCode.clear(); } catch(e) {}
+    html5QrCode = null;
+  }
+  btn.className   = 'scan-toggle start';
+  btn.textContent = '▶ Start Camera Scanner';
+}
+
+// ── QR detected ────────────────────────────
+async function onQRDetected(text) {
+  const now = Date.now();
+  // Debounce: ignore same code within 5 seconds
+  if (text === lastScanned && now - lastScannedAt < 5000) return;
+  lastScanned   = text;
+  lastScannedAt = now;
+
+  await processEntry(text.trim());
+}
+
+// ── Manual input ───────────────────────────
+document.getElementById('manualInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') manualLookup();
+});
+
+function manualLookup() {
+  const val = document.getElementById('manualInput').value.trim();
+  if (!val) return;
+  document.getElementById('manualInput').value = '';
+  processEntry(val);
+}
+
+// ── Core entry logic ───────────────────────
+async function processEntry(value) {
+  const isId     = /^DDH-\d+$/i.test(value);
+  const isPhone  = /^\d{10}$/.test(value);
+  const action   = isId ? 'scanById' : isPhone ? 'scanByPhone' : null;
+
+  if (!action) {
+    showResult('error', '✗', 'Invalid Input', '', '', `"${value}" is not a valid ID or phone number`);
+    return;
+  }
+
+  try {
+    const result = await callAPI({ action, value });
+    const v = result.data;
+
+    if (result.success) {
+      const isNew = v.type !== 'Returning';
+      showResult(
+        'success', '✓',
+        v.name,
+        `${v.id}  ·  ${isNew ? '✨ New' : '🎉 Returning'}`,
+        v.area || '',
+        'Entry confirmed — welcome!'
+      );
+      addHistory(v.name, v.id, 'ok');
+      refreshStats();
+    } else if (result.message === 'Already scanned in') {
+      showResult('already', '⚠️', v?.name || '—', v?.id || value, v?.area || '', 'Already entered — duplicate scan');
+      addHistory(v?.name || value, v?.id || '—', 'dup');
+    } else {
+      showResult('error', '✗', 'Not Found', '', value, result.message);
+      addHistory(value, '—', 'err');
+    }
+  } catch (err) {
+    console.error(err);
+    showResult('error', '✗', 'Connection Error', '', '', 'Could not reach server — check your internet');
+  }
+}
+
+// ── Result display ─────────────────────────
+let resultTimer;
+function showResult(type, icon, name, id, area, msg) {
+  const card = document.getElementById('resultCard');
+  card.className = `result-card show ${type}`;
+  document.getElementById('resultIcon').textContent = icon;
+  document.getElementById('resultName').textContent = name;
+  document.getElementById('resultId').textContent   = id;
+  document.getElementById('resultArea').textContent = area;
+  document.getElementById('resultMsg').textContent  = msg;
+
+  clearTimeout(resultTimer);
+  resultTimer = setTimeout(() => { card.classList.remove('show'); }, 5000);
+}
+
+// ── History ────────────────────────────────
+function addHistory(name, id, status) {
+  const time = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+  scanHistory.unshift({ name, id, time, status });
+  if (scanHistory.length > 12) scanHistory.pop();
+  renderHistory();
+}
+
+function renderHistory() {
+  const el = document.getElementById('scanHistory');
+  if (!scanHistory.length) {
+    el.innerHTML = '<div class="empty-history">No scans yet</div>';
+    return;
+  }
+  el.innerHTML = scanHistory.map(s => `
+    <div class="scan-item">
+      <div>
+        <div class="si-name">${s.name}</div>
+        <div class="si-sub">${s.id} &middot; ${s.time}</div>
+      </div>
+      <span class="si-badge ${s.status}">${s.status === 'ok' ? '✓ In' : s.status === 'dup' ? '⚠ Dup' : '✗ Err'}</span>
+    </div>`).join('');
+}
+
+// ── Live stats ─────────────────────────────
+async function refreshStats() {
+  try {
+    const r = await callAPI({ action: 'getStats' });
+    if (r?.success && r.data) {
+      document.getElementById('hcRegistered').textContent = r.data.total   ?? '—';
+      document.getElementById('hcEntered').textContent    = r.data.scanned ?? '—';
+      document.getElementById('hcNew').textContent        = r.data.new     ?? '—';
+    }
+  } catch(e) {}
+}
+
+// ── Init ───────────────────────────────────
+refreshStats();
+setInterval(refreshStats, 30000);
+try { if ('wakeLock' in navigator) navigator.wakeLock.request('screen'); } catch(e) {}
+</script>
+</body>
+</html>
