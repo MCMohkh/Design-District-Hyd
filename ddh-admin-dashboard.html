@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DDH Admin Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --black: #0A0A0A;
+    --teal: #7AADA8;
+    --teal-dark: #4E8A85;
+    --cream: #F4EEE4;
+    --warm-white: #FAF7F2;
+    --gold: #C4A35A;
+    --muted: #8A8070;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--black);
+    color: var(--cream);
+    padding: 2rem 1rem;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  
+  .header .subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .stat-card {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(10,10,10,0.7);
+    font-weight: 600;
+  }
+  
+  /* Charts Section */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .chart-card {
+    background: var(--warm-white);
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .chart-card h3 {
+    font-size: 1.2rem;
+    color: var(--black);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .chart-placeholder {
+    height: 250px;
+    background: rgba(122, 173, 168, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+  }
+  
+  /* Visitor List */
+  .visitor-list {
+    background: var(--warm-white);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+  
+  .visitor-list h2 {
+    font-size: 1.5rem;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .search-export {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .search-box {
+    flex: 1;
+    min-width: 250px;
+    padding: 0.8rem;
+    border: 2px solid var(--teal);
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .export-btn {
+    padding: 0.8rem 1.5rem;
+    background: var(--teal);
+    color: var(--black);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
+  
+  .export-btn:hover {
+    background: var(--teal-dark);
+  }
+  
+  .visitor-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  
+  .visitor-table th {
+    background: var(--teal);
+    color: var(--black);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .visitor-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    color: var(--black);
+  }
+  
+  .visitor-table tr:hover {
+    background: rgba(122, 173, 168, 0.1);
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .badge-new {
+    background: var(--teal);
+    color: var(--black);
+  }
+  
+  .badge-returning {
+    background: var(--gold);
+    color: var(--black);
+  }
+  
+  /* Area Distribution */
+  .area-list {
+    list-style: none;
+  }
+  
+  .area-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    border-bottom: 1px solid #ddd;
+    color: var(--black);
+  }
+  
+  .area-name {
+    font-weight: 600;
+  }
+  
+  .area-count {
+    background: var(--teal);
+    color: var(--black);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  
+  /* Refresh Button */
+  .refresh-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: none;
+    color: var(--black);
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  
+  .refresh-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  .refresh-btn:active {
+    transform: scale(0.95);
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .refresh-btn.spinning {
+    animation: spin 1s linear;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header h1 { font-size: 2rem; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .visitor-table { font-size: 0.8rem; }
+    .visitor-table th,
+    .visitor-table td { padding: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Header -->
+  <div class="header">
+    <h1>DDH Admin Dashboard</h1>
+    <div class="subtitle">Design District Hyd • Season 2 • Live Monitoring</div>
+  </div>
+  
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number" id="totalStat">0</div>
+      <div class="stat-label">Total Check-ins</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-number" id="newStat">0</div>
+      <div class="stat-label">New Visitors</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-number" id="returningStat">0</div>
+      <div class="stat-label">Returning Visitors</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-number" id="rateStat">0</div>
+      <div class="stat-label">Per Hour Rate</div>
+    </div>
+  </div>
+  
+  <!-- Charts Grid -->
+  <div class="charts-grid">
+    
+    <!-- Visitor Type Breakdown -->
+    <div class="chart-card">
+      <h3>📊 Visitor Type</h3>
+      <div class="chart-placeholder">
+        <canvas id="typeChart"></canvas>
+      </div>
+    </div>
+    
+    <!-- Top Areas -->
+    <div class="chart-card">
+      <h3>📍 Top Areas</h3>
+      <ul class="area-list" id="areaList">
+        <li class="area-item">
+          <span class="area-name">Loading...</span>
+          <span class="area-count">—</span>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Time-based Check-ins -->
+    <div class="chart-card">
+      <h3>⏰ Check-ins Timeline</h3>
+      <div class="chart-placeholder">
+        <canvas id="timeChart"></canvas>
+      </div>
+    </div>
+    
+    <!-- Company Stats -->
+    <div class="chart-card">
+      <h3>👥 Solo vs Groups</h3>
+      <div class="chart-placeholder">
+        <canvas id="companyChart"></canvas>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Recent Check-ins -->
+  <div class="visitor-list">
+    <h2>Recent Check-ins</h2>
+    
+    <div class="search-export">
+      <input 
+        type="text" 
+        class="search-box" 
+        id="searchBox" 
+        placeholder="Search by name, phone, or area..."
+      >
+      <button class="export-btn" onclick="exportToExcel()">📥 Export to Excel</button>
+      <button class="export-btn" onclick="exportToCSV()">📄 Export to CSV</button>
+    </div>
+    
+    <div style="overflow-x: auto;">
+      <table class="visitor-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Area</th>
+            <th>Company</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody id="visitorTableBody">
+          <tr>
+            <td colspan="7" style="text-align: center; color: var(--muted);">
+              Loading visitor data...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Refresh Button -->
+<button class="refresh-btn" id="refreshBtn" onclick="refreshData()">
+  🔄
+</button>
+
+<script>
+// ============================================
+// SAMPLE DATA (Replace with Google Sheets API)
+// ============================================
+
+let visitors = [
+  { timestamp: '2026-03-24 10:15', id: 'DDH-001', name: 'Priya Sharma', phone: '9876543210', area: 'Banjara Hills', company: '2 friends', type: 'Returning' },
+  { timestamp: '2026-03-24 10:22', id: 'DDH-006', name: 'Neha Singh', phone: '9123456780', area: 'Jubilee Hills', company: 'Alone', type: 'New' },
+  { timestamp: '2026-03-24 10:28', id: 'DDH-002', name: 'Rahul Kapoor', phone: '9123456789', area: 'Gachibowli', company: 'Alone', type: 'Returning' },
+  { timestamp: '2026-03-24 10:35', id: 'DDH-007', name: 'Kavya Reddy', phone: '9988001122', area: 'Madhapur', company: 'Family of 3', type: 'New' }
+];
+
+let stats = {
+  total: 4,
+  new: 2,
+  returning: 2,
+  perHour: 12
+};
+
+// ============================================
+// UPDATE STATS
+// ============================================
+
+function updateStats() {
+  document.getElementById('totalStat').textContent = stats.total;
+  document.getElementById('newStat').textContent = stats.new;
+  document.getElementById('returningStat').textContent = stats.returning;
+  document.getElementById('rateStat').textContent = stats.perHour;
+}
+
+// ============================================
+// UPDATE VISITOR TABLE
+// ============================================
+
+function updateVisitorTable(searchTerm = '') {
+  const tbody = document.getElementById('visitorTableBody');
+  tbody.innerHTML = '';
+  
+  const filteredVisitors = visitors.filter(v => {
+    if (!searchTerm) return true;
+    const search = searchTerm.toLowerCase();
+    return v.name.toLowerCase().includes(search) ||
+           v.phone.includes(search) ||
+           v.area.toLowerCase().includes(search);
+  });
+  
+  if (filteredVisitors.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--muted);">No visitors found</td></tr>';
+    return;
+  }
+  
+  filteredVisitors.forEach(v => {
+    const row = tbody.insertRow();
+    row.innerHTML = `
+      <td>${v.timestamp}</td>
+      <td><strong>${v.id}</strong></td>
+      <td>${v.name}</td>
+      <td>${v.phone}</td>
+      <td>${v.area}</td>
+      <td>${v.company}</td>
+      <td><span class="badge badge-${v.type.toLowerCase()}">${v.type}</span></td>
+    `;
+  });
+}
+
+// ============================================
+// UPDATE AREA DISTRIBUTION
+// ============================================
+
+function updateAreaList() {
+  const areas = {};
+  visitors.forEach(v => {
+    areas[v.area] = (areas[v.area] || 0) + 1;
+  });
+  
+  const sorted = Object.entries(areas)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+  
+  const list = document.getElementById('areaList');
+  list.innerHTML = '';
+  
+  sorted.forEach(([area, count]) => {
+    const li = document.createElement('li');
+    li.className = 'area-item';
+    li.innerHTML = `
+      <span class="area-name">${area}</span>
+      <span class="area-count">${count}</span>
+    `;
+    list.appendChild(li);
+  });
+}
+
+// ============================================
+// REFRESH DATA
+// ============================================
+
+function refreshData() {
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  
+  // Simulate API call
+  setTimeout(() => {
+    updateStats();
+    updateVisitorTable();
+    updateAreaList();
+    btn.classList.remove('spinning');
+  }, 1000);
+}
+
+// ============================================
+// SEARCH FUNCTIONALITY
+// ============================================
+
+document.getElementById('searchBox').addEventListener('input', (e) => {
+  updateVisitorTable(e.target.value);
+});
+
+// ============================================
+// EXPORT FUNCTIONS
+// ============================================
+
+function exportToExcel() {
+  // Convert to CSV format
+  let csv = 'Timestamp,ID,Name,Phone,Area,Company,Type\n';
+  visitors.forEach(v => {
+    csv += `${v.timestamp},${v.id},${v.name},${v.phone},${v.area},${v.company},${v.type}\n`;
+  });
+  
+  // Create download
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `DDH-Season2-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
+function exportToCSV() {
+  exportToExcel(); // Same implementation for now
+}
+
+// ============================================
+// AUTO-REFRESH
+// ============================================
+
+// Refresh data every 30 seconds
+setInterval(refreshData, 30000);
+
+// ============================================
+// INITIALIZE
+// ============================================
+
+window.addEventListener('load', () => {
+  updateStats();
+  updateVisitorTable();
+  updateAreaList();
+});
+
+</script>
+
+</body>
+</html>
