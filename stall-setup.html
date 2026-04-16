@@ -482,21 +482,21 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-QvVFxIV5cIci
 // ──────────────────────────────────────────────────────────
 
 const ACCESSORIES = [
-  { id: 'garment_stand',   name: 'Garment Stand',       price: 700,  hasQty: false },
+  { id: 'garment_stand',   name: 'Garment Stand',       price: 700,  hasQty: true },
   { id: 'plastic_hanger',  name: 'Plastic Hanger',      price: 20,   hasQty: true  },
   { id: 'wooden_hanger',   name: 'Wooden Hanger',       price: 40,   hasQty: true  },
-  { id: 'spot_light',      name: 'Spot Light',          price: 400,  hasQty: false },
-  { id: 'mirror',          name: 'Mirror',              price: 800,  hasQty: false },
-  { id: 'mannequin',       name: 'Mannequin',           price: 2400, hasQty: false },
-  { id: 'extra_table',     name: 'Extra Table (4×2)',   price: 600,  hasQty: false },
-  { id: 'glass_shelf',     name: 'Glass Shelf',         price: 600,  hasQty: false },
-  { id: 'j_counter',       name: 'J. Counter',          price: 3000, hasQty: false },
-  { id: 'extra_lunch',     name: 'Extra Lunch Coupon',  price: 1800, hasQty: false },
-  { id: 'halogen_yellow',  name: 'Halogen (Yellow)',    price: 1600, hasQty: false },
-  { id: 'steam_iron',      name: 'Steam Iron',          price: 3000, hasQty: false },
+  { id: 'spot_light',      name: 'Spot Light',          price: 400,  hasQty: true },
+  { id: 'mirror',          name: 'Mirror',              price: 800,  hasQty: true },
+  { id: 'mannequin',       name: 'Mannequin',           price: 2400, hasQty: true },
+  { id: 'extra_table',     name: 'Extra Table (4×2)',   price: 600,  hasQty: true },
+  { id: 'glass_shelf',     name: 'Glass Shelf',         price: 600,  hasQty: true },
+  { id: 'j_counter',       name: 'J. Counter',          price: 3000, hasQty: true },
+  { id: 'extra_lunch',     name: 'Extra Lunch Coupon',  price: 1800, hasQty: true },
+  { id: 'halogen_yellow',  name: 'Halogen (Yellow)',    price: 1600, hasQty: true },
+  { id: 'steam_iron',      name: 'Steam Iron',          price: 3000, hasQty: true },
 ];
 
-const fmt = (n) => '₹' + n.toLocaleString('en-IN');
+const fmt = (n) => '₹' + (Number(n) || 0).toLocaleString('en-IN');
 
 let designerData = null;
 let tokenId = null;
@@ -547,10 +547,18 @@ function buildGrid() {
       const cb = card.querySelector(`#acc-${acc.id}`);
       const qtyRow = card.querySelector(`#qty-row-${acc.id}`);
       cb.addEventListener('change', () => {
-        qtyRow.style.display = cb.checked ? 'flex' : 'none';
-        updateSummary();
-      });
-      card.querySelector(`#qty-${acc.id}`).addEventListener('input', updateSummary);
+  qtyRow.style.display = cb.checked ? 'flex' : 'none';
+
+  if (!cb.checked) {
+    const qtyInput = card.querySelector(`#qty-${acc.id}`);
+    if (qtyInput) qtyInput.value = 1;
+  }
+
+  updateSummary();
+});
+      const qtyInput = card.querySelector(`#qty-${acc.id}`);
+qtyInput.addEventListener('input', updateSummary);
+qtyInput.addEventListener('change', updateSummary);
     } else {
       card.querySelector(`#acc-${acc.id}`).addEventListener('change', updateSummary);
     }
@@ -565,12 +573,12 @@ function updateSummary() {
 
   document.querySelectorAll('#accessories-grid input[type="checkbox"]:checked').forEach(cb => {
     const price = parseInt(cb.dataset.price);
-    const hasQty = cb.dataset.hasQty === 'true';
-    let qty = 1;
-    if (hasQty) {
-      const qtyEl = document.getElementById(`qty-${cb.dataset.id}`);
-      qty = parseInt(qtyEl?.value || 1);
-    }
+  let qty = 1;
+const qtyEl = document.getElementById(`qty-${cb.dataset.id}`);
+qty = parseInt(qtyEl?.value);
+
+if (isNaN(qty) || qty < 1) qty = 1;
+qty = Math.min(qty, 200);
     const lineTotal = price * qty;
     accTotal += lineTotal;
     breakdown.push(`${cb.dataset.name}${qty > 1 ? ' ×' + qty : ''}`);
@@ -581,7 +589,11 @@ function updateSummary() {
   document.getElementById('summary-acc').textContent = fmt(accTotal);
   document.getElementById('summary-total').textContent = fmt(grandTotal);
   document.getElementById('summary-breakdown').textContent =
-    breakdown.length > 0 ? breakdown.join(', ') : 'No accessories selected yet';
+  breakdown.length > 3
+    ? `${breakdown.slice(0, 3).join(', ')} + ${breakdown.length - 3} more`
+    : breakdown.length > 0
+      ? breakdown.join(', ')
+      : 'No accessories selected yet';
 }
 
 // ── Collect order data ──
@@ -589,12 +601,12 @@ function collectOrder() {
   const items = [];
   document.querySelectorAll('#accessories-grid input[type="checkbox"]:checked').forEach(cb => {
     const price = parseInt(cb.dataset.price);
-    const hasQty = cb.dataset.hasQty === 'true';
     let qty = 1;
-    if (hasQty) {
-      const qtyEl = document.getElementById(`qty-${cb.dataset.id}`);
-      qty = parseInt(qtyEl?.value || 1);
-    }
+const qtyEl = document.getElementById(`qty-${cb.dataset.id}`);
+qty = parseInt(qtyEl?.value);
+
+if (isNaN(qty) || qty < 1) qty = 1;
+qty = Math.min(qty, 200);
     items.push({ id: cb.dataset.id, name: cb.dataset.name, price, qty, total: price * qty });
   });
   return items;
@@ -644,12 +656,17 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   };
 
   try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    const res = await fetch(APPS_SCRIPT_URL, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload)
+});
+
+const data = await res.json();
+
+if (!data.success) {
+  throw new Error('Submission failed');
+}
 
     document.getElementById('invoice-preview').innerHTML = buildInvoicePreview(order);
     document.getElementById('success-state').classList.add('visible');
