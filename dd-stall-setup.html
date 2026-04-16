@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stall Setup — Design District Hyd · Season 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EF;
+    --ink: #1A1714;
+    --muted: #8A7F74;
+    --accent: #C9A96E;
+    --line: rgba(26,23,20,0.12);
+    --success: #4A7C59;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+  header img { height: 32px; }
+
+  /* ── Loading / Invalid states ── */
+  #loading-state, #invalid-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 48px;
+    text-align: center;
+  }
+  #invalid-state { display: none; }
+  .loading-dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.2s ease-in-out infinite;
+    margin: 0 auto 24px;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8)} 50%{opacity:1;transform:scale(1)} }
+
+  /* ── Main content ── */
+  #main-content { display: none; flex: 1; flex-direction: column; }
+  #main-content.visible { display: flex; }
+
+  /* ── Designer Banner ── */
+  .designer-banner {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .designer-banner .left { display: flex; flex-direction: column; gap: 6px; }
+  .designer-banner .greeting {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .designer-banner .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+  }
+  .designer-banner .stall-info {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stall-pill {
+    padding: 8px 16px;
+    border: 1px solid rgba(247,244,239,0.2);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+  .stall-pill span { color: var(--accent); }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 56px 48px 32px;
+    max-width: 720px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: italic; color: var(--muted); }
+  .hero p { font-size: 14px; line-height: 1.7; color: var(--muted); max-width: 460px; }
+
+  /* ── Accessories ── */
+  .accessories-wrap {
+    padding: 0 48px 32px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .section-label span {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .accessories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .accessory-card {
+    position: relative;
+  }
+  .accessory-card input[type="checkbox"] { display: none; }
+  .accessory-card label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 100%;
+    min-height: 100px;
+    gap: 12px;
+    user-select: none;
+  }
+  .accessory-card label:hover {
+    border-color: rgba(201,169,110,0.4);
+    background: rgba(201,169,110,0.03);
+  }
+  .accessory-card input:checked + label {
+    border-color: var(--accent);
+    background: rgba(201,169,110,0.06);
+  }
+  .accessory-card .check-mark {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    transition: all 0.15s;
+    color: transparent;
+    pointer-events: none;
+  }
+  .accessory-card input:checked ~ .check-mark {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .accessory-card .acc-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+    padding-right: 24px;
+    line-height: 1.3;
+  }
+  .accessory-card .acc-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .accessory-card input:checked + label .acc-price { color: var(--accent); }
+
+  /* Qty for certain items? Let's keep it simple — qty for hangers */
+  .qty-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .qty-row label { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  .qty-row input[type="number"] {
+    width: 56px;
+    padding: 4px 8px;
+    border: 1px solid var(--line);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    text-align: center;
+    appearance: none;
+    -moz-appearance: textfield;
+  }
+  .qty-row input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  /* ── Requirements text box ── */
+  .req-wrap {
+    padding: 0 48px 0;
+    max-width: 760px;
+  }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+  .field label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .field textarea:focus { border-bottom-color: var(--accent); }
+  .field textarea::placeholder { color: rgba(26,23,20,0.25); }
+
+  /* ── Summary bar ── */
+  .summary-bar {
+    position: sticky;
+    bottom: 0;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    z-index: 10;
+  }
+  .summary-bar .totals { display: flex; flex-direction: column; gap: 4px; }
+  .summary-bar .total-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,244,239,0.5); }
+  .summary-bar .total-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+  }
+  .summary-bar .total-amount .stall-part { color: rgba(247,244,239,0.4); }
+  .summary-bar .total-amount .acc-part { color: var(--accent); }
+  .summary-bar .breakdown {
+    font-size: 12px;
+    color: rgba(247,244,239,0.4);
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: var(--ink);
+    border: none;
+    padding: 14px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .btn-submit:hover { opacity: 0.85; }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .spinner {
+    display: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(26,23,20,0.2);
+    border-top-color: var(--ink);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .btn-submit.loading .spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Success ── */
+  #success-state {
+    display: none;
+    padding: 80px 48px;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #success-state.visible { display: block; }
+  .success-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    font-size: 22px;
+    color: var(--accent);
+  }
+  #success-state h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+  #success-state h2 em { font-style: italic; color: var(--muted); }
+  #success-state p { font-size: 15px; line-height: 1.7; color: var(--muted); }
+  .invoice-preview {
+    margin: 32px 0;
+    border: 1px solid var(--line);
+    padding: 24px;
+    text-align: left;
+  }
+  .invoice-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .invoice-row:last-child { border-bottom: none; }
+  .invoice-row.total {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    margin-top: 4px;
+    border-top: 1px solid var(--ink);
+  }
+
+  footer {
+    padding: 24px 48px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    header, .hero, .accessories-wrap, .req-wrap { padding-left: 20px; padding-right: 20px; }
+    .designer-banner { padding: 20px; }
+    .accessories-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .summary-bar { padding: 16px 20px; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://designdistricthyd.com">
+    <img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd">
+  </a>
+  <span style="font-size:12px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;">Season 3 · Stall Setup</span>
+</header>
+
+<!-- Loading -->
+<div id="loading-state">
+  <div class="loading-dot"></div>
+  <p style="font-size:14px;color:var(--muted);">Loading your details…</p>
+</div>
+
+<!-- Invalid token -->
+<div id="invalid-state">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:16px;">This link isn't valid.</p>
+  <p style="font-size:14px;color:var(--muted);">Please use the link sent to your email. If you need help, contact <a href="mailto:hello@designdistricthyd.com" style="color:var(--ink)">hello@designdistricthyd.com</a>.</p>
+</div>
+
+<!-- Main content (shown after token verified) -->
+<div id="main-content">
+
+  <div class="designer-banner">
+    <div class="left">
+      <span class="greeting">Welcome back</span>
+      <span class="name" id="banner-name">—</span>
+    </div>
+    <div class="stall-info">
+      <div class="stall-pill">Stall <span id="banner-stall-no">—</span></div>
+      <div class="stall-pill">Size: <span id="banner-stall-size">—</span></div>
+      <div class="stall-pill">Stall Fee: <span id="banner-stall-price">—</span></div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Set up your<br><em>stall</em> for Season 3</h1>
+    <p>Your stall is confirmed. Now choose any additional accessories you'd like — all items will be billed on your invoice. You can select zero or as many as you need.</p>
+  </div>
+
+  <div class="accessories-wrap">
+    <div class="section-label"><span>Accessories & Add-ons</span></div>
+
+    <div class="accessories-grid" id="accessories-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <div class="req-wrap">
+    <div class="section-label"><span>Other Requirements</span></div>
+    <div class="field">
+      <label>Anything else you need?</label>
+      <textarea id="other-requirements" placeholder="E.g. extra power socket, specific placement request, special setup needs…"></textarea>
+    </div>
+  </div>
+
+  <!-- Success state shown inline after submit -->
+  <div id="success-state">
+    <div class="success-icon">✓</div>
+    <h2>You're all<br><em>set.</em></h2>
+    <p>Your stall preferences have been received. We're preparing your invoice — expect it in your inbox shortly. We'll also send a WhatsApp confirmation.</p>
+    <div class="invoice-preview" id="invoice-preview">
+      <!-- populated by JS -->
+    </div>
+    <p>See you at Design District Season 3! 🎉</p>
+  </div>
+
+  <!-- Sticky summary + submit -->
+  <div class="summary-bar" id="summary-bar">
+    <div class="totals">
+      <span class="total-label">Your Total (estimate)</span>
+      <span class="total-amount">
+        <span class="stall-part" id="summary-stall">₹0</span>
+        <span style="color:rgba(247,244,239,0.25);font-size:20px;margin:0 6px;">+</span>
+        <span class="acc-part" id="summary-acc">₹0</span>
+        <span style="font-size:16px;color:rgba(247,244,239,0.3);margin-left:6px;">=</span>
+        <span style="margin-left:6px;" id="summary-total">₹0</span>
+      </span>
+      <span class="breakdown" id="summary-breakdown">Stall fee + accessories</span>
+    </div>
+    <button class="btn-submit" id="submit-btn">
+      <span class="btn-text">Confirm & Request Invoice</span>
+      <span class="spinner"></span>
+    </button>
+  </div>
+
+</div>
+
+<footer>© 2026 Design District Hyd · <a href="mailto:hello@designdistricthyd.com" style="color:var(--ink)">hello@designdistricthyd.com</a></footer>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-QvVFxIV5cIciZ7kRCWRrIUs1IiQpR6WfQFc5pDSxL5YBOvDNlqr5iWijt8XJ6srI/exec';
+// ──────────────────────────────────────────────────────────
+
+const ACCESSORIES = [
+  { id: 'garment_stand',   name: 'Garment Stand',       price: 700,  hasQty: false },
+  { id: 'plastic_hanger',  name: 'Plastic Hanger',      price: 20,   hasQty: true  },
+  { id: 'wooden_hanger',   name: 'Wooden Hanger',       price: 40,   hasQty: true  },
+  { id: 'spot_light',      name: 'Spot Light',          price: 400,  hasQty: false },
+  { id: 'mirror',          name: 'Mirror',              price: 800,  hasQty: false },
+  { id: 'mannequin',       name: 'Mannequin',           price: 2400, hasQty: false },
+  { id: 'extra_table',     name: 'Extra Table (4×2)',   price: 600,  hasQty: false },
+  { id: 'glass_shelf',     name: 'Glass Shelf',         price: 600,  hasQty: false },
+  { id: 'j_counter',       name: 'J. Counter',          price: 3000, hasQty: false },
+  { id: 'extra_lunch',     name: 'Extra Lunch Coupon',  price: 1800, hasQty: false },
+  { id: 'halogen_yellow',  name: 'Halogen (Yellow)',    price: 1600, hasQty: false },
+  { id: 'steam_iron',      name: 'Steam Iron',          price: 3000, hasQty: false },
+];
+
+const fmt = (n) => '₹' + n.toLocaleString('en-IN');
+
+let designerData = null;
+let tokenId = null;
+
+// ── Parse token from URL ──
+function getToken() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('token');
+}
+
+// ── Verify token with Apps Script ──
+async function verifyToken(token) {
+  try {
+    const url = `${APPS_SCRIPT_URL}?action=verify&token=${encodeURIComponent(token)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
+// ── Build accessories grid ──
+function buildGrid() {
+  const grid = document.getElementById('accessories-grid');
+  grid.innerHTML = '';
+  ACCESSORIES.forEach(acc => {
+    const card = document.createElement('div');
+    card.className = 'accessory-card';
+    const qtyHtml = acc.hasQty ? `
+      <div class="qty-row" id="qty-row-${acc.id}" style="display:none;margin-top:8px;">
+        <label for="qty-${acc.id}">Qty:</label>
+        <input type="number" id="qty-${acc.id}" min="1" max="200" value="1">
+      </div>` : '';
+    card.innerHTML = `
+      <input type="checkbox" id="acc-${acc.id}" data-id="${acc.id}" data-price="${acc.price}" data-name="${acc.name}" data-has-qty="${acc.hasQty}">
+      <label for="acc-${acc.id}">
+        <span class="acc-name">${acc.name}</span>
+        <span class="acc-price">${fmt(acc.price)}${acc.hasQty ? ' / pc' : ''}</span>
+        ${qtyHtml}
+      </label>
+      <div class="check-mark">✓</div>
+    `;
+    grid.appendChild(card);
+
+    // qty toggle
+    if (acc.hasQty) {
+      const cb = card.querySelector(`#acc-${acc.id}`);
+      const qtyRow = card.querySelector(`#qty-row-${acc.id}`);
+      cb.addEventListener('change', () => {
+        qtyRow.style.display = cb.checked ? 'flex' : 'none';
+        updateSummary();
+      });
+      card.querySelector(`#qty-${acc.id}`).addEventListener('input', updateSummary);
+    } else {
+      card.querySelector(`#acc-${acc.id}`).addEventListener('change', updateSummary);
+    }
+  });
+}
+
+// ── Update summary bar ──
+function updateSummary() {
+  const stallPrice = designerData ? parseInt(designerData.stall_price || 0) : 0;
+  let accTotal = 0;
+  let breakdown = [];
+
+  document.querySelectorAll('#accessories-grid input[type="checkbox"]:checked').forEach(cb => {
+    const price = parseInt(cb.dataset.price);
+    const hasQty = cb.dataset.hasQty === 'true';
+    let qty = 1;
+    if (hasQty) {
+      const qtyEl = document.getElementById(`qty-${cb.dataset.id}`);
+      qty = parseInt(qtyEl?.value || 1);
+    }
+    const lineTotal = price * qty;
+    accTotal += lineTotal;
+    breakdown.push(`${cb.dataset.name}${qty > 1 ? ' ×' + qty : ''}`);
+  });
+
+  const grandTotal = stallPrice + accTotal;
+  document.getElementById('summary-stall').textContent = fmt(stallPrice);
+  document.getElementById('summary-acc').textContent = fmt(accTotal);
+  document.getElementById('summary-total').textContent = fmt(grandTotal);
+  document.getElementById('summary-breakdown').textContent =
+    breakdown.length > 0 ? breakdown.join(', ') : 'No accessories selected yet';
+}
+
+// ── Collect order data ──
+function collectOrder() {
+  const items = [];
+  document.querySelectorAll('#accessories-grid input[type="checkbox"]:checked').forEach(cb => {
+    const price = parseInt(cb.dataset.price);
+    const hasQty = cb.dataset.hasQty === 'true';
+    let qty = 1;
+    if (hasQty) {
+      const qtyEl = document.getElementById(`qty-${cb.dataset.id}`);
+      qty = parseInt(qtyEl?.value || 1);
+    }
+    items.push({ id: cb.dataset.id, name: cb.dataset.name, price, qty, total: price * qty });
+  });
+  return items;
+}
+
+// ── Build invoice preview HTML ──
+function buildInvoicePreview(order) {
+  const stallPrice = parseInt(designerData.stall_price || 0);
+  let html = `<div class="invoice-row"><span>Stall ${designerData.stall_number} (${designerData.stall_size_allocated})</span><span>${fmt(stallPrice)}</span></div>`;
+  order.forEach(item => {
+    html += `<div class="invoice-row"><span>${item.name}${item.qty > 1 ? ' ×' + item.qty : ''}</span><span>${fmt(item.total)}</span></div>`;
+  });
+  const accTotal = order.reduce((s, i) => s + i.total, 0);
+  const grand = stallPrice + accTotal;
+  html += `<div class="invoice-row total"><span>Total</span><span>${fmt(grand)}</span></div>`;
+  return html;
+}
+
+// ── Submit ──
+document.getElementById('submit-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('submit-btn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  const order = collectOrder();
+  const stallPrice = parseInt(designerData.stall_price || 0);
+  const accTotal = order.reduce((s, i) => s + i.total, 0);
+  const grandTotal = stallPrice + accTotal;
+
+  const payload = {
+    type: 'order',
+    token: tokenId,
+    designer_id: designerData.id,
+    designer_name: designerData.designer_name,
+    brand_name: designerData.brand_name,
+    email: designerData.email,
+    phone: designerData.phone,
+    instagram: designerData.instagram,
+    stall_number: designerData.stall_number,
+    stall_size: designerData.stall_size_allocated,
+    stall_price: stallPrice,
+    accessories: order,
+    accessories_total: accTotal,
+    grand_total: grandTotal,
+    other_requirements: document.getElementById('other-requirements').value.trim(),
+    submitted_at: new Date().toISOString()
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    document.getElementById('invoice-preview').innerHTML = buildInvoicePreview(order);
+    document.getElementById('success-state').classList.add('visible');
+    document.getElementById('summary-bar').style.display = 'none';
+    document.querySelector('.req-wrap').style.display = 'none';
+    document.querySelector('.accessories-wrap').style.display = 'none';
+    document.querySelector('.hero').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    alert('Something went wrong. Please try again or contact us directly.');
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+});
+
+// ── Init ──
+async function init() {
+  tokenId = getToken();
+  if (!tokenId) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('invalid-state').style.display = 'flex';
+    return;
+  }
+
+  const data = await verifyToken(tokenId);
+  document.getElementById('loading-state').style.display = 'none';
+
+  if (!data || !data.valid) {
+    document.getElementById('invalid-state').style.display = 'flex';
+    return;
+  }
+
+  designerData = data;
+  const stallPrice = parseInt(data.stall_price || 0);
+
+  // Populate banner
+  document.getElementById('banner-name').textContent = data.brand_name || data.designer_name;
+  document.getElementById('banner-stall-no').textContent = data.stall_number || '—';
+  document.getElementById('banner-stall-size').textContent = data.stall_size_allocated || '—';
+  document.getElementById('banner-stall-price').textContent = fmt(stallPrice);
+
+  buildGrid();
+  updateSummary();
+  document.getElementById('main-content').classList.add('visible');
+}
+
+init();
+</script>
+</body>
+</html>

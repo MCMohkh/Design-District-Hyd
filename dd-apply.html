@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — Design District Hyd · Season 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EF;
+    --ink: #1A1714;
+    --muted: #8A7F74;
+    --accent: #C9A96E;
+    --line: rgba(26,23,20,0.12);
+    --error: #B84040;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+  header img { height: 36px; }
+  header nav a {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 80px 48px 56px;
+    max-width: 720px;
+  }
+  .season-tag {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: var(--muted); }
+  .hero p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 480px;
+  }
+
+  /* ── Form container ── */
+  .form-wrap {
+    flex: 1;
+    padding: 0 48px 80px;
+    max-width: 760px;
+  }
+
+  .form-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .form-divider span {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .form-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 32px;
+    margin-bottom: 24px;
+  }
+  .field-grid.single { grid-template-columns: 1fr; }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .field label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field label .req { color: var(--accent); margin-left: 2px; }
+
+  .field input,
+  .field select,
+  .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-bottom-color: var(--accent);
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: rgba(26,23,20,0.25); }
+  .field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A7F74' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; padding-right: 24px; }
+  .field select option[value=""] { color: rgba(26,23,20,0.25); }
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .field .hint {
+    font-size: 12px;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  /* stall size cards */
+  .stall-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .stall-option input[type="radio"] { display: none; }
+  .stall-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 14px;
+    color: var(--muted);
+    min-width: 100px;
+  }
+  .stall-option label .size {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .stall-option label .dim {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .stall-option input:checked + label {
+    border-color: var(--accent);
+    background: rgba(201,169,110,0.06);
+  }
+  .stall-option input:checked + label .size { color: var(--accent); }
+
+  /* price range */
+  .price-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .price-option input[type="radio"] { display: none; }
+  .price-option label {
+    padding: 8px 16px;
+    border: 1px solid var(--line);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--muted);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .price-option input:checked + label {
+    border-color: var(--accent);
+    color: var(--ink);
+    background: rgba(201,169,110,0.06);
+  }
+
+  /* ── Instagram prefix ── */
+  .insta-wrap {
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--line);
+    transition: border-color 0.2s;
+    gap: 0;
+  }
+  .insta-wrap:focus-within { border-bottom-color: var(--accent); }
+  .insta-wrap .prefix {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    padding: 10px 4px 10px 0;
+    white-space: nowrap;
+  }
+  .insta-wrap input {
+    border: none !important;
+    padding-left: 0;
+    flex: 1;
+  }
+  .insta-wrap input:focus { outline: none; }
+
+  /* ── Submit ── */
+  .submit-row {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .btn-submit {
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 16px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-submit:hover { background: var(--accent); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .submit-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  /* ── States ── */
+  .form-error {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 4px;
+    display: none;
+  }
+  .field.has-error input,
+  .field.has-error select { border-bottom-color: var(--error); }
+  .field.has-error .form-error { display: block; }
+
+  #success-state {
+    display: none;
+    padding: 80px 48px;
+    max-width: 600px;
+  }
+  #success-state.visible { display: block; }
+  #success-state .check {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    color: var(--accent);
+    font-size: 20px;
+  }
+  #success-state h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  #success-state h2 em { font-style: italic; color: var(--muted); }
+  #success-state p { font-size: 15px; line-height: 1.7; color: var(--muted); }
+
+  .spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(247,244,239,0.3);
+    border-top-color: var(--cream);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin-left: 12px;
+    vertical-align: middle;
+  }
+  .btn-submit.loading .spinner { display: inline-block; }
+  .btn-submit.loading .btn-text { opacity: 0.6; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Footer ── */
+  footer {
+    padding: 24px 48px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    header, .hero, .form-wrap { padding-left: 24px; padding-right: 24px; }
+    .field-grid { grid-template-columns: 1fr; }
+    .hero { padding-top: 48px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://designdistricthyd.com">
+    <img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd">
+  </a>
+  <nav><a href="https://designdistricthyd.com">← Back to site</a></nav>
+</header>
+
+<div class="hero">
+  <span class="season-tag">Season 3 · Designer Applications</span>
+  <h1>Apply for your<br><em>stall</em> at<br>Design District</h1>
+  <p>Fill in your details below and we'll review your application. If selected, you'll hear from us within a few days with your stall allocation and next steps.</p>
+</div>
+
+<!-- Form -->
+<div class="form-wrap" id="form-section">
+  <div class="form-divider"><span>Your Details</span></div>
+
+  <form id="apply-form" novalidate>
+
+    <div class="field-grid">
+      <div class="field" id="field-designer-name">
+        <label>Designer Name <span class="req">*</span></label>
+        <input type="text" name="designer_name" id="designer_name" placeholder="Your full name" autocomplete="name">
+        <span class="form-error">Please enter your name</span>
+      </div>
+      <div class="field" id="field-brand-name">
+        <label>Brand Name <span class="req">*</span></label>
+        <input type="text" name="brand_name" id="brand_name" placeholder="Your label / brand">
+        <span class="form-error">Please enter your brand name</span>
+      </div>
+    </div>
+
+    <div class="field-grid">
+      <div class="field" id="field-email">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" name="email" id="email" placeholder="you@yourbrand.com" autocomplete="email">
+        <span class="form-error">Please enter a valid email</span>
+      </div>
+      <div class="field" id="field-phone">
+        <label>WhatsApp / Phone <span class="req">*</span></label>
+        <input type="tel" name="phone" id="phone" placeholder="+91 98765 43210" autocomplete="tel">
+        <span class="form-error">Please enter your phone number</span>
+      </div>
+    </div>
+
+    <div class="field-grid single" style="margin-bottom:8px;">
+      <div class="field" id="field-instagram">
+        <label>Instagram Handle <span class="req">*</span></label>
+        <div class="insta-wrap">
+          <span class="prefix">@</span>
+          <input type="text" name="instagram" id="instagram" placeholder="yourbrand">
+        </div>
+        <span class="form-error">Please enter your Instagram handle</span>
+      </div>
+    </div>
+
+    <div class="form-divider" style="margin-top:40px;"><span>Stall Preference</span></div>
+
+    <div class="field" id="field-stall-size" style="margin-bottom:32px;">
+      <label>Preferred Stall Size <span class="req">*</span></label>
+      <div class="stall-options" style="margin-top:12px;">
+        <div class="stall-option">
+          <input type="radio" name="stall_size" id="s3x3" value="3x3">
+          <label for="s3x3">
+            <span class="size">3×3</span>
+            <span class="dim">9 sq ft</span>
+          </label>
+        </div>
+        <div class="stall-option">
+          <input type="radio" name="stall_size" id="s4x3" value="4x3">
+          <label for="s4x3">
+            <span class="size">4×3</span>
+            <span class="dim">12 sq ft</span>
+          </label>
+        </div>
+        <div class="stall-option">
+          <input type="radio" name="stall_size" id="s3x2" value="3x2">
+          <label for="s3x2">
+            <span class="size">3×2</span>
+            <span class="dim">6 sq ft</span>
+          </label>
+        </div>
+      </div>
+      <span class="form-error">Please select a stall size preference</span>
+    </div>
+
+    <div class="field" id="field-price-range" style="margin-bottom:32px;">
+      <label>Your Typical Price Range <span class="req">*</span></label>
+      <div class="price-options" style="margin-top:12px;">
+        <div class="price-option">
+          <input type="radio" name="price_range" id="p1" value="Under ₹5,000">
+          <label for="p1">Under ₹5,000</label>
+        </div>
+        <div class="price-option">
+          <input type="radio" name="price_range" id="p2" value="₹5,000–₹15,000">
+          <label for="p2">₹5,000–₹15,000</label>
+        </div>
+        <div class="price-option">
+          <input type="radio" name="price_range" id="p3" value="₹15,000–₹40,000">
+          <label for="p3">₹15,000–₹40,000</label>
+        </div>
+        <div class="price-option">
+          <input type="radio" name="price_range" id="p4" value="₹40,000+">
+          <label for="p4">₹40,000+</label>
+        </div>
+      </div>
+      <span class="form-error">Please select a price range</span>
+    </div>
+
+    <div class="form-divider"><span>Anything else?</span></div>
+
+    <div class="field-grid single">
+      <div class="field">
+        <label>Tell us about your brand (optional)</label>
+        <textarea name="brand_bio" id="brand_bio" placeholder="A short intro — what you design, your aesthetic, past shows…"></textarea>
+      </div>
+    </div>
+
+    <!-- Hidden field to prevent spam -->
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit" id="submit-btn">
+        <span class="btn-text">Submit Application</span>
+        <span class="spinner"></span>
+      </button>
+      <p class="submit-note">We review all applications personally. You'll hear from us within 3–5 days.</p>
+    </div>
+
+  </form>
+
+  <!-- Success state -->
+  <div id="success-state">
+    <div class="check">✓</div>
+    <h2>Application<br><em>received.</em></h2>
+    <p>Thank you for applying to Design District Season 3. We've received your details and will be in touch within 3–5 days.<br><br>Keep an eye on your inbox — and in the meantime, follow <a href="https://instagram.com/designdistrict.hyd" style="color:var(--ink)">@designdistrict.hyd</a> for updates.</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Design District Hyd</p>
+  <p>Questions? <a href="mailto:hello@designdistricthyd.com" style="color:var(--ink)">hello@designdistricthyd.com</a></p>
+</footer>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────
+// Replace this with your deployed Google Apps Script Web App URL
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-QvVFxIV5cIciZ7kRCWRrIUs1IiQpR6WfQFc5pDSxL5YBOvDNlqr5iWijt8XJ6srI/exec';
+// ──────────────────────────────────────────────────────────
+
+const form = document.getElementById('apply-form');
+const submitBtn = document.getElementById('submit-btn');
+const successState = document.getElementById('success-state');
+const formSection = document.getElementById('form-section');
+
+function validate() {
+  let valid = true;
+
+  // Text fields
+  const textFields = [
+    { id: 'designer_name', fieldId: 'field-designer-name' },
+    { id: 'brand_name',    fieldId: 'field-brand-name' },
+    { id: 'instagram',     fieldId: 'field-instagram' },
+  ];
+  textFields.forEach(({ id, fieldId }) => {
+    const el = document.getElementById(id);
+    const field = document.getElementById(fieldId);
+    if (!el.value.trim()) {
+      field.classList.add('has-error'); valid = false;
+    } else {
+      field.classList.remove('has-error');
+    }
+  });
+
+  // Email
+  const email = document.getElementById('email');
+  const emailField = document.getElementById('field-email');
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+  emailField.classList.toggle('has-error', !emailOk);
+  if (!emailOk) valid = false;
+
+  // Phone
+  const phone = document.getElementById('phone');
+  const phoneField = document.getElementById('field-phone');
+  if (!phone.value.trim()) {
+    phoneField.classList.add('has-error'); valid = false;
+  } else {
+    phoneField.classList.remove('has-error');
+  }
+
+  // Stall size
+  const stallChecked = document.querySelector('input[name="stall_size"]:checked');
+  document.getElementById('field-stall-size').classList.toggle('has-error', !stallChecked);
+  if (!stallChecked) valid = false;
+
+  // Price range
+  const priceChecked = document.querySelector('input[name="price_range"]:checked');
+  document.getElementById('field-price-range').classList.toggle('has-error', !priceChecked);
+  if (!priceChecked) valid = false;
+
+  return valid;
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+  if (document.querySelector('input[name="_honey"]').value) return; // honeypot
+
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+
+  const data = {
+    designer_name: document.getElementById('designer_name').value.trim(),
+    brand_name:    document.getElementById('brand_name').value.trim(),
+    email:         document.getElementById('email').value.trim(),
+    phone:         document.getElementById('phone').value.trim(),
+    instagram:     '@' + document.getElementById('instagram').value.trim().replace(/^@/, ''),
+    stall_size:    document.querySelector('input[name="stall_size"]:checked').value,
+    price_range:   document.querySelector('input[name="price_range"]:checked').value,
+    brand_bio:     document.getElementById('brand_bio').value.trim(),
+    submitted_at:  new Date().toISOString(),
+    type:          'application'
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    // no-cors means we can't read response, assume success
+    form.style.display = 'none';
+    successState.classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong. Please try again or email us directly.');
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+  }
+});
+
+// Clear error on input
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', () => {
+    el.closest('.field')?.classList.remove('has-error');
+  });
+});
+</script>
+</body>
+</html>
