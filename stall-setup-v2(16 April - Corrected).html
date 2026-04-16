@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stall Setup — Design District Hyd · Season 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0A0A0A;
+    --off-black: #111110;
+    --teal: #7AADA8;
+    --teal-dark: #4E8A85;
+    --teal-light: #B0CEC9;
+    --cream: #F4EEE4;
+    --bone: #E8E0D2;
+    --warm-white: #FAF7F2;
+    --terracotta: #C67B52;
+    --gold: #C4A35A;
+    --muted: #8A8070;
+    --charcoal: #1E1D1A;
+    --line: rgba(122,173,168,0.15);
+    --line-soft: rgba(122,173,168,0.08);
+  }
+
+  body {
+    background: var(--off-black);
+    color: var(--warm-white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+  header img { height: 28px; filter: invert(1) brightness(0.85); }
+  header span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  /* ── Loading / Invalid ── */
+  #loading-state, #invalid-state {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 80px 48px; text-align: center;
+  }
+  #invalid-state { display: none; }
+  .loading-dot {
+    width: 8px; height: 8px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: pulse 1.2s ease-in-out infinite;
+    margin: 0 auto 24px;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.2;transform:scale(0.7)} 50%{opacity:1;transform:scale(1)} }
+
+  /* ── Main ── */
+  #main-content { display: none; flex: 1; flex-direction: column; }
+  #main-content.visible { display: flex; }
+
+  /* ── Banner ── */
+  .designer-banner {
+    background: var(--charcoal);
+    border-bottom: 1px solid var(--line);
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .banner-left { display: flex; flex-direction: column; gap: 4px; }
+  .banner-greeting { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); }
+  .banner-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--warm-white); }
+  .banner-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill {
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .pill strong { color: var(--teal); font-weight: 400; }
+
+  /* ── Hero ── */
+  .hero { padding: 48px 48px 28px; max-width: 680px; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 46px);
+    line-height: 1.1;
+    margin-bottom: 14px;
+    color: var(--warm-white);
+  }
+  .hero h1 em { font-style: italic; color: var(--teal-light); }
+  .hero p { font-size: 13px; line-height: 1.75; color: var(--muted); max-width: 460px; }
+
+  /* ── Section label ── */
+  .section-label {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 0;
+  }
+  .section-label span {
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); white-space: nowrap;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  /* ── Accessories wrap ── */
+  .accessories-wrap { padding: 0 48px 40px; }
+
+  /* ── Accessories LIST layout ── */
+  .accessories-list {
+    margin-top: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .acc-row {
+    display: grid;
+    grid-template-columns: 32px 1fr auto auto;
+    align-items: center;
+    gap: 0 16px;
+    padding: 0;
+    border-bottom: 1px solid var(--line-soft);
+    transition: background 0.15s;
+    min-height: 56px;
+  }
+  .acc-row:hover { background: rgba(122,173,168,0.04); }
+  .acc-row.selected { background: rgba(122,173,168,0.07); }
+
+  /* Checkbox cell */
+  .acc-checkbox-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 0 2px;
+    height: 56px;
+    cursor: pointer;
+  }
+  .acc-checkbox {
+    width: 18px; height: 18px;
+    border: 1px solid rgba(122,173,168,0.35);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+  }
+  .acc-row.selected .acc-checkbox {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  .acc-checkbox::after {
+    content: '';
+    width: 10px; height: 6px;
+    border-left: 1.5px solid var(--black);
+    border-bottom: 1.5px solid var(--black);
+    transform: rotate(-45deg) translateY(-1px);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .acc-row.selected .acc-checkbox::after { opacity: 1; }
+
+  /* Name cell */
+  .acc-name-cell {
+    padding: 14px 0;
+    cursor: pointer;
+  }
+  .acc-item-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--warm-white);
+    line-height: 1.3;
+  }
+  .acc-item-unit {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Price cell */
+  .acc-price-cell {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+    padding: 0 8px 0 0;
+    transition: color 0.15s;
+    min-width: 80px;
+  }
+  .acc-row.selected .acc-price-cell { color: var(--teal); }
+
+  /* Qty cell */
+  .acc-qty-cell {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 8px 16px 8px 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    min-width: 110px;
+    justify-content: flex-end;
+  }
+  .acc-row.selected .acc-qty-cell { opacity: 1; pointer-events: auto; }
+
+  .qty-btn {
+    width: 28px; height: 28px;
+    background: rgba(122,173,168,0.1);
+    border: 1px solid var(--line);
+    color: var(--teal);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+    flex-shrink: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+  .qty-btn:hover { background: rgba(122,173,168,0.2); }
+  .qty-btn:active { background: rgba(122,173,168,0.3); }
+
+  .qty-input {
+    width: 44px;
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--warm-white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    padding: 4px 0;
+    height: 28px;
+    -moz-appearance: textfield;
+    outline: none;
+  }
+  .qty-input::-webkit-inner-spin-button,
+  .qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+  .qty-input:focus { border-color: var(--teal); }
+
+  /* ── Requirements ── */
+  .req-wrap { padding: 0 48px 0; max-width: 720px; }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 40px; }
+  .field label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--warm-white);
+    outline: none;
+    resize: vertical;
+    min-height: 72px;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .field textarea:focus { border-bottom-color: var(--teal); }
+  .field textarea::placeholder { color: rgba(250,247,242,0.2); }
+
+  /* ── Summary bar ── */
+  .summary-bar {
+    position: sticky;
+    bottom: 0;
+    background: var(--charcoal);
+    border-top: 1px solid var(--line);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    z-index: 10;
+  }
+  .summary-left { display: flex; flex-direction: column; gap: 3px; }
+  .summary-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,247,242,0.35); }
+  .summary-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--warm-white);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .summary-stall { color: rgba(250,247,242,0.35); }
+  .summary-acc { color: var(--teal); }
+  .summary-sep { font-size: 18px; color: rgba(250,247,242,0.2); }
+  .summary-breakdown { font-size: 11px; color: rgba(250,247,242,0.3); margin-top: 2px; }
+
+  .btn-submit {
+    background: var(--teal);
+    color: var(--black);
+    border: none;
+    padding: 14px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .btn-submit:hover { background: var(--teal-light); }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  .spinner {
+    display: none; width: 14px; height: 14px;
+    border: 2px solid rgba(10,10,10,0.25); border-top-color: var(--black);
+    border-radius: 50%; animation: spin 0.7s linear infinite;
+    margin-left: 10px; vertical-align: middle;
+  }
+  .btn-submit.loading .spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Success ── */
+  #success-state {
+    display: none;
+    padding: 72px 48px;
+    max-width: 600px;
+  }
+  #success-state.visible { display: block; }
+  .success-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--teal);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px;
+    font-size: 20px;
+    color: var(--teal);
+  }
+  #success-state h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 40px;
+    margin-bottom: 16px;
+    color: var(--warm-white);
+  }
+  #success-state h2 em { font-style: italic; color: var(--teal-light); }
+  #success-state p { font-size: 14px; line-height: 1.75; color: var(--muted); }
+
+  .invoice-preview {
+    margin: 28px 0;
+    border: 1px solid var(--line);
+    background: var(--charcoal);
+  }
+  .invoice-preview-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+  .invoice-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--muted);
+  }
+  .invoice-row:last-child { border-bottom: none; }
+  .invoice-row.total {
+    font-size: 16px;
+    color: var(--warm-white);
+    padding: 14px 20px;
+    border-top: 1px solid var(--line);
+    margin-top: 4px;
+  }
+  .invoice-row.total span:last-child { color: var(--teal); }
+
+  footer {
+    padding: 20px 48px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    header, .hero, .accessories-wrap, .req-wrap { padding-left: 20px; padding-right: 20px; }
+    .designer-banner { padding: 20px; }
+    .summary-bar { padding: 16px 20px; }
+    .acc-row { grid-template-columns: 28px 1fr auto; gap: 0 10px; }
+    .acc-price-cell { display: none; }
+    .acc-qty-cell { min-width: 90px; padding-right: 0; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://designdistricthyd.com">
+    <img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd">
+  </a>
+  <span>Season 3 · Stall Setup</span>
+</header>
+
+<div id="loading-state">
+  <div class="loading-dot"></div>
+  <p style="font-size:13px;color:var(--muted);">Loading your details…</p>
+</div>
+
+<div id="invalid-state">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:16px;color:var(--warm-white);">This link isn't valid.</p>
+  <p style="font-size:13px;color:var(--muted);line-height:1.7;">Please use the link sent to your email or WhatsApp.<br>Need help? <a href="mailto:designdistricthyd@gmail.com" style="color:var(--teal)">designdistricthyd@gmail.com</a></p>
+</div>
+
+<div id="main-content">
+
+  <div class="designer-banner">
+    <div class="banner-left">
+      <span class="banner-greeting">Welcome back</span>
+      <span class="banner-name" id="banner-name">—</span>
+    </div>
+    <div class="banner-pills">
+      <div class="pill">Stall <strong id="banner-stall-no">—</strong></div>
+      <div class="pill">Size: <strong id="banner-stall-size">—</strong></div>
+      <div class="pill">Stall Fee: <strong id="banner-stall-price">—</strong></div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Set up your<br><em>stall</em> for Season 3</h1>
+    <p>Your stall is confirmed. Select any accessories you'd like — tick to add, then set the quantity. Everything you pick will be included in your invoice.</p>
+  </div>
+
+  <div class="accessories-wrap">
+    <div class="section-label" style="margin-bottom:0;"><span>Accessories & Add-ons</span></div>
+    <div class="accessories-list" id="accessories-list"></div>
+  </div>
+
+  <div class="req-wrap" style="margin-top:32px;">
+    <div class="section-label" style="margin-bottom:24px;"><span>Other Requirements</span></div>
+    <div class="field">
+      <label>Anything else you need?</label>
+      <textarea id="other-requirements" placeholder="E.g. extra power socket, specific placement request, special setup needs…"></textarea>
+    </div>
+  </div>
+
+  <div id="success-state">
+    <div class="success-icon">✓</div>
+    <h2>You're all<br><em>set.</em></h2>
+    <p>Your stall requirements have been received. Your invoice is being prepared — expect it in your inbox shortly.<br><br>See you at Design District Season 3! 🎉</p>
+    <div class="invoice-preview" id="invoice-preview">
+      <div class="invoice-preview-header">Order Summary</div>
+    </div>
+    <p style="margin-top:16px;">If you have any changes, reply to your invoice email.</p>
+  </div>
+
+  <div class="summary-bar" id="summary-bar">
+    <div class="summary-left">
+      <span class="summary-label">Estimated Total</span>
+      <div class="summary-amount">
+        <span class="summary-stall" id="summary-stall">₹0</span>
+        <span class="summary-sep">+</span>
+        <span class="summary-acc" id="summary-acc">₹0</span>
+        <span class="summary-sep">=</span>
+        <span id="summary-total">₹0</span>
+      </div>
+      <span class="summary-breakdown" id="summary-breakdown">Stall fee + accessories</span>
+    </div>
+    <button class="btn-submit" id="submit-btn">
+      <span class="btn-text">Confirm & Request Invoice</span>
+      <span class="spinner"></span>
+    </button>
+  </div>
+
+</div>
+
+<footer>© 2026 Design District Hyd · <a href="mailto:designdistricthyd@gmail.com">designdistricthyd@gmail.com</a></footer>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-QvVFxIV5cIciZ7kRCWRrIUs1IiQpR6WfQFc5pDSxL5YBOvDNlqr5iWijt8XJ6srI/exec';
+
+const ACCESSORIES = [
+  { id: 'garment_stand',  name: 'Garment Stand',      price: 700  },
+  { id: 'plastic_hanger', name: 'Plastic Hanger',     price: 20   },
+  { id: 'wooden_hanger',  name: 'Wooden Hanger',      price: 40   },
+  { id: 'spot_light',     name: 'Spot Light',         price: 400  },
+  { id: 'mirror',         name: 'Mirror',             price: 800  },
+  { id: 'mannequin',      name: 'Mannequin',          price: 2400 },
+  { id: 'extra_table',    name: 'Extra Table (4×2)',  price: 600  },
+  { id: 'glass_shelf',    name: 'Glass Shelf',        price: 600  },
+  { id: 'j_counter',      name: 'J. Counter',         price: 3000 },
+  { id: 'extra_lunch',    name: 'Extra Lunch Coupon', price: 1800 },
+  { id: 'halogen_yellow', name: 'Halogen (Yellow)',   price: 1600 },
+  { id: 'steam_iron',     name: 'Steam Iron',         price: 3000 },
+];
+
+const fmt = (n) => '₹' + (Number(n) || 0).toLocaleString('en-IN');
+let designerData = null;
+let tokenId = null;
+
+function getToken() {
+  return new URLSearchParams(window.location.search).get('token');
+}
+
+async function verifyToken(token) {
+  try {
+    const res = await fetch(`${APPS_SCRIPT_URL}?action=verify&token=${encodeURIComponent(token)}`);
+    return await res.json();
+  } catch { return null; }
+}
+
+function buildList() {
+  const list = document.getElementById('accessories-list');
+  list.innerHTML = '';
+
+  ACCESSORIES.forEach(acc => {
+    const row = document.createElement('div');
+    row.className = 'acc-row';
+    row.dataset.id = acc.id;
+
+    row.innerHTML = `
+      <div class="acc-checkbox-cell">
+        <div class="acc-checkbox"></div>
+      </div>
+      <div class="acc-name-cell">
+        <div class="acc-item-name">${acc.name}</div>
+        <div class="acc-item-unit">₹${acc.price.toLocaleString('en-IN')} per unit</div>
+      </div>
+      <div class="acc-price-cell" id="price-cell-${acc.id}">${fmt(acc.price)}</div>
+      <div class="acc-qty-cell" id="qty-cell-${acc.id}">
+        <button class="qty-btn qty-minus" type="button">−</button>
+        <input class="qty-input" type="number" value="1" min="1" max="200" id="qty-${acc.id}">
+        <button class="qty-btn qty-plus" type="button">+</button>
+      </div>
+    `;
+
+    list.appendChild(row);
+
+    const checkbox = row.querySelector('.acc-checkbox');
+    const checkboxCell = row.querySelector('.acc-checkbox-cell');
+    const nameCell = row.querySelector('.acc-name-cell');
+    const qtyInput = row.querySelector('.qty-input');
+    const minusBtn = row.querySelector('.qty-minus');
+    const plusBtn  = row.querySelector('.qty-plus');
+
+    // Toggle selection on checkbox or name click
+    [checkboxCell, nameCell].forEach(el => {
+      el.addEventListener('click', () => {
+        row.classList.toggle('selected');
+        updateSummary();
+      });
+    });
+
+    // +/- buttons
+    minusBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      let v = parseInt(qtyInput.value) || 1;
+      if (v > 1) { qtyInput.value = v - 1; updateSummary(); }
+    });
+    plusBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      let v = parseInt(qtyInput.value) || 1;
+      if (v < 200) { qtyInput.value = v + 1; updateSummary(); }
+    });
+
+    // Manual input
+    qtyInput.addEventListener('input', () => {
+      let v = parseInt(qtyInput.value);
+      if (isNaN(v) || v < 1) qtyInput.value = 1;
+      if (v > 200) qtyInput.value = 200;
+      updateSummary();
+    });
+    qtyInput.addEventListener('click', e => e.stopPropagation());
+  });
+}
+
+function getQty(id) {
+  const el = document.getElementById(`qty-${id}`);
+  const v = parseInt(el?.value);
+  return (isNaN(v) || v < 1) ? 1 : Math.min(v, 200);
+}
+
+function updateSummary() {
+  const stallPrice = designerData ? parseInt(designerData.stall_price || 0) : 0;
+  let accTotal = 0;
+  const breakdown = [];
+
+  document.querySelectorAll('.acc-row.selected').forEach(row => {
+    const accId = row.dataset.id;
+    const acc = ACCESSORIES.find(a => a.id === accId);
+    if (!acc) return;
+    const qty = getQty(accId);
+    accTotal += acc.price * qty;
+    breakdown.push(`${acc.name}${qty > 1 ? ' ×' + qty : ''}`);
+  });
+
+  document.getElementById('summary-stall').textContent = fmt(stallPrice);
+  document.getElementById('summary-acc').textContent = fmt(accTotal);
+  document.getElementById('summary-total').textContent = fmt(stallPrice + accTotal);
+  document.getElementById('summary-breakdown').textContent =
+    breakdown.length > 3
+      ? `${breakdown.slice(0, 3).join(', ')} +${breakdown.length - 3} more`
+      : breakdown.length > 0 ? breakdown.join(', ')
+      : 'No accessories selected yet';
+}
+
+function collectOrder() {
+  return Array.from(document.querySelectorAll('.acc-row.selected')).map(row => {
+    const accId = row.dataset.id;
+    const acc = ACCESSORIES.find(a => a.id === accId);
+    const qty = getQty(accId);
+    return { id: acc.id, name: acc.name, price: acc.price, qty, total: acc.price * qty };
+  });
+}
+
+function buildInvoicePreview(order) {
+  const stallPrice = parseInt(designerData.stall_price || 0);
+  let html = `<div class="invoice-row"><span>Stall ${designerData.stall_number} (${designerData.stall_size_allocated})</span><span>${fmt(stallPrice)}</span></div>`;
+  order.forEach(item => {
+    html += `<div class="invoice-row"><span>${item.name}${item.qty > 1 ? ' ×' + item.qty : ''}</span><span>${fmt(item.total)}</span></div>`;
+  });
+  const grand = stallPrice + order.reduce((s, i) => s + i.total, 0);
+  html += `<div class="invoice-row total"><span>Total</span><span>${fmt(grand)}</span></div>`;
+  return html;
+}
+
+document.getElementById('submit-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('submit-btn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  const order = collectOrder();
+  const stallPrice = parseInt(designerData.stall_price || 0);
+  const accTotal = order.reduce((s, i) => s + i.total, 0);
+
+  const payload = {
+    type: 'order',
+    token: tokenId,
+    designer_id:    designerData.id,
+    designer_name:  designerData.designer_name,
+    brand_name:     designerData.brand_name,
+    email:          designerData.email,
+    phone:          designerData.phone,
+    instagram:      designerData.instagram,
+    stall_number:   designerData.stall_number,
+    stall_size:     designerData.stall_size_allocated,
+    stall_price:    stallPrice,
+    accessories:    order,
+    accessories_total: accTotal,
+    grand_total:    stallPrice + accTotal,
+    other_requirements: document.getElementById('other-requirements').value.trim(),
+    submitted_at:   new Date().toISOString()
+  };
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error('failed');
+
+    document.getElementById('invoice-preview').innerHTML =
+      '<div class="invoice-preview-header">Order Summary</div>' + buildInvoicePreview(order);
+    document.getElementById('success-state').classList.add('visible');
+    document.getElementById('summary-bar').style.display = 'none';
+    document.querySelector('.req-wrap').style.display = 'none';
+    document.querySelector('.accessories-wrap').style.display = 'none';
+    document.querySelector('.hero').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch {
+    alert('Something went wrong. Please try again or contact us directly.');
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+});
+
+async function init() {
+  tokenId = getToken();
+  if (!tokenId) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('invalid-state').style.display = 'flex';
+    return;
+  }
+
+  const data = await verifyToken(tokenId);
+  document.getElementById('loading-state').style.display = 'none';
+
+  if (!data || !data.valid) {
+    document.getElementById('invalid-state').style.display = 'flex';
+    return;
+  }
+
+  designerData = data;
+  const stallPrice = parseInt(data.stall_price || 0);
+
+  document.getElementById('banner-name').textContent = data.brand_name || data.designer_name;
+  document.getElementById('banner-stall-no').textContent = data.stall_number || '—';
+  document.getElementById('banner-stall-size').textContent = data.stall_size_allocated || '—';
+  document.getElementById('banner-stall-price').textContent = fmt(stallPrice);
+
+  buildList();
+  updateSummary();
+  document.getElementById('main-content').classList.add('visible');
+}
+
+init();
+</script>
+</body>
+</html>
