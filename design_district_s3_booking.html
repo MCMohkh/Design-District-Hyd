@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design District · Season 3 · Stall Booking</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --maroon: #8B1A1A;
+    --maroon-dark: #5c0f0f;
+    --cream: #F5E6C3;
+    --gold: #c4a882;
+    --bg: #faf8f5;
+    --bg2: #f3f0eb;
+    --border: rgba(139,26,26,0.12);
+    --text: #2a1a14;
+    --text2: #6b5040;
+    --text3: #9a8070;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); background: var(--bg); color: var(--text); }
+
+  /* ── HERO ── */
+  .dd-hero {
+    background: #2a1a14;
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .dd-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent 0, transparent 28px, rgba(74,45,30,.4) 28px, rgba(74,45,30,.4) 40px);
+  }
+  .dd-hero-inner { position: relative; z-index: 1; }
+  .dd-logo { font-family: var(--font-sans); font-size: 10px; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .dd-hero h1 { font-family: var(--font-serif); font-size: 30px; font-weight: 400; color: #f5ede4; line-height: 1.15; margin-bottom: 6px; }
+  .dd-hero h1 em { font-style: italic; color: var(--gold); }
+  .dd-hero-meta { font-size: 12px; color: var(--text3); letter-spacing: .12em; text-transform: uppercase; }
+  .dd-pills { display: flex; gap: 8px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+  .dd-pill { font-size: 11px; padding: 4px 12px; border-radius: 20px; border: .5px solid rgba(196,168,130,.4); color: var(--gold); letter-spacing: .08em; }
+
+  /* ── TABS ── */
+  .dd-tabs { display: flex; border-bottom: .5px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 20; }
+  .dd-tab { flex: 1; padding: 13px 8px; font-size: 12px; cursor: pointer; border: none; background: none; color: var(--text2); border-bottom: 2px solid transparent; transition: all .15s; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; font-family: var(--font-sans); }
+  .dd-tab.active { color: var(--maroon); border-bottom-color: var(--maroon); }
+  .dd-tab:hover:not(.active) { background: var(--bg2); }
+
+  /* ── PANELS ── */
+  .dd-panel { display: none; padding: 1.5rem; }
+  .dd-panel.active { display: block; }
+
+  /* ── STATS ── */
+  .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .stat-card { background: #fff; border: .5px solid var(--border); border-radius: var(--radius); padding: 14px 10px; text-align: center; }
+  .stat-num { font-family: var(--font-serif); font-size: 28px; font-weight: 400; color: var(--maroon); }
+  .stat-lbl { font-size: 10px; color: var(--text3); margin-top: 2px; letter-spacing: .08em; text-transform: uppercase; }
+
+  /* ── PRICING TOGGLE ── */
+  .pricing-toggle-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .pricing-toggle-bar h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 400; color: var(--text); }
+  .toggle-switch { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .toggle-switch input { display: none; }
+  .toggle-track { width: 36px; height: 20px; background: #ccc; border-radius: 10px; position: relative; transition: background .2s; }
+  .toggle-track::after { content: ''; position: absolute; width: 14px; height: 14px; background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+  .toggle-switch input:checked + .toggle-track { background: var(--maroon); }
+  .toggle-switch input:checked + .toggle-track::after { transform: translateX(16px); }
+  .toggle-label { font-size: 12px; color: var(--text2); }
+
+  /* ── PRICE TABLE ── */
+  #pricingSection { overflow: hidden; transition: max-height .35s ease, opacity .35s ease; max-height: 400px; opacity: 1; }
+  #pricingSection.hidden { max-height: 0; opacity: 0; pointer-events: none; }
+  .price-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+  .price-table th { text-align: left; font-weight: 500; color: var(--text2); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; padding: 8px 12px; border-bottom: .5px solid var(--border); }
+  .price-table td { padding: 10px 12px; border-bottom: .5px solid var(--border); }
+  .price-table tr:last-child td { border-bottom: none; }
+  .price-swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: middle; }
+
+  /* ── FLOOR PLAN IMAGE ── */
+  .floor-plan-section { margin-bottom: 1.5rem; }
+  .floor-plan-section h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 400; color: var(--text); margin-bottom: 10px; }
+  .floor-img-wrap {
+    border: .5px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    background: var(--bg2); text-align: center;
+    /* 4:5 aspect ratio — vertical */
+    aspect-ratio: 4/5; max-height: 520px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .floor-img-wrap img {
+    width: 100%; height: 100%; object-fit: contain;
+    display: block;
+  }
+  .floor-img-placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; color: var(--text3); font-size: 13px; padding: 2rem;
+    text-align: center;
+  }
+  .floor-img-placeholder svg { opacity: .3; }
+
+  /* ── INTERACTIVE FLOOR GRID ── */
+  .floor-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 1rem; padding: 10px 12px; background: var(--bg2); border-radius: var(--radius); }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); }
+  .leg-swatch { width: 13px; height: 13px; border-radius: 2px; flex-shrink: 0; }
+  .floor-scroll { overflow-x: auto; }
+  .floor-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 38px);
+    grid-template-rows: repeat(22, 32px);
+    gap: 2px; min-width: 590px; padding: 8px;
+    background: var(--bg2); border-radius: var(--radius);
+  }
+  .stall {
+    border-radius: 3px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    cursor: pointer; transition: transform .1s, box-shadow .1s;
+    border: .5px solid rgba(0,0,0,.12);
+    font-size: 9px; font-weight: 500; line-height: 1.1; text-align: center;
+    padding: 2px; position: relative; font-family: var(--font-sans);
+  }
+  .stall:hover { transform: scale(1.1); z-index: 5; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+  .stall.s-cream { background: #F5E6C3; color: #6b4c1a; }
+  .stall.s-maroon { background: #8B1A1A; color: #f5d5d5; }
+  .stall.s-blue { background: #5B9EB5; color: #0d3d52; }
+  .stall.s-olive { background: #8B7D3A; color: #f5efcc; }
+  .stall.s-booked { opacity: .45; cursor: not-allowed; filter: grayscale(.3); }
+  .stall.s-booked::after { content: '✓'; position: absolute; top: 1px; right: 3px; font-size: 8px; }
+  .stall.s-booked:hover { transform: none; box-shadow: none; }
+  .stall.s-selected { outline: 2px solid #2a1a14; outline-offset: 1px; transform: scale(1.12); z-index: 6; box-shadow: 0 3px 10px rgba(42,26,20,.35); }
+  .floor-label { display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--text3); text-align: center; letter-spacing: .04em; line-height: 1.2; }
+  .floor-label.vertical { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 8px; }
+  .floor-label.fire { background: #e74c3c; color: white; border-radius: 3px; font-size: 8px; font-weight: 500; }
+  .floor-label.exit { background: #27ae60; color: white; border-radius: 3px; font-size: 8px; font-weight: 500; }
+  .floor-label.lounge { background: #f0f0e8; border: .5px dashed #aaa; border-radius: 3px; font-size: 8px; color: #666; }
+  .floor-label.table { background: #e8e8e8; border: .5px solid #bbb; border-radius: 2px; font-size: 8px; color: #444; }
+  .stall-info {
+    margin-top: 12px; padding: 12px 14px;
+    background: #fff; border-radius: var(--radius); border: .5px solid var(--border);
+    font-size: 13px; min-height: 52px; display: flex; align-items: center; gap: 12px;
+  }
+  .stall-info-num { font-family: var(--font-serif); font-size: 26px; font-weight: 400; color: var(--maroon); min-width: 36px; text-align: center; }
+  .stall-info-detail { color: var(--text2); font-size: 13px; }
+  .badge-apply-btn {
+    background: var(--maroon); color: white; border: none; padding: 7px 16px;
+    border-radius: 20px; font-size: 12px; cursor: pointer; font-weight: 500;
+    margin-left: auto; font-family: var(--font-sans); letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .badge-apply-btn:hover { background: var(--maroon-dark); }
+
+  /* ── FORM ── */
+  .form-section { margin-bottom: 1.5rem; }
+  .form-section h3 { font-family: var(--font-serif); font-size: 16px; font-weight: 400; color: var(--text); letter-spacing: .06em; margin-bottom: 12px; padding-bottom: 6px; border-bottom: .5px solid var(--border); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-grid.one { grid-template-columns: 1fr; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group label { font-size: 11px; color: var(--text2); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 9px 12px; border: .5px solid #d0c4b8;
+    border-radius: var(--radius); font-size: 14px;
+    background: #fff; color: var(--text);
+    font-family: var(--font-sans); transition: border-color .15s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--maroon); box-shadow: 0 0 0 3px rgba(139,26,26,.08);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+
+  .stall-picker {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(50px,1fr)); gap: 6px;
+    padding: 12px; background: var(--bg2); border-radius: var(--radius); border: .5px solid var(--border);
+    max-height: 200px; overflow-y: auto;
+  }
+  .stall-pick-btn {
+    padding: 6px 4px; font-size: 11px; border: .5px solid #d0c4b8;
+    border-radius: 4px; background: #fff; cursor: pointer;
+    text-align: center; transition: all .12s; color: var(--text);
+    line-height: 1.2; font-family: var(--font-sans);
+  }
+  .stall-pick-btn:hover:not(.pick-booked) { background: #fdf0f0; border-color: var(--maroon); color: var(--maroon); }
+  .stall-pick-btn.pick-selected { background: var(--maroon); color: white; border-color: var(--maroon); }
+  .stall-pick-btn.pick-booked { background: var(--bg2); color: var(--text3); cursor: not-allowed; opacity: .5; text-decoration: line-through; }
+  .form-note { font-size: 12px; color: var(--text2); line-height: 1.6; padding: 10px 12px; background: #fdf8f0; border-left: 2px solid var(--gold); border-radius: 0 4px 4px 0; margin-top: 4px; }
+
+  .submit-area { text-align: center; padding-top: 1rem; }
+  .submit-btn {
+    background: #2a1a14; color: #f5ede4; border: none; padding: 14px 40px;
+    border-radius: 4px; font-size: 13px; cursor: pointer; font-weight: 500;
+    letter-spacing: .1em; font-family: var(--font-sans); text-transform: uppercase;
+    transition: background .15s;
+  }
+  .submit-btn:hover { background: var(--maroon); }
+  .submit-btn:disabled { opacity: .6; cursor: not-allowed; }
+  .submit-note { font-size: 11px; color: var(--text3); margin-top: 8px; letter-spacing: .06em; }
+
+  .success-state { display: none; text-align: center; padding: 2.5rem 1rem; }
+  .success-icon { font-size: 40px; margin-bottom: 12px; }
+  .success-state h2 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; margin-bottom: 10px; }
+  .success-state p { font-size: 14px; color: var(--text2); line-height: 1.8; }
+
+  .err { font-size: 11px; color: #c0392b; margin-top: 3px; display: none; }
+
+  /* ── SUBMITTING OVERLAY ── */
+  .submitting-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(42,26,20,.6);
+    z-index: 100; align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px; color: #f5ede4;
+  }
+  .submitting-overlay.show { display: flex; }
+  .spinner { width: 32px; height: 32px; border: 2px solid rgba(245,237,228,.3); border-top-color: #f5ede4; border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 520px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2,1fr); }
+    .floor-grid { grid-template-columns: repeat(15,30px); grid-template-rows: repeat(22,25px); }
+    .dd-hero h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="submitting-overlay" id="submittingOverlay">
+  <div class="spinner"></div>
+  <div style="font-size:14px;letter-spacing:.1em;text-transform:uppercase;">Submitting your application…</div>
+</div>
+
+<div class="dd-wrap">
+
+  <!-- HERO -->
+  <div class="dd-hero">
+    <div class="dd-hero-inner">
+      <div class="dd-logo">Design District · Hyderabad</div>
+      <h1>Season <em>3</em> — Stall Booking</h1>
+      <div class="dd-hero-meta">26 September 2026 &nbsp;·&nbsp; Novotel HICC, Hitech City &nbsp;·&nbsp; 10 AM – 7 PM</div>
+      <div class="dd-pills">
+        <span class="dd-pill">Diwali Edition</span>
+        <span class="dd-pill">90–100 Stalls</span>
+        <span class="dd-pill">4,000+ Expected Footfall</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="dd-tabs">
+    <button class="dd-tab active" onclick="showTab('overview')">Overview</button>
+    <button class="dd-tab" onclick="showTab('floor')">Floor Plan</button>
+    <button class="dd-tab" onclick="showTab('apply')">Apply</button>
+  </div>
+
+  <!-- OVERVIEW TAB -->
+  <div id="tab-overview" class="dd-panel active">
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num" id="stat-total">96</div><div class="stat-lbl">Total Stalls</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-avail" style="color:#1a6b1a;"></div><div class="stat-lbl">Available</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-booked"></div><div class="stat-lbl">Booked</div></div>
+      <div class="stat-card"><div class="stat-num">8</div><div class="stat-lbl">Tables</div></div>
+    </div>
+
+    <!-- PRICING TOGGLE -->
+    <div class="pricing-toggle-bar">
+      <h3>Pricing</h3>
+      <label class="toggle-switch" title="Show / hide pricing">
+        <input type="checkbox" id="pricingToggle" checked onchange="togglePricing(this.checked)">
+        <div class="toggle-track"></div>
+        <span class="toggle-label">Show pricing</span>
+      </label>
+    </div>
+
+    <div id="pricingSection">
+      <table class="price-table">
+        <thead>
+          <tr><th>Type</th><th>Size</th><th>Configuration</th><th>Price + GST</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="price-swatch" style="background:#F5E6C3;border:.5px solid #cca;"></span>3×3 Corner</td>
+            <td>9 sqm</td><td>2-sided open</td><td>₹1,55,000 + 18% GST</td>
+          </tr>
+          <tr>
+            <td><span class="price-swatch" style="background:#5B9EB5;"></span>3×3 Standard</td>
+            <td>9 sqm</td><td>Hall facing</td><td>₹1,40,000 + 18% GST</td>
+          </tr>
+          <tr>
+            <td><span class="price-swatch" style="background:#8B1A1A;"></span>4×3 Corner</td>
+            <td>12 sqm</td><td>2-sided open + trial room</td><td>₹1,75,000 + 18% GST</td>
+          </tr>
+          <tr>
+            <td><span class="price-swatch" style="background:#8B7D3A;"></span>4×3 Standard</td>
+            <td>12 sqm</td><td>Hall facing + trial room</td><td>₹1,60,000 + 18% GST</td>
+          </tr>
+          <tr>
+            <td><span class="price-swatch" style="background:#e8e8e8;border:.5px solid #bbb;"></span>Table Space</td>
+            <td>2 × 6ft table</td><td>Lounge area</td><td>₹60,000 + 18% GST</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="form-note" style="margin-bottom:1.2rem;">
+        All 4×3 stalls include a private trial room. 18% GST applicable on all prices.<br>
+        Applications are subject to curation review by Aishwarya Agarwal — confirmation within 5 working days.<br>
+        <strong>50% advance</strong> is required within 48 hours of confirmation to secure your stall.
+      </div>
+    </div>
+
+    <div style="text-align:center; padding-top:.5rem;">
+      <button class="submit-btn" onclick="showTab('apply')">Apply for a Stall →</button>
+    </div>
+  </div>
+
+  <!-- FLOOR PLAN TAB -->
+  <div id="tab-floor" class="dd-panel">
+
+    <!-- Static floor plan image -->
+    <div class="floor-plan-section">
+      <h3>Venue Layout</h3>
+      <div class="floor-img-wrap">
+        <!--
+          REPLACE THE SRC BELOW WITH YOUR ACTUAL FLOOR PLAN IMAGE URL.
+          Recommended: Upload to Google Drive, make public, use direct link.
+          Dimensions: vertical, 4:5 ratio.
+        -->
+        <img
+          src="REPLACE_WITH_YOUR_FLOOR_PLAN_IMAGE_URL"
+          alt="Design District Season 3 Floor Plan"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <div class="floor-img-placeholder" style="display:none;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <div>Floor plan image</div>
+          <div style="font-size:11px;">Replace the image URL in the HTML source</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive grid -->
+    <div style="margin-bottom:10px;">
+      <div class="floor-legend">
+        <div class="leg-item"><div class="leg-swatch" style="background:#F5E6C3;border:.5px solid #cca;"></div><span class="price-label">3×3 corner</span></div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#5B9EB5;"></div><span class="price-label">3×3 standard</span></div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#8B1A1A;"></div><span class="price-label">4×3 corner</span></div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#8B7D3A;"></div><span class="price-label">4×3 standard</span></div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#aaa;opacity:.5;"></div>Booked</div>
+      </div>
+    </div>
+    <div class="floor-scroll">
+      <div class="floor-grid" id="floorGrid"></div>
+    </div>
+    <div class="stall-info" id="stallInfo">
+      <div class="stall-info-num">—</div>
+      <div class="stall-info-detail">Tap any stall to see details &amp; apply</div>
+    </div>
+  </div>
+
+  <!-- APPLY TAB -->
+  <div id="tab-apply" class="dd-panel">
+    <div id="applyForm">
+
+      <div class="form-section">
+        <h3>Brand Information</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Brand / Designer Name *</label>
+            <input type="text" id="f-brand" placeholder="e.g. Prinktonik">
+          </div>
+          <div class="form-group">
+            <label>Instagram Handle *</label>
+            <input type="text" id="f-insta" placeholder="@yourbrand">
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="f-cat">
+              <option value="">Select category</option>
+              <option>Women's Apparel — Indian Wear</option>
+              <option>Women's Apparel — Western / Fusion</option>
+              <option>Bridal &amp; Couture</option>
+              <option>Jewellery — Fine / Gold</option>
+              <option>Jewellery — Lab-grown / Fashion</option>
+              <option>Accessories — Bags &amp; Footwear</option>
+              <option>Lifestyle &amp; Home</option>
+              <option>Skincare &amp; Wellness</option>
+              <option>Men's Wear</option>
+              <option>Kids &amp; Infants</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>City / State</label>
+            <input type="text" id="f-city" placeholder="e.g. Mumbai, Maharashtra">
+          </div>
+        </div>
+        <div class="form-grid one" style="margin-top:12px;">
+          <div class="form-group">
+            <label>Brief about the brand *</label>
+            <textarea id="f-brief" placeholder="Tell us about your label, price points, target audience, and what makes your collection unique…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Contact Details</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Contact Name *</label>
+            <input type="text" id="f-name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" id="f-phone" placeholder="+91 98765 43210">
+          </div>
+          <div class="form-group" style="grid-column:1/-1;">
+            <label>Email Address *</label>
+            <input type="email" id="f-email" placeholder="your@brand.com">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Stall Preference</h3>
+        <div class="form-grid" style="margin-bottom:12px;">
+          <div class="form-group">
+            <label>Preferred stall type</label>
+            <select id="f-type">
+              <option value="">No preference</option>
+              <option>3×3 standard</option>
+              <option>3×3 corner — 2 sided open</option>
+              <option>4×3 standard</option>
+              <option>4×3 corner — 2 sided open</option>
+              <option>Table space — lounge area</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Stall number preference</label>
+            <input type="text" id="f-stallnum" placeholder="e.g. 45, 62 or leave blank">
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:10px;">Click any available stall below to select (optional):</p>
+        <div class="stall-picker" id="stallPicker"></div>
+        <div class="form-note" style="margin-top:10px;">Stall allocation is at the discretion of the Design District team. Preferences are noted but not guaranteed.</div>
+      </div>
+
+      <div class="form-section">
+        <h3>Exhibition History</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Exhibited at Design District before?</label>
+            <select id="f-prev">
+              <option value="">Select</option>
+              <option>No — first time</option>
+              <option>Yes — Season 1</option>
+              <option>Yes — Season 2</option>
+              <option>Yes — both seasons</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>How did you hear about Season 3?</label>
+            <select id="f-source">
+              <option value="">Select</option>
+              <option>Instagram</option>
+              <option>Word of mouth</option>
+              <option>Past exhibitor</option>
+              <option>WhatsApp broadcast</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-note" id="formError" style="display:none;background:#fff0f0;border-left-color:#c0392b;color:#c0392b;"></div>
+
+      <div class="submit-area">
+        <button class="submit-btn" id="submitBtn" onclick="submitForm()">Submit Application →</button>
+        <div class="submit-note">Reviewed personally by Aishwarya · Queries: +91 90002 75100 (Mon–Sat, 11 AM–6 PM)</div>
+      </div>
+    </div>
+
+    <div class="success-state" id="successState">
+      <div class="success-icon">✦</div>
+      <h2>Application Received</h2>
+      <p>
+        Thank you, <strong id="succ-brand"></strong>!<br>
+        Your application has been submitted successfully.<br>
+        A confirmation has been sent to <strong id="succ-email"></strong>.<br><br>
+        Aishwarya's team will review and respond within 5 working days.<br>
+        <span style="color:var(--text3);font-size:12px;">Queries: +91 90002 75100 · designdistricthyd.com</span>
+      </p>
+    </div>
+  </div>
+</div><!-- /dd-wrap -->
+
+<script>
+// ─────────────────────────────────────────────────────────────
+//  CONFIG — Replace with your actual Google Apps Script URL
+// ─────────────────────────────────────────────────────────────
+const GAS_URL = 'REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+
+// ─────────────────────────────────────────────────────────────
+//  PRICING VISIBILITY TOGGLE
+//  Set SHOW_PRICING = false to hide all pricing from the page
+// ─────────────────────────────────────────────────────────────
+const SHOW_PRICING = true; // ← flip to false to hide pricing site-wide
+
+// ─────────────────────────────────────────────────────────────
+//  BOOKED STALLS — synced from your Google Sheet via this list
+//  (admin can also push updates via the GAS backend)
+// ─────────────────────────────────────────────────────────────
+const BOOKED = new Set([
+  84, 85, 14, 18, 20, 7, 8, 9, 20, 31, 32, 36, 37,
+  75, 77, 73, 71, 69, 68, 62, 63
+]);
+
+// ─────────────────────────────────────────────────────────────
+//  STALL DATA
+// ─────────────────────────────────────────────────────────────
+const STALL_DATA = {};
+for (let i = 1; i <= 96; i++) {
+  let type, price, size, corner;
+  if ([10,11,12,13,14,15,16,17,18,19,20].includes(i)) {
+    type = 'olive'; price = '₹1,60,000'; size = '4×3'; corner = false;
+  } else if ([73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96].includes(i)) {
+    type = 'maroon'; price = '₹1,60,000'; size = '4×3'; corner = false;
+  } else {
+    type = 'blue'; price = '₹1,40,000'; size = '3×3'; corner = false;
+  }
+  if ([1,2,3,4,5,6,7,8,9,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41].includes(i)) {
+    type = 'cream'; price = '₹1,55,000'; size = '3×3'; corner = true;
+  }
+  STALL_DATA[i] = { type, price, size, corner };
+}
+
+// ─────────────────────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  applyPricingVisibility(SHOW_PRICING);
+  document.getElementById('pricingToggle').checked = SHOW_PRICING;
+  updateStats();
+  buildFloorGrid();
+  buildPicker();
+});
+
+function applyPricingVisibility(show) {
+  const section = document.getElementById('pricingSection');
+  section.classList.toggle('hidden', !show);
+  // also hide prices in floor legend
+  document.querySelectorAll('.price-label').forEach(el => {
+    el.style.opacity = show ? '1' : '1'; // labels kept; prices hidden via table only
+  });
+  // hide price column in stall type dropdown
+  document.querySelectorAll('#f-type option').forEach(opt => {
+    if (show) {
+      opt.textContent = opt.dataset.full || opt.textContent;
+    } else {
+      opt.dataset.full = opt.dataset.full || opt.textContent;
+      opt.textContent = opt.dataset.full.replace(/\s*[\(₹][^)]*\)?/, '').trim();
+    }
+  });
+}
+
+function togglePricing(show) {
+  applyPricingVisibility(show);
+}
+
+function updateStats() {
+  const booked = BOOKED.size;
+  const avail = 96 - booked;
+  document.getElementById('stat-booked').textContent = booked;
+  document.getElementById('stat-avail').textContent = avail;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  FLOOR GRID
+// ─────────────────────────────────────────────────────────────
+function buildFloorGrid() {
+  const grid = document.getElementById('floorGrid');
+  grid.innerHTML = '';
+  const cells = [];
+  for (let r = 0; r < 22; r++) cells.push(Array(15).fill(null));
+
+  function place(row, col, label, cls, rspan = 1, cspan = 1) {
+    cells[row][col] = { label, cls, rspan, cspan };
+    for (let r = row; r < row + rspan; r++)
+      for (let c = col; c < col + cspan; c++)
+        if (r !== row || c !== col) cells[r][c] = 'skip';
+  }
+
+  place(0, 0, 'Fire Exit', 'fire', 1, 3);
+  place(21, 3, 'Fire Exit', 'fire', 1, 2);
+  place(21, 14, 'Exit / Entry', 'exit', 1, 1);
+
+  const topStalls = [42, 43, 44, 45, 46, 47, 48];
+  topStalls.forEach((n, i) => place(0, 3 + i, n + '', 'stall'));
+  place(0, 10, 'Trial', 'table', 1, 1); place(0, 11, 'Trial', 'table', 1, 1);
+
+  place(2, 1, 54, 'stall'); place(2, 2, 53, 'stall');
+  place(3, 1, 55, 'stall'); place(3, 2, 56, 'stall');
+  place(5, 1, 66, 'stall'); place(5, 2, 65, 'stall');
+  place(6, 1, 67, 'stall'); place(6, 2, 68, 'stall');
+  place(2, 4, 52, 'stall'); place(2, 5, 51, 'stall');
+  place(3, 4, 57, 'stall'); place(3, 5, 58, 'stall');
+  place(5, 4, 64, 'stall'); place(5, 5, 63, 'stall');
+  place(6, 4, 69, 'stall'); place(6, 5, 70, 'stall');
+  place(2, 7, 50, 'stall'); place(2, 8, 49, 'stall');
+  place(3, 7, 59, 'stall'); place(3, 8, 60, 'stall');
+  place(5, 7, 62, 'stall'); place(5, 8, 61, 'stall');
+  place(6, 7, 71, 'stall'); place(6, 8, 72, 'stall');
+
+  place(8, 2, 'Lounge\n32×30', 'lounge', 4, 5);
+  place(8, 8, 'Table\nSpace', 'table', 4, 2);
+  place(8, 1, 'T↑', 'table', 1, 1); place(9, 1, 'T↑', 'table', 1, 1);
+  place(10, 1, 'T↑', 'table', 1, 1); place(11, 1, 'T↑', 'table', 1, 1);
+
+  place(13, 1, 78, 'stall'); place(13, 2, 77, 'stall');
+  place(14, 1, 79, 'stall'); place(14, 2, 80, 'stall');
+  place(13, 4, 76, 'stall'); place(13, 5, 75, 'stall');
+  place(14, 4, 81, 'stall'); place(14, 5, 82, 'stall');
+  place(13, 7, 74, 'stall'); place(13, 8, 73, 'stall');
+  place(14, 7, 83, 'stall'); place(14, 8, 84, 'stall');
+
+  place(17, 1, 90, 'stall'); place(17, 2, 89, 'stall');
+  place(18, 1, 91, 'stall'); place(18, 2, 92, 'stall');
+  place(17, 4, 88, 'stall'); place(17, 5, 87, 'stall');
+  place(18, 4, 93, 'stall'); place(18, 5, 94, 'stall');
+  place(17, 7, 86, 'stall'); place(17, 8, 85, 'stall');
+  place(18, 7, 95, 'stall'); place(18, 8, 96, 'stall');
+
+  const rightCol = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+  rightCol.forEach((n, i) => { if (i < 16) place(i, 14, n, 'stall'); });
+  const leftCol = [41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20];
+  leftCol.forEach((n, i) => { if (i < 22) place(i, 0, n, 'stall'); });
+
+  place(21, 5, 22, 'stall'); place(21, 6, 21, 'stall'); place(21, 7, 20, 'stall');
+  place(21, 8, 19, 'stall'); place(21, 9, 18, 'stall'); place(21, 10, 17, 'stall');
+
+  const placed = new Set();
+  cells.forEach((row, r) => {
+    row.forEach((cell, c) => {
+      if (cell === 'skip') return;
+      const key = `${r}-${c}`;
+      if (placed.has(key)) return;
+      placed.add(key);
+      const div = document.createElement('div');
+      if (!cell) { grid.appendChild(div); return; }
+      const rs = cell.rspan || 1, cs = cell.cspan || 1;
+      div.style.gridRow = `${r + 1} / span ${rs}`;
+      div.style.gridColumn = `${c + 1} / span ${cs}`;
+      if (cell.cls === 'stall') {
+        const n = parseInt(cell.label);
+        const d = STALL_DATA[n] || { type: 'blue', price: '₹1,40,000', size: '3×3' };
+        div.className = `stall s-${d.type}${BOOKED.has(n) ? ' s-booked' : ''}`;
+        div.innerHTML = `<span>${n}</span><span style="font-size:8px;opacity:.7;">${d.size}</span>`;
+        if (!BOOKED.has(n)) div.onclick = () => selectStall(n, d, div);
+      } else {
+        div.className = `floor-label ${cell.cls}`;
+        div.textContent = cell.label;
+      }
+      grid.appendChild(div);
+    });
+  });
+}
+
+let selectedStallEl = null;
+function selectStall(n, d, el) {
+  if (selectedStallEl) selectedStallEl.classList.remove('s-selected');
+  selectedStallEl = el;
+  el.classList.add('s-selected');
+  const priceStr = SHOW_PRICING ? ` · ${d.price} + GST` : '';
+  document.getElementById('stallInfo').innerHTML = `
+    <div class="stall-info-num">${n}</div>
+    <div class="stall-info-detail">
+      <strong>Stall ${n}</strong> · ${d.size} sqm · ${d.corner ? '2-sided open' : 'Standard hall'}${priceStr}
+    </div>
+    <button class="badge-apply-btn" onclick="applyForStall(${n},'${d.size}','${d.corner}')">Apply for Stall ${n} →</button>
+  `;
+}
+
+function applyForStall(n, size, corner) {
+  showTab('apply');
+  document.getElementById('f-stallnum').value = n;
+  const t = document.getElementById('f-type');
+  if (size === '4×3') t.value = corner === 'true' ? '4×3 corner — 2 sided open' : '4×3 standard';
+  else t.value = corner === 'true' ? '3×3 corner — 2 sided open' : '3×3 standard';
+  highlightPickerBtn(n);
+}
+
+function buildPicker() {
+  const p = document.getElementById('stallPicker');
+  p.innerHTML = '';
+  for (let i = 1; i <= 96; i++) {
+    const btn = document.createElement('button');
+    const isBooked = BOOKED.has(i);
+    btn.className = 'stall-pick-btn' + (isBooked ? ' pick-booked' : '');
+    btn.id = 'pick-' + i;
+    const d = STALL_DATA[i] || {};
+    btn.innerHTML = `${i}<br><span style="font-size:9px;opacity:.7;">${d.size || '3×3'}</span>`;
+    if (!isBooked) {
+      btn.onclick = () => {
+        document.querySelectorAll('.stall-pick-btn.pick-selected').forEach(b => b.classList.remove('pick-selected'));
+        btn.classList.add('pick-selected');
+        document.getElementById('f-stallnum').value = i;
+        const d = STALL_DATA[i];
+        const t = document.getElementById('f-type');
+        if (d.size === '4×3') t.value = d.corner ? '4×3 corner — 2 sided open' : '4×3 standard';
+        else t.value = d.corner ? '3×3 corner — 2 sided open' : '3×3 standard';
+      };
+    }
+    p.appendChild(btn);
+  }
+}
+
+function highlightPickerBtn(n) {
+  document.querySelectorAll('.stall-pick-btn.pick-selected').forEach(b => b.classList.remove('pick-selected'));
+  const b = document.getElementById('pick-' + n);
+  if (b && !b.classList.contains('pick-booked')) {
+    b.classList.add('pick-selected');
+    b.scrollIntoView({ block: 'nearest' });
+  }
+}
+
+function showTab(id) {
+  document.querySelectorAll('.dd-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.dd-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  const tabs = ['overview', 'floor', 'apply'];
+  document.querySelectorAll('.dd-tab')[tabs.indexOf(id)].classList.add('active');
+}
+
+// ─────────────────────────────────────────────────────────────
+//  FORM SUBMISSION → Google Apps Script
+// ─────────────────────────────────────────────────────────────
+async function submitForm() {
+  const fields = {
+    brand:   document.getElementById('f-brand').value.trim(),
+    insta:   document.getElementById('f-insta').value.trim(),
+    cat:     document.getElementById('f-cat').value,
+    city:    document.getElementById('f-city').value.trim(),
+    brief:   document.getElementById('f-brief').value.trim(),
+    name:    document.getElementById('f-name').value.trim(),
+    phone:   document.getElementById('f-phone').value.trim(),
+    email:   document.getElementById('f-email').value.trim(),
+    type:    document.getElementById('f-type').value,
+    stallno: document.getElementById('f-stallnum').value.trim(),
+    prev:    document.getElementById('f-prev').value,
+    source:  document.getElementById('f-source').value,
+    action:  'newApplication'
+  };
+
+  const required = ['brand','insta','cat','brief','name','phone','email'];
+  const missing = required.filter(k => !fields[k]);
+  if (missing.length) {
+    showFormError('Please fill all required fields marked with *');
+    return;
+  }
+  if (!/\S+@\S+\.\S+/.test(fields.email)) {
+    showFormError('Please enter a valid email address.');
+    return;
+  }
+
+  document.getElementById('formError').style.display = 'none';
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submittingOverlay').classList.add('show');
+
+  try {
+    const resp = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify(fields),
+      headers: { 'Content-Type': 'text/plain' } // GAS requires text/plain for CORS
+    });
+    const data = await resp.json();
+    document.getElementById('submittingOverlay').classList.remove('show');
+    if (data.status === 'ok') {
+      document.getElementById('succ-brand').textContent = fields.brand;
+      document.getElementById('succ-email').textContent = fields.email;
+      document.getElementById('applyForm').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (e) {
+    document.getElementById('submittingOverlay').classList.remove('show');
+    document.getElementById('submitBtn').disabled = false;
+    showFormError('Submission failed: ' + e.message + '. Please try again or contact us directly.');
+  }
+}
+
+function showFormError(msg) {
+  const el = document.getElementById('formError');
+  el.textContent = msg;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+</body>
+</html>
