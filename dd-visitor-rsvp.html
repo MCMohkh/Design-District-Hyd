@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSVP — Design District Hyd, Season III</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:      #0A0A0A;
+  --teal:       #7AADA8;
+  --teal-dark:  #4E8A85;
+  --cream:      #F4EEE4;
+  --warm-white: #FAF7F2;
+  --terracotta: #C67B52;
+  --gold:       #C4A35A;
+  --muted:      #8A8070;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--black);
+  color: var(--cream);
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+.header {
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.header .eyebrow { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(10,10,10,0.6); margin-bottom: 0.4rem; }
+.header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: 0.05em; color: var(--black); }
+.header .subtitle { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(10,10,10,0.7); margin-top: 0.4rem; }
+
+.main { max-width: 480px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+.tier-toggle { display: flex; gap: 0.6rem; margin-bottom: 1.5rem; }
+.tier-btn {
+  flex: 1; padding: 0.9rem 0.5rem; border-radius: 10px; border: 2px solid rgba(122,173,168,0.3);
+  background: var(--warm-white); color: var(--black); font-weight: 700; font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; transition: all .15s;
+}
+.tier-btn.active.visitor { background: var(--teal); border-color: var(--teal); }
+.tier-btn.active.vip     { background: var(--gold); border-color: var(--gold); }
+
+.form-card {
+  background: var(--warm-white); border-radius: 16px; padding: 1.5rem; color: var(--black);
+}
+.form-group { margin-bottom: 1rem; }
+.form-label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+.form-input { width: 100%; padding: 0.8rem; border-radius: 8px; border: 2px solid #ddd; font-size: 1rem; outline: none; background: #fff; color: var(--black); }
+.form-input:focus { border-color: var(--teal); }
+
+.vip-note {
+  background: rgba(196,163,90,0.12); border: 1px solid rgba(196,163,90,0.4);
+  border-radius: 10px; padding: 0.8rem 1rem; font-size: 0.85rem; line-height: 1.5;
+  margin-bottom: 1rem; display: none;
+}
+.vip-note.show { display: block; }
+
+.btn-submit {
+  width: 100%; padding: 1rem; border-radius: 10px; border: none;
+  background: var(--teal); color: var(--black); font-size: 1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-top: 0.5rem;
+}
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.form-error { display: none; color: var(--terracotta); font-size: 0.85rem; margin-top: 0.8rem; text-align: center; }
+
+.success-state { display: none; text-align: center; padding: 2rem 1rem; }
+.success-state.show { display: block; }
+.success-state h2 { font-size: 1.4rem; margin-bottom: 0.6rem; color: var(--teal); }
+.success-state p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">Design District Hyd</div>
+  <h1>Season III</h1>
+  <div class="subtitle">1 October 2026 · Hall #4, Novotel Hyderabad</div>
+</div>
+
+<div class="main">
+
+  <div class="tier-toggle">
+    <button type="button" class="tier-btn active visitor" id="tierVisitorBtn" onclick="selectTier('Visitor')">Visitor</button>
+    <button type="button" class="tier-btn vip" id="tierVipBtn" onclick="selectTier('VIP')">VIP</button>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <div class="vip-note" id="vipNote">
+      You're requesting a VIP pass. VIP passes include priority entry and reserved seating — your registration will be confirmed on WhatsApp.
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Full Name *</label>
+      <input class="form-input" id="f-name" type="text" placeholder="Your name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">WhatsApp Number *</label>
+      <input class="form-input" id="f-phone" type="tel" placeholder="10-digit number">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email (optional)</label>
+      <input class="form-input" id="f-email" type="email" placeholder="you@email.com">
+    </div>
+
+    <button class="btn-submit" id="submitBtn" onclick="submitRsvp()">Confirm RSVP</button>
+    <div class="form-error" id="formError"></div>
+  </div>
+
+  <div class="success-state" id="successState">
+    <h2>You're on the list ✨</h2>
+    <p>Your pass is confirmed. Check WhatsApp for your QR entry pass — see you at Design District Hyd!</p>
+  </div>
+
+</div>
+
+<script>
+const GAS_URL = 'REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+let selectedTier = 'Visitor';
+
+function selectTier(tier) {
+  selectedTier = tier;
+  document.getElementById('tierVisitorBtn').classList.toggle('active', tier === 'Visitor');
+  document.getElementById('tierVipBtn').classList.toggle('active', tier === 'VIP');
+  document.getElementById('vipNote').classList.toggle('show', tier === 'VIP');
+}
+
+async function submitRsvp() {
+  const name  = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const errEl = document.getElementById('formError');
+
+  errEl.style.display = 'none';
+
+  if (!name) { return showError('Please enter your name.'); }
+  if (!/^\d{10}$/.test(phone.replace(/\D/g, '').slice(-10))) { return showError('Please enter a valid 10-digit WhatsApp number.'); }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    const resp = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'registerGuest', name, phone, email, tier: selectedTier }),
+      headers: { 'Content-Type': 'text/plain' }
+    });
+    const data = await resp.json();
+
+    if (data.status === 'ok') {
+      document.getElementById('formCard').style.display = 'none';
+      document.getElementById('successState').classList.add('show');
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Confirm RSVP';
+    showError('Something went wrong: ' + e.message + '. Please try again.');
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('formError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+</script>
+</body>
+</html>

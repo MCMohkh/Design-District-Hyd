@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Your Pass — Design District Hyd, Season III</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:      #0A0A0A;
+  --teal:       #7AADA8;
+  --teal-dark:  #4E8A85;
+  --cream:      #F4EEE4;
+  --warm-white: #FAF7F2;
+  --terracotta: #C67B52;
+  --gold:       #C4A35A;
+  --muted:      #8A8070;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--black);
+  color: var(--cream);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.main { max-width: 420px; width: 100%; }
+
+.pass-card {
+  background: var(--black); border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(122,173,168,0.3);
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.5);
+}
+
+.pass-header {
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+  padding: 1.4rem; text-align: center;
+}
+.pass-eyebrow { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(10,10,10,0.6); margin-bottom: 0.3rem; }
+.pass-event-name { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); }
+.pass-season-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(10,10,10,0.65); margin-top: 0.3rem; }
+
+.tier-ribbon {
+  text-align: center; padding: 0.5rem; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+}
+.tier-ribbon.visitor { background: var(--teal-dark); color: var(--cream); }
+.tier-ribbon.vip { background: var(--gold); color: var(--black); }
+
+.pass-qr-area {
+  display: flex; justify-content: center; align-items: center;
+  padding: 1.5rem; background: var(--cream);
+}
+.pass-qr-area img { border-radius: 4px; display: block; }
+
+.pass-info { padding: 1.2rem 1.2rem 0.8rem; text-align: center; }
+.pass-visitor-name { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.3rem; }
+.pass-visitor-id { font-size: 1.3rem; font-weight: 900; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 0.6rem; font-family: monospace; }
+
+.pass-footer {
+  background: rgba(122,173,168,0.08); padding: 0.9rem 1.2rem;
+  border-top: 1px solid rgba(122,173,168,0.15);
+  font-size: 0.78rem; color: var(--muted); line-height: 1.6;
+}
+.pass-footer strong { color: var(--cream); }
+
+.venue-block { margin-top: 1.2rem; padding: 1rem 1.2rem; }
+.venue-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; font-weight: 700; }
+.venue-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+.venue-address { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.6rem; }
+.map-link { color: var(--teal); font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+
+.before-arrive {
+  margin: 1rem 1.2rem 1.2rem; padding: 1rem 1.1rem;
+  background: rgba(198,123,82,0.1); border-left: 3px solid var(--terracotta); border-radius: 6px;
+}
+.before-arrive-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.5rem; font-weight: 700; }
+.before-arrive ul { list-style: none; }
+.before-arrive li { font-size: 0.8rem; color: var(--cream); margin-bottom: 0.4rem; padding-left: 0.9rem; position: relative; }
+.before-arrive li::before { content: '—'; position: absolute; left: 0; color: var(--terracotta); }
+</style>
+</head>
+<body>
+
+<div class="main">
+  <div class="pass-card">
+    <div class="pass-header">
+      <div class="pass-eyebrow">Design District Hyd</div>
+      <div class="pass-event-name">Season III</div>
+      <div class="pass-season-label">1 October 2026</div>
+    </div>
+
+    <div class="tier-ribbon" id="tierRibbon">Visitor Pass</div>
+
+    <div class="pass-qr-area">
+      <img id="qrImg" width="200" height="200" alt="Entry QR Code">
+    </div>
+
+    <div class="pass-info">
+      <div class="pass-visitor-name" id="passName">—</div>
+      <div class="pass-visitor-id" id="passId">—</div>
+    </div>
+
+    <div class="pass-footer">
+      Show this QR code at check-in for quick entry. <strong>Screenshot this page as a backup</strong> before the event.
+    </div>
+
+    <div class="venue-block">
+      <div class="venue-label">Venue</div>
+      <div class="venue-name">Novotel Hyderabad — Hall #4</div>
+      <div class="venue-address">Novotel Hotel Rd, Izzathnagar, Shilpa Hills, Kothaguda, Hyderabad, Telangana 500084</div>
+      <a class="map-link" href="https://share.google/GSeznPaLTqDz35Wr1" target="_blank">View location on map →</a>
+    </div>
+
+    <div class="before-arrive">
+      <div class="before-arrive-label">Before You Arrive</div>
+      <ul>
+        <li>Carry a valid photo ID for verification at the venue</li>
+        <li>Keep your screen brightness high for faster scanning</li>
+        <li>This pass is non-transferable</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const reg  = params.get('reg')  || 'DDH-S3-000000';
+const name = params.get('name') || 'Guest';
+const tier = params.get('tier') || 'Visitor';
+
+document.getElementById('passName').textContent = name;
+document.getElementById('passId').textContent = reg;
+
+const ribbon = document.getElementById('tierRibbon');
+if (tier.toLowerCase() === 'vip') {
+  ribbon.textContent = 'VIP Pass';
+  ribbon.classList.add('vip');
+} else {
+  ribbon.textContent = 'Visitor Pass';
+  ribbon.classList.add('visitor');
+}
+
+// Free QR generation service — no key required, generated live from the Reg ID
+const qrData = encodeURIComponent(reg);
+document.getElementById('qrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${qrData}&bgcolor=F4EEE4&color=0A0A0A`;
+</script>
+</body>
+</html>
