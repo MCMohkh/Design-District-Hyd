@@ -155,7 +155,7 @@ async function submitRsvp() {
     });
     const data = await resp.json();
 
-    if (data.status === 'ok') {
+    if (data.success) {
       document.getElementById('formCard').style.display = 'none';
       document.getElementById('successState').classList.add('show');
     } else {
