@@ -230,7 +230,7 @@ body {
 </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXbLhNspu50FhlQKDtvDBwuS0LjYa68tat7-bVtsSz-qjOLszIqtYnPbVQtnCQEVZDHQ/exec';
 
 let html5QrCode   = null;
 let scanning      = false;
@@ -316,7 +316,7 @@ function manualLookup() {
 
 // ── Core entry logic ───────────────────────
 async function processEntry(value) {
-  const isId     = /^DDH-\d+$/i.test(value);
+  const isId     = /^DDH-S3-[A-Z0-9]+$/i.test(value);
   const isPhone  = /^\d{10}$/.test(value);
   const action   = isId ? 'scanById' : isPhone ? 'scanByPhone' : null;
 
