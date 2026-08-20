@@ -156,8 +156,15 @@ async function submitRsvp() {
     const data = await resp.json();
 
     if (data.success) {
+      const passUrl = data.data && data.data.passUrl
+        ? data.data.passUrl
+        : `pass.html?reg=${encodeURIComponent(data.data.id)}&name=${encodeURIComponent(name)}&tier=${encodeURIComponent(selectedTier)}`;
+
       document.getElementById('formCard').style.display = 'none';
       document.getElementById('successState').classList.add('show');
+      document.querySelector('#successState p').textContent = 'Redirecting to your pass — screenshot it once it loads. It\'s also on its way to your WhatsApp.';
+
+      setTimeout(() => { window.location.href = passUrl; }, 1200);
     } else {
       throw new Error(data.message || 'Submission failed');
     }
