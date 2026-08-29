@@ -68,6 +68,14 @@ body {
 }
 .pass-footer strong { color: var(--cream); }
 
+.wa-save-block { padding: 0 1.2rem 1rem; }
+.wa-save-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  width: 100%; padding: 0.85rem; border-radius: 10px;
+  background: #25D366; color: #05330F; text-decoration: none;
+  font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+}
+
 .venue-block { margin-top: 1.2rem; padding: 1rem 1.2rem; }
 .venue-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; font-weight: 700; }
 .venue-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
@@ -109,6 +117,13 @@ body {
       Show this QR code at check-in for quick entry. <strong>Screenshot this page as a backup</strong> before the event.
     </div>
 
+    <div class="wa-save-block">
+      <a class="wa-save-btn" id="waSaveBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a7.4 7.4 0 0 1-2.2-1.3 8 8 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4a.5.5 0 0 0 0-.5c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.1 4.5c.7.3 1.3.5 1.7.6a4.1 4.1 0 0 0 1.9.1c.6-.1 1.7-.7 2-1.4s.3-1.2.2-1.4-.3-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7 3.8z"/></svg>
+        Save / forward this pass on WhatsApp
+      </a>
+    </div>
+
     <div class="venue-block">
       <div class="venue-label">Venue</div>
       <div class="venue-name">Novotel Hyderabad — Hall #4</div>
@@ -148,6 +163,11 @@ if (tier.toLowerCase() === 'vip') {
 // Free QR generation service — no key required, generated live from the Reg ID
 const qrData = encodeURIComponent(reg);
 document.getElementById('qrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${qrData}&bgcolor=F4EEE4&color=0A0A0A`;
+
+// "Save on WhatsApp" — a plain wa.me share link, not tied to any API/provider,
+// so it works even if the automated confirmation send fails for any reason.
+const waText = `My ${tier} pass for Design District Hyd — Season III\nReg ID: ${reg}\n1 October 2026 · Novotel Hyderabad, Hall #4\nPass: ${window.location.href}`;
+document.getElementById('waSaveBtn').href = `https://wa.me/?text=${encodeURIComponent(waText)}`;
 </script>
 </body>
 </html>
