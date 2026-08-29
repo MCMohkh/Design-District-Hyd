@@ -16,90 +16,202 @@
 })(window,document,"script","//app.wigzo.com/wigzo.compressed.js","wigzo");
 wigzo("configure", "MPgUgko3R5SR_aNBn96HKA");
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --black:      #0A0A0A;
+  --charcoal:   #14120F;
   --teal:       #7AADA8;
   --teal-dark:  #4E8A85;
   --cream:      #F4EEE4;
   --warm-white: #FAF7F2;
   --terracotta: #C67B52;
   --gold:       #C4A35A;
+  --gold-soft:  rgba(196,163,90,0.35);
   --muted:      #8A8070;
+  --display:    'Fraunces', Georgia, serif;
+  --body:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--body);
   background: var(--black);
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(122,173,168,0.10), transparent 40%),
+    radial-gradient(circle at 90% 0%, rgba(196,163,90,0.08), transparent 35%);
   color: var(--cream);
   min-height: 100vh;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* ── Home link ─────────────────────────────────────────────────────── */
+.topbar {
+  max-width: 480px; margin: 0 auto; padding: 1rem 1.25rem 0;
+}
+.home-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color .15s;
+}
+.home-link:hover { color: var(--teal); }
+.home-link svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ── Header ────────────────────────────────────────────────────────── */
 .header {
-  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
-  padding: 2rem 1rem 1.5rem;
+  position: relative;
+  background: linear-gradient(150deg, var(--teal-dark) 0%, var(--teal) 100%);
+  padding: 2.75rem 1.5rem 2.25rem;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  overflow: hidden;
+  box-shadow: 0 12px 32px -12px rgba(0,0,0,0.5);
 }
-.header .eyebrow { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(10,10,10,0.6); margin-bottom: 0.4rem; }
-.header h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: 0.05em; color: var(--black); }
-.header .subtitle { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(10,10,10,0.7); margin-top: 0.4rem; }
+.header::before {
+  /* subtle woven texture — nods to the fabric/design-craft subject matter */
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    115deg, rgba(10,10,10,0.05) 0px, rgba(10,10,10,0.05) 1px,
+    transparent 1px, transparent 13px
+  );
+  pointer-events: none;
+}
+.header-inner { position: relative; }
+.header .eyebrow {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase;
+  color: rgba(10,10,10,0.62); margin-bottom: 0.65rem;
+}
+.header h1 {
+  font-family: var(--display); font-size: 2.6rem; font-weight: 600; font-style: italic;
+  letter-spacing: 0.01em; color: var(--black); line-height: 1;
+}
+.header .subtitle {
+  font-size: 0.76rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(10,10,10,0.68); margin-top: 0.85rem;
+}
+.header .subtitle::before { content: ''; }
+.header .divider {
+  width: 32px; height: 2px; background: rgba(10,10,10,0.35);
+  margin: 0.9rem auto 0.7rem;
+}
 
-.main { max-width: 480px; margin: 0 auto; padding: 1.5rem 1rem; }
+.main { max-width: 480px; margin: 0 auto; padding: 2rem 1.25rem 0; }
 
-.tier-toggle { display: flex; gap: 0.6rem; margin-bottom: 1.5rem; }
+/* ── Tier toggle ───────────────────────────────────────────────────── */
+.tier-toggle { display: flex; gap: 0.65rem; margin-bottom: 1.75rem; }
 .tier-btn {
-  flex: 1; padding: 0.9rem 0.5rem; border-radius: 10px; border: 2px solid rgba(122,173,168,0.3);
-  background: var(--warm-white); color: var(--black); font-weight: 700; font-size: 0.85rem;
-  text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; transition: all .15s;
+  flex: 1; padding: 0.95rem 0.5rem; border-radius: 12px; border: 1.5px solid rgba(244,238,228,0.14);
+  background: transparent; color: var(--cream); font-weight: 600; font-size: 0.82rem;
+  text-transform: uppercase; letter-spacing: 0.09em; cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s, transform .1s, box-shadow .18s;
 }
-.tier-btn.active.visitor { background: var(--teal); border-color: var(--teal); }
-.tier-btn.active.vip     { background: var(--gold); border-color: var(--gold); }
+.tier-btn:active { transform: scale(0.98); }
+.tier-btn.active.visitor {
+  background: var(--teal); border-color: var(--teal); color: var(--black);
+  box-shadow: 0 6px 16px -6px rgba(122,173,168,0.5);
+}
+.tier-btn.active.vip {
+  background: var(--gold); border-color: var(--gold); color: var(--black);
+  box-shadow: 0 6px 16px -6px rgba(196,163,90,0.5);
+}
 
+/* ── Form card ─────────────────────────────────────────────────────── */
 .form-card {
-  background: var(--warm-white); border-radius: 16px; padding: 1.5rem; color: var(--black);
+  background: var(--warm-white); border-radius: 18px; padding: 1.75rem 1.5rem;
+  color: var(--black);
+  box-shadow: 0 20px 48px -20px rgba(0,0,0,0.6);
 }
-.form-group { margin-bottom: 1rem; }
-.form-label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
-.form-input { width: 100%; padding: 0.8rem; border-radius: 8px; border: 2px solid #ddd; font-size: 1rem; outline: none; background: #fff; color: var(--black); }
-.form-input:focus { border-color: var(--teal); }
-
-.vip-note {
-  display: none;
-  margin-top: 1.5rem;
-  padding: 0 0.25rem;
+.form-group { margin-bottom: 1.15rem; }
+.form-label {
+  display: block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.5rem;
 }
-.vip-note.show { display: block; }
-.vip-note-headline {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.5rem;
+.form-input {
+  width: 100%; padding: 0.85rem 0.9rem; border-radius: 9px; border: 1.5px solid #E4DED2;
+  font-size: 1rem; font-family: var(--body); outline: none; background: #fff; color: var(--black);
+  transition: border-color .15s, box-shadow .15s;
 }
-.vip-note p { font-size: 0.9rem; line-height: 1.65; color: var(--cream); opacity: 0.85; }
+.form-input::placeholder { color: #B8B0A0; }
+.form-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(122,173,168,0.18); }
 
 .btn-submit {
-  width: 100%; padding: 1rem; border-radius: 10px; border: none;
-  background: var(--teal); color: var(--black); font-size: 1rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; margin-top: 0.5rem;
+  width: 100%; padding: 1.05rem; border-radius: 10px; border: none;
+  background: var(--teal); color: var(--black); font-size: 0.92rem; font-weight: 700;
+  font-family: var(--body); text-transform: uppercase; letter-spacing: 0.07em; cursor: pointer;
+  margin-top: 0.6rem; transition: filter .15s, transform .1s;
 }
-.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-submit:hover:not(:disabled) { filter: brightness(1.05); }
+.btn-submit:active:not(:disabled) { transform: scale(0.99); }
+.btn-submit:disabled { opacity: 0.55; cursor: not-allowed; }
 
-.form-error { display: none; color: var(--terracotta); font-size: 0.85rem; margin-top: 0.8rem; text-align: center; }
+.form-error { display: none; color: var(--terracotta); font-size: 0.85rem; margin-top: 0.9rem; text-align: center; line-height: 1.5; }
 
-.success-state { display: none; text-align: center; padding: 2rem 1rem; }
+/* ── VIP / Visitor detail panels ──────────────────────────────────── */
+.vip-note { display: none; margin-top: 1.85rem; padding: 0 0.15rem; }
+.vip-note.show { display: block; }
+.vip-note-headline {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.vip-note p { font-size: 0.92rem; line-height: 1.7; color: var(--cream); opacity: 0.82; }
+.rules-list { list-style: none; margin-top: 0.3rem; }
+.rules-list li {
+  font-size: 0.85rem; line-height: 1.65; color: var(--cream); opacity: 0.82;
+  padding-left: 1.1rem; position: relative; margin-bottom: 0.55rem;
+}
+.rules-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+.section-divider {
+  height: 1px; margin: 2rem 0;
+  background: linear-gradient(90deg, transparent, rgba(244,238,228,0.14), transparent);
+}
+
+/* ── Success state ─────────────────────────────────────────────────── */
+.success-state { display: none; text-align: center; padding: 2.5rem 1rem 1rem; }
 .success-state.show { display: block; }
-.success-state h2 { font-size: 1.4rem; margin-bottom: 0.6rem; color: var(--teal); }
-.success-state p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+.success-state .check {
+  width: 44px; height: 44px; margin: 0 auto 1.1rem; border-radius: 50%;
+  background: var(--teal); display: flex; align-items: center; justify-content: center;
+}
+.success-state .check svg { width: 20px; height: 20px; }
+.success-state h2 { font-family: var(--display); font-weight: 600; font-style: italic; font-size: 1.6rem; margin-bottom: 0.7rem; color: var(--teal); }
+.success-state p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+
+/* ── Footer ────────────────────────────────────────────────────────── */
+.footer {
+  max-width: 480px; margin: 2.5rem auto 0; padding: 0 1.25rem;
+  text-align: center;
+}
+.footer a {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  color: var(--gold); text-decoration: none; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; border: 1.5px solid var(--gold-soft);
+  border-radius: 100px; padding: 0.7rem 1.4rem; transition: background .15s, border-color .15s;
+}
+.footer a:hover { background: rgba(196,163,90,0.1); border-color: var(--gold); }
+.footer a svg { width: 13px; height: 13px; }
 </style>
 </head>
 <body>
 
+<div class="topbar">
+  <a class="home-link" href="https://www.designdistricthyd.com/">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3L4.5 8l5 5"/></svg>
+    Design District Hyd
+  </a>
+</div>
+
 <div class="header">
-  <div class="eyebrow">Design District Hyd</div>
-  <h1>Season III</h1>
-  <div class="subtitle">1 October 2026 · Hall #4, Novotel Hyderabad</div>
+  <div class="header-inner">
+    <div class="eyebrow">Design District Hyd</div>
+    <h1>Season III</h1>
+    <div class="divider"></div>
+    <div class="subtitle">1 October 2026 · Hall #4, Novotel Hyderabad</div>
+  </div>
 </div>
 
 <div class="main">
@@ -130,13 +242,41 @@ body {
   <div class="vip-note show" id="vipNote">
     <div class="vip-note-headline">Why VIP hour</div>
     <p>The floor, before it's a floor show. VIP hour gets you in ahead of the crowd — first access to every designer's rack while pieces are still untouched, room to actually shop without elbow-to-elbow browsing, and real time one-on-one with the designers themselves to hear the how and why behind what they've made. It's the version of Design District built for people who want to experience it, not just attend it.</p>
+
+    <div class="section-divider"></div>
+
+    <div class="vip-note-headline">Important information</div>
+    <ul class="rules-list">
+      <li>VIP Hour: 10:00 AM – 12:00 PM · 1 October 2026 (before general entry opens)</li>
+      <li>One pass = one person only</li>
+      <li>Pre-registration is mandatory — walk-ins are not accepted during VIP hour</li>
+      <li>Slots are limited — register early to secure your spot</li>
+      <li>Your pass is valid only for 1 October 2026</li>
+      <li>Non-transferable — carry a valid photo ID matching your registration</li>
+      <li>Screenshot your pass as a backup; if lost, reach out to us and we'll verify against our records</li>
+    </ul>
+  </div>
+
+  <div class="vip-note" id="visitorNote">
+    <div class="vip-note-headline">Visitor hours</div>
+    <p>General entry, 12:00 PM – 7:00 PM · 1 October 2026. Walk-ins are welcome, but RSVP-ing ahead means faster entry with your QR pass ready to scan.</p>
   </div>
 
   <div class="success-state" id="successState">
-    <h2>You're on the list ✨</h2>
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 8"/></svg>
+    </div>
+    <h2>You're on the list</h2>
     <p>Your pass is confirmed. Check WhatsApp for your QR entry pass — see you at Design District Hyd!</p>
   </div>
 
+</div>
+
+<div class="footer">
+  <a href="https://www.designdistricthyd.com/">
+    Explore Design District Hyd
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3l5 5-5 5"/></svg>
+  </a>
 </div>
 
 <script>
@@ -148,6 +288,7 @@ function selectTier(tier) {
   document.getElementById('tierVisitorBtn').classList.toggle('active', tier === 'Visitor');
   document.getElementById('tierVipBtn').classList.toggle('active', tier === 'VIP');
   document.getElementById('vipNote').classList.toggle('show', tier === 'VIP');
+  document.getElementById('visitorNote').classList.toggle('show', tier === 'Visitor');
 }
 
 async function submitRsvp() {
