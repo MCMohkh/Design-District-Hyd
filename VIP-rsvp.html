@@ -63,7 +63,7 @@ body {
 }
 
 /* ══════════ CURTAIN REVEAL ══════════ */
-.curtain { position: fixed; inset: 0; z-index: 999; display: flex; pointer-events: none; }
+.curtain { position: fixed; inset: 0; z-index: 999; display: flex; flex-direction: column; pointer-events: none; }
 .curtain-panel {
   flex: 1; position: relative; overflow: hidden;
   background:
@@ -72,13 +72,10 @@ body {
   display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.6rem;
   animation: curtainHold 0.55s forwards;
 }
-.curtain-left { animation-name: curtainOpenLeft; animation-delay: 0.55s; animation-duration: 0.95s; animation-timing-function: cubic-bezier(.7,0,.2,1); animation-fill-mode: forwards; border-right: 1px solid rgba(196,163,90,0.25); }
-.curtain-right { animation-name: curtainOpenRight; animation-delay: 0.55s; animation-duration: 0.95s; animation-timing-function: cubic-bezier(.7,0,.2,1); animation-fill-mode: forwards; }
-@keyframes curtainOpenLeft { to { transform: translateX(-100%); } }
-@keyframes curtainOpenRight { to { transform: translateX(100%); } }
-.curtain-mark { width: 30px; height: 30px; opacity: 0.9; filter: invert(1); }
-.curtain-word { font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--cream); opacity: 0.85; }
-.curtain-tagline { font-size: 0.48rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.8; max-width: 140px; text-align: center; line-height: 1.8; }
+.curtain-left { animation-name: curtainOpenUp; animation-delay: 0.55s; animation-duration: 0.95s; animation-timing-function: cubic-bezier(.7,0,.2,1); animation-fill-mode: forwards; border-bottom: 1px solid rgba(196,163,90,0.25); }
+.curtain-right { animation-name: curtainOpenDown; animation-delay: 0.55s; animation-duration: 0.95s; animation-timing-function: cubic-bezier(.7,0,.2,1); animation-fill-mode: forwards; }
+@keyframes curtainOpenUp { to { transform: translateY(-100%); } }
+@keyframes curtainOpenDown { to { transform: translateY(100%); } }
 
 /* ══════════ TOP BAR ══════════ */
 .topbar { max-width: 460px; margin: 0 auto; padding: 1.6rem 1.5rem 0; }
@@ -255,7 +252,7 @@ body {
 
   <div class="value-prop">
     <div class="line1">Fill in your details to unlock <em>VIP Hour</em></div>
-    <div class="line2">10–35% off at select stores</div>
+    <div class="line2">Get up to 35% off on the latest 2026 festive collection</div>
   </div>
 
   <div class="tier-toggle">
@@ -283,12 +280,14 @@ body {
 
   <div class="vip-note show" id="vipNote">
     <div class="vip-note-headline">VIP Hour</div>
-    <p>10:00 AM – 12:00 PM · First access to every rack, room to actually shop, and time with the designers themselves — before the floor opens to everyone else.</p>
+    <p>10:30 AM – 12:30 PM · First access to every rack, room to actually shop, and time with the designers themselves — before the floor opens to everyone else.</p>
 
     <div class="section-rule"></div>
 
     <ul class="rules-list">
-      <li>One pass, one person — pre-registration mandatory, no walk-ins</li>
+      <li>One QR = one person only</li>
+      <li>Multiple entries on the same QR code will not be permitted</li>
+      <li>Pre-registration is mandatory — no walk-ins during VIP hour</li>
       <li>Slots are limited — register early</li>
       <li>Valid only for 1 October 2026, non-transferable</li>
       <li>Carry a valid photo ID matching your registration</li>
