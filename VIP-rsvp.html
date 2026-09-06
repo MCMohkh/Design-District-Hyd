@@ -192,13 +192,27 @@ body {
 .form-error { display: none; color: var(--terracotta); font-size: 0.68rem; letter-spacing: 0.04em; margin-top: 1rem; text-align: center; line-height: 1.6; }
 
 /* ══════════ VIP / Visitor detail panels ══════════ */
-.vip-note { display: none; margin-top: 2.2rem; }
+.vip-note { display: none; margin-bottom: 2.2rem; }
 .vip-note.show { display: block; }
 .vip-note-headline {
   font-size: 0.52rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold);
   margin-bottom: 0.9rem;
 }
 .vip-note p { font-family: 'Blanc', serif; font-size: 0.95rem; line-height: 1.6; color: rgba(244,238,228,0.8); }
+
+/* ══════════ Key-info callout — the "don't miss this" box ══════════ */
+.key-info {
+  background: rgba(196,163,90,0.07); border: 1px solid rgba(196,163,90,0.35);
+  padding: 1.1rem 1.2rem; margin-bottom: 1.4rem;
+}
+.key-info-item {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: 0.72rem; line-height: 1.6; color: var(--cream);
+  margin-bottom: 0.6rem;
+}
+.key-info-item:last-child { margin-bottom: 0; }
+.key-info-item .mark { color: var(--gold); flex-shrink: 0; }
+.key-info-item b { color: var(--gold); font-weight: 400; }
 
 .section-rule { width: 100%; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin: 1.6rem 0; opacity: 0.4; }
 
@@ -273,12 +287,41 @@ body {
 
   <div class="value-prop">
     <div class="line1">Fill in your details to unlock <em>VIP Hour</em></div>
-    <div class="line2">Get up to 35% off on the latest 2026 festive collection</div>
+    <div class="line2">Up to 35% off on selective designers · 10:30 AM – 12:30 PM only</div>
   </div>
 
   <div class="tier-toggle">
     <button type="button" class="tier-btn vip active" id="tierVipBtn" onclick="selectTier('VIP')">VIP</button>
     <button type="button" class="tier-btn visitor" id="tierVisitorBtn" onclick="selectTier('Visitor')">Visitor</button>
+  </div>
+
+  <div class="vip-note show" id="vipNote">
+    <div class="vip-note-headline">VIP Hour</div>
+
+    <div class="key-info">
+      <div class="key-info-item"><span class="mark">✨</span><span>Discount hours are valid <b>only from 10:30 AM to 12:30 PM</b></span></div>
+      <div class="key-info-item"><span class="mark">✨</span><span>Up to <b>35% off on selective designers</b> — not sitewide, check in-store for which labels are included</span></div>
+      <div class="key-info-item"><span class="mark">✨</span><span>After 12:30 PM, <b>all products return to original pricing</b></span></div>
+    </div>
+
+    <p>First access to every rack, room to actually shop, and time with the designers themselves — before the floor opens to everyone else.</p>
+
+    <div class="section-rule"></div>
+
+    <ul class="rules-list">
+      <li>One QR = one person only</li>
+      <li>Multiple entries on the same QR code will not be permitted</li>
+      <li>Pre-registration is mandatory — no walk-ins during VIP hour</li>
+      <li>Slots are limited — register early</li>
+      <li>Valid only for 1 October 2026, non-transferable</li>
+      <li>Carry a valid photo ID matching your registration</li>
+      <li>Screenshot your pass; if lost, we'll verify against our records</li>
+    </ul>
+  </div>
+
+  <div class="vip-note" id="visitorNote">
+    <div class="vip-note-headline">Visitor Hours</div>
+    <p>12:00 PM – 7:00 PM · Walk-ins welcome — RSVP ahead for faster entry with your QR pass ready to scan.</p>
   </div>
 
   <div class="form-card" id="formCard">
@@ -297,28 +340,6 @@ body {
 
     <button class="btn-submit" id="submitBtn" onclick="submitRsvp()">Confirm RSVP</button>
     <div class="form-error" id="formError"></div>
-  </div>
-
-  <div class="vip-note show" id="vipNote">
-    <div class="vip-note-headline">VIP Hour</div>
-    <p>10:30 AM – 12:30 PM · First access to every rack, room to actually shop, and time with the designers themselves — before the floor opens to everyone else.</p>
-
-    <div class="section-rule"></div>
-
-    <ul class="rules-list">
-      <li>One QR = one person only</li>
-      <li>Multiple entries on the same QR code will not be permitted</li>
-      <li>Pre-registration is mandatory — no walk-ins during VIP hour</li>
-      <li>Slots are limited — register early</li>
-      <li>Valid only for 1 October 2026, non-transferable</li>
-      <li>Carry a valid photo ID matching your registration</li>
-      <li>Screenshot your pass; if lost, we'll verify against our records</li>
-    </ul>
-  </div>
-
-  <div class="vip-note" id="visitorNote">
-    <div class="vip-note-headline">Visitor Hours</div>
-    <p>12:00 PM – 7:00 PM · Walk-ins welcome — RSVP ahead for faster entry with your QR pass ready to scan.</p>
   </div>
 
   <div class="success-state" id="successState">
