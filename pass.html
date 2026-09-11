@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Your Pass — Design District Hyd, Season III</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -30,6 +31,18 @@ body {
 
 .main { max-width: 420px; width: 100%; }
 
+/* ── Delivery confirmation banner — only shown when something actually sent ── */
+.delivery-banner {
+  display: none;
+  align-items: flex-start; gap: 0.7rem;
+  background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.35);
+  border-radius: 10px; padding: 0.9rem 1rem; margin-bottom: 1rem;
+}
+.delivery-banner.show { display: flex; }
+.delivery-banner svg { flex-shrink: 0; margin-top: 0.1rem; width: 18px; height: 18px; color: #4CAF50; }
+.delivery-banner p { font-size: 0.8rem; line-height: 1.5; color: var(--cream); }
+.delivery-banner strong { color: #4CAF50; }
+
 .pass-card {
   background: var(--black); border-radius: 16px; overflow: hidden;
   border: 1px solid rgba(122,173,168,0.3);
@@ -52,14 +65,30 @@ body {
 .tier-ribbon.vip { background: var(--gold); color: var(--black); }
 
 .pass-qr-area {
-  display: flex; justify-content: center; align-items: center;
-  padding: 1.5rem; background: var(--cream);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 1.5rem; background: var(--cream); gap: 0.5rem;
 }
 .pass-qr-area img { border-radius: 4px; display: block; }
+.pass-qr-caption { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-dark); }
 
-.pass-info { padding: 1.2rem 1.2rem 0.8rem; text-align: center; }
-.pass-visitor-name { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.3rem; }
-.pass-visitor-id { font-size: 1.3rem; font-weight: 900; color: var(--teal); letter-spacing: 0.1em; margin-bottom: 0.6rem; font-family: monospace; }
+.pass-info { padding: 1.2rem 1.2rem 1.4rem; }
+.pass-visitor-name { font-size: 1.3rem; font-weight: 800; text-align: center; margin-bottom: 0.3rem; }
+.pass-visitor-id { font-size: 1.3rem; font-weight: 900; color: var(--teal); letter-spacing: 0.1em; text-align: center; margin-bottom: 1rem; font-family: monospace; }
+
+.pass-detail-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem;
+  padding-top: 1rem; border-top: 1px solid rgba(122,173,168,0.15);
+}
+.pass-detail-label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+.pass-detail-value { font-size: 0.88rem; font-weight: 600; color: var(--cream); }
+
+/* ── Perforated divider ── */
+.perforation { position: relative; height: 1px; background-image: linear-gradient(90deg, rgba(244,238,228,0.25) 50%, transparent 50%); background-size: 10px 1px; margin: 0 -1px; }
+.perforation::before, .perforation::after {
+  content: ''; position: absolute; top: -8px; width: 16px; height: 16px; border-radius: 50%; background: var(--black);
+}
+.perforation::before { left: -9px; }
+.perforation::after { right: -9px; }
 
 .pass-footer {
   background: rgba(122,173,168,0.08); padding: 0.9rem 1.2rem;
@@ -68,21 +97,28 @@ body {
 }
 .pass-footer strong { color: var(--cream); }
 
-.wa-save-block { padding: 0 1.2rem 1rem; }
-.wa-save-btn {
+.action-block { padding: 1rem 1.2rem 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.action-btn {
   display: flex; align-items: center; justify-content: center; gap: 0.5rem;
   width: 100%; padding: 0.85rem; border-radius: 10px; border: none; cursor: pointer;
-  background: #25D366; color: #05330F; font-family: inherit;
-  font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  font-family: inherit; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
   transition: opacity 0.2s;
 }
-.wa-save-btn:active { opacity: 0.85; }
+.action-btn:active { opacity: 0.85; }
+.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.wa-save-btn { background: #25D366; color: #05330F; }
+.download-btn { background: var(--cream); color: var(--black); }
+.calendar-btn { background: transparent; color: var(--cream); border: 1px solid rgba(244,238,228,0.3) !important; }
 
 .venue-block { margin-top: 1.2rem; padding: 1rem 1.2rem; }
-.venue-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; font-weight: 700; }
+.venue-row { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.9rem; }
+.venue-row:last-child { margin-bottom: 0; }
+.venue-row svg { flex-shrink: 0; margin-top: 0.15rem; width: 15px; height: 15px; color: var(--gold); }
+.venue-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; font-weight: 700; }
 .venue-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
-.venue-address { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.6rem; }
+.venue-address { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.4rem; }
 .map-link { color: var(--teal); font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+.venue-hours { font-size: 0.88rem; font-weight: 600; color: var(--cream); }
 
 .before-arrive {
   margin: 1rem 1.2rem 1.2rem; padding: 1rem 1.1rem;
@@ -97,7 +133,13 @@ body {
 <body>
 
 <div class="main">
-  <div class="pass-card">
+
+  <div class="delivery-banner" id="deliveryBanner">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    <p id="deliveryBannerText"></p>
+  </div>
+
+  <div class="pass-card" id="passCard">
     <div class="pass-header">
       <div class="pass-eyebrow">Design District Hyd</div>
       <div class="pass-event-name">Season III</div>
@@ -107,30 +149,66 @@ body {
     <div class="tier-ribbon" id="tierRibbon">Visitor Pass</div>
 
     <div class="pass-qr-area">
-      <img id="qrImg" width="200" height="200" alt="Entry QR Code">
+      <img id="qrImg" width="200" height="200" alt="Entry QR Code" crossorigin="anonymous">
+      <div class="pass-qr-caption">Scan at Entry</div>
     </div>
 
     <div class="pass-info">
       <div class="pass-visitor-name" id="passName">—</div>
       <div class="pass-visitor-id" id="passId">—</div>
+
+      <div class="pass-detail-grid">
+        <div>
+          <div class="pass-detail-label">Tier</div>
+          <div class="pass-detail-value" id="detailTier">—</div>
+        </div>
+        <div>
+          <div class="pass-detail-label">Session Hours</div>
+          <div class="pass-detail-value" id="detailHours">—</div>
+        </div>
+      </div>
     </div>
+
+    <div class="perforation"></div>
 
     <div class="pass-footer">
       Show this QR code at check-in for quick entry. <strong>Screenshot this page as a backup</strong> before the event.
     </div>
 
-    <div class="wa-save-block">
-      <button class="wa-save-btn" id="waSaveBtn" type="button">
+    <div class="action-block">
+      <button class="action-btn wa-save-btn" id="waSaveBtn" type="button">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a7.4 7.4 0 0 1-2.2-1.3 8 8 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4a.5.5 0 0 0 0-.5c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.1 4.5c.7.3 1.3.5 1.7.6a4.1 4.1 0 0 0 1.9.1c.6-.1 1.7-.7 2-1.4s.3-1.2.2-1.4-.3-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7 3.8z"/></svg>
         <span id="waSaveBtnText">Save / forward this pass on WhatsApp</span>
+      </button>
+
+      <button class="action-btn download-btn" id="downloadBtn" type="button">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span id="downloadBtnText">Download Pass (PNG)</span>
+      </button>
+
+      <button class="action-btn calendar-btn" id="calendarBtn" type="button">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Add to Calendar
       </button>
     </div>
 
     <div class="venue-block">
-      <div class="venue-label">Venue</div>
-      <div class="venue-name">Novotel Hyderabad — Hall #4</div>
-      <div class="venue-address">Novotel Hotel Rd, Izzathnagar, Shilpa Hills, Kothaguda, Hyderabad, Telangana 500084</div>
-      <a class="map-link" href="https://share.google/GSeznPaLTqDz35Wr1" target="_blank">View location on map →</a>
+      <div class="venue-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div>
+          <div class="venue-label">Venue</div>
+          <div class="venue-name">Novotel Hyderabad — Hall #4</div>
+          <div class="venue-address">Novotel Hotel Rd, Izzathnagar, Shilpa Hills, Kothaguda, Hyderabad, Telangana 500084</div>
+          <a class="map-link" href="https://share.google/GSeznPaLTqDz35Wr1" target="_blank">View location on map →</a>
+        </div>
+      </div>
+      <div class="venue-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div>
+          <div class="venue-label">Hours</div>
+          <div class="venue-hours" id="venueHoursText">—</div>
+        </div>
+      </div>
     </div>
 
     <div class="before-arrive">
@@ -149,17 +227,35 @@ const params = new URLSearchParams(window.location.search);
 const reg  = params.get('reg')  || 'DDH-S3-000000';
 const name = params.get('name') || 'Guest';
 const tier = params.get('tier') || 'Visitor';
+const waSent = params.get('wa') === '1';
+const emSent = params.get('em') === '1';
+
+const isVip = tier.toLowerCase() === 'vip';
+const hoursText = isVip ? '10:30 AM – 12:30 PM' : '12:00 PM – 7:00 PM';
 
 document.getElementById('passName').textContent = name;
 document.getElementById('passId').textContent = reg;
+document.getElementById('detailTier').textContent = tier;
+document.getElementById('detailHours').textContent = hoursText;
+document.getElementById('venueHoursText').textContent = hoursText + ' · 1 Oct 2026';
 
 const ribbon = document.getElementById('tierRibbon');
-if (tier.toLowerCase() === 'vip') {
+if (isVip) {
   ribbon.textContent = 'VIP Pass';
   ribbon.classList.add('vip');
 } else {
   ribbon.textContent = 'Visitor Pass';
   ribbon.classList.add('visitor');
+}
+
+// ── Honest delivery banner — only claims what actually happened ──
+if (waSent || emSent) {
+  const parts = [];
+  if (waSent) parts.push('WhatsApp');
+  if (emSent) parts.push('email');
+  document.getElementById('deliveryBannerText').innerHTML =
+    `<strong>Delivered.</strong> A copy of this pass has also been sent to your ${parts.join(' and ')}.`;
+  document.getElementById('deliveryBanner').classList.add('show');
 }
 
 // Free QR generation service — no key required, generated live from the Reg ID
@@ -175,7 +271,7 @@ document.getElementById('qrImg').src = qrUrl.replace('size=400x400', 'size=200x2
 const waText =
   `Hi ${name},\n\n` +
   `*Your ${tier} Pass — Design District Hyd, Season III*\n\n` +
-  `📅 1 October 2026\n` +
+  `📅 1 October 2026 · ${hoursText}\n` +
   `📍 Novotel Hyderabad, Hall #4\n` +
   `🆔 Reg ID: ${reg}\n\n` +
   `🗺️ Map: https://share.google/GSeznPaLTqDz35Wr1\n` +
@@ -198,11 +294,9 @@ document.getElementById('waSaveBtn').addEventListener('click', async () => {
       await navigator.share({ files: [qrFile], title: 'My Design District Hyd Pass', text: waText });
       return;
     } catch (err) {
-      // User cancelled the share sheet, or it failed — fall through to the link below.
       if (err.name === 'AbortError') return;
     }
   } else if (navigator.share) {
-    // Share API exists but can't attach files here — share the formatted text/link instead.
     try {
       await navigator.share({ title: 'My Design District Hyd Pass', text: waText });
       return;
@@ -211,9 +305,65 @@ document.getElementById('waSaveBtn').addEventListener('click', async () => {
     }
   }
 
-  // Fallback for browsers with no Web Share API (mainly desktop) — opens
-  // WhatsApp Web/app with the formatted text pre-filled.
   window.open(`https://wa.me/?text=${encodeURIComponent(waText)}`, '_blank');
+});
+
+// ── Download Pass as PNG ──────────────────────────────────────────
+document.getElementById('downloadBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('downloadBtn');
+  const label = document.getElementById('downloadBtnText');
+  const originalLabel = label.textContent;
+  btn.disabled = true;
+  label.textContent = 'Generating...';
+
+  try {
+    const canvas = await html2canvas(document.getElementById('passCard'), {
+      backgroundColor: '#0A0A0A',
+      useCORS: true,
+      scale: 2 // sharper output for saving/printing
+    });
+    const link = document.createElement('a');
+    link.download = `${reg}-pass.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch (err) {
+    alert('Could not generate image — try the WhatsApp save option instead, or screenshot this page.');
+  } finally {
+    btn.disabled = false;
+    label.textContent = originalLabel;
+  }
+});
+
+// ── Add to Calendar (.ics) — built client-side, no server needed ──
+document.getElementById('calendarBtn').addEventListener('click', () => {
+  // Times in UTC (event is IST, UTC+5:30): VIP 10:30–12:30 IST = 05:00–07:00 UTC.
+  // Visitor 12:00–19:00 IST = 06:30–13:30 UTC.
+  const [dtStart, dtEnd] = isVip
+    ? ['20261001T050000Z', '20261001T070000Z']
+    : ['20261001T063000Z', '20261001T133000Z'];
+
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Design District Hyd//Season III//EN',
+    'BEGIN:VEVENT',
+    `UID:${reg}@designdistricthyd.com`,
+    `DTSTAMP:${dtStart}`,
+    `DTSTART:${dtStart}`,
+    `DTEND:${dtEnd}`,
+    `SUMMARY:Design District Hyd — Season III (${tier})`,
+    `DESCRIPTION:Reg ID: ${reg}\\nYour pass: ${window.location.href}`,
+    'LOCATION:Novotel Hyderabad\\, Hall #4\\, Novotel Hotel Rd\\, Izzathnagar\\, Shilpa Hills\\, Kothaguda\\, Hyderabad\\, Telangana 500084',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'design-district-hyd-season-3.ics';
+  link.click();
+  URL.revokeObjectURL(link.href);
 });
 </script>
 </body>
