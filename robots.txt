@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
+Disallow: /admin-dd-h.html
+Disallow: /ddh-admin-dashboard.html
+Disallow: /checkin.html
+Disallow: /checkin(draft-1).html
+Disallow: /ddh-checkin.html
+Disallow: /scan.html
+Disallow: /pass.html
+Disallow: /stall-setup.html
+Disallow: /Accessories/accessories-requirements.html
+Disallow: /index(23march).html
 
 Sitemap: https://www.designdistricthyd.com/sitemap.xml
