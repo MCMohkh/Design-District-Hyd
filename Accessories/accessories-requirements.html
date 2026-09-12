@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Designer Setup & Accessories Requirement — Design District Hyd, Season III</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Blanc';
+  src: url('https://ik.imagekit.io/mcjoint/Design%20District/Blanc-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0A0A0A; --off-black: #111110; --teal: #7AADA8; --teal-dark: #4E8A85;
+  --teal-light: #B0CEC9; --cream: #F4EEE4; --bone: #E8E0D2; --warm-white: #FAF7F2;
+  --terracotta: #C67B52; --gold: #C4A35A; --charcoal: #1E1D1A; --muted: #8A8070;
+}
+
+body {
+  background: var(--black); color: var(--cream); font-family: 'Tenor Sans', sans-serif;
+  min-height: 100vh; padding-bottom: 6rem;
+}
+
+.header {
+  background: linear-gradient(150deg, var(--teal-dark), var(--teal));
+  padding: 2.2rem 1.5rem 1.8rem; text-align: center;
+}
+.header-eyebrow { font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(10,10,10,0.62); margin-bottom: 0.6rem; }
+.header h1 { font-family: 'Blanc', serif; font-weight: 400; font-size: 1.8rem; color: var(--black); line-height: 1.15; }
+.header-sub { font-size: 0.68rem; letter-spacing: 0.1em; color: rgba(10,10,10,0.6); margin-top: 0.6rem; }
+
+.main { max-width: 620px; margin: 0 auto; padding: 1.5rem 1.25rem 0; }
+
+.intro-text { font-size: 0.88rem; line-height: 1.7; color: rgba(244,238,228,0.8); margin-bottom: 1.4rem; }
+
+.included-card {
+  background: rgba(122,173,168,0.08); border: 1px solid rgba(122,173,168,0.25);
+  border-radius: 12px; padding: 1.2rem 1.3rem; margin-bottom: 1.4rem;
+}
+.included-title { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-light); font-weight: 700; margin-bottom: 0.7rem; }
+.included-list { list-style: none; }
+.included-list li { font-size: 0.85rem; line-height: 1.6; padding-left: 1.1rem; position: relative; margin-bottom: 0.3rem; }
+.included-list li::before { content: '—'; position: absolute; left: 0; color: var(--teal); }
+.included-list .sub-item { padding-left: 2.2rem; font-size: 0.8rem; opacity: 0.75; }
+.included-list .sub-item::before { content: '·'; left: 1.1rem; }
+
+.fine-note { font-size: 0.76rem; color: var(--muted); line-height: 1.6; margin-bottom: 2rem; }
+
+/* ── Section headers ── */
+.section-header { margin: 2rem 0 1rem; }
+.section-eyebrow { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.section-title { font-family: 'Blanc', serif; font-weight: 400; font-size: 1.4rem; color: var(--cream); }
+.section-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
+
+/* ── Section 1 fields ── */
+.field-group { margin-bottom: 1.3rem; }
+.field-label { display: block; font-size: 0.72rem; letter-spacing: 0.05em; color: var(--bone); margin-bottom: 0.5rem; font-weight: 600; }
+.field-label .req { color: var(--terracotta); }
+.field-input {
+  width: 100%; background: var(--warm-white); border: 1.5px solid transparent; border-radius: 8px;
+  padding: 0.8rem 0.9rem; font-family: inherit; font-size: 0.92rem; color: var(--charcoal); outline: none;
+  transition: border-color 0.2s;
+}
+.field-input:focus { border-color: var(--teal); }
+.field-input::placeholder { color: #A8A093; }
+
+.checkbox-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.checkbox-chip {
+  display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; border-radius: 100px;
+  border: 1.5px solid rgba(244,238,228,0.25); cursor: pointer; font-size: 0.82rem; transition: all 0.2s;
+  user-select: none;
+}
+.checkbox-chip input { display: none; }
+.checkbox-chip.checked { background: var(--teal); border-color: var(--teal); color: var(--black); font-weight: 600; }
+
+/* ── Accessory cards ── */
+.accessory-card {
+  display: flex; gap: 1rem; background: rgba(244,238,228,0.04); border: 1px solid rgba(244,238,228,0.1);
+  border-radius: 12px; padding: 1rem; margin-bottom: 0.9rem; align-items: flex-start;
+}
+.accessory-thumb {
+  width: 76px; height: 76px; flex-shrink: 0; border-radius: 8px; overflow: hidden;
+  background: var(--warm-white); display: flex; align-items: center; justify-content: center;
+}
+.accessory-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.accessory-info { flex: 1; min-width: 0; }
+.accessory-name { font-size: 0.98rem; font-weight: 700; color: var(--cream); }
+.accessory-size { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; font-style: italic; }
+.accessory-price { font-size: 0.78rem; color: var(--gold); margin-top: 0.2rem; }
+.accessory-qty-row { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.7rem; }
+.accessory-qty-label { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.qty-select {
+  background: var(--warm-white); border: none; border-radius: 6px; padding: 0.45rem 0.6rem;
+  font-family: inherit; font-size: 0.85rem; color: var(--charcoal); outline: none;
+}
+.qty-other-input {
+  width: 70px; background: var(--warm-white); border: 1.5px solid var(--gold); border-radius: 6px;
+  padding: 0.4rem 0.5rem; font-family: inherit; font-size: 0.85rem; color: var(--charcoal); outline: none;
+  display: none;
+}
+.qty-other-input.show { display: inline-block; }
+.accessory-subtotal { font-size: 0.78rem; color: var(--teal-light); margin-top: 0.4rem; min-height: 1.1rem; }
+
+.disclaimer-banner {
+  background: rgba(198,123,82,0.1); border-left: 3px solid var(--terracotta);
+  border-radius: 6px; padding: 0.8rem 1rem; font-size: 0.78rem; line-height: 1.5; color: rgba(244,238,228,0.85);
+  margin-bottom: 1.2rem;
+}
+
+/* ── Radio (Section 3) ── */
+.radio-row { display: flex; gap: 0.8rem; margin-bottom: 1rem; }
+.radio-chip {
+  flex: 1; text-align: center; padding: 0.75rem; border-radius: 8px; border: 1.5px solid rgba(244,238,228,0.25);
+  cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+}
+.radio-chip.checked { background: var(--teal); border-color: var(--teal); color: var(--black); }
+.conditional-block { display: none; }
+.conditional-block.show { display: block; }
+
+/* ── Confirmation checkbox ── */
+.confirm-row { display: flex; align-items: flex-start; gap: 0.7rem; margin: 1.2rem 0; cursor: pointer; }
+.confirm-row input { margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--teal); }
+.confirm-text { font-size: 0.84rem; line-height: 1.55; }
+
+.important-note { font-size: 0.76rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+.important-note strong { color: var(--cream); }
+
+.submit-btn {
+  width: 100%; padding: 1.05rem; border: none; border-radius: 10px; cursor: pointer;
+  background: var(--gold); color: var(--black); font-family: inherit; font-size: 0.85rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; transition: filter 0.2s;
+}
+.submit-btn:hover:not(:disabled) { filter: brightness(1.06); }
+.submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.form-error { display: none; color: var(--terracotta); font-size: 0.82rem; margin-top: 0.8rem; text-align: center; line-height: 1.5; }
+
+/* ── Sticky running total bar ── */
+.total-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+  background: var(--off-black); border-top: 1px solid rgba(196,163,90,0.35);
+  padding: 0.9rem 1.25rem; display: flex; justify-content: space-between; align-items: center;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.4);
+}
+.total-bar-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.total-bar-value { font-family: 'Blanc', serif; font-size: 1.5rem; color: var(--gold); }
+
+/* ── Breakdown before submit ── */
+.breakdown-card {
+  background: rgba(196,163,90,0.08); border: 1px solid rgba(196,163,90,0.3); border-radius: 12px;
+  padding: 1.2rem 1.3rem; margin: 1.5rem 0;
+}
+.breakdown-title { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 0.8rem; }
+.breakdown-row { display: flex; justify-content: space-between; font-size: 0.84rem; padding: 0.35rem 0; }
+.breakdown-empty { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+.breakdown-grand { display: flex; justify-content: space-between; font-size: 0.98rem; font-weight: 700; padding-top: 0.6rem; margin-top: 0.4rem; border-top: 1px solid rgba(196,163,90,0.3); color: var(--gold); }
+
+/* ── Success state ── */
+.success-state { display: none; text-align: center; padding: 3rem 1rem; }
+.success-state.show { display: block; }
+.success-state h2 { font-family: 'Blanc', serif; font-weight: 400; font-size: 1.8rem; color: var(--teal); margin-bottom: 0.8rem; }
+.success-state p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Design District | Season III</div>
+  <h1>Designer Setup &amp; Accessories Requirement</h1>
+  <div class="header-sub">Select what you need for your stall</div>
+</div>
+
+<div class="main" id="formWrap">
+
+  <p class="intro-text">This form is for designers, vendors and partners to select any additional accessories/equipment required for their stall or setup at Design District Season 3. Please review the available options, prices and quantities carefully before submitting your requirements.</p>
+
+  <div class="included-card">
+    <div class="included-title">Included with your participation</div>
+    <ul class="included-list">
+      <li>1 Billing Table</li>
+      <li>2 Chairs</li>
+      <li>2 Food &amp; Beverage Coupons, covering:</li>
+      <li class="sub-item">Breakfast / Morning Tea</li>
+      <li class="sub-item">High Tea</li>
+    </ul>
+  </div>
+
+  <p class="fine-note">Any additional furniture, accessories, equipment or other requirements beyond the above will be available at an additional cost, subject to availability. All prices mentioned are per unit. Final requirements will be subject to availability and confirmation by the Design District team.</p>
+
+  <!-- ═══ SECTION 1 ═══ -->
+  <div class="section-header">
+    <div class="section-eyebrow">Section 1</div>
+    <div class="section-title">Your Details</div>
+  </div>
+
+  <div class="field-group">
+    <label class="field-label">Stall No &amp; Brand Name on Fascia <span class="req">*</span></label>
+    <input class="field-input" id="f-stall" type="text" placeholder="e.g. B4 — Alfaeen">
+  </div>
+  <div class="field-group">
+    <label class="field-label">Contact Person Name &amp; Number <span class="req">*</span></label>
+    <input class="field-input" id="f-contact" type="text" placeholder="Name and 10-digit number">
+  </div>
+  <div class="field-group">
+    <label class="field-label">Email Address</label>
+    <input class="field-input" id="f-email" type="email" placeholder="you@email.com">
+  </div>
+  <div class="field-group">
+    <label class="field-label">Stall / Participation Category</label>
+    <div class="checkbox-grid" id="categoryGrid">
+      <label class="checkbox-chip"><input type="checkbox" value="Designer">Designer</label>
+      <label class="checkbox-chip"><input type="checkbox" value="Jewellery">Jewellery</label>
+      <label class="checkbox-chip"><input type="checkbox" value="Accessories">Accessories</label>
+      <label class="checkbox-chip"><input type="checkbox" value="Lifestyle">Lifestyle</label>
+      <label class="checkbox-chip"><input type="checkbox" value="Beauty">Beauty</label>
+      <label class="checkbox-chip"><input type="checkbox" value="Partner">Partner</label>
+      <label class="checkbox-chip"><input type="checkbox" value="Other">Other</label>
+    </div>
+    <input class="field-input" id="f-category-other" type="text" placeholder="If Other, please specify" style="display:none; margin-top:0.6rem;">
+  </div>
+
+  <!-- ═══ SECTION 2 ═══ -->
+  <div class="section-header">
+    <div class="section-eyebrow">Section 2</div>
+    <div class="section-title">Select What You Need For Your Stall</div>
+    <div class="section-note">Choose a quantity for anything you require. Leave as "0 / Not Required" to skip an item.</div>
+  </div>
+
+  <div class="disclaimer-banner">Product images shown below are for reference only and may not reflect the exact size, colour, or model provided on-site.</div>
+
+  <div id="accessoryList"></div>
+
+  <!-- ═══ SECTION 3 ═══ -->
+  <div class="section-header">
+    <div class="section-eyebrow">Section 3</div>
+    <div class="section-title">Additional Requirements</div>
+  </div>
+  <div class="field-group">
+    <label class="field-label">Do you require any accessory/equipment not listed above?</label>
+    <div class="radio-row">
+      <div class="radio-chip checked" data-value="No" onclick="selectAdditional(this,'No')">No</div>
+      <div class="radio-chip" data-value="Yes" onclick="selectAdditional(this,'Yes')">Yes</div>
+    </div>
+    <div class="conditional-block" id="additionalDetailBlock">
+      <label class="field-label">Please specify your requirement</label>
+      <textarea class="field-input" id="f-additional-detail" rows="3" placeholder="Item name, quantity and any specific dimensions/requirements."></textarea>
+    </div>
+  </div>
+
+  <!-- ═══ RUNNING BREAKDOWN ═══ -->
+  <div class="breakdown-card">
+    <div class="breakdown-title">Your Estimated Total</div>
+    <div id="breakdownRows"><div class="breakdown-empty">No additional accessories selected yet.</div></div>
+    <div class="breakdown-grand"><span>Estimated Total</span><span id="breakdownGrand">₹0</span></div>
+  </div>
+
+  <!-- ═══ SECTION 4 ═══ -->
+  <div class="section-header">
+    <div class="section-eyebrow">Section 4</div>
+    <div class="section-title">Confirmation</div>
+  </div>
+
+  <label class="confirm-row">
+    <input type="checkbox" id="f-confirm" onchange="document.getElementById('submitBtn').disabled = !this.checked;">
+    <span class="confirm-text">I have reviewed the accessory options and prices and confirm that the quantities selected above represent my requirements for Design District Season 3.</span>
+  </label>
+
+  <p class="important-note"><strong>Important Note:</strong> Accessories will be allocated subject to availability. Quantities submitted through this form will be treated as your requested requirements and may be billed accordingly after confirmation by the Design District team. Any changes after submission will be subject to availability.</p>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitForm()" disabled>Submit</button>
+  <div class="form-error" id="formError"></div>
+
+</div>
+
+<div class="success-state" id="successState">
+  <h2>Requirement Submitted</h2>
+  <p>Thank you — your accessory requirements for Design District Season III have been received.<br><br>Our production team will confirm availability and final billing with you directly.</p>
+</div>
+
+<div class="total-bar" id="totalBar">
+  <div>
+    <div class="total-bar-label">Estimated Total</div>
+    <div class="total-bar-value" id="totalBarValue">₹0</div>
+  </div>
+</div>
+
+<script>
+// ── Accessory data model — single source of truth for name, price, image,
+// size note, and the exact quantity options from the brief. Every rendered
+// card and the running total both read from this one array. ──────────────
+const ACCESSORIES = [
+  { key: 'garmentStand',  name: 'Garment Stand',        price: 700,  img: 'Garment Stand.png',        options: [0,1,2,3,4,5,6,7,8,9,10] },
+  { key: 'plasticHangers',name: 'Plastic Hangers',       price: 20,   img: 'Plastic Hangers.png',       options: [0,10,20,30,40,50,75,100,150,200,'Other'] },
+  { key: 'woodenHangers', name: 'Wooden Hangers',        price: 40,   img: 'Wooden Hangers.png',        options: [0,10,20,30,40,50,75,100,150,200,'Other'] },
+  { key: 'spotLight',     name: 'Spot Light',            price: 400,  img: 'Spot Light.png',            options: [0,1,2,3,4,5,6,8,10,'Other'] },
+  { key: 'mirror',        name: 'Mirror',                price: 800,  img: 'Mirror.png',        size: 'Size: To be confirmed', options: [0,1,2,3,4,5] },
+  { key: 'halogen',       name: 'Halogen Light',         price: 1600, img: 'Halogen Light.png',         options: [0,1,2,3,4,5,'Other'] },
+  { key: 'mannequin',     name: 'Mannequin',             price: 2400, img: 'Mannequin.png',     size: 'Size / Type: To be confirmed', options: [0,1,2,3,4,5,'Other'] },
+  { key: 'glassShelves',  name: 'Glass Shelves',         price: 600,  img: 'Glass Shelves.png', size: 'Size: To be confirmed', options: [0,1,2,3,4,5,6,'Other'] },
+  { key: 'glassCounter',  name: 'Glass Counter',         price: 3000, img: 'Glass Counter.png', size: 'Size: To be confirmed', options: [0,1,2,3,4,5] },
+  { key: 'steamIron',     name: 'Steam Iron',            price: 3000, img: 'Steam Iron.png',            options: [0,1,2,3] },
+  { key: 'extraTable',    name: 'Extra Table | 4 ft × 2 ft', price: 600, img: 'Extra Table.png',        options: [0,1,2,3,4,5,6,'Other'] },
+  { key: 'lunchCoupon',   name: 'Extra Lunch Coupon',    price: 1800, img: 'Extra Lunch Coupon.png',    options: [0,1,2,3,4,5,'Other'] }
+];
+
+const state = {}; // key -> resolved integer quantity
+ACCESSORIES.forEach(a => state[a.key] = 0);
+
+function fmtMoney(n) { return '₹' + n.toLocaleString('en-IN'); }
+
+function renderAccessories() {
+  const container = document.getElementById('accessoryList');
+  container.innerHTML = ACCESSORIES.map(a => `
+    <div class="accessory-card">
+      <div class="accessory-thumb"><img src="${a.img}" alt="${a.name} — reference image" onerror="this.style.display='none'"></div>
+      <div class="accessory-info">
+        <div class="accessory-name">${a.name}</div>
+        ${a.size ? `<div class="accessory-size">${a.size}</div>` : ''}
+        <div class="accessory-price">${fmtMoney(a.price)} per unit</div>
+        <div class="accessory-qty-row">
+          <span class="accessory-qty-label">Qty</span>
+          <select class="qty-select" id="qty-${a.key}" onchange="onQtyChange('${a.key}')">
+            ${a.options.map(o => `<option value="${o}">${o === 0 ? '0 / Not Required' : o}</option>`).join('')}
+          </select>
+          <input class="qty-other-input" id="other-${a.key}" type="number" min="0" placeholder="Qty" oninput="onOtherInput('${a.key}')">
+        </div>
+        <div class="accessory-subtotal" id="subtotal-${a.key}"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function onQtyChange(key) {
+  const select = document.getElementById(`qty-${key}`);
+  const otherInput = document.getElementById(`other-${key}`);
+  if (select.value === 'Other') {
+    otherInput.classList.add('show');
+    state[key] = parseInt(otherInput.value, 10) || 0;
+  } else {
+    otherInput.classList.remove('show');
+    otherInput.value = '';
+    state[key] = parseInt(select.value, 10) || 0;
+  }
+  updateTotals();
+}
+
+function onOtherInput(key) {
+  const otherInput = document.getElementById(`other-${key}`);
+  state[key] = parseInt(otherInput.value, 10) || 0;
+  updateTotals();
+}
+
+function updateTotals() {
+  let grand = 0;
+  const rows = [];
+  ACCESSORIES.forEach(a => {
+    const qty = state[a.key] || 0;
+    const subEl = document.getElementById(`subtotal-${a.key}`);
+    if (qty > 0) {
+      const sub = qty * a.price;
+      grand += sub;
+      subEl.textContent = `${qty} × ${fmtMoney(a.price)} = ${fmtMoney(sub)}`;
+      rows.push(`<div class="breakdown-row"><span>${a.name} × ${qty}</span><span>${fmtMoney(sub)}</span></div>`);
+    } else {
+      subEl.textContent = '';
+    }
+  });
+
+  document.getElementById('breakdownRows').innerHTML = rows.length
+    ? rows.join('')
+    : '<div class="breakdown-empty">No additional accessories selected yet.</div>';
+  document.getElementById('breakdownGrand').textContent = fmtMoney(grand);
+  document.getElementById('totalBarValue').textContent = fmtMoney(grand);
+}
+
+renderAccessories();
+updateTotals();
+
+// ── Category checkboxes ──
+document.querySelectorAll('#categoryGrid .checkbox-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const input = chip.querySelector('input');
+    input.checked = !input.checked;
+    chip.classList.toggle('checked', input.checked);
+    const otherChecked = document.querySelector('#categoryGrid input[value="Other"]').checked;
+    document.getElementById('f-category-other').style.display = otherChecked ? 'block' : 'none';
+  });
+});
+
+// ── Additional requirements radio ──
+let additionalRequired = 'No';
+function selectAdditional(el, value) {
+  document.querySelectorAll('.radio-chip').forEach(c => c.classList.remove('checked'));
+  el.classList.add('checked');
+  additionalRequired = value;
+  document.getElementById('additionalDetailBlock').classList.toggle('show', value === 'Yes');
+}
+
+// ── Submit ──
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwXbLhNspu50FhlQKDtvDBwuS0LjYa68tat7-bVtsSz-qjOLszIqtYnPbVQtnCQEVZDHQ/exec';
+
+async function submitForm() {
+  const errEl = document.getElementById('formError');
+  errEl.style.display = 'none';
+
+  const stall = document.getElementById('f-stall').value.trim();
+  const contact = document.getElementById('f-contact').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+
+  if (!stall) return showError('Please enter your Stall No & Brand Name.');
+  if (!contact) return showError('Please enter your Contact Person Name & Number.');
+  if (!document.getElementById('f-confirm').checked) return showError('Please confirm the checkbox in Section 4 before submitting.');
+
+  const categories = Array.from(document.querySelectorAll('#categoryGrid input:checked')).map(i => i.value);
+  const categoryOther = document.getElementById('f-category-other').value.trim();
+  const categoryText = categories.join(', ') + (categoryOther ? ` (${categoryOther})` : '');
+
+  let grand = 0;
+  ACCESSORIES.forEach(a => { grand += (state[a.key] || 0) * a.price; });
+
+  const payload = {
+    action: 'submitVendorRequirement',
+    stall, contact, email,
+    category: categoryText,
+    quantities: Object.fromEntries(ACCESSORIES.map(a => [a.key, state[a.key] || 0])),
+    additionalRequired,
+    additionalDetail: document.getElementById('f-additional-detail').value.trim(),
+    estimatedTotal: grand
+  };
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    const resp = await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'text/plain' }
+    });
+    const data = await resp.json();
+
+    if (data.success) {
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('totalBar').style.display = 'none';
+      document.getElementById('successState').classList.add('show');
+      window.scrollTo(0, 0);
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = 'Submit';
+    showError('Something went wrong: ' + e.message + '. Please try again.');
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('formError');
+  el.textContent = msg;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>
