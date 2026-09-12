@@ -178,7 +178,7 @@ body {
     <div class="action-block">
       <button class="action-btn wa-save-btn" id="waSaveBtn" type="button">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a7.4 7.4 0 0 1-2.2-1.3 8 8 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4a.5.5 0 0 0 0-.5c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.1 4.5c.7.3 1.3.5 1.7.6a4.1 4.1 0 0 0 1.9.1c.6-.1 1.7-.7 2-1.4s.3-1.2.2-1.4-.3-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7 3.8z"/></svg>
-        <span id="waSaveBtnText">Save / forward this pass on WhatsApp</span>
+        <span id="waSaveBtnText">Save your pass on (Design District) WhatsApp</span>
       </button>
 
       <button class="action-btn download-btn" id="downloadBtn" type="button">
@@ -263,49 +263,22 @@ const qrData = encodeURIComponent(reg);
 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${qrData}&bgcolor=F4EEE4&color=0A0A0A`;
 document.getElementById('qrImg').src = qrUrl.replace('size=400x400', 'size=200x200');
 
-// "Save on WhatsApp" — improved formatting (WhatsApp's own *bold* markdown),
-// includes the map link, and attaches the actual QR code image where the
-// browser supports it (Web Share API with files — most Android/iOS mobile
-// browsers). Falls back to a plain wa.me text link (with the pass URL, which
-// shows the QR when opened) everywhere else, e.g. desktop.
+// "Send to Design District on WhatsApp" — always opens a chat directly with
+// Design District's number (not an open share sheet), so every guest who
+// taps this ends up with the number saved in their WhatsApp for the day of
+// the event, and the team's inbox gets a record of who sent what.
 const waText =
-  `Hi ${name},\n\n` +
-  `*Your ${tier} Pass — Design District Hyd, Season III*\n\n` +
+  `Hi, this is ${name}.\n\n` +
+  `*My ${tier} Pass — Design District Hyd, Season III*\n\n` +
   `📅 1 October 2026 · ${hoursText}\n` +
   `📍 Novotel Hyderabad, Hall #4\n` +
   `🆔 Reg ID: ${reg}\n\n` +
-  `🗺️ Map: https://share.google/GSeznPaLTqDz35Wr1\n` +
   `🎟️ Full pass with QR: ${window.location.href}`;
 
-// Pre-fetch the QR image in the background (not inside the click handler) so
-// it's ready instantly when the guest taps the button — Web Share API needs
-// to fire promptly within the click for some browsers to allow it.
-let qrFile = null;
-fetch(qrUrl)
-  .then(r => r.blob())
-  .then(blob => { qrFile = new File([blob], `${reg}-qr.png`, { type: 'image/png' }); })
-  .catch(() => { /* stays null — button falls back to the text-only link */ });
+const DDH_WHATSAPP_NUMBER = '919000275100'; // Design District Hyd internal number
 
-document.getElementById('waSaveBtn').addEventListener('click', async () => {
-  const canShareFiles = navigator.canShare && qrFile && navigator.canShare({ files: [qrFile] });
-
-  if (navigator.share && canShareFiles) {
-    try {
-      await navigator.share({ files: [qrFile], title: 'My Design District Hyd Pass', text: waText });
-      return;
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-    }
-  } else if (navigator.share) {
-    try {
-      await navigator.share({ title: 'My Design District Hyd Pass', text: waText });
-      return;
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-    }
-  }
-
-  window.open(`https://wa.me/?text=${encodeURIComponent(waText)}`, '_blank');
+document.getElementById('waSaveBtn').addEventListener('click', () => {
+  window.open(`https://wa.me/${DDH_WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`, '_blank');
 });
 
 // ── Download Pass as PNG ──────────────────────────────────────────
