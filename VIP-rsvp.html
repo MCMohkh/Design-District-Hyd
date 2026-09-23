@@ -394,16 +394,29 @@ function selectTier(tier) {
   document.getElementById('formCard').classList.toggle('visitor-active', tier === 'Visitor');
 }
 
+function isFakeNumber(digits) {
+  if (/^(\d)\1{9}$/.test(digits)) return true; // all same digit: 9999999999, 0000000000
+  let ascending = true, descending = true;
+  for (let i = 1; i < digits.length; i++) {
+    if (Number(digits[i]) !== (Number(digits[i-1]) + 1) % 10) ascending = false;
+    if (Number(digits[i]) !== (Number(digits[i-1]) + 9) % 10) descending = false;
+  }
+  if (ascending || descending) return true; // 1234567890, 9876543210, 0123456789...
+  const blocklist = ['9876543210','1234567890','0123456789','1212121212'];
+  return blocklist.includes(digits);
+}
+
 async function submitRsvp() {
   const name  = document.getElementById('f-name').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
+  const phone = document.getElementById('f-phone').value.replace(/\D/g, '').slice(-10); // strip spaces/dashes/etc. immediately
   const email = document.getElementById('f-email').value.trim();
   const errEl = document.getElementById('formError');
 
   errEl.style.display = 'none';
 
   if (!name) { return showError('Please enter your name.'); }
-  if (!/^\d{10}$/.test(phone.replace(/\D/g, '').slice(-10))) { return showError('Please enter a valid 10-digit WhatsApp number.'); }
+  if (!/^[6-9]\d{9}$/.test(phone)) { return showError('Please enter a valid 10-digit WhatsApp number.'); }
+  if (isFakeNumber(phone)) { return showError('That doesn\'t look like a real WhatsApp number — please double check and re-enter.'); }
 
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -426,7 +439,7 @@ async function submitRsvp() {
       // confirmation Journey (built in the Engage 360 dashboard) listens for.
       try {
         wigzo('identify', {
-          phone: phone.replace(/\D/g, '').slice(-10),
+           phone: phone,
           email: email || '',
           fullName: name
         });
