@@ -39,11 +39,19 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
   padding: 0.6rem 0.8rem; color: var(--cream); font-family: inherit; font-size: 0.85rem; outline: none;
 }
 .search-input:focus { border-color: var(--gold); }
-.chip-row { display:flex; gap:6px; overflow-x:auto; padding:0.6rem 0 0.1rem; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-.chip-row::-webkit-scrollbar { display:none; }
-.chip { flex:0 0 auto; font-family:inherit; font-size:0.66rem; padding:0.32rem 0.75rem; border-radius:100px; border:1px solid var(--border); background:transparent; color:var(--cream); cursor:pointer; white-space:nowrap; }
-.chip.on { background:var(--gold); border-color:var(--gold); color:var(--black); font-weight:700; }
-.chip.clear { border-style:dashed; color:var(--muted); }
+.cat-row { display:flex; align-items:center; justify-content:space-between; gap:0.6rem; padding-top:0.6rem; }
+.cat-toggle { display:flex; align-items:center; gap:0.5rem; font-family:inherit; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.5rem 0.9rem; border-radius:8px; border:1px solid var(--border); background:var(--off-black); color:var(--cream); cursor:pointer; }
+.cat-toggle.has-sel { border-color:var(--gold); color:var(--gold); }
+.cat-toggle .caret { transition: transform 0.2s; font-size:0.7rem; }
+.cat-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+.cat-clear { font-family:inherit; font-size:0.64rem; color:var(--muted); background:none; border:none; text-decoration:underline; cursor:pointer; padding:0.4rem; }
+.cat-panel { margin-top:0.6rem; max-height:42vh; overflow-y:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--border); border-radius:8px; background:var(--off-black); padding:0.4rem 0.7rem; }
+.cat-list { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); column-gap:1rem; }
+.cat-item { display:flex; align-items:center; gap:0.55rem; padding:0.5rem 0; font-size:0.74rem; color:var(--cream); cursor:pointer; border-bottom:1px solid rgba(244,238,228,0.06); }
+.cat-item input { width:16px; height:16px; margin:0; accent-color: var(--gold); flex-shrink:0; cursor:pointer; }
+.cat-item span { flex:1; }
+.cat-item em { font-style:normal; font-size:0.6rem; color:var(--muted); }
+.cat-item.trial-opt span { color:var(--trial); }
 .result-count { font-size: 0.64rem; color: var(--muted); padding: 0.5rem 1rem 0; text-align:center; }
 
 .hall {
@@ -92,7 +100,9 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
 @keyframes glintSweep { to { background-position: 160% 160%; } }
 .stall.db-a { background: var(--db-blue); color: var(--db-blue-text); }
 .stall.db-b { background: var(--db-blue-alt); color: var(--db-blue-alt-text); }
-.stall.trial { background: var(--trial); color: var(--trial-text); font-size: 0.48rem; text-align:center; line-height:1; }
+.stall.trial { background: var(--trial); color: var(--trial-text); cursor:default; }
+.stall.trial.lit { outline:2px solid var(--gold); box-shadow:0 0 10px rgba(196,163,90,0.9); animation: trialPulse 1.4s ease-in-out infinite; }
+@keyframes trialPulse { 50% { box-shadow:0 0 2px rgba(196,163,90,0.4); } }
 .stall.table {
   background: var(--table); color: var(--table-text); font-size: 0.5rem;
   flex: 0 0 auto; width: calc(var(--unit) / 2); height: calc(var(--unit) / 2); aspect-ratio: 1;
@@ -261,7 +271,8 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
 .nav-links { display:flex; gap:2rem; list-style:none; margin:0; padding:0; }
 .nav-links a { font-size:0.58rem; letter-spacing:0.28em; text-transform:uppercase; color: var(--cream); text-decoration:none; opacity:0.65; transition: opacity 0.3s; }
 .nav-links a:hover, .nav-links a.current { opacity:1; }
-.nav-links a.current { color: var(--teal); }
+.nav-links a.current, .nav-links a.rsvp-link { color: var(--teal); }
+.nav-links a.rsvp-link { opacity:1; }
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:0.5rem; z-index:150; }
 .hamburger span { width:24px; height:1px; background: var(--cream); transition: all 0.3s; display:block; }
 .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -274,15 +285,8 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
 @media (max-width: 900px) { .site-nav { padding: 0.6rem 1.2rem; } .nav-links { display:none; } .hamburger { display:flex; } }
 
 /* ══════════ RSVP POP-UP (from home page form) ══════════ */
-.rsvp-fab { position: fixed; right: 0.9rem; bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px)); z-index: 30; display:flex; align-items:center; gap:0.55rem;
-  background: var(--teal); color: var(--black); border:none; border-radius:100px; padding: 0.7rem 1.1rem; cursor:pointer;
-  font-family: inherit; font-size:0.56rem; letter-spacing:0.28em; text-transform:uppercase; box-shadow: 0 6px 22px rgba(0,0,0,0.45); transition: background 0.3s, color 0.3s; }
-.rsvp-fab:hover { background: var(--teal-dark); color: var(--cream); }
-.rsvp-fab .tab-dot { width:5px; height:5px; border-radius:50%; background: currentColor; }
-.rsvp-modal { position: fixed; inset:0; z-index:70; display:none; align-items:flex-end; justify-content:flex-end; padding: 0.9rem; background: rgba(0,0,0,0.55); }
-.rsvp-modal.open { display:flex; }
-.rsvp-card { position:relative; width: min(100%, 360px); max-height: calc(100vh - 1.8rem); overflow-y:auto; background: var(--warm-white); color: var(--charcoal); padding: 2rem 1.7rem 1.6rem; border-top: 2px solid var(--teal); }
-.rsvp-close { position:absolute; top:0.7rem; right:0.9rem; background:none; border:none; font-size:1.2rem; color: var(--muted); cursor:pointer; line-height:1; }
+.rsvp-section { background: var(--warm-white); color: var(--charcoal); padding: 3.5rem 1.4rem calc(3.5rem + env(safe-area-inset-bottom, 0px)); margin-top: 1.5rem; scroll-margin-top: 0; }
+.rsvp-card { max-width: 440px; margin: 0 auto; }
 .rsvp-heading { font-family:'Blanc',serif; font-size:1.5rem; font-weight:400; line-height:1.2; color: var(--charcoal); }
 .rsvp-sub { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color: var(--muted); line-height:1.8; }
 .intent-row { display:flex; border:1px solid rgba(26,25,22,0.12); margin: 1.1rem 0 0.4rem; }
@@ -297,8 +301,7 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
 .rsvp-submit { width:100%; padding:1rem; background: var(--charcoal); color: var(--warm-white); border:none; font-family:'Tenor Sans',sans-serif; font-size:0.55rem; letter-spacing:0.35em; text-transform:uppercase; cursor:pointer; transition: background 0.3s; margin-top:0.3rem; }
 .rsvp-submit:hover { background: var(--teal-dark); }
 .rsvp-note { font-size:0.48rem; letter-spacing:0.1em; color: var(--muted); text-align:center; margin: 1rem 0 0; }
-@media (max-width: 600px) { .rsvp-modal { padding:0; } .rsvp-card { width:100%; max-height: 88vh; padding-bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px)); } }
-@media print { .site-nav, .mobile-nav, .rsvp-fab, .rsvp-modal { display:none !important; } }
+@media print { .site-nav, .mobile-nav, .rsvp-section { display:none !important; } }
 </style>
 </head>
 <body>
@@ -336,6 +339,7 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
     <li><a href="https://designdistricthyd.com/#collabs">Designers</a></li>
     <li><a href="https://designdistricthyd.com/#testimonials">Voices</a></li>
     <li><a href="#" class="current">Floor Map</a></li>
+    <li><a href="#rsvp" class="rsvp-link">RSVP</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
@@ -347,7 +351,7 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
   <a href="https://designdistricthyd.com/#collabs">Designers</a>
   <a href="https://designdistricthyd.com/#testimonials">Voices</a>
   <a href="#" class="current" onclick="toggleMenu();return false;">Floor Map</a>
-  <a href="javascript:void(0)" onclick="toggleMenu();toggleRsvp();" style="color:var(--teal);opacity:1;">RSVP — Season 3</a>
+  <a href="#rsvp" onclick="toggleMenu()" style="color:var(--teal);opacity:1;">RSVP — Season 3</a>
 </div>
 
 <div class="page-head">
@@ -358,7 +362,11 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
 
 <div class="filter-bar">
   <input class="search-input" id="searchInput" type="text" placeholder="Search stall number, designer or category" oninput="applyFilters()">
-  <div class="chip-row" id="chipRow"></div>
+  <div class="cat-row">
+    <button class="cat-toggle" id="catToggle" onclick="toggleCatPanel()" aria-expanded="false" aria-controls="catPanel"><span id="catLabel">Categories</span><span class="caret">▾</span></button>
+    <button class="cat-clear" id="chipClear" onclick="clearTags()" hidden>Clear all</button>
+  </div>
+  <div class="cat-panel" id="catPanel" hidden><div class="cat-list" id="chipRow"></div></div>
 </div>
 <div class="result-count" id="resultCount"></div>
 
@@ -406,12 +414,9 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
 </div>
 
 
-<!-- RSVP pop-up (same form as home page) -->
-<button class="rsvp-fab" id="rsvpFab" onclick="toggleRsvp()" aria-label="RSVP for Season 3"><span class="tab-dot"></span>RSVP · Season 3</button>
-<div class="rsvp-modal" id="rsvpModal" onclick="if(event.target===this) toggleRsvp()">
+<!-- RSVP (full form, bottom of page) -->
+<section class="rsvp-section" id="rsvp">
   <div class="rsvp-card">
-    <button class="rsvp-close" onclick="toggleRsvp()" aria-label="Close">✕</button>
-
     <div id="rsvpSuccess" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;text-align:center;padding:2rem 0;">
       <div style="width:48px;height:48px;border:1px solid var(--teal-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--teal-dark);">✓</div>
       <p style="font-family:'Blanc',serif;font-size:1.2rem;font-weight:400;color:var(--charcoal);line-height:1.4;margin:0;">Request<br><em>Received</em></p>
@@ -441,7 +446,7 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
       <p class="rsvp-note">Limited seats. Curated access only.</p>
     </div>
   </div>
-</div>
+</section>
 
 <script>
 // ── Gatsby-style intro control ──
@@ -465,8 +470,7 @@ function toggleMenu() {
   document.getElementById('mobileNav').classList.toggle('open', menuOpen);
   document.body.style.overflow = menuOpen ? 'hidden' : '';
 }
-function toggleRsvp() { document.getElementById('rsvpModal').classList.toggle('open'); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('rsvpModal').classList.remove('open'); closeSheet(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
 function selectIntent(el, value) {
   document.querySelectorAll('.intent-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
@@ -1061,7 +1065,7 @@ const LOUNGE_RIGHT_GRID = [['T14','T13','T12'],['T15','LABEL','T11'],['T16','T9'
 
 function tagStr(id) { return ((STALL_TAGS[id]||[]).join('|')).toLowerCase().replace(/"/g,''); }
 function renderStallCell(id) {
-  if (id === 'TR') return '<div class="stall trial">Trial<br>Room</div>';
+  if (id === 'TR') return '<div class="stall trial" data-trial="1" title="Trial room" aria-label="Trial room"></div>';
   const name = STALL_NAME[id];
   const dot = STALL_DISCOUNT[id] ? '<span class="discount-dot"></span>' : '';
   return '<div class="stall ' + sizeClass(id) + '" data-id="' + id + '" data-name="' + name.toLowerCase() + '" data-tags="' + tagStr(id) + '" onclick="openSheet(' + id + ')">' + id + dot + '</div>';
@@ -1106,7 +1110,7 @@ function renderHall() {
         '<div class="passage-v"><span>2.5 Mtr Passage</span></div>' +
         '<div class="lounge-tables">' + renderLoungeGrid(LOUNGE_LEFT_GRID) + '</div>' +
         '<div class="passage-ft">6 ft<br>Passage</div>' +
-        '<div class="lounge-center"><div class="lounge-title">Lounge Area</div><img class="lounge-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District logo"></div>' +
+        '<div class="lounge-center"><img class="lounge-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District logo"></div>' +
         '<div class="passage-ft">6 ft<br>Passage</div>' +
         '<div class="lounge-tables">' + renderLoungeGrid(LOUNGE_RIGHT_GRID) + '</div>' +
         '<div class="passage-v"><span>2.5 Mtr Passage</span></div>' +
@@ -1120,14 +1124,19 @@ function renderHall() {
   document.getElementById('hallGrid').innerHTML = html;
 }
 
+const TRIAL_TAG = 'Trial Room';
 const activeTags = new Set();
 function renderChips() {
   const count = {};
   Object.values(STALL_TAGS).forEach(a => a.forEach(t => count[t] = (count[t]||0)+1));
   const tags = Object.keys(count).sort((a,b) => count[b]-count[a] || a.localeCompare(b));
-  document.getElementById('chipRow').innerHTML =
-    '<button class="chip clear" id="chipClear" onclick="clearTags()" style="display:none">✕ Clear</button>' +
-    tags.map(t => '<button class="chip" data-tag="' + t.replace(/"/g,'') + '" onclick="toggleTag(this.dataset.tag)">' + t + '</button>').join('');
+  const trialCount = TOP_ROW.filter(x => x === 'TR').length;
+  const item = (t, n, cls) => '<label class="cat-item' + (cls ? ' ' + cls : '') + '"><input type="checkbox" value="' + t.replace(/"/g,'') + '" onchange="toggleTag(this.value)"><span>' + t + '</span><em>' + n + '</em></label>';
+  document.getElementById('chipRow').innerHTML = item(TRIAL_TAG, trialCount, 'trial-opt') + tags.map(t => item(t, count[t])).join('');
+}
+function toggleCatPanel() {
+  const p = document.getElementById('catPanel'), b = document.getElementById('catToggle');
+  p.hidden = !p.hidden; b.setAttribute('aria-expanded', String(!p.hidden));
 }
 function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); applyFilters(); }
 function clearTags() { activeTags.clear(); applyFilters(); }
@@ -1148,8 +1157,19 @@ function applyFilters() {
     el.classList.toggle('dimmed', !match);
     if (match) matchCount++;
   });
-  document.querySelectorAll('#chipRow .chip[data-tag]').forEach(c => c.classList.toggle('on', activeTags.has(c.dataset.tag)));
-  const cc = document.getElementById('chipClear'); if (cc) cc.style.display = activeTags.size ? '' : 'none';
+  // trial rooms: lit only when "Trial Room" is ticked; dimmed when any other filter/search is active
+  const trialSel = activeTags.has(TRIAL_TAG);
+  const anyFilter = !!q || sel.length > 0;
+  document.querySelectorAll('.stall[data-trial]').forEach(el => {
+    const textOk = !q || 'trial room'.includes(q);
+    el.classList.toggle('lit', trialSel && textOk);
+    el.classList.toggle('dimmed', anyFilter && !(textOk && (!sel.length || trialSel)));
+  });
+  document.querySelectorAll('#chipRow input[type=checkbox]').forEach(c => { c.checked = activeTags.has(c.value); });
+  const n = activeTags.size;
+  document.getElementById('catLabel').textContent = n ? 'Categories (' + n + ')' : 'Categories';
+  document.getElementById('catToggle').classList.toggle('has-sel', n > 0);
+  document.getElementById('chipClear').hidden = n === 0;
   document.getElementById('resultCount').textContent = (q || sel.length) ? (matchCount + ' of ' + total + ' match') : (total + ' stalls + tables');
 }
 
