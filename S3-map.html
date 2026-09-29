@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Main Hall Map — Design District Hyd, Season III</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+@font-face {
+  font-family: 'Blanc';
+  src: url('https://ik.imagekit.io/mcjoint/Design%20District/Blanc-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+:root {
+  --black:#0A0A0A; --off-black:#111110; --panel:#171613;
+  --gold:#C4A35A; --cream:#F4EEE4; --muted:#8A8070; --border:rgba(244,238,228,0.12);
+  --tan:#D9CBA3; --tan-text:#4A3F26;
+  --db-blue:#3D746F; --db-blue-text:#F4EEE4;
+  --db-blue-alt:#7AADA8; --db-blue-alt-text:#0F2422;
+  --trial:#C67B52; --trial-text:#FBF1E8;
+  --table:#6B5F45; --table-text:#F4EEE4;
+  --unit: 46px;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html, body { margin:0; background: var(--black); color: var(--cream); font-family: 'Tenor Sans', sans-serif; }
+h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
+
+.page-head { padding: 1.2rem 1rem 0.9rem; text-align: center; border-bottom: 1px solid var(--border); }
+.page-eyebrow { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.page-head h1 { font-size: 1.4rem; }
+.page-sub { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+
+.filter-bar { position: sticky; top: 0; z-index: 20; background: var(--black); border-bottom: 1px solid var(--border); padding: 0.7rem 1rem; }
+.search-input {
+  width:100%; background: var(--off-black); border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.6rem 0.8rem; color: var(--cream); font-family: inherit; font-size: 0.85rem; outline: none;
+}
+.search-input:focus { border-color: var(--gold); }
+.chip-row { display:flex; gap:6px; overflow-x:auto; padding:0.6rem 0 0.1rem; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.chip-row::-webkit-scrollbar { display:none; }
+.chip { flex:0 0 auto; font-family:inherit; font-size:0.66rem; padding:0.32rem 0.75rem; border-radius:100px; border:1px solid var(--border); background:transparent; color:var(--cream); cursor:pointer; white-space:nowrap; }
+.chip.on { background:var(--gold); border-color:var(--gold); color:var(--black); font-weight:700; }
+.chip.clear { border-style:dashed; color:var(--muted); }
+.result-count { font-size: 0.64rem; color: var(--muted); padding: 0.5rem 1rem 0; text-align:center; }
+
+.hall {
+  display: grid;
+  grid-template-columns: 46px 1fr 46px;
+  grid-template-areas: "top top top" "left center right" "bottom bottom bottom";
+  gap: 5px;
+  padding: 0.9rem 0.6rem;
+  max-width: 640px; margin: 0 auto;
+}
+.top-row { grid-area: top; display:flex; gap:4px; margin: 0 22px; }
+.left-col { grid-area: left; display:flex; flex-direction:column; gap:4px; margin: 22px 0; }
+.right-col { grid-area: right; display:flex; flex-direction:column; gap:4px; margin: 22px 0; }
+.bottom-row { grid-area: bottom; display:flex; gap:4px; margin: 5px 22px 0; }
+.center-col { grid-area: center; display:flex; flex-direction:column; gap:8px; justify-content:space-between; }
+
+.cluster-row { display:flex; gap:6px; justify-content:space-between; }
+.cluster { display:grid; grid-template-columns: 1fr 1fr; gap:3px; flex:1; }
+
+.lounge-block { display:flex; flex-wrap:nowrap; gap:6px; align-items:stretch; margin: 2px 0; }
+.lounge-tables { display:flex; flex-direction:column; gap:12px; flex: 0 0 auto; }
+.lounge-subgrid { display:grid; grid-template-columns: repeat(3, auto); gap:5px; justify-content:start; }
+.lounge-label { width: calc(var(--unit) / 2); height: calc(var(--unit) / 2); aspect-ratio:1; display:flex; align-items:center; justify-content:center; text-align:center; font-size:0.4rem; color: var(--muted); line-height:1.05; border: 1px dashed var(--border); border-radius:4px; }
+.lounge-center {
+  flex:1; min-width:0; border: 1px dashed var(--border); border-radius: 8px; display:flex; align-items:center; justify-content:center;
+  text-align:center; font-size:0.58rem; color: var(--muted); letter-spacing:0.05em; text-transform:uppercase; padding: 0.5rem;
+}
+
+.stall {
+  flex:1; aspect-ratio:1; border-radius: 6px; display:flex; align-items:center; justify-content:center;
+  font-size: 0.68rem; font-weight: 700; cursor:pointer; position:relative; border: 1px solid rgba(0,0,0,0.25);
+  transition: transform 0.12s, opacity 0.15s; min-width:0;
+}
+.stall:active { transform: scale(0.92); }
+.stall.dimmed { opacity: 0.18; pointer-events:none; }
+.discount-dot {
+  position:absolute; top:2px; right:2px; width:7px; height:7px; border-radius:50%;
+  background: var(--gold); border: 1px solid rgba(0,0,0,0.35); box-shadow: 0 0 3px rgba(196,163,90,0.7);
+}
+.stall.glint::before {
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:1;
+  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.65) 50%, transparent 65%);
+  background-size: 260% 260%; background-position: -160% -160%;
+  animation: glintSweep 1.15s ease-in-out;
+}
+@keyframes glintSweep { to { background-position: 160% 160%; } }
+.stall.db-a { background: var(--db-blue); color: var(--db-blue-text); }
+.stall.db-b { background: var(--db-blue-alt); color: var(--db-blue-alt-text); }
+.stall.trial { background: var(--trial); color: var(--trial-text); font-size: 0.48rem; text-align:center; line-height:1; }
+.stall.table {
+  background: var(--table); color: var(--table-text); font-size: 0.5rem;
+  flex: 0 0 auto; width: calc(var(--unit) / 2); height: calc(var(--unit) / 2); aspect-ratio: 1;
+}
+
+.passage-h { text-align:center; font-size:0.5rem; color: var(--muted); letter-spacing:0.06em; text-transform:uppercase; padding: 1px 0; }
+.passage-v {
+  flex: 0 0 14px; display:flex; align-items:center; justify-content:center; position:relative;
+}
+.passage-v span {
+  writing-mode: vertical-rl; transform: rotate(180deg); font-size:0.44rem; color: var(--muted);
+  letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap;
+}
+.passage-ft { text-align:center; font-size:0.46rem; color: var(--muted); letter-spacing:0.04em; text-transform:uppercase; flex:0 0 34px; display:flex; align-items:center; justify-content:center; line-height:1.2; }
+
+.landmark-badge {
+  flex-shrink:0; display:flex; align-items:center; gap:0.25rem; padding: 0 0.5rem;
+  font-size: 0.56rem; color: var(--gold); letter-spacing:0.04em; text-transform:uppercase; white-space:nowrap;
+}
+.lounge-title { font-size:0.5rem; color: var(--muted); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.4rem; }
+.lounge-logo { width: 46%; max-width:70px; filter: invert(1); opacity:0.92; }
+
+.legend { display:flex; flex-wrap:wrap; gap: 0.6rem 1rem; padding: 0.9rem 1rem 1rem; border-bottom: 1px solid var(--border); margin-bottom: 0.4rem; justify-content:center; }
+.legend-item { display:flex; align-items:center; gap:0.4rem; font-size: 0.62rem; color: var(--muted); }
+.legend-swatch { width:11px; height:11px; border-radius:3px; flex-shrink:0; }
+
+.note-banner { margin: 0.9rem 1rem 0; padding: 0.7rem 0.9rem; border: 1px solid var(--border); border-radius: 8px; font-size:0.68rem; color: var(--muted); line-height:1.5; }
+
+.sheet-backdrop { position: fixed; inset:0; background: rgba(0,0,0,0.6); z-index:40; display:none; align-items:flex-end; }
+.sheet-backdrop.show { display:flex; }
+.sheet {
+  width:100%; background: var(--panel); border-top: 1px solid var(--gold); border-radius: 16px 16px 0 0;
+  padding: 1.3rem 1.2rem calc(1.5rem + env(safe-area-inset-bottom, 0px)); height: 50vh; overflow-y:auto;
+}
+.sheet-handle { width:36px; height:4px; background: var(--border); border-radius:2px; margin: 0 auto 1rem; }
+.sheet-top { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+.sheet-stall-no { font-family:'Blanc',serif; font-size:1.9rem; color: var(--gold); line-height:1; }
+.sheet-close { background:none; border:none; color: var(--muted); font-size:1.3rem; cursor:pointer; line-height:1; }
+.sheet-name { font-family:'Blanc', serif; font-size:1.25rem; margin: 0.3rem 0 0.6rem; }
+.sheet-meta-row { display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap; }
+.tag { font-size:0.66rem; padding:0.3rem 0.7rem; border-radius:100px; border:1px solid var(--border); color: var(--cream); }
+.sheet-actions { display:flex; flex-direction:column; gap:0.55rem; }
+.sheet-btn { display:flex; align-items:center; justify-content:center; padding:0.8rem; border-radius:8px; border:1px solid var(--border); color: var(--cream); text-decoration:none; font-size:0.78rem; background:transparent; }
+.sheet-btn.primary { background: var(--gold); border-color: var(--gold); color: var(--black); font-weight:700; }
+.sheet-placeholder-tag { font-size:0.6rem; color: var(--muted); font-style:italic; margin-bottom: 0.7rem; }
+
+/* ══════════ GATSBY-STYLE INTRO ══════════ */
+.gatsby-intro {
+  position: fixed; inset:0; z-index:999; background: radial-gradient(ellipse at 50% 40%, #14110a 0%, #0A0A0A 60%, #050503 100%);
+  display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer;
+  animation: gatsbyExit 1.1s ease-in 5.2s forwards;
+}
+.gatsby-intro.skip { animation: gatsbyExit 0.7s ease-in forwards; }
+@keyframes gatsbyExit { to { opacity:0; transform:scale(1.08); visibility:hidden; pointer-events:none; } }
+
+.sunburst {
+  position:absolute; inset:-30%;
+  background: repeating-conic-gradient(from 0deg, rgba(196,163,90,0.55) 0deg 1deg, transparent 1deg 8deg);
+  -webkit-mask-image: radial-gradient(circle, black 0%, black 22%, transparent 68%);
+  mask-image: radial-gradient(circle, black 0%, black 22%, transparent 68%);
+  opacity:0; transform-origin:center;
+  animation: sunburstFade 1.8s ease-out 0.9s forwards, sunburstSpin 40s linear 0.9s infinite;
+}
+@keyframes sunburstFade { from { opacity:0; } to { opacity:1; } }
+@keyframes sunburstSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.deco-corner { position:absolute; width:64px; height:64px; opacity:0; transform:scale(0.3); animation: decoCornerIn 0.9s cubic-bezier(.2,.8,.2,1) 1.05s forwards; }
+.deco-corner.tl { top:5%; left:5%; border-top:2px solid var(--gold); border-left:2px solid var(--gold); transform-origin: top left; }
+.deco-corner.tr { top:5%; right:5%; border-top:2px solid var(--gold); border-right:2px solid var(--gold); transform-origin: top right; animation-delay:1.2s; }
+.deco-corner.bl { bottom:5%; left:5%; border-bottom:2px solid var(--gold); border-left:2px solid var(--gold); transform-origin: bottom left; animation-delay:1.2s; }
+.deco-corner.br { bottom:5%; right:5%; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold); transform-origin: bottom right; animation-delay:1.05s; }
+@keyframes decoCornerIn { to { opacity:0.85; transform:scale(1); } }
+
+.intro-content { position:relative; z-index:2; text-align:center; padding: 0 1.5rem; }
+.intro-mark {
+  width:118px; height:118px; margin: 0 auto 1.3rem; opacity:0; transform:scale(0.5);
+  filter: invert(1) drop-shadow(0 0 22px rgba(196,163,90,0.55));
+  animation: logoHeroIn 1.15s cubic-bezier(.2,.8,.2,1) 0.05s forwards;
+}
+@keyframes logoHeroIn { 0% { opacity:0; transform:scale(0.5); } 65% { opacity:1; transform:scale(1.08); } 100% { opacity:1; transform:scale(1); } }
+.intro-eyebrow {
+  font-size:0.62rem; letter-spacing:0.9em; text-indent:0.9em; text-transform:uppercase; color: var(--gold);
+  opacity:0; animation: introFadeUp 1.1s ease-out 1.4s forwards;
+}
+.intro-title {
+  font-family:'Playfair Display', serif; font-weight:900; font-size: clamp(3.2rem, 15vw, 6rem); line-height:0.95;
+  letter-spacing:0.03em; margin: 0.7rem 0 0.6rem;
+  background: linear-gradient(100deg, #8a6d34 0%, #F4E4B8 25%, #C4A35A 45%, #F4E4B8 60%, #8a6d34 100%);
+  background-size: 250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+  opacity:0; animation: introFadeUp 1.3s ease-out 1.9s forwards, shimmerText 3.5s linear 3.4s infinite;
+}
+.intro-sub {
+  font-family:'Playfair Display', serif; font-style:italic; font-size:0.95rem; letter-spacing:0.35em; text-indent:0.35em;
+  color: var(--cream); opacity:0.85;
+  opacity:0; animation: introFadeUp 1.1s ease-out 2.5s forwards;
+}
+.intro-rule { width:70px; height:1px; background: var(--gold); margin: 1.3rem auto; opacity:0; animation: introLineGrow 0.9s ease-out 2.9s forwards; }
+.intro-tap { font-size:0.56rem; letter-spacing:0.3em; text-transform:uppercase; color: var(--muted); opacity:0; animation: introFadeUp 1s ease 4s forwards, tapPulse 1.8s ease-in-out 4s infinite; }
+
+@keyframes introFadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+@keyframes introLineGrow { from { opacity:0; width:0; } to { opacity:0.7; width:70px; } }
+@keyframes shimmerText { from { background-position:0% 0; } to { background-position:250% 0; } }
+@keyframes tapPulse { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+
+.sparkle {
+  position:absolute; width:3px; height:3px; border-radius:50%; background: var(--gold);
+  box-shadow: 0 0 6px 1px rgba(196,163,90,0.8); opacity:0;
+  animation: sparkleTwinkle 2.4s ease-in-out infinite;
+}
+@keyframes sparkleTwinkle { 0%,100% { opacity:0; transform:scale(0.6); } 50% { opacity:1; transform:scale(1.3); } }
+
+.share-card {
+  background: linear-gradient(155deg, #171613, #0A0A0A 70%);
+  border: 1px solid var(--gold); border-radius: 14px; padding: 1.4rem 1.3rem;
+  margin-bottom: 1.1rem; position: relative; overflow:hidden;
+}
+.share-card::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background: repeating-linear-gradient(115deg, rgba(196,163,90,0.035) 0px, rgba(196,163,90,0.035) 1px, transparent 1px, transparent 14px);
+}
+.share-card-header { display:flex; align-items:center; gap:0.5rem; margin-bottom: 1.6rem; }
+.share-card-logo { width:20px; height:20px; filter: invert(1); opacity:0.9; }
+.share-card-brand { font-size:0.52rem; letter-spacing:0.22em; text-transform:uppercase; color: var(--gold); }
+.share-card-stallno { font-family:'Blanc',serif; font-size:0.95rem; color: var(--gold); margin-bottom:0.2rem; }
+.share-card-name { font-family:'Blanc',serif; font-size:1.7rem; line-height:1.15; color: var(--cream); margin-bottom:0.9rem; }
+
+.brand-row { display:flex; align-items:center; gap:0.8rem; margin-bottom:0.5rem; }
+.brand-row .share-card-name, .brand-row .share-card-stallno { margin-bottom:0.1rem; }
+.brand-avatar {
+  width:44px; height:44px; border-radius:50%; flex-shrink:0; background: var(--gold);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+  font-family:'Playfair Display',serif; font-weight:700; font-size:1.1rem; color:#1a1508;
+  border: 1px solid rgba(196,163,90,0.5);
+}
+.brand-avatar img { width:100%; height:100%; object-fit:cover; }
+.brand-avatar.favicon { background: var(--off-black); }
+.brand-avatar.favicon img { width:60%; height:60%; object-fit:contain; }
+
+.embed-slot:empty { display:none; }
+.embed-slot { margin: 0.9rem 0; border-radius:10px; overflow:hidden; max-width:100%; }
+.share-card-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.6rem; }
+.share-card-tag { font-size:0.62rem; padding:0.28rem 0.65rem; border-radius:100px; border:1px solid rgba(244,238,228,0.25); color: var(--cream); }
+.share-card-tag.placeholder { border-style:dashed; color: var(--muted); font-style:italic; }
+.share-card-tag.discount { border-color: var(--gold); color: var(--gold); font-weight:700; }
+.share-card-bio:empty { display:none; }
+.share-card-bio { font-size:0.76rem; line-height:1.55; color: rgba(244,238,228,0.82); margin-bottom:0.9rem; }
+
+.card-gallery:empty { display:none; }
+.card-gallery {
+  display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  margin-bottom:0.9rem; padding-bottom:2px;
+}
+.card-gallery::-webkit-scrollbar { display:none; }
+.card-gallery img {
+  height:78px; width:78px; flex-shrink:0; object-fit:cover; border-radius:8px;
+  border:1px solid rgba(244,238,228,0.12);
+}
+.share-card-footer { border-top: 1px solid rgba(244,238,228,0.14); padding-top:0.8rem; display:flex; justify-content:space-between; align-items:flex-end; gap:0.5rem; }
+.share-card-venue { font-size:0.6rem; color: var(--muted); line-height:1.5; }
+.share-card-link { font-size:0.62rem; color: var(--gold); text-align:right; word-break:break-all; }
+
+/* ══════════ SITE NAV (from home page) ══════════ */
+:root { --teal:#7AADA8; --teal-dark:#4E8A85; --teal-light:#B0CEC9; --warm-white:#FAF7F2; --charcoal:#1E1D1A; }
+.site-nav { position: relative; z-index: 100; display:flex; justify-content:space-between; align-items:center; padding: 0.7rem 2rem; background: var(--black); border-bottom: 1px solid var(--border); }
+.nav-logo-img { height: 54px; width:auto; display:block; filter: invert(1); }
+.nav-links { display:flex; gap:2rem; list-style:none; margin:0; padding:0; }
+.nav-links a { font-size:0.58rem; letter-spacing:0.28em; text-transform:uppercase; color: var(--cream); text-decoration:none; opacity:0.65; transition: opacity 0.3s; }
+.nav-links a:hover, .nav-links a.current { opacity:1; }
+.nav-links a.current { color: var(--teal); }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:0.5rem; z-index:150; }
+.hamburger span { width:24px; height:1px; background: var(--cream); transition: all 0.3s; display:block; }
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.mobile-nav { display:none; position:fixed; inset:0; background: rgba(10,10,10,0.97); z-index:120; flex-direction:column; align-items:center; justify-content:center; gap:2rem; }
+.mobile-nav.open { display:flex; }
+.mobile-nav a { font-size:0.7rem; letter-spacing:0.45em; text-transform:uppercase; color: var(--cream); text-decoration:none; opacity:0.7; transition: opacity 0.3s; }
+.mobile-nav a:hover, .mobile-nav a.current { opacity:1; }
+@media (max-width: 900px) { .site-nav { padding: 0.6rem 1.2rem; } .nav-links { display:none; } .hamburger { display:flex; } }
+
+/* ══════════ RSVP POP-UP (from home page form) ══════════ */
+.rsvp-fab { position: fixed; right: 0.9rem; bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px)); z-index: 30; display:flex; align-items:center; gap:0.55rem;
+  background: var(--teal); color: var(--black); border:none; border-radius:100px; padding: 0.7rem 1.1rem; cursor:pointer;
+  font-family: inherit; font-size:0.56rem; letter-spacing:0.28em; text-transform:uppercase; box-shadow: 0 6px 22px rgba(0,0,0,0.45); transition: background 0.3s, color 0.3s; }
+.rsvp-fab:hover { background: var(--teal-dark); color: var(--cream); }
+.rsvp-fab .tab-dot { width:5px; height:5px; border-radius:50%; background: currentColor; }
+.rsvp-modal { position: fixed; inset:0; z-index:70; display:none; align-items:flex-end; justify-content:flex-end; padding: 0.9rem; background: rgba(0,0,0,0.55); }
+.rsvp-modal.open { display:flex; }
+.rsvp-card { position:relative; width: min(100%, 360px); max-height: calc(100vh - 1.8rem); overflow-y:auto; background: var(--warm-white); color: var(--charcoal); padding: 2rem 1.7rem 1.6rem; border-top: 2px solid var(--teal); }
+.rsvp-close { position:absolute; top:0.7rem; right:0.9rem; background:none; border:none; font-size:1.2rem; color: var(--muted); cursor:pointer; line-height:1; }
+.rsvp-heading { font-family:'Blanc',serif; font-size:1.5rem; font-weight:400; line-height:1.2; color: var(--charcoal); }
+.rsvp-sub { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color: var(--muted); line-height:1.8; }
+.intent-row { display:flex; border:1px solid rgba(26,25,22,0.12); margin: 1.1rem 0 0.4rem; }
+.intent-btn { flex:1; padding:0.65rem 0.4rem; font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; text-align:center; color: var(--muted); cursor:pointer; border-right:1px solid rgba(26,25,22,0.12); transition: all 0.25s; user-select:none; }
+.intent-btn:last-child { border-right:none; }
+.intent-btn.active, .intent-btn:hover { background: var(--teal); color: var(--black); }
+.rsvp-fields { display:flex; flex-direction:column; gap:1.1rem; }
+.rsvp-field label { display:block; font-size:0.48rem; letter-spacing:0.25em; text-transform:uppercase; color: var(--muted); margin-bottom:0.4rem; }
+.rsvp-field input { width:100%; background:transparent; border:none; border-bottom:1px solid rgba(26,25,22,0.2); padding:0.55rem 0; font-family:'Blanc',serif; font-size:0.95rem; color: var(--charcoal); outline:none; transition: border-color 0.3s; border-radius:0; }
+.rsvp-field input:focus { border-bottom-color: var(--teal-dark); }
+.rsvp-field input::placeholder { color: rgba(26,25,22,0.25); font-style: italic; }
+.rsvp-submit { width:100%; padding:1rem; background: var(--charcoal); color: var(--warm-white); border:none; font-family:'Tenor Sans',sans-serif; font-size:0.55rem; letter-spacing:0.35em; text-transform:uppercase; cursor:pointer; transition: background 0.3s; margin-top:0.3rem; }
+.rsvp-submit:hover { background: var(--teal-dark); }
+.rsvp-note { font-size:0.48rem; letter-spacing:0.1em; color: var(--muted); text-align:center; margin: 1rem 0 0; }
+@media (max-width: 600px) { .rsvp-modal { padding:0; } .rsvp-card { width:100%; max-height: 88vh; padding-bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px)); } }
+@media print { .site-nav, .mobile-nav, .rsvp-fab, .rsvp-modal { display:none !important; } }
+</style>
+</head>
+<body>
+
+<div class="gatsby-intro" id="gatsbyIntro" onclick="skipIntro()">
+  <div class="sunburst"></div>
+  <div class="deco-corner tl"></div>
+  <div class="deco-corner tr"></div>
+  <div class="deco-corner bl"></div>
+  <div class="deco-corner br"></div>
+  <div class="sparkle" style="top:18%; left:22%; animation-delay:0.3s;"></div>
+  <div class="sparkle" style="top:28%; left:78%; animation-delay:1.1s;"></div>
+  <div class="sparkle" style="top:70%; left:15%; animation-delay:1.9s;"></div>
+  <div class="sparkle" style="top:75%; left:82%; animation-delay:0.7s;"></div>
+  <div class="sparkle" style="top:12%; left:55%; animation-delay:2.4s;"></div>
+  <div class="sparkle" style="top:60%; left:50%; animation-delay:1.5s;"></div>
+  <div class="intro-content">
+    <img class="intro-mark" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="">
+    <div class="intro-eyebrow">Design District Hyd</div>
+    <h1 class="intro-title">Season III</h1>
+    <div class="intro-sub">The Main Hall Awaits</div>
+    <div class="intro-rule"></div>
+    <div class="intro-tap">Tap to enter</div>
+  </div>
+</div>
+
+<!-- NAV (same as home page) -->
+<nav class="site-nav">
+  <a href="https://designdistricthyd.com/" class="nav-logo"><img class="nav-logo-img" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd Logo"></a>
+  <ul class="nav-links">
+    <li><a href="https://designdistricthyd.com/#about">About</a></li>
+    <li><a href="https://designdistricthyd.com/#past">Season 01</a></li>
+    <li><a href="https://designdistricthyd.com/#season-2">Season 02</a></li>
+    <li><a href="https://designdistricthyd.com/#season-3">Season 03</a></li>
+    <li><a href="https://designdistricthyd.com/#collabs">Designers</a></li>
+    <li><a href="https://designdistricthyd.com/#testimonials">Voices</a></li>
+    <li><a href="#" class="current">Floor Map</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="https://designdistricthyd.com/#about">About</a>
+  <a href="https://designdistricthyd.com/#past">Season 01</a>
+  <a href="https://designdistricthyd.com/#season-2">Season 02</a>
+  <a href="https://designdistricthyd.com/#season-3">Season 03</a>
+  <a href="https://designdistricthyd.com/#collabs">Designers</a>
+  <a href="https://designdistricthyd.com/#testimonials">Voices</a>
+  <a href="#" class="current" onclick="toggleMenu();return false;">Floor Map</a>
+  <a href="javascript:void(0)" onclick="toggleMenu();toggleRsvp();" style="color:var(--teal);opacity:1;">RSVP — Season 3</a>
+</div>
+
+<div class="page-head">
+  <div class="page-eyebrow">Design District Hyd · Season III</div>
+  <h1>Main Hall Map</h1>
+  <div class="page-sub">Hall #4, Novotel Hyderabad · Tap a stall for designer details</div>
+</div>
+
+<div class="filter-bar">
+  <input class="search-input" id="searchInput" type="text" placeholder="Search stall number, designer or category" oninput="applyFilters()">
+  <div class="chip-row" id="chipRow"></div>
+</div>
+<div class="result-count" id="resultCount"></div>
+
+<div class="legend" id="legend"></div>
+
+<div class="hall" id="hallGrid"></div>
+
+
+<div class="sheet-backdrop" id="sheetBackdrop" onclick="if(event.target===this) closeSheet()">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <div></div>
+      <button class="sheet-close" onclick="closeSheet()" aria-label="Close">✕</button>
+    </div>
+
+    <div class="share-card" id="shareCard">
+      <div class="share-card-header">
+        <img class="share-card-logo" crossorigin="anonymous" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="">
+        <div class="share-card-brand">Design District Hyd · Season III</div>
+      </div>
+      <div class="brand-row">
+        <div class="brand-avatar" id="brandAvatar"></div>
+        <div>
+          <div class="share-card-stallno" id="cardStallNo">#—</div>
+          <div class="share-card-name" id="cardName">—</div>
+        </div>
+      </div>
+      <div class="share-card-bio" id="cardBio"></div>
+      <div class="share-card-tags" id="cardTags"></div>
+      <div class="card-gallery" id="cardGallery"></div>
+      <div class="embed-slot" id="embedSlot"></div>
+      <div class="share-card-footer">
+        <div class="share-card-venue">Hall #4, Novotel<br>Hyderabad · 1 Oct 2026</div>
+        <div class="share-card-link" id="cardLink"></div>
+      </div>
+    </div>
+
+        <div class="sheet-actions" id="sheetActions">
+      <button class="sheet-btn primary" onclick="shareCard()">Share / Save Card</button>
+      <a class="sheet-btn" id="instaBtn" href="#" onclick="return false;">View on Instagram</a>
+      <a class="sheet-btn" id="webBtn" href="#" onclick="return false;">Visit website</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- RSVP pop-up (same form as home page) -->
+<button class="rsvp-fab" id="rsvpFab" onclick="toggleRsvp()" aria-label="RSVP for Season 3"><span class="tab-dot"></span>RSVP · Season 3</button>
+<div class="rsvp-modal" id="rsvpModal" onclick="if(event.target===this) toggleRsvp()">
+  <div class="rsvp-card">
+    <button class="rsvp-close" onclick="toggleRsvp()" aria-label="Close">✕</button>
+
+    <div id="rsvpSuccess" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;text-align:center;padding:2rem 0;">
+      <div style="width:48px;height:48px;border:1px solid var(--teal-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--teal-dark);">✓</div>
+      <p style="font-family:'Blanc',serif;font-size:1.2rem;font-weight:400;color:var(--charcoal);line-height:1.4;margin:0;">Request<br><em>Received</em></p>
+      <p style="font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);line-height:2;margin:0;">We'll be in touch<br>shortly.</p>
+    </div>
+
+    <div id="rsvpFormWrap">
+      <h3 class="rsvp-heading">Reserve<br>Your Place</h3>
+      <p class="rsvp-sub" style="margin:0.8rem 0 0">Season 3 · 1 October 2026<br>Novotel HICC, Hyderabad</p>
+      <div class="intent-row">
+        <div class="intent-btn active" onclick="selectIntent(this,'Attend')">Attend</div>
+        <div class="intent-btn" onclick="selectIntent(this,'Update Me')">Update Me</div>
+        <div class="intent-btn" onclick="selectIntent(this,'Collaborate')">Collab</div>
+      </div>
+      <form id="rsvpForm" name="rsvp-season2" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleRsvpSubmit(event)" style="display:flex;flex-direction:column;gap:1.1rem;margin-top:0.2rem;">
+        <input type="hidden" name="form-name" value="rsvp-season2">
+        <p style="display:none"><label>Don't fill this: <input name="bot-field"></label></p>
+        <input type="hidden" name="intent" id="intentField" value="Attend">
+        <div class="rsvp-fields">
+          <div class="rsvp-field"><label for="rsvp-name">Full Name</label><input type="text" id="rsvp-name" name="name" placeholder="Your name" required></div>
+          <div class="rsvp-field"><label for="rsvp-email">Email</label><input type="email" id="rsvp-email" name="email" placeholder="your@email.com" required></div>
+          <div class="rsvp-field"><label for="rsvp-phone">Phone</label><input type="tel" id="rsvp-phone" name="phone" placeholder="+91"></div>
+          <div class="rsvp-field"><label for="rsvp-ig">Instagram <span style="color:var(--muted);font-size:0.45rem">— optional</span></label><input type="text" id="rsvp-ig" name="instagram" placeholder="@handle"></div>
+        </div>
+        <button type="submit" class="rsvp-submit" id="rsvpBtn">Submit Request</button>
+      </form>
+      <p class="rsvp-note">Limited seats. Curated access only.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Gatsby-style intro control ──
+let introTimer = setTimeout(removeIntro, 6300);
+function skipIntro() {
+  clearTimeout(introTimer);
+  const el = document.getElementById('gatsbyIntro');
+  if (el) el.classList.add('skip');
+  setTimeout(removeIntro, 720);
+}
+function removeIntro() {
+  const el = document.getElementById('gatsbyIntro');
+  if (el) el.style.display = 'none';
+}
+
+// ── Site nav + RSVP pop-up ──
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('hamburger').classList.toggle('open', menuOpen);
+  document.getElementById('mobileNav').classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+function toggleRsvp() { document.getElementById('rsvpModal').classList.toggle('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('rsvpModal').classList.remove('open'); closeSheet(); } });
+function selectIntent(el, value) {
+  document.querySelectorAll('.intent-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('intentField').value = value;
+}
+async function handleRsvpSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('rsvpForm');
+  const btn = document.getElementById('rsvpBtn');
+  btn.textContent = 'Sending…'; btn.disabled = true; btn.style.opacity = '0.7';
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
+    if (!res.ok) throw new Error('bad status');
+    document.getElementById('rsvpFormWrap').style.display = 'none';
+    document.getElementById('rsvpSuccess').style.display = 'flex';
+  } catch (err) {
+    btn.textContent = 'Try Again'; btn.disabled = false; btn.style.opacity = '1'; btn.style.background = '#c0392b';
+  }
+}
+
+const STALL_NAME = {
+  1: "Label Garima Sonam",
+  2: "Étoile by Shikha Munim",
+  3: "Sshilpa Samriya",
+  4: "Shradha Prêt Line",
+  5: "Neha Poddar",
+  6: "Ameesha Arora",
+  7: "Mustard Moon",
+  8: "Aanchal Vijaywargi",
+  9: "Nainara Heritage",
+  10: "Jorah Men",
+  11: "Studio22 by Pulkita Arora Bajaj",
+  12: "Jyoti Sahni",
+  13: "Isha Sawhney",
+  14: "Ennso",
+  15: "Monre by Tejaswini Agarwal",
+  16: "Aura Kreations",
+  17: "Disha Patil Pret Couture",
+  18: "The Darling Girl",
+  19: "Mohammed Mazhar",
+  20: "Gyaarah Baees",
+  21: "Éclat by Prerika",
+  22: "Meenal Paraswani",
+  23: "Whimsical by Shica",
+  24: "Krati Jain",
+  25: "Chitty Chui",
+  26: "Jayn",
+  27: "KalaTika",
+  28: "Richaa Goenka",
+  29: "Taroob",
+  30: "REYÈ BY MALIKA BHASIN ARORA",
+  31: "Twenty Seven Eleven",
+  32: "Tanveer Rim Saniya",
+  33: "PINK PESO",
+  34: "Muskaan Agarwal",
+  35: "Elemonopee",
+  36: "Tavya Silver Jewellery",
+  37: "Tavya Silver Jewellery",
+  38: "Vero by Sakshi & Anushka",
+  39: "Midushi Bajoria",
+  40: "Neher",
+  41: "Poonam Gadia",
+  42: "Tamak Label",
+  43: "Qno",
+  44: "Suman Thard",
+  45: "Pooja Wang",
+  46: "Dhi",
+  47: "Virachi",
+  48: "Emense",
+  49: "Veera Wear",
+  50: "Shimona",
+  51: "Neitri",
+  52: "Purvasha Popli",
+  53: "Trouvé",
+  54: "Issa by Chetana & Swathi",
+  55: "Chambray & Co.",
+  56: "Knottz",
+  57: "Ayushi Modi",
+  58: "Aur (by Anāash)",
+  59: "Nishi Madaan",
+  60: "RRR Ethnic Wear",
+  61: "Puja Agarwal",
+  62: "House of Pasha",
+  63: "Tasha India",
+  64: "Silouhette Hues",
+  65: "The Label 39",
+  66: "The Night Trend",
+  67: "Rosemary by behno",
+  68: "Ashwarya Khurana",
+  69: "The Cherry Tree",
+  70: "Pallash by Ruchi",
+  71: "Silver Edge",
+  72: "Smridhi Bajaj",
+  73: "Parul and Preyanka",
+  74: "Abhishek Sharma",
+  75: "Namrataa Rajpal",
+  76: "Tulua",
+  77: "Medha Batra",
+  78: "Daash",
+  79: "NIRVAIR By Naina Makkar",
+  80: "Anushka Mahajan",
+  81: "Niddhi Gupta",
+  82: "Namrataa Rajpal",
+  83: "Surabhi Arya",
+  84: "Preeti Kler",
+  85: "Platinoiir",
+  86: "Shivya K",
+  87: "CP by Chandini & Priyanka",
+  88: "Kriti Magon",
+  89: "Mai Tai",
+  90: "Karnaya",
+  91: "Radhika Soni",
+  92: "Sana Salman",
+  93: "Divisha Sharma",
+  94: "Maira Kataria",
+  95: "Our Love",
+  96: "ANG-SA by Nidhir & Shelly"
+};
+const TABLE_NAME = {
+  'T1': "Daga Accessories",
+  'T2': "Occassions by Renu",
+  'T3': "Tokachii - Japan in India",
+  'T4': "Sanctioned by You",
+  'T5': "LOVE P ORGANICS",
+  'T6': "Trinket Trunket",
+  'T7': "Be Chic by Sneh Sandhu",
+  'T8': "Amulets by Sherry Kathuria",
+  'T9': "Sitaara World",
+  'T10': "TAD Accessories",
+  'T11': "The Sanctum by Suparna",
+  'T12': "Trupti Mohta",
+  'T13': "PariPari",
+  'T14': "PriLoved Vintage Studio",
+  'T15': "Beau Monde",
+  'T16': "Cinderella"
+};
+// (STALL_POSTS is declared below, alongside STALL_LINKS and STALL_BIO)
+
+// Confirmed website/Instagram links — only stalls with verified data appear here.
+// Everything else falls back to "not yet available" in the card.
+// Discount % offered by stall/table, where confirmed. Anything absent here shows no discount.
+const STALL_DISCOUNT = {
+  1:10,
+  2:10,
+  3:10,
+  5:10,
+  6:10,
+  7:10,
+  9:5,
+  10:20,
+  11:15,
+  13:10,
+  14:10,
+  16:10,
+  17:20,
+  18:10,
+  19:20,
+  20:20,
+  21:10,
+  22:15,
+  23:10,
+  25:15,
+  26:10,
+  27:10,
+  29:10,
+  33:10,
+  34:10,
+  39:15,
+  40:10,
+  41:10,
+  42:5,
+  44:10,
+  46:20,
+  47:10,
+  48:10,
+  49:10,
+  50:10,
+  51:20,
+  52:15,
+  55:15,
+  56:10,
+  57:10,
+  58:10,
+  60:10,
+  61:10,
+  63:10,
+  64:10,
+  65:10,
+  66:10,
+  67:20,
+  69:10,
+  70:10,
+  72:10,
+  73:10,
+  74:5,
+  76:10,
+  77:10,
+  79:15,
+  83:10,
+  85:15,
+  86:10,
+  87:10,
+  88:10,
+  89:10,
+  91:15,
+  94:10,
+  95:10,
+  96:10,
+  'T1':10,
+  'T2':10,
+  'T7':10,
+  'T8':15,
+  'T9':10,
+  'T10':10,
+  'T11':15,
+  'T12':15,
+  'T13':15,
+  'T14':10
+};
+
+const STALL_LINKS = {
+  1: {"website": "https://labelgarimasonam.com/", "instagram": "https://www.instagram.com/labelgarimasonam/", "images": ["https://labelgarimasonam.com/cdn/shop/files/dab9a829-8942-460f-9c49-50823a2becd7.jpg?width=400", "https://labelgarimasonam.com/cdn/shop/files/CLA_1072_aa7234b5-3aee-4545-8f4d-c8d3838c9df6.jpg?width=400"]},
+  2: {"instagram": "https://www.instagram.com/etoilebyshikhamunim/"},
+  3: {"website": "https://sshilpasamriya.com/", "instagram": "https://www.instagram.com/sshilpasamriya/", "logo": "https://sshilpasamriya.com/cdn/shop/files/logookk-copy_1.png?width=200", "images": ["https://sshilpasamriya.com/cdn/shop/files/SS110_1_b6fb3ff0-aacb-4b96-b0f2-c6a68b7b9fdc.jpg?width=400", "https://sshilpasamriya.com/cdn/shop/collections/IMG-20240306-WA0004.jpg?width=400"]},
+  4: {"website": "https://shradhathepretline.com/", "instagram": "https://www.instagram.com/shradha_thepretline/", "logo": "https://shradhathepretline.com/cdn/shop/files/shradha-logo-black-transparent.png?width=200", "images": ["https://shradhathepretline.com/cdn/shop/files/SV_June_26_00920.jpg?width=400", "https://shradhathepretline.com/cdn/shop/files/SVJune26_00943.jpg?width=400"]},
+  5: {"instagram": "https://www.instagram.com/nehapoddar24/"},
+  6: {"instagram": "https://www.instagram.com/ameeshaaroralabel/"},
+  7: {"website": "https://mustardmoon.in/", "instagram": "https://www.instagram.com/mustardmoon.in/", "logo": "https://mustardmoon.in/cdn/shop/files/520x200-pc-logo_1200x1200.png?width=200", "images": ["https://mustardmoon.in/cdn/shop/files/1_1_1024x1024.jpg?width=400", "https://mustardmoon.in/cdn/shop/files/4_630f8d1b-ac44-4e99-a772-592402dde3f0_1024x1024.jpg?width=400"]},
+  8: {"website": "https://aanchalvijaywargi.com/", "instagram": "https://www.instagram.com/aanchalvijaywargi/", "images": ["https://aanchalvijaywargi.com/cdn/shop/files/31.png?width=400", "https://aanchalvijaywargi.com/cdn/shop/files/63.png?width=400"]},
+  9: {"website": "https://nainara.in/", "instagram": "https://www.instagram.com/nainara_official/", "logo": "https://nainara.in/cdn/shop/files/Nainara_logo_final_File-08_2.png?width=200", "images": ["https://nainara.in/cdn/shop/files/KalamkariSozniShawl_A_-1.webp?width=400", "https://nainara.in/cdn/shop/files/Product-15-main.webp?width=400"]},
+  10: {"website": "https://jorahmen.com/", "instagram": "https://www.instagram.com/jorahmen/"},
+  11: {"website": "https://studio22.co.in/", "instagram": "https://www.instagram.com/studio22.in/"},
+  12: {"instagram": "https://www.instagram.com/jyotisahniofficial/"},
+  13: {"website": "https://ishasawhney.com/", "instagram": "https://www.instagram.com/ish_sawhney/"},
+  14: {"instagram": "https://www.instagram.com/ennsothelabel/"},
+  15: {"instagram": "https://www.instagram.com/monre__official/"},
+  16: {"instagram": "https://www.instagram.com/aurakreation/"},
+  17: {"website": "https://dishapatil.com/", "instagram": "https://www.instagram.com/dishapatilpretcouture/"},
+  18: {"website": "https://thedarlinggirl.co/", "instagram": "https://www.instagram.com/darlinggirlofficial/"},
+  19: {"website": "https://mohammedmazhar.in/", "instagram": "https://www.instagram.com/mohammed.mazhar.official/"},
+  20: {"website": "https://gyaarahbaees.com/", "instagram": "https://www.instagram.com/gyaarah.baees/"},
+  21: {"website": "https://eclatbyprerika.com/", "instagram": "https://www.instagram.com/eclatbyprerika/"},
+  22: {"instagram": "https://www.instagram.com/meenalparaswani/"},
+  23: {"instagram": "https://www.instagram.com/whimsicalbyshica/"},
+  24: {"instagram": "https://www.instagram.com/kratijain9/"},
+  25: {"instagram": "https://www.instagram.com/chitty_chui/"},
+  26: {"website": "https://jayn.in/", "instagram": "https://www.instagram.com/jaynindia/"},
+  27: {"instagram": "https://www.instagram.com/kalatikawear/"},
+  28: {"website": "https://richaagoenka.com/", "instagram": "https://www.instagram.com/richagoenka/"},
+  29: {"website": "https://taroob.com/", "instagram": "https://www.instagram.com/taroobofficial/"},
+  30: {"website": "https://shopreye.in/", "instagram": "https://www.instagram.com/shop_reye/"},
+  31: {"website": "https://twentyseveneleven.in/", "instagram": "https://www.instagram.com/twentyseven_eleven_official/"},
+  32: {"instagram": "https://www.instagram.com/tanveerrimsaniya/"},
+  33: {"website": "https://pinkpeso.in/", "instagram": "https://www.instagram.com/pinkpeso_official/"},
+  34: {"website": "https://www.muskaanagarwal.com/", "instagram": "https://www.instagram.com/muskaanagarwal____/"},
+  35: {"instagram": "https://www.instagram.com/_elemonopee"},
+  36: {"instagram": "https://www.instagram.com/tavyajewellery"},
+  37: {"instagram": "https://www.instagram.com/tavyajewellery"},
+  38: {"instagram": "https://www.instagram.com/verobysakshiandanushka"},
+  39: {"instagram": "https://www.instagram.com/midushibajorialabel/"},
+  40: {"instagram": "https://www.instagram.com/neheraofficial"},
+  41: {"instagram": "https://www.instagram.com/poonam_gadia_/"},
+  42: {"website": "https://www.tamaklabel.in/", "instagram": "https://www.instagram.com/tamak.label/"},
+  43: {"instagram": "https://www.instagram.com/qno.studio/"},
+  44: {"instagram": "https://www.instagram.com/suman.thard"},
+  45: {"instagram": "https://www.instagram.com/poojawangcouture"},
+  46: {"instagram": "https://www.instagram.com/dhicontemporary"},
+  47: {"instagram": "https://www.instagram.com/virachi_official"},
+  48: {"website": "https://emenselabel.com/", "instagram": "https://www.instagram.com/eme_n_se/"},
+  49: {"website": "https://www.veerawear.com/", "instagram": "https://www.instagram.com/veera_wear/"},
+  50: {"website": "https://shimona.in/", "instagram": "https://www.instagram.com/shimona.in/"},
+  51: {"website": "https://neitri.in/", "instagram": "https://www.instagram.com/neitri_banarasi/"},
+  52: {"instagram": "https://www.instagram.com/labelpurvashapopli"},
+  53: {"instagram": "https://www.instagram.com/official.trouve/"},
+  54: {"website": "https://issastudio.com/collections", "instagram": "https://www.instagram.com/theissastudio/"},
+  55: {"instagram": "https://www.instagram.com/chambrayandco"},
+  56: {"instagram": "https://www.instagram.com/knottz.rs/"},
+  57: {"instagram": "https://www.instagram.com/ayushimodiofficial"},
+  58: {"instagram": "https://www.instagram.com/aur.anaash"},
+  59: {"website": "https://nishimadaanlabel.com/", "instagram": "https://www.instagram.com/nishimadaanlabel/"},
+  60: {"instagram": "https://www.instagram.com/rrr_ethnicwear/"},
+  61: {"instagram": "https://www.instagram.com/pujaagarwal_official"},
+  62: {"instagram": "https://www.instagram.com/houseofpashaofficial"},
+  63: {"website": "https://tashaindia.com/", "instagram": "https://www.instagram.com/tashaindiaofficial/"},
+  64: {"website": "https://silhouettehues.com/", "instagram": "https://www.instagram.com/silhouette_hues"},
+  65: {"instagram": "https://www.instagram.com/thelabel39"},
+  66: {"website": "https://thenighttrend.com/", "instagram": "https://www.instagram.com/thenighttrend/"},
+  67: {"instagram": "https://www.instagram.com/rosemarybybehno/"},
+  68: {"website": "https://ashwaryakhurana.com/", "instagram": "https://www.instagram.com/ashwaryakhuranaofficial/"},
+  69: {"instagram": "https://www.instagram.com/thecherrytreeofficial/"},
+  70: {"website": "https://pallashbyruchi.com/", "instagram": "https://www.instagram.com/pallashbyruchigrover/"},
+  71: {"instagram": "https://www.instagram.com/silveredgeindia"},
+  72: {"instagram": "https://www.instagram.com/smridhibajajofficial/"},
+  73: {"website": "https://parulandpreyanka.com/", "instagram": "https://www.instagram.com/parulandpreyankaofficial/"},
+  74: {"website": "https://abhisheksharmastudio.com/", "instagram": "https://www.instagram.com/abhisheksharmastudio/"},
+  75: {"website": "https://houseofexotique.com/", "instagram": "https://www.instagram.com/namrataarrajpal.official/"},
+  76: {"website": "https://tulua.co.in/", "instagram": "https://www.instagram.com/tuluaindia/"},
+  77: {"website": "https://medhabatra.com/", "instagram": "https://www.instagram.com/medhabatraofficial/"},
+  78: {"website": "https://www.daashindia.com/", "instagram": "https://www.instagram.com/daash_clothing/"},
+  79: {"website": "https://shopnirvair.com/pages/about-us", "instagram": "https://www.instagram.com/nirvair_bynainamakkar/"},
+  80: {"website": "https://anushkamahajan.com/", "instagram": "https://www.instagram.com/labelanushkamahajan/"},
+  81: {"website": "https://janyascloset.com/", "instagram": "https://www.instagram.com/niddhiguptacouture/"},
+  82: {"website": "https://houseofexotique.com/", "instagram": "https://www.instagram.com/namrataarrajpal.official/"},
+  83: {"website": "https://surabhiarya.com/", "instagram": "https://www.instagram.com/surabhiaryaofficial/"},
+  84: {"instagram": "https://www.instagram.com/preetiklerofficial/"},
+  85: {"website": "https://platinoiir.com/", "instagram": "https://www.instagram.com/platinoiir/"},
+  86: {"website": "https://shivyak.com/", "instagram": "https://www.instagram.com/shivyak__/"},
+  87: {"website": "https://chandiniandpriyanka.com/", "instagram": "https://www.instagram.com/chandinipriyankaofficial/"},
+  88: {"website": "https://kritimaggon.com/", "instagram": "https://www.instagram.com/kritimaggonofficial/"},
+  89: {"website": "https://maitai.co.in/", "instagram": "https://www.instagram.com/mai.taiofficial/"},
+  90: {"website": "https://karnaya.com/", "instagram": "https://www.instagram.com/karnayaclothing/"},
+  91: {"website": "https://radhikasoni.in/", "instagram": "https://www.instagram.com/radhikasoni.in/"},
+  92: {"instagram": "https://www.instagram.com/sanasalman07"},
+  93: {"website": "https://divishasharma.in/", "instagram": "https://www.instagram.com/divishasharmaofficial/"},
+  94: {"website": "https://mairakataria.com/", "instagram": "https://www.instagram.com/mairakataria/"},
+  95: {"website": "https://ourlove.in/", "instagram": "https://www.instagram.com/ourlovelabel/"},
+  96: {"website": "https://www.angsa.in/", "instagram": "https://www.instagram.com/angsaofficial/"},
+  'T1': {"website": "https://dagaaccessories.in/", "instagram": "https://www.instagram.com/19dagaaccessories"},
+  'T2': {"instagram": "https://www.instagram.com/occassionsbyrenu/"},
+  'T3': {"website": "https://tokachii.in/", "instagram": "https://www.instagram.com/tokachii.jp/"},
+  'T4': {"website": "https://sanctionedbyou.com/", "instagram": "https://www.instagram.com/sanctionedbyyou/"},
+  'T5': {"website": "https://www.loveporganics.com/", "instagram": "https://www.instagram.com/loveporganics/"},
+  'T6': {"instagram": "https://www.instagram.com/trinkettrunket/"},
+  'T7': {"website": "https://bechic.in/", "instagram": "https://www.instagram.com/bechicbysnehsandhu/"},
+  'T8': {"instagram": "https://www.instagram.com/amuletsbysherrykathuria/"},
+  'T9': {"website": "https://sitaaraworld.com/", "instagram": "https://www.instagram.com/sitaara_world/"},
+  'T10': {"website": "https://tadaccessories.com/", "instagram": "https://www.instagram.com/tadaccessories/"},
+  'T11': {"website": "https://www.thesanctumdesigns.com/", "instagram": "https://www.instagram.com/thesanctumdesign/"},
+  'T12': {"website": "https://truptimohta.com/", "instagram": "https://www.instagram.com/truptimohta.in/"},
+  'T13': {"website": "https://pariparilife.com/collections/all", "instagram": "https://www.instagram.com/pariparilife/"},
+  'T14': {"instagram": "https://www.instagram.com/priloved.in/"},
+  'T15': {"website": "https://beaumondeaccessories.com/", "instagram": "https://www.instagram.com/beaumondeaccessories/"},
+  'T16': {"website": "https://www.cinderellashoes.in/", "instagram": "https://www.instagram.com/cinderella_by_heenayusuf/"}
+};
+
+// Compiled 2-line bios — only where real "about" content was supplied. Left out
+// entirely where only contact/address info existed, rather than inventing brand story.
+const STALL_BIO = {
+  1: "Playful co-ords and statement dresses across evocative collections — from 'Enchanted Garden' to the 'Ibiza Series.' Effortlessly wearable, unmistakably fun.",
+  2: "Timeless shawls crafted in quiet luxury, with customization available — perfect for gifting. Based in Mumbai.",
+  3: "Handcrafted Indian and fusion wear — anarkali, co-ord and blazer sets, with collections like Whispers of Wonderland and Mogra.",
+  4: "Elevated prêt from Shradha — dresses, co-ord sets, shirts and denim or jacquard jackets.",
+  5: "Luxe festive pret that blends ethnic silhouettes with modern sensibility — flagship store in Kolkata's Bhowanipore.",
+  6: "Luxury prêt with a modern muse — co-ords, dresses and kurta sets for the woman who owns every room. Delhi.",
+  7: "A warm, whimsical label known for its easy, everyday-luxe pieces — worn as comfortably as its name suggests.",
+  8: "Fusion Indian fashion pairing contemporary silhouettes with timeless traditional embroidery. Flagship in Banjara Hills, Hyderabad.",
+  9: "An authentic Kashmiri textile house — hand-woven pashmina, Kani, Sozni and Jamawar for bridal, trousseau and heirloom dressing.",
+  10: "Contemporary opulent menswear from Delhi's Greater Kailash, also stocked at Pernia's, Aza and more.",
+  11: "A homegrown contemporary label for women blending modern silhouettes with Indian embroideries. Also at Aza, Pernia's and Ogaan.",
+  12: "Bespoke couture and occasion wear tailored to you, from Delhi.",
+  13: "The signature Isha Sawhney silhouette — handcrafted luxury for trousseau, indo-western and wedding wardrobes.",
+  14: "Contemporary label by designer Nitika Nayyar, unveiling seasonal lookbooks with a modern, directional edge.",
+  15: "Made-to-order, definitively structured clothing — now with a studio right here in Jubilee Hills, Hyderabad.",
+  16: "Stocked at leading multi-designer boutiques across India — from Aza Fashions to The Amaya Life.",
+  17: "Bridal, cocktail, and occasion wear designed to listen before it sketches — crafted between Mumbai and Hyderabad.",
+  18: "Party-ready dresses, co-ord sets, jumpsuits and pant suits with a playful, polished attitude.",
+  19: "Dresses, sarees, lehenga sets and blazers spanning indo-western and western occasion wear, from Saharanpur.",
+  20: "Kurta sets, lehengas, co-ords and dresses for festive and occasion dressing, made in Noida.",
+  21: "Feminine dresses, cape sets, kaftans and lehengas for festive and occasion wear.",
+  22: "Fusion and festive sets — kurta, jacket, kaftan and tunic sets crafted for occasions.",
+  23: "Dresses, gowns, anarkali and lehenga sets for occasion and festive wear.",
+  24: "Contemporary, easy-to-wear dresses, shirt dresses, co-ords and waistcoats for casual and everyday dressing.",
+  25: "Handbags, clutches, juttis and boho accessories, from New Friends Colony, Delhi.",
+  26: "Dresses, co-ords, sarees and lehenga sets in indo-western silhouettes for festive and occasion wear.",
+  27: "Kurtas, co-ords, tunics and jackets in fusion and festive styles.",
+  28: "A Chennai-rooted label bringing thoughtful, distinct design to contemporary fashion.",
+  29: "An expansive edit of pashmina shawls, embroidered capes, and festive co-ords for women, men, and every wedding gifting need.",
+  30: "Designed by Malika Bhasin Arora — a refined, contemporary edge for occasion dressing.",
+  31: "A Hyderabad-based label blending craft and contemporary sensibility, helmed by designer Surabhi Arya.",
+  32: "A Mumbai-rooted label with its own design language, based near Marine Drive's Chowpatty.",
+  33: "Bold, playful, unapologetically fun — Pink Peso adds a splash of colour to your closet.",
+  34: "Hyderabad-founded womenswear atelier (2025) by an Istituto Marangoni London graduate — sculptural, pattern-driven silhouettes balancing structure with softness.",
+  35: "Kidswear label — party dresses, skirt sets and co-ords for little ones' occasions.",
+  36: "Silver jewellery for every ritual — necklaces, earrings, bangles, maangtikka, nath and bridal pieces.",
+  37: "Silver jewellery for every ritual — necklaces, earrings, bangles, maangtikka, nath and bridal pieces.",
+  38: "Dresses, co-ord sets, jumpsuits and kurta sets for party, festive and occasion wear.",
+  39: "Sarees, lehenga, anarkali and sharara sets with indo-western and menswear options. By appointment, Kolkata.",
+  40: "Knitwear, shirts, jackets, coats and dresses in relaxed unisex and menswear silhouettes.",
+  41: "Where tradition meets contemporary style — a Kolkata label stocked across leading multi-designer stores like Anantam and Agashe.",
+  42: "Where timeless elegance meets mindful craftsmanship — western wear, co-ords, and indo-western fusion pieces.",
+  43: "Handcrafted Indian textiles exploring introspection and luxury — curious, syncretic, courageous.",
+  44: "Embroidered kurtas, anarkali and sharara sets for festive and occasion wear.",
+  45: "Couture for girls — gowns, party and birthday dresses, co-ord sets and kids' occasion wear.",
+  46: "Sustainable contemporary wear — dresses, jumpsuits, tunics, co-ords and jackets.",
+  47: "Sarees, lehenga and suit sets with embroidered indo-western details for wedding and festive wear.",
+  48: "Thoughtful, feminine silhouettes for every kind of occasion — from garden parties to evening elegance. Made with 'emense' love, from Indore.",
+  49: "A homegrown Kolkata label — tops, bottoms, dresses, co-ords and jumpsuits made to make every woman feel powerful.",
+  50: "Conscious, conceptual, classic and chic — premium womenswear from dresses and gowns to matching sets. Jaipur and New York.",
+  51: "Banarasi-rooted apparel weaving stories of grace and heritage, with kaftans and detailed craftsmanship.",
+  52: "Contemporary dresses, co-ord sets, skirts, pants and jackets for occasion and party wear.",
+  53: "Bespoke bedding, luxe baby collections, and redefined home essentials — quiet luxury for the home, from Ahmedabad to Hyderabad.",
+  54: "Contemporary Indian fashion from Hyderabad's own Issa Studio — Indo-western couture, bridal ensembles, and pret, founded by Chetana and Swathi.",
+  55: "Sustainable dresses, co-ord sets, sarees, kurtas and lehengas for festive and occasion wear.",
+  56: "Curated, redefined style by Rashmi & Swati Tantia — shipping across India.",
+  57: "Dresses, co-ords, sarees and formal shirts spanning indo-western, evening and contemporary wear.",
+  58: "Sustainable contemporary wear from Anāash — co-ords, jumpsuits, shirts, skirts and bags.",
+  59: "Thoughtful bridal, bridesmaid, indo-western and custom wear for the modern woman. Gachibowli, Hyderabad.",
+  60: "Handcrafted, customizable ethnic wear for festive, wedding, and everyday luxe — proudly Kolkata-made, shipped pan-India.",
+  61: "Sustainable contemporary wear — shirt dresses, blazers, co-ord sets and tunics.",
+  62: "Embroidered dresses, co-ords, jackets and skirts in indo-western silhouettes for festive and occasion wear.",
+  63: "Block-printed mulmul cotton meets contemporary silhouettes — easy, breathable fashion with a handcrafted soul, from Delhi.",
+  64: "Embroidered contemporary wear — dresses, blazers, co-ords, trousers and skirts for occasions.",
+  65: "Ethnic kurti sets, jackets, embellished shirts and lehenga choli.",
+  66: "Quiet luxury pret from Siliguri — started in nightwear by a former software engineer turned designer, now a pan-India favorite for textured, story-driven fashion.",
+  67: "Delightful hues in embroidered western and modern wear. New Delhi, shipping worldwide.",
+  68: "Effortless everyday staples with a festive edge — shirts, tops, and skirts from the 'Sands of Time' and Festive Season collections.",
+  69: "A clothing label crafting luxe fits for the modern wardrobe — also at Anantam, Anonym and Agashe.",
+  70: "Soft fits, strong craft — homegrown, handcrafted western and festive wear. Also stocked at Anantam, Agashe, and Azra.",
+  71: "Elegance with an edge — luxury silver gifts and décor for the modern home, from Hyderabad's Banjara Hills.",
+  72: "A Ludhiana-based label with a distinct, contemporary point of view.",
+  73: "Bold, unrestrained collections blending contemporary western aesthetics with traditional craftsmanship — affordable luxury.",
+  74: "Bold, festive-ready fashion for both men and women — from bandhgalas and sherwanis to red-carpet gowns and anarkalis.",
+  75: "A trousseau specialist spanning sarees, anarkalis, and lehengas to western tracksuits and jumpsuits — celebrity-favored, wedding-ready, from House of Exotique.",
+  76: "Timeless, effortless luxury resort wear and accessories for seasonless style. At Renasci, Studio Luxe and more.",
+  77: "Demi-couture built on storytelling and sustainability, with an ultra-feminine charm. Based at The Dhanmill, New Delhi.",
+  78: "Kolkata women's western wear with tailor-fit designs and customisation, including The Her Edit.",
+  79: "Bespoke attire for every age and occasion — dresses, co-ords, kurtas and anarkalis that empower individuality.",
+  80: "Rediscovering gota in contemporary Indian fashion — anarkalis, kaftans and menswear.",
+  81: "Luxury kids' occasionwear (1 month–14 years) with custom fits and no scratchy linings — loved by celebrity kids. Sister label @niddhiguptacouture covers womenswear.",
+  82: "A trousseau specialist spanning sarees, anarkalis, and lehengas to western tracksuits and jumpsuits — celebrity-favored, wedding-ready, from House of Exotique.",
+  83: "Indian and western designer wear from Gurugram, playing with antique Indian motifs in custom and ready-to-wear pieces.",
+  84: "Hand-embroidered heirloom ensembles for Indian occasion and festive wear. New Delhi by appointment, also at Ogaan.",
+  85: "Evening wear for crafted celebrations — cocktail gowns and jumpsuits in fresh, mood-driven hues. Latest collection: 'Bloom at Dusk.'",
+  86: "Classic sophistication with a modern edge — refined everyday luxury, tailor-made to set trends.",
+  87: "A statement in every silhouette — contemporary sarees, voguish dresses and stylish co-ords. Studio in Gurgaon.",
+  88: "A trousseau specialist — embellished kalidaars, draped sarees and indo-westerns with intricate hand embroidery.",
+  89: "A body-positive prêt label from New Delhi — dresses, co-ords, jumpsuits and overcoats.",
+  90: "Where tradition meets couture — poetic collections like 'Chameli,' 'Mogra,' and 'Velvet Stories' turn everyday ethnic wear into an outfit dream.",
+  91: "Luxury contemporary Indian wear ignited by modernity — anarkalis, gowns, and sharara sets that channel tough femininity.",
+  92: "Handmade, made-to-order pieces from Kolkata — helmed by the creative director behind @sana.world.",
+  93: "Made-to-order luxe occasionwear spanning bridal, pret, and fusion — from draped sarees and sharara sets to contemporary jumpsuits and capes.",
+  94: "Contemporary festive wear — sets, lehengas and sarees, handcrafted in Pune and shipped in about 30 working days.",
+  95: "A ready-to-wear label weaving dreams into shirts, dresses, co-ords and jumpsuits — modern heirlooms made with love.",
+  96: "Everyday luxury redefined — confident, easy shirts, dresses, co-ords and jumpsuits that celebrate the strength of women.",
+  'T1': "Western fashion jewellery in stainless steel — anti-tarnish and nickel-free. Made for colour, detail and self-expression.",
+  'T2': "Wedding and trousseau packing, baby announcements, tableware, home accessories and corporate gifts. Delhi.",
+  'T3': "A premium skincare brand bringing Japanese beauty innovation to India.",
+  'T4': "A quirky street-style curation of unisex clothing and kidswear — the same designs for kids and adults.",
+  'T5': "Botanical-based hair, face and body care and sleep rituals with gentle formulations.",
+  'T6': "Hampers, event decor and trousseau curation.",
+  'T7': "Luxury handcrafted clutches and accessories, founded in 2015 to fill India's gap in artisanal luxury bags.",
+  'T8': "Delhi's first evil-eye jewellery store — trending amulet bracelets, rings and earrings since 2014.",
+  'T9': "Handcrafted silver, alloy and 18k statement jewellery — bracelets, rings, earrings, necklaces and anklets.",
+  'T10': "Contemporary Indian semi-precious jewellery, handcrafted in Mumbai since 2006.",
+  'T11': "Artisanal homeware, dineware and serveware with personal styling guidance, by founder Suparna Dhaduvai.",
+  'T12': "Timeless handcrafted heirloom trinkets — necklaces, earrings, bracelets, rings and belts, each with a story.",
+  'T13': "From bridal flats to everyday espadrilles — footwear and accessories for every occasion, all under one covetable label.",
+  'T14': "One-of-a-kind vintage and antique costume jewelry, curated from the 1800s through the 1980s — a true treasure hunt, from Mumbai.",
+  'T15': "Eccentric, embellished bags and accessories in fine natural materials, by founder Kanika Chawla.",
+  'T16': "Handcrafted footwear from Mumbai since 2007 — from casual flats to embellished evening heels, blending Eastern and Western silhouettes."
+};
+
+// Specific POST or REEL permalinks confirmed so far.
+const STALL_POSTS = { 31: "https://www.instagram.com/p/C3CNV04yKIq/" };
+
+// Style/category tags — extracted from real category info supplied. Left out
+// entirely where no specific categories were given, rather than guessing.
+const STALL_TAGS = {
+  1: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops"],
+  2: ["Shawls & Pashmina", "Gifting & Home"],
+  3: ["Co-ords", "Anarkalis", "Jackets & Capes", "Indo-Western", "Handcrafted"],
+  4: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Western Wear"],
+  5: ["Festive Wear", "Ethnic Wear", "Pret & Contemporary"],
+  6: ["Dresses", "Kurta Sets", "Pret & Contemporary"],
+  7: ["Indo-Western", "Pret & Contemporary"],
+  8: ["Indo-Western", "Ethnic Wear", "Embroidered", "Pret & Contemporary"],
+  9: ["Shawls & Pashmina", "Bridal & Trousseau", "Ethnic Wear", "Embroidered", "Handcrafted"],
+  10: ["Menswear", "Pret & Contemporary"],
+  11: ["Pret & Contemporary", "Embroidered"],
+  12: ["Occasion Wear", "Couture", "Made-to-Order"],
+  13: ["Bridal & Trousseau", "Occasion Wear", "Indo-Western", "Handcrafted"],
+  14: ["Western Wear", "Ethnic Wear", "Embroidered"],
+  15: ["Pret & Contemporary", "Made-to-Order"],
+  16: ["Pret & Contemporary"],
+  17: ["Bridal & Trousseau", "Occasion Wear", "Couture", "Pret & Contemporary"],
+  18: ["Co-ords", "Dresses", "Jumpsuits", "Jackets & Capes", "Bottoms"],
+  19: ["Dresses", "Kurta Sets", "Sarees", "Lehengas", "Jackets & Capes"],
+  20: ["Co-ords", "Dresses", "Kurta Sets", "Sarees", "Lehengas"],
+  21: ["Co-ords", "Dresses", "Kurta Sets", "Sarees", "Lehengas"],
+  22: ["Co-ords", "Kurta Sets", "Jackets & Capes", "Shirts & Tops", "Festive Wear"],
+  23: ["Co-ords", "Dresses", "Gowns", "Kurta Sets", "Anarkalis"],
+  24: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Bottoms"],
+  25: ["Footwear", "Bags & Clutches", "Accessories"],
+  26: ["Co-ords", "Dresses", "Kurta Sets", "Anarkalis", "Sarees"],
+  27: ["Co-ords", "Dresses", "Kurta Sets", "Jackets & Capes", "Shirts & Tops"],
+  28: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Bottoms"],
+  29: ["Co-ords", "Dresses", "Jackets & Capes", "Menswear", "Shawls & Pashmina"],
+  30: ["Co-ords", "Dresses", "Gowns", "Sarees", "Lehengas"],
+  31: ["Co-ords", "Dresses", "Jumpsuits", "Jackets & Capes", "Bottoms"],
+  32: ["Dresses", "Kurta Sets", "Sarees", "Lehengas", "Bridal & Trousseau"],
+  33: ["Co-ords", "Dresses", "Jumpsuits", "Jackets & Capes", "Shirts & Tops"],
+  34: ["Shirts & Tops", "Bottoms"],
+  35: ["Co-ords", "Dresses", "Bottoms", "Kidswear", "Occasion Wear"],
+  36: ["Jewellery", "Accessories", "Bridal & Trousseau", "Festive Wear"],
+  37: ["Jewellery", "Accessories", "Bridal & Trousseau", "Festive Wear"],
+  38: ["Co-ords", "Dresses", "Kurta Sets", "Jumpsuits", "Jackets & Capes"],
+  39: ["Co-ords", "Dresses", "Kurta Sets", "Anarkalis", "Sarees"],
+  40: ["Dresses", "Jackets & Capes", "Shirts & Tops", "Bottoms", "Menswear"],
+  41: ["Dresses", "Kurta Sets", "Sarees", "Lehengas", "Shirts & Tops"],
+  42: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Indo-Western"],
+  43: ["Ethnic Wear", "Handcrafted"],
+  44: ["Dresses", "Kurta Sets", "Anarkalis", "Festive Wear", "Occasion Wear"],
+  45: ["Co-ords", "Dresses", "Gowns", "Kidswear", "Bridal & Trousseau"],
+  46: ["Co-ords", "Dresses", "Jumpsuits", "Jackets & Capes", "Shirts & Tops"],
+  47: ["Kurta Sets", "Sarees", "Lehengas", "Bridal & Trousseau", "Festive Wear"],
+  48: ["Co-ords", "Dresses", "Kurta Sets", "Jumpsuits", "Shirts & Tops"],
+  49: ["Co-ords", "Dresses", "Jumpsuits", "Shirts & Tops"],
+  50: ["Dresses", "Gowns", "Menswear"],
+  51: ["Made-to-Order"],
+  52: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Bottoms"],
+  53: ["Kidswear", "Gifting & Home"],
+  54: ["Co-ords", "Dresses", "Kurta Sets", "Sarees", "Lehengas"],
+  55: ["Co-ords", "Dresses", "Kurta Sets", "Sarees", "Lehengas"],
+  56: ["Pret & Contemporary"],
+  57: ["Co-ords", "Dresses", "Sarees", "Shirts & Tops", "Occasion Wear"],
+  58: ["Co-ords", "Dresses", "Jumpsuits", "Shirts & Tops", "Bottoms"],
+  59: ["Bridal & Trousseau", "Indo-Western", "Made-to-Order"],
+  60: ["Ethnic Wear", "Handcrafted", "Made-to-Order"],
+  61: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Bottoms"],
+  62: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Bottoms"],
+  63: ["Pret & Contemporary"],
+  64: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Bottoms"],
+  65: ["Kurta Sets", "Lehengas", "Jackets & Capes", "Shirts & Tops", "Ethnic Wear"],
+  66: ["Pret & Contemporary"],
+  67: ["Western Wear", "Embroidered"],
+  68: ["Shirts & Tops", "Bottoms", "Festive Wear"],
+  69: ["Pret & Contemporary"],
+  70: ["Co-ords", "Dresses", "Jackets & Capes", "Shirts & Tops", "Festive Wear"],
+  71: ["Gifting & Home", "Accessories"],
+  72: ["Pret & Contemporary"],
+  73: ["Western Wear", "Ethnic Wear", "Pret & Contemporary"],
+  74: ["Co-ords", "Dresses", "Gowns", "Kurta Sets", "Anarkalis"],
+  75: ["Co-ords", "Dresses", "Kurta Sets", "Anarkalis", "Sarees"],
+  76: ["Accessories"],
+  77: ["Occasion Wear", "Couture"],
+  78: ["Western Wear"],
+  79: ["Dresses", "Kurta Sets", "Anarkalis", "Occasion Wear", "Made-to-Order"],
+  80: ["Anarkalis", "Menswear", "Embroidered", "Pret & Contemporary"],
+  81: ["Dresses", "Gowns", "Kidswear", "Accessories", "Bridal & Trousseau"],
+  82: ["Co-ords", "Dresses", "Kurta Sets", "Anarkalis", "Sarees"],
+  83: ["Western Wear", "Handcrafted", "Made-to-Order", "Pret & Contemporary"],
+  84: ["Festive Wear", "Occasion Wear"],
+  85: ["Co-ords", "Dresses", "Gowns", "Jumpsuits", "Shirts & Tops"],
+  86: ["Pret & Contemporary"],
+  87: ["Co-ords", "Dresses", "Sarees", "Pret & Contemporary"],
+  88: ["Sarees", "Bridal & Trousseau", "Western Wear", "Embroidered"],
+  89: ["Dresses", "Jumpsuits", "Jackets & Capes"],
+  90: ["Pret & Contemporary"],
+  91: ["Gowns", "Kurta Sets", "Anarkalis", "Sarees", "Lehengas"],
+  92: ["Handcrafted", "Made-to-Order"],
+  93: ["Co-ords", "Kurta Sets", "Sarees", "Lehengas", "Jumpsuits"],
+  94: ["Sarees", "Lehengas", "Festive Wear", "Pret & Contemporary"],
+  95: ["Co-ords", "Dresses", "Jumpsuits", "Shirts & Tops", "Pret & Contemporary"],
+  96: ["Co-ords", "Dresses", "Jumpsuits", "Shirts & Tops", "Pret & Contemporary"],
+  'T1': ["Jewellery", "Accessories", "Western Wear"],
+  'T2': ["Gifting & Home", "Bridal & Trousseau"],
+  'T3': ["Skincare & Beauty", "Made-to-Order"],
+  'T4': ["Kidswear", "Accessories", "Pret & Contemporary"],
+  'T5': ["Skincare & Beauty"],
+  'T6': ["Gifting & Home", "Bridal & Trousseau"],
+  'T7': ["Bags & Clutches", "Accessories", "Gifting & Home", "Bridal & Trousseau", "Festive Wear"],
+  'T8': ["Jewellery"],
+  'T9': ["Jewellery", "Handcrafted"],
+  'T10': ["Jewellery", "Accessories", "Handcrafted", "Pret & Contemporary"],
+  'T11': ["Gifting & Home"],
+  'T12': ["Jewellery", "Accessories"],
+  'T13': ["Footwear", "Bags & Clutches", "Bridal & Trousseau", "Festive Wear", "Occasion Wear"],
+  'T14': ["Jewellery"],
+  'T15': ["Bags & Clutches", "Accessories"],
+  'T16': ["Footwear"]
+};
+
+function sizeClass(id) {
+  return id % 2 === 0 ? 'db-a' : 'db-b';
+}
+
+const TOP_ROW = ['TR','TR','TR',42,43,44,45,46,47,48,'TR','TR','FIRE_EXIT'];
+const RIGHT_COL = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+const LEFT_COL = [41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25];
+const BOTTOM_ROW = [24,23,'FIRE_EXIT',22,21,20,19,18,17,'EXIT_ENTRY'];
+
+const TAN_CLUSTERS = [[54,53,55,56],[52,51,57,58],[50,49,59,60]];
+const TAN_CLUSTERS_2 = [[66,65,67,68],[64,63,69,70],[62,61,71,72]];
+const MAROON_CLUSTERS = [[78,77,79,80],[76,75,81,82],[74,73,83,84]];
+const MAROON_CLUSTERS_2 = [[90,89,91,92],[88,87,93,94],[86,85,95,96]];
+const LOUNGE_LEFT_GRID = [['T6','T5','T4'],['T7','LABEL','T3'],['T8','T1','T2']];
+const LOUNGE_RIGHT_GRID = [['T14','T13','T12'],['T15','LABEL','T11'],['T16','T9','T10']];
+
+function tagStr(id) { return ((STALL_TAGS[id]||[]).join('|')).toLowerCase().replace(/"/g,''); }
+function renderStallCell(id) {
+  if (id === 'TR') return '<div class="stall trial">Trial<br>Room</div>';
+  const name = STALL_NAME[id];
+  const dot = STALL_DISCOUNT[id] ? '<span class="discount-dot"></span>' : '';
+  return '<div class="stall ' + sizeClass(id) + '" data-id="' + id + '" data-name="' + name.toLowerCase() + '" data-tags="' + tagStr(id) + '" onclick="openSheet(' + id + ')">' + id + dot + '</div>';
+}
+function renderLoungeGrid(grid) {
+  const upper = grid.slice(0, 2).flat().map(cell => cell === 'LABEL'
+    ? '<div class="lounge-label">Table<br>Space</div>'
+    : renderTableCell(cell)
+  ).join('');
+  const lower = grid[2].map(renderTableCell).join('');
+  return '<div class="lounge-subgrid">' + upper + '</div><div class="lounge-subgrid">' + lower + '</div>';
+}
+function renderTableCell(id) {
+  const name = TABLE_NAME[id];
+  const dot = STALL_DISCOUNT[id] ? '<span class="discount-dot"></span>' : '';
+  return '<div class="stall table" data-id="' + id + '" data-name="' + name.toLowerCase() + '" data-tags="' + tagStr(id) + '" onclick="openTableSheet(\'' + id + '\')">' + id + dot + '</div>';
+}
+function renderRowCell(item) {
+  if (item === 'FIRE_EXIT') return '<div class="landmark-badge">🚪 Fire Exit</div>';
+  if (item === 'EXIT_ENTRY') return '<div class="landmark-badge">↕ Exit / Entry</div>';
+  return renderStallCell(item);
+}
+function renderCluster(group, is4x3) {
+  return '<div class="cluster' + (is4x3 ? ' cluster-4x3' : '') + '">' + group.map(renderStallCell).join('') + '</div>';
+}
+function renderClusterRowWithPassages(clusters, is4x3) {
+  const vp = '<div class="passage-v"><span>2.5 Mtr Passage</span></div>';
+  return vp + clusters.map(c => renderCluster(c, is4x3)).join(vp) + vp;
+}
+
+function renderHall() {
+  const html =
+    '<div class="top-row">' + TOP_ROW.map(renderRowCell).join('') + '</div>' +
+    '<div class="left-col">' + LEFT_COL.map(renderStallCell).join('') + '</div>' +
+    '<div class="right-col">' + RIGHT_COL.map(renderStallCell).join('') + '</div>' +
+    '<div class="center-col">' +
+      '<div class="cluster-row">' + renderClusterRowWithPassages(TAN_CLUSTERS) + '</div>' +
+      '<div class="passage-h">2.5 Mtr Passage</div>' +
+      '<div class="cluster-row">' + renderClusterRowWithPassages(TAN_CLUSTERS_2) + '</div>' +
+      '<div class="passage-h">2.5 Mtr Passage</div>' +
+      '<div class="lounge-block">' +
+        '<div class="passage-v"><span>2.5 Mtr Passage</span></div>' +
+        '<div class="lounge-tables">' + renderLoungeGrid(LOUNGE_LEFT_GRID) + '</div>' +
+        '<div class="passage-ft">6 ft<br>Passage</div>' +
+        '<div class="lounge-center"><div class="lounge-title">Lounge Area</div><img class="lounge-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District logo"></div>' +
+        '<div class="passage-ft">6 ft<br>Passage</div>' +
+        '<div class="lounge-tables">' + renderLoungeGrid(LOUNGE_RIGHT_GRID) + '</div>' +
+        '<div class="passage-v"><span>2.5 Mtr Passage</span></div>' +
+      '</div>' +
+      '<div class="passage-h">2.5 Mtr Passage</div>' +
+      '<div class="cluster-row">' + renderClusterRowWithPassages(MAROON_CLUSTERS, true) + '</div>' +
+      '<div class="passage-h">2.5 Mtr Passage</div>' +
+      '<div class="cluster-row">' + renderClusterRowWithPassages(MAROON_CLUSTERS_2, true) + '</div>' +
+    '</div>' +
+    '<div class="bottom-row">' + BOTTOM_ROW.map(renderRowCell).join('') + '</div>';
+  document.getElementById('hallGrid').innerHTML = html;
+}
+
+const activeTags = new Set();
+function renderChips() {
+  const count = {};
+  Object.values(STALL_TAGS).forEach(a => a.forEach(t => count[t] = (count[t]||0)+1));
+  const tags = Object.keys(count).sort((a,b) => count[b]-count[a] || a.localeCompare(b));
+  document.getElementById('chipRow').innerHTML =
+    '<button class="chip clear" id="chipClear" onclick="clearTags()" style="display:none">✕ Clear</button>' +
+    tags.map(t => '<button class="chip" data-tag="' + t.replace(/"/g,'') + '" onclick="toggleTag(this.dataset.tag)">' + t + '</button>').join('');
+}
+function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); applyFilters(); }
+function clearTags() { activeTags.clear(); applyFilters(); }
+
+function applyFilters() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  let matchCount = 0, total = 0;
+  const sel = [...activeTags].map(t => t.toLowerCase());
+  document.querySelectorAll('.stall[data-id]').forEach(el => {
+    total++;
+    const id = el.getAttribute('data-id');
+    const name = el.getAttribute('data-name');
+    const tags = el.getAttribute('data-tags') || '';
+    const textMatch = !q || id.toLowerCase() === q || id.toLowerCase().includes(q) || name.includes(q) || tags.includes(q);
+    const tagList = tags.split('|');
+    const tagMatch = !sel.length || sel.some(s => tagList.includes(s));
+    const match = textMatch && tagMatch;
+    el.classList.toggle('dimmed', !match);
+    if (match) matchCount++;
+  });
+  document.querySelectorAll('#chipRow .chip[data-tag]').forEach(c => c.classList.toggle('on', activeTags.has(c.dataset.tag)));
+  const cc = document.getElementById('chipClear'); if (cc) cc.style.display = activeTags.size ? '' : 'none';
+  document.getElementById('resultCount').textContent = (q || sel.length) ? (matchCount + ' of ' + total + ' match') : (total + ' stalls + tables');
+}
+
+function renderCardTags(stallNo) {
+  const discount = STALL_DISCOUNT[stallNo];
+  const discountTag = discount ? '<span class="share-card-tag discount">' + discount + '% OFF</span>' : '';
+  const tags = STALL_TAGS[stallNo];
+  const styleTags = tags && tags.length
+    ? tags.map(t => '<span class="share-card-tag">' + t + '</span>').join('')
+    : '';
+  return discountTag + styleTags;
+}
+
+function extractDomain(url) {
+  try { return new URL(url).hostname; } catch (e) { return null; }
+}
+
+function setAvatar(name, websiteUrl, logoUrl) {
+  const el = document.getElementById('brandAvatar');
+  if (logoUrl) {
+    el.className = 'brand-avatar favicon';
+    el.innerHTML = '<img src="' + logoUrl + '" alt="" loading="lazy" onerror="this.parentElement.className=\'brand-avatar\'; this.parentElement.textContent=\'' + name.charAt(0).toUpperCase() + '\';">';
+    return;
+  }
+  const domain = websiteUrl ? extractDomain(websiteUrl) : null;
+  if (domain) {
+    el.className = 'brand-avatar favicon';
+    el.innerHTML = '<img src="https://www.google.com/s2/favicons?domain=' + domain + '&sz=128" alt="" loading="lazy" onerror="this.parentElement.className=\'brand-avatar\'; this.parentElement.textContent=\'' + name.charAt(0).toUpperCase() + '\';">';
+  } else {
+    el.className = 'brand-avatar';
+    el.textContent = name.charAt(0).toUpperCase();
+  }
+}
+
+function setGallery(images) {
+  const el = document.getElementById('cardGallery');
+  if (!images || !images.length) { el.innerHTML = ''; return; }
+  el.innerHTML = images.map(src =>
+    '<img src="' + src + '" alt="" loading="lazy" onerror="this.style.display=\'none\';">'
+  ).join('');
+}
+
+let igEmbedScriptLoaded = false;
+function loadInstagramEmbedScript(callback) {
+  if (igEmbedScriptLoaded) { callback(); return; }
+  const s = document.createElement('script');
+  s.src = 'https://www.instagram.com/embed.js';
+  s.async = true;
+  s.onload = () => { igEmbedScriptLoaded = true; callback(); };
+  document.body.appendChild(s);
+}
+
+function setEmbed(stallNo) {
+  const slot = document.getElementById('embedSlot');
+  const postUrl = STALL_POSTS[stallNo];
+  if (!postUrl) { slot.innerHTML = ''; return; }
+  slot.innerHTML = '<blockquote class="instagram-media" data-instgrm-permalink="' + postUrl + '" data-instgrm-version="14" style="margin:0; width:100%;"></blockquote>';
+  loadInstagramEmbedScript(() => {
+    if (window.instgrm) window.instgrm.Embeds.process();
+  });
+}
+
+function populateCard(stallNo, name) {
+  document.getElementById('cardStallNo').textContent = '#' + stallNo;
+  document.getElementById('cardName').textContent = name;
+  document.getElementById('cardBio').textContent = STALL_BIO[stallNo] || '';
+  document.getElementById('cardTags').innerHTML = renderCardTags(stallNo);
+  document.getElementById('cardLink').textContent = 'designdistricthyd.com/map?stall=' + stallNo;
+
+  const links = STALL_LINKS[stallNo] || {};
+  const instaBtn = document.getElementById('instaBtn');
+  const webBtn = document.getElementById('webBtn');
+
+  setAvatar(name, links.website, links.logo);
+  setGallery(links.images);
+  setEmbed(stallNo);
+
+  if (links.instagram) {
+    instaBtn.href = links.instagram;
+    instaBtn.removeAttribute('onclick');
+    instaBtn.target = '_blank'; instaBtn.rel = 'noopener';
+    instaBtn.style.display = '';
+  } else {
+    instaBtn.style.display = 'none';
+  }
+
+  if (links.website) {
+    webBtn.href = links.website;
+    webBtn.removeAttribute('onclick');
+    webBtn.target = '_blank'; webBtn.rel = 'noopener';
+    webBtn.style.display = '';
+  } else {
+    webBtn.style.display = 'none';
+  }
+}
+
+function openSheet(id) {
+  populateCard(id, STALL_NAME[id]);
+  document.getElementById('sheetBackdrop').classList.add('show');
+}
+function openTableSheet(id) {
+  populateCard(id, TABLE_NAME[id]);
+  document.getElementById('sheetBackdrop').classList.add('show');
+}
+function closeSheet() { document.getElementById('sheetBackdrop').classList.remove('show'); }
+
+function shareCard() {
+  const card = document.getElementById('shareCard');
+  const embedSlot = document.getElementById('embedSlot');
+  const btn = document.querySelector('.sheet-actions .primary');
+  const originalLabel = btn.textContent;
+  btn.textContent = 'Preparing image…';
+  btn.disabled = true;
+
+  // html2canvas can't render cross-origin iframes (Instagram embeds) — hide the
+  // embed for the capture only, restore it right after regardless of outcome.
+  const embedWasVisible = embedSlot.innerHTML.trim() !== '';
+  const prevDisplay = embedSlot.style.display;
+  if (embedWasVisible) embedSlot.style.display = 'none';
+
+  html2canvas(card, { backgroundColor: '#0A0A0A', scale: 2, useCORS: true }).then(canvas => {
+    if (embedWasVisible) embedSlot.style.display = prevDisplay;
+    canvas.toBlob(blob => {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      if (!blob) return;
+      const fileName = 'design-district-hyd-' + document.getElementById('cardStallNo').textContent.replace('#','') + '.png';
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          files: [file],
+          title: document.getElementById('cardName').textContent,
+          text: 'Check out this designer at Design District Hyd, Season III'
+        }).catch(() => {});
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = fileName;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+      }
+    }, 'image/png');
+  }).catch(() => {
+    if (embedWasVisible) embedSlot.style.display = prevDisplay;
+    btn.textContent = originalLabel;
+    btn.disabled = false;
+  });
+}
+
+function renderLegend() {
+  document.getElementById('legend').innerHTML =
+    '<div class="legend-item"><span class="legend-swatch" style="background:var(--db-blue)"></span>Stall</div>' +
+    '<div class="legend-item"><span class="legend-swatch" style="background:var(--table)"></span>Table space</div>' +
+    '<div class="legend-item"><span class="legend-swatch" style="background:var(--trial)"></span>Trial room</div>' +
+    '<div class="legend-item"><span class="legend-swatch" style="background:var(--gold); border-radius:50%;"></span>Discount available</div>';
+}
+
+renderHall();
+renderLegend();
+renderChips();
+applyFilters();
+
+// ── Random gold glint — sweeps across a random stall every so often ──
+function scheduleGlint() {
+  const delay = 1800 + Math.random() * 3200; // 1.8s–5s, feels random rather than metronomic
+  setTimeout(() => {
+    const cells = document.querySelectorAll('.stall[data-id]:not(.dimmed)');
+    if (cells.length) {
+      const cell = cells[Math.floor(Math.random() * cells.length)];
+      cell.classList.add('glint');
+      setTimeout(() => cell.classList.remove('glint'), 1200);
+    }
+    scheduleGlint();
+  }, delay);
+}
+scheduleGlint();
+</script>
+</body>
+</html>
