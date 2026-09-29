@@ -4,159 +4,392 @@
 
   <url>
     <loc>https://www.designdistricthyd.com/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-
-    <!-- Founder -->
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/Aishwarya-Agarwal-DDH-001x1.jpg</image:loc>
+      <image:loc>https://www.designdistricthyd.com/web/Aishwarya-Agarwal-DDH-001x1.webp</image:loc>
       <image:title>Aishwarya Agarwal — Founder and Creative Director, Design District Hyd</image:title>
-      <image:caption>Aishwarya Agarwal, founder of Design District Hyd, a curated luxury fashion showcase in Hyderabad</image:caption>
+      <image:caption>Aishwarya Agarwal, founder and creative director of Design District Hyd, Hyderabad</image:caption>
     </image:image>
-
-    <!-- Hero Slider -->
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(Anuragh%20Gupta)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd Season 1 — Anuragh Gupta at Park Hyatt Hyderabad</image:title>
-      <image:caption>Independent Indian designer Anuragh Gupta at Design District Hyd Season 1, Park Hyatt Hyderabad</image:caption>
+      <image:loc>https://www.designdistricthyd.com/Times-Business-Awards-2026.webp</image:loc>
+      <image:title>Design District Hyd — Times Business Awards Hyderabad 2026</image:title>
+      <image:caption>Design District Hyd recognised as Hyderabad&#x27;s Outstanding Curated Fashion Exhibition at the Times Business Awards Hyderabad 2026</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(5).jpg</image:loc>
-      <image:title>Design District Hyd — Curated Fashion Showcase Hyderabad</image:title>
-      <image:caption>Curated fashion showcase at Design District Hyd featuring India's finest independent designers</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20%20(Parul%20%26%20Preyanka).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(13).jpg</image:loc>
-      <image:title>Design District Hyd Season 2 — Fashion Collections Hyderabad 2026</image:title>
-      <image:caption>Season 2 fashion collections at Design District Hyd, Park Hyatt Hyderabad, 24 March 2026</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20(11).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(28).jpg</image:loc>
-      <image:title>Design District Hyd Season 1 — Parul and Priyanka at Park Hyatt Hyderabad</image:title>
-      <image:caption>Designers Parul and Priyanka showcasing at Design District Hyd Season 1, Hyderabad</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20(12).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-district-hyderabad-%20(31).jpg</image:loc>
-      <image:title>Design District Hyd by Aishwarya Agarwal — Season 1 Live Hyderabad</image:title>
-      <image:caption>Design District Hyd Season 1 curated fashion event by Aishwarya Agarwal, Park Hyatt Hyderabad 2025</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20(18).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(36)%20Platinoiir.jpg</image:loc>
-      <image:title>Design District Hyd — Park Hyatt Hyderabad Fashion Event</image:title>
-      <image:caption>Fashion showcase at Design District Hyd, Park Hyatt Hyderabad</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20(25).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(Parul-priyanka)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd Season 1 — Live Fashion Event Hyderabad 2025</image:title>
-      <image:caption>Live fashion showcase at Design District Hyd Season 1, Park Hyatt Hyderabad, September 2025</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20(43).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
-    <!-- Gallery -->
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(13).jpg</image:loc>
-      <image:title>Design District Hyd Season 1 — Opening Night Park Hyatt Hyderabad</image:title>
-      <image:caption>Opening night of Design District Hyd Season 1 by Aishwarya Agarwal, Park Hyatt Hyderabad, September 2025</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20(48).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(27).jpg</image:loc>
-      <image:title>Design District Hyd — Curated Designer Floor Season 1 Hyderabad</image:title>
-      <image:caption>Curated designer floor at Design District Hyd Season 1 featuring independent Indian fashion labels</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20(56).webp</image:loc>
+      <image:title>Design District Hyd Season 1 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 1 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(Parul%20Priyanka)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd — Indian Craft and Textile Detail Season 1</image:title>
-      <image:caption>Craft and textile detail at Design District Hyd Season 1 showcasing India's finest independent designers</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(4).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(19)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd — Luxury Fashion Experience Hyderabad</image:title>
-      <image:caption>The Design District Hyd experience — curated luxury fashion pop-up by Aishwarya Agarwal, Hyderabad</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(6).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(31).jpg</image:loc>
-      <image:title>Design District Hyd Season 1 — Abhishek Sharma and Monika Sagar</image:title>
-      <image:caption>Designer Abhishek Sharma and Monika Sagar at Design District Hyd Season 1, Park Hyatt Hyderabad</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(9).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(Parul-priyanka)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd Season 1 Live — Fashion Event Hyderabad 2025</image:title>
-      <image:caption>Live showcase at Design District Hyd Season 1, Hyderabad's premier curated independent fashion event</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(12).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(10)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd — Independent Designer Collections Season 1</image:title>
-      <image:caption>Independent Indian designer collections on display at Design District Hyd Season 1, Park Hyatt Hyderabad</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(14).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(17)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd Season 1 — Anaydara by Gunjan Hyderabad</image:title>
-      <image:caption>Designer Gunjan of Anaydara showcasing at Design District Hyd Season 1, Park Hyatt Hyderabad 2025</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(16).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(14)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd — Master Crafts Indian Fashion Hyderabad</image:title>
-      <image:caption>Master craftsmanship on display at Design District Hyd celebrating India's finest independent fashion labels</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(19).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-distric-hyderabad-by-aishwarya-agarwal-season-01-%20(11)%20(1).jpg</image:loc>
-      <image:title>Design District Hyd — Season 1 Experience Park Hyatt Hyderabad</image:title>
-      <image:caption>The Design District Hyd Season 1 experience at Park Hyatt Hyderabad, curated by Aishwarya Agarwal</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(24).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/DSC00460.jpg</image:loc>
-      <image:title>Design District Hyd Season 2 Teaser — Luxury Fashion Hyderabad 2026</image:title>
-      <image:caption>Season 2 teaser for Design District Hyd returning to Park Hyatt Hyderabad on 24 March 2026</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(25).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-district-hyderabad-%20(10).jpg</image:loc>
-      <image:title>Design District Hyd — Fashion Moments Season 1 Hyderabad</image:title>
-      <image:caption>Memorable fashion moments from Design District Hyd Season 1, Park Hyatt Hyderabad, September 2025</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(27).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-district-hyderabad-%20(25).jpg</image:loc>
-      <image:title>Design District Hyd — Curated Fashion Experience Season 1</image:title>
-      <image:caption>Curated fashion experience at Design District Hyd Season 1, Park Hyatt Hyderabad 2025</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(32).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
-
     <image:image>
-      <image:loc>https://ik.imagekit.io/mcjoint/Design%20District/design-district-hyderabad-%20(21).jpg</image:loc>
-      <image:title>Design District Hyd — Season 1 Showcase Experience Hyderabad</image:title>
-      <image:caption>The immersive showcase experience at Design District Hyd Season 1 curated by Aishwarya Agarwal</image:caption>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(36).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
     </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(39).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(43).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(44).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(50).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(52).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(53).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(54).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(56).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(62).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(64).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(68).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(69).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(72).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(76).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(80).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(81).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(87).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(88).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(89).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(94).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(99).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(102).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(106).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(107).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(113).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(115).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(118).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(120).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20(123).webp</image:loc>
+      <image:title>Design District Hyd Season 2 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 2 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(13).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(15).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(16).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(28).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(29).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(30).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(4).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(44).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(62).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(77).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(8).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(84).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(91).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20(93).webp</image:loc>
+      <image:title>Design District Hyd Season 3 — curated fashion showcase Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 fashion and designer showcase in Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png</image:loc>
+      <image:title>Design District Hyd logo</image:title>
+      <image:caption>Official Design District Hyd logo</image:caption>
+    </image:image>
+  </url>
 
+  <url>
+    <loc>https://www.designdistricthyd.com/s3-map</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/Main%20images/design-district-s3-map-preview.webp</image:loc>
+      <image:title>Design District Hyd Season 3 floor plan — Hall 4 Novotel Hyderabad</image:title>
+      <image:caption>Design District Hyd Season 3 Main Hall floor plan, Hall 4, Novotel Hyderabad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png</image:loc>
+      <image:title>Design District Hyd logo</image:title>
+      <image:caption>Official Design District Hyd logo</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.designdistricthyd.com/vip-rsvp</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png</image:loc>
+      <image:title>Design District Hyd logo</image:title>
+      <image:caption>Official Design District Hyd logo</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://www.designdistricthyd.com/dd-apply.html</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png</image:loc>
+      <image:title>Design District Hyd logo</image:title>
+      <image:caption>Official Design District Hyd logo</image:caption>
+    </image:image>
   </url>
 
   <url>
     <loc>https://www.designdistricthyd.com/design_district_s3_booking.html</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.designdistricthyd.com/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png</image:loc>
+      <image:title>Design District Hyd logo</image:title>
+      <image:caption>Official Design District Hyd logo</image:caption>
+    </image:image>
   </url>
 
 </urlset>
