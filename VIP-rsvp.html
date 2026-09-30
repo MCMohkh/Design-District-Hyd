@@ -121,15 +121,37 @@ body {
 @keyframes curtainOpenUp { to { transform: translateY(-100%); } }
 @keyframes curtainOpenDown { to { transform: translateY(100%); } }
 
-/* ══════════ TOP BAR ══════════ */
-.topbar { max-width: 460px; margin: 0 auto; padding: 1.6rem 1.5rem 0; }
-.home-link {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--teal-light); text-decoration: none; opacity: 0.85; transition: opacity 0.3s;
+/* ══════════ NAV (matches home page) ══════════ */
+nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 4rem; }
+nav::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.75) 0%, transparent 100%); pointer-events: none; z-index: -1; }
+.nav-logo-img { height: 90px; width: auto; display: block; filter: invert(1); }
+.logo-mark { width: 38px; height: 38px; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); text-decoration: none; opacity: 0.65; transition: opacity 0.3s; }
+.nav-links a:hover { opacity: 1; }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; z-index: 150; }
+.hamburger span { width: 24px; height: 1px; background: var(--cream); transition: all 0.3s; display: block; }
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.mobile-nav { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.97); z-index: 120; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+.mobile-nav.open { display: flex; }
+.mobile-nav a { font-size: 0.7rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--cream); text-decoration: none; opacity: 0.7; transition: opacity 0.3s; }
+.mobile-nav a:hover { opacity: 1; }
+
+/* nav is fixed, so push page content below it */
+body { padding-top: 6.5rem; }
+/* the nav already carries the logo, so skip the duplicate above the title */
+.header-mark { display: none; }
+
+@media (max-width: 900px) {
+  nav { padding: 1.5rem 2rem; }
+  .nav-logo-img { height: 64px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  body { padding-top: 5rem; }
 }
-.home-link:hover { opacity: 1; }
-.home-link svg { width: 11px; height: 11px; flex-shrink: 0; }
 
 /* ══════════ HEADER ══════════ */
 .header {
@@ -290,11 +312,36 @@ body {
   </div>
 </div>
 
-<div class="topbar">
-  <a class="home-link" href="https://www.designdistricthyd.com/">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3L4.5 8l5 5"/></svg>
-    Design District Hyd
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="logo-mark">
+      <img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png"
+        alt="Design District Hyd Logo" class="nav-logo-img">
+    </div>
   </a>
+  <ul class="nav-links">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#past">Season 01</a></li>
+    <li><a href="/#season-2">Season 02</a></li>
+    <li><a href="/#season-3">Season 03</a></li>
+    <li><a href="/#collabs">Designers</a></li>
+    <li><a href="/#testimonials">Voices</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="/#about">About</a>
+  <a href="/#past">Season 01</a>
+  <a href="/#season-2">Season 02</a>
+  <a href="/#season-3">Season 03</a>
+  <a href="/#collabs">Designers</a>
+  <a href="/#testimonials">Voices</a>
+  <a href="#formCard" onclick="toggleMenu()" style="color:var(--teal);opacity:1;">RSVP — Season 3</a>
 </div>
 
 <div class="header">
@@ -393,6 +440,15 @@ setTimeout(() => {
   const c = document.getElementById('curtain');
   if (c) c.style.display = 'none';
 }, 1600);
+
+// ── MOBILE MENU (same as home page) ──
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('hamburger').classList.toggle('open', menuOpen);
+  document.getElementById('mobileNav').classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
 let selectedTier = 'VIP';
