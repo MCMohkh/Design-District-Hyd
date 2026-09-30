@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RSVP — Design District Hyd, Season III</title>
 
-<link rel="icon" type="image/png" href="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png">
+<link rel="icon" type="image/png" href="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png">
 <meta name="theme-color" content="#0A0A0A">
      
 <!-- Image header code -->
@@ -65,13 +65,16 @@ src="https://www.facebook.com/tr?id=1055361800740013&ev=PageView&noscript=1"
 wigzo("configure", "MPgUgko3R5SR_aNBn96HKA");
 </script>
 
+<link rel="preload" href="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" as="image">
+<link rel="preload" href="/Blanc-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 @font-face {
   font-family: 'Blanc';
-  src: url('https://ik.imagekit.io/mcjoint/Design%20District/Blanc-Regular.woff2') format('woff2');
+  src: url('/Blanc-Regular.woff2') format('woff2'),
+       url('/Blanc-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -106,20 +109,55 @@ body {
   overflow-x: hidden;
 }
 
-/* ══════════ CURTAIN REVEAL ══════════ */
+/* ══════════ SPLASH / CURTAIN REVEAL ══════════
+   Sequence: logo fades in first -> wordmark -> tagline -> centre layer fades
+   out -> curtain halves part. Total ~2.6s. */
 .curtain { position: fixed; inset: 0; z-index: 999; display: flex; flex-direction: column; pointer-events: none; }
 .curtain-panel {
   flex: 1; position: relative; overflow: hidden;
   background:
     repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 15px),
     linear-gradient(160deg, var(--off-black), var(--black) 60%);
-  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.6rem;
-  animation: curtainHold 0.55s forwards;
+  animation-timing-function: cubic-bezier(.7,0,.2,1);
+  animation-duration: 0.95s;
+  animation-delay: 1.6s;
+  animation-fill-mode: forwards;
 }
-.curtain-left { animation-name: curtainOpenUp; animation-delay: 0.55s; animation-duration: 0.95s; animation-timing-function: cubic-bezier(.7,0,.2,1); animation-fill-mode: forwards; border-bottom: 1px solid rgba(196,163,90,0.25); }
-.curtain-right { animation-name: curtainOpenDown; animation-delay: 0.55s; animation-duration: 0.95s; animation-timing-function: cubic-bezier(.7,0,.2,1); animation-fill-mode: forwards; }
-@keyframes curtainOpenUp { to { transform: translateY(-100%); } }
+.curtain-left  { animation-name: curtainOpenUp;   border-bottom: 1px solid rgba(196,163,90,0.25); }
+.curtain-right { animation-name: curtainOpenDown; }
+@keyframes curtainOpenUp   { to { transform: translateY(-100%); } }
 @keyframes curtainOpenDown { to { transform: translateY(100%); } }
+
+/* centre layer sits above both halves so nothing gets sliced when they part */
+.curtain-center {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem;
+  text-align: center; padding: 0 1.5rem;
+  animation: splashOut 0.3s ease 1.55s forwards;
+}
+.curtain-mark {
+  height: 120px; width: auto; display: block; filter: invert(1);
+  opacity: 0; transform: scale(0.92);
+  animation: splashIn 0.7s cubic-bezier(.2,.7,.2,1) 0.1s forwards;
+}
+.curtain-word {
+  font-size: 0.7rem; letter-spacing: 0.55em; text-transform: uppercase; color: var(--cream);
+  padding-left: 0.55em; /* balances trailing letter-spacing so it centres optically */
+  opacity: 0; animation: splashIn 0.6s ease 0.6s forwards;
+}
+.curtain-tagline {
+  font-family: 'Great Vibes', cursive; font-size: 1.7rem; line-height: 1.2; color: var(--gold);
+  opacity: 0; animation: splashIn 0.6s ease 0.9s forwards;
+}
+@keyframes splashIn  { to { opacity: 1; transform: none; } }
+@keyframes splashOut { to { opacity: 0; } }
+
+@media (max-width: 900px) { .curtain-mark { height: 96px; } .curtain-tagline { font-size: 1.45rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .curtain-mark, .curtain-word, .curtain-tagline { animation-duration: 0.01s; animation-delay: 0s; }
+  .curtain-panel { animation-delay: 0.4s; }
+  .curtain-center { animation-delay: 0.35s; }
+}
 
 /* ══════════ NAV (matches home page) ══════════ */
 nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 4rem; }
@@ -301,14 +339,14 @@ body { padding-top: 6.5rem; }
 </head>
 <body>
 
-<!-- Curtain reveal — parts on load, echoing the event's own key art -->
+<!-- Splash: logo appears first, then the curtain parts -->
 <div class="curtain" id="curtain">
-  <div class="curtain-panel curtain-left">
-    <img class="curtain-mark" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="">
+  <div class="curtain-panel curtain-left"></div>
+  <div class="curtain-panel curtain-right"></div>
+  <div class="curtain-center">
+    <img class="curtain-mark" src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd">
     <div class="curtain-word">Design District</div>
-  </div>
-  <div class="curtain-panel curtain-right">
-    <div class="curtain-tagline">Something exceptional<br>is coming</div>
+    <div class="curtain-tagline">Something exceptional is coming</div>
   </div>
 </div>
 
@@ -316,7 +354,7 @@ body { padding-top: 6.5rem; }
 <nav>
   <a href="/" class="nav-logo">
     <div class="logo-mark">
-      <img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png"
+      <img src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png"
         alt="Design District Hyd Logo" class="nav-logo-img">
     </div>
   </a>
@@ -345,7 +383,7 @@ body { padding-top: 6.5rem; }
 </div>
 
 <div class="header">
-  <img class="header-mark" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District">
+  <img class="header-mark" src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District">
   <div class="header-eyebrow">Design District Hyd</div>
   <h1>Season III</h1>
   <div class="header-rule"></div>
@@ -439,7 +477,7 @@ body { padding-top: 6.5rem; }
 setTimeout(() => {
   const c = document.getElementById('curtain');
   if (c) c.style.display = 'none';
-}, 1600);
+}, 2700);
 
 // ── MOBILE MENU (same as home page) ──
 let menuOpen = false;
