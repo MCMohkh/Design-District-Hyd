@@ -214,7 +214,7 @@ body {
     <div class="section-title">Phone number or Visitor ID</div>
     <div class="input-row">
       <input type="text" class="manual-input" id="manualInput"
-        placeholder="9876543210  or  DDH-142" inputmode="text" autocomplete="off">
+        placeholder="9876543210  or  DDH-S3-XXXX" inputmode="text" autocomplete="off">
       <button class="go-btn" onclick="manualLookup()">Go</button>
     </div>
   </div>
@@ -237,16 +237,46 @@ let scanning      = false;
 let lastScanned   = '';
 let lastScannedAt = 0;
 let scanHistory   = [];
+let busy          = false;
 
 // ── API ────────────────────────────────────
+const REQUEST_TIMEOUT_MS = 20000;
+
+class ApiError extends Error {
+  constructor(kind, message) { super(message); this.kind = kind; }
+}
+
 async function callAPI(payload) {
-  const res  = await fetch(SCRIPT_URL, {
-    method: 'POST',
-    body: JSON.stringify(payload),
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    redirect: 'follow'
-  });
-  return JSON.parse(await res.text());
+  const ctrl  = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
+  let res, text;
+  try {
+    res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      redirect: 'follow',
+      signal: ctrl.signal
+    });
+    text = await res.text();
+  } catch (e) {
+    throw new ApiError('network',
+      e.name === 'AbortError' ? 'Server took too long to respond — try again'
+                              : 'Could not reach server — check your internet');
+  } finally {
+    clearTimeout(timer);
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    // Apps Script returns an HTML page when the script crashes, isn't deployed
+    // for "Anyone", or the action doesn't exist. Surface that text so the real
+    // cause is visible instead of a generic "Connection Error".
+    const snippet = text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+    console.error('Non-JSON reply from Apps Script (HTTP ' + res.status + '):', text.slice(0, 800));
+    throw new ApiError('server', 'Server error: ' + (snippet || 'empty reply (HTTP ' + res.status + ')'));
+  }
 }
 
 // ── Scanner toggle ─────────────────────────
@@ -259,6 +289,13 @@ async function startScanner() {
   btn.disabled = true;
   btn.textContent = 'Starting camera...';
 
+  if (typeof Html5Qrcode === 'undefined') {
+    btn.className = 'scan-toggle start';
+    btn.textContent = '▶ Start Camera Scanner';
+    btn.disabled = false;
+    showResult('error', '📷', 'Scanner not loaded', '', '', 'Camera library failed to load — check internet and reload the page');
+    return;
+  }
   html5QrCode = new Html5Qrcode('reader');
 
   try {
@@ -296,10 +333,11 @@ async function onQRDetected(text) {
   const now = Date.now();
   // Debounce: ignore same code within 5 seconds
   if (text === lastScanned && now - lastScannedAt < 5000) return;
+  if (busy) return;
   lastScanned   = text;
   lastScannedAt = now;
 
-  await processEntry(text.trim());
+  await processEntry(text);
 }
 
 // ── Manual input ───────────────────────────
@@ -314,42 +352,72 @@ function manualLookup() {
   processEntry(val);
 }
 
-// ── Core entry logic ───────────────────────
-async function processEntry(value) {
-  const isId     = /^DDH-S3-[A-Z0-9]+$/i.test(value);
-  const isPhone  = /^\d{10}$/.test(value);
-  const action   = isId ? 'scanById' : isPhone ? 'scanByPhone' : null;
+// ── Work out what a QR / typed value is ────
+// Accepts: a bare ID (DDH-S3-XXXX), a 10-digit phone, or a pass URL such as
+// https://…/pass.html?reg=DDH-S3-XXXX that the pass page may have encoded.
+function parseScanValue(raw) {
+  const text = String(raw || '').trim();
+  if (!text) return null;
 
-  if (!action) {
-    showResult('error', '✗', 'Invalid Input', '', '', `"${value}" is not a valid ID or phone number`);
-    return;
+  const idMatch = text.match(/DDH-S3-[A-Z0-9-]+/i);
+  if (idMatch) return { action: 'scanById', value: idMatch[0].toUpperCase() };
+
+  if (/^[\d\s+\-()]+$/.test(text)) {
+    const digits = text.replace(/\D/g, '');
+    if (digits.length >= 10) return { action: 'scanByPhone', value: digits.slice(-10) };
   }
 
   try {
-    const result = await callAPI({ action, value });
-    const v = result.data;
+    const u = new URL(text);
+    const reg = u.searchParams.get('reg') || u.searchParams.get('id');
+    if (reg) return { action: 'scanById', value: reg.trim().toUpperCase() };
+    const ph = (u.searchParams.get('phone') || '').replace(/\D/g, '');
+    if (ph.length >= 10) return { action: 'scanByPhone', value: ph.slice(-10) };
+  } catch (e) { /* not a URL */ }
 
-    if (result.success) {
-      const isNew = v.type !== 'Returning';
+  return null;
+}
+
+// ── Core entry logic ───────────────────────
+async function processEntry(raw) {
+  const parsed = parseScanValue(raw);
+  if (!parsed) {
+    lastScanned = '';
+    showResult('error', '✗', 'Invalid Input', '', '', `"${String(raw).slice(0, 60)}" is not a valid ID or phone number`);
+    return;
+  }
+
+  busy = true;
+  try {
+    const result = await callAPI({ action: parsed.action, value: parsed.value });
+    const v = result && result.data;
+
+    if (result && result.success) {
+      const isNew = !v || v.type !== 'Returning';
       showResult(
         'success', '✓',
-        v.name,
-        `${v.id}  ·  ${isNew ? '✨ New' : '🎉 Returning'}`,
-        v.area || '',
+        (v && v.name) || parsed.value,
+        `${(v && v.id) || parsed.value}  ·  ${isNew ? '✨ New' : '🎉 Returning'}`,
+        (v && v.area) || '',
         'Entry confirmed — welcome!'
       );
-      addHistory(v.name, v.id, 'ok');
+      addHistory((v && v.name) || parsed.value, (v && v.id) || parsed.value, 'ok');
       refreshStats();
-    } else if (result.message === 'Already scanned in') {
-      showResult('already', '⚠️', v?.name || '—', v?.id || value, v?.area || '', 'Already entered — duplicate scan');
-      addHistory(v?.name || value, v?.id || '—', 'dup');
+    } else if (result && result.message === 'Already scanned in') {
+      showResult('already', '⚠️', v?.name || '—', v?.id || parsed.value, v?.area || '', 'Already entered — duplicate scan');
+      addHistory(v?.name || parsed.value, v?.id || '—', 'dup');
     } else {
-      showResult('error', '✗', 'Not Found', '', value, result.message);
-      addHistory(value, '—', 'err');
+      lastScanned = ''; // allow an immediate re-scan after a miss
+      showResult('error', '✗', 'Not Found', '', parsed.value, (result && result.message) || 'No matching registration');
+      addHistory(parsed.value, '—', 'err');
     }
   } catch (err) {
     console.error(err);
-    showResult('error', '✗', 'Connection Error', '', '', 'Could not reach server — check your internet');
+    lastScanned = ''; // let the volunteer retry the same QR straight away
+    const title = err.kind === 'server' ? 'Server Error' : 'Connection Error';
+    showResult('error', '✗', title, '', parsed.value, err.message || 'Something went wrong — try again');
+  } finally {
+    busy = false;
   }
 }
 
@@ -369,6 +437,10 @@ function showResult(type, icon, name, id, area, msg) {
 }
 
 // ── History ────────────────────────────────
+function esc(t) {
+  return String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 function addHistory(name, id, status) {
   const time = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
   scanHistory.unshift({ name, id, time, status });
@@ -385,8 +457,8 @@ function renderHistory() {
   el.innerHTML = scanHistory.map(s => `
     <div class="scan-item">
       <div>
-        <div class="si-name">${s.name}</div>
-        <div class="si-sub">${s.id} &middot; ${s.time}</div>
+        <div class="si-name">${esc(s.name)}</div>
+        <div class="si-sub">${esc(s.id)} &middot; ${esc(s.time)}</div>
       </div>
       <span class="si-badge ${s.status}">${s.status === 'ok' ? '✓ In' : s.status === 'dup' ? '⚠ Dup' : '✗ Err'}</span>
     </div>`).join('');
