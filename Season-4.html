@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — Design District Hyd · Season 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;--off-black:#111110;--teal:#7AADA8;--teal-dark:#4E8A85;
+  --teal-light:#B0CEC9;--cream:#F4EEE4;--warm-white:#FAF7F2;
+  --terracotta:#C67B52;--gold:#C4A35A;--muted:#8A8070;--charcoal:#1E1D1A;
+  --line:rgba(122,173,168,0.15);--line-strong:rgba(122,173,168,0.28);
+}
+html{scroll-behavior:smooth}
+body{background:var(--off-black);color:var(--warm-white);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:column}
+header{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+header img{height:28px;filter:invert(1) brightness(0.9)}
+header nav a{font-size:11px;letter-spacing:0.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s}
+header nav a:hover{color:var(--teal)}
+.hero{padding:60px 48px 40px;max-width:720px}
+.season-tag{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.season-tag::after{content:'';flex:1;height:1px;background:var(--line-strong);max-width:120px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5.5vw,60px);line-height:1.05;letter-spacing:-0.01em;margin-bottom:18px;color:var(--warm-white)}
+.hero h1 em{font-style:italic;color:var(--teal-light)}
+.hero p{font-size:14px;line-height:1.8;color:var(--muted);max-width:440px}
+.form-wrap{flex:1;padding:0 48px 80px;max-width:760px}
+.divider{display:flex;align-items:center;gap:14px;margin:40px 0 28px}
+.divider span{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);white-space:nowrap}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.divider::before{max-width:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 32px;margin-bottom:22px}
+.grid.one{grid-template-columns:1fr}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted)}
+.field label .req{color:var(--teal);margin-left:2px}
+.field input,.field textarea,.field select{background:transparent;border:none;border-bottom:1px solid var(--line-strong);padding:10px 0;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;color:var(--warm-white);outline:none;transition:border-color 0.2s;width:100%;border-radius:0;-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237AADA8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;padding-right:22px;cursor:pointer}
+.field select option{background:#1a1a18;color:var(--warm-white)}
+.field input:focus,.field textarea:focus,.field select:focus{border-bottom-color:var(--teal)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(250,247,242,0.18)}
+.field textarea{resize:vertical;min-height:80px}
+.insta-wrap{display:flex;align-items:flex-end;border-bottom:1px solid var(--line-strong);transition:border-color 0.2s}
+.insta-wrap:focus-within{border-bottom-color:var(--teal)}
+.insta-wrap .prefix{font-size:15px;font-weight:300;color:var(--muted);padding:10px 4px 10px 0}
+.insta-wrap input{border:none!important;padding-left:0;flex:1}
+.field.has-error input,.field.has-error .insta-wrap,.field.has-error select{border-bottom-color:var(--terracotta)!important}
+.form-error{font-size:11px;color:var(--terracotta);margin-top:3px;display:none}
+.field.has-error .form-error{display:block}
+.field-hint{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:0.03em}
+/* Category pills */
+.cat-pills{display:flex;flex-wrap:wrap;gap:8px;padding:4px 0}
+.cat-pill{padding:7px 16px;border:1px solid var(--line-strong);border-radius:20px;font-size:12px;color:var(--muted);cursor:pointer;transition:all 0.15s;background:transparent;font-family:'DM Sans',sans-serif;font-weight:300;letter-spacing:0.04em}
+.cat-pill:hover{border-color:var(--teal);color:var(--teal-light)}
+.cat-pill.active{background:rgba(122,173,168,0.12);border-color:var(--teal);color:var(--teal-light)}
+/* Season checkboxes */
+.season-checks{display:flex;flex-direction:column;gap:12px;padding:4px 0}
+.season-item{display:flex;align-items:center;gap:12px;cursor:pointer}
+.season-item input[type=checkbox]{display:none}
+.season-box{width:16px;height:16px;border:1px solid var(--line-strong);border-radius:2px;flex-shrink:0;position:relative;transition:all 0.15s}
+.season-item:hover .season-box{border-color:var(--teal)}
+.season-item input:checked+.season-box{background:var(--teal);border-color:var(--teal)}
+.season-item input:checked+.season-box::after{content:'';position:absolute;left:4px;top:1px;width:6px;height:9px;border:1.5px solid #0A0A0A;border-top:none;border-left:none;transform:rotate(40deg)}
+.season-text{font-size:14px;font-weight:300;color:var(--warm-white)}
+.season-meta{font-size:11px;color:var(--muted);margin-left:2px}
+/* Submit */
+.submit-row{margin-top:48px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.btn-submit{background:var(--teal);color:var(--black);border:none;padding:15px 40px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;display:inline-flex;align-items:center;gap:10px}
+.btn-submit:hover{background:var(--teal-light)}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed}
+.submit-note{font-size:12px;color:var(--muted);line-height:1.7;max-width:260px}
+.spinner{display:none;width:13px;height:13px;border:1.5px solid rgba(10,10,10,0.2);border-top-color:var(--black);border-radius:50%;animation:spin 0.7s linear infinite}
+.btn-submit.loading .spinner{display:inline-block}
+.btn-submit.loading .btn-text{opacity:0.7}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Success */
+#success-state{display:none;padding:80px 48px;max-width:560px}
+#success-state.visible{display:block}
+.check-ring{width:44px;height:44px;border:1px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:28px;color:var(--teal);font-size:18px}
+#success-state h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:36px;margin-bottom:16px}
+#success-state h2 em{font-style:italic;color:var(--teal-light)}
+#success-state p{font-size:14px;line-height:1.8;color:var(--muted)}
+@media(max-width:640px){
+  header,.hero,.form-wrap{padding-left:20px;padding-right:20px}
+  .grid{grid-template-columns:1fr}
+  .hero{padding-top:44px}
+}
+
+/* ══════════ SHARED SITE FOOTER ══════════ */
+.ddf { --f-bg:#111110; --f-muted:#8A8070; --f-teal:#7AADA8; --f-teal-light:#B0CEC9; --f-cream:#F4EEE4;
+  background:var(--f-bg); border-top:1px solid rgba(122,173,168,0.15); padding:4rem; display:grid; grid-template-columns:1fr auto 1fr; gap:2rem; align-items:center;
+  font-family:'Tenor Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin-top:auto; width:100%; text-align:left; color:var(--f-muted); }
+.ddf * { box-sizing:border-box; }
+.ddf-left { display:flex; flex-direction:column; gap:0.6rem; }
+.ddf-link { font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--f-muted); text-decoration:none; transition:color 0.3s; line-height:1.6; }
+a.ddf-link:hover { color:var(--f-teal-light); }
+.ddf-ig { display:flex; align-items:center; gap:0.6rem; }
+.ddf-ig svg { flex-shrink:0; opacity:0.7; }
+.ddf-center { text-align:center; }
+.ddf-logo { height:52px; width:auto; filter:invert(1); opacity:0.85; display:block; margin:0 auto 0.8rem; }
+.ddf-tagline { font-size:0.45rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--f-teal); margin-top:0.5rem; }
+.ddf-support { font-size:0.48rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--f-muted); margin:0.8rem 0 0; line-height:1.8; }
+.ddf-support a { color:var(--f-teal-light); text-decoration:none; }
+.ddf-copy { font-size:0.42rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--f-muted); margin-top:1.5rem; line-height:2; }
+.ddf-copy a { text-decoration:none; }
+.ddf-mc { height:18px; width:auto; vertical-align:middle; filter:grayscale(1); opacity:0.6; transition:filter 0.4s, opacity 0.4s; }
+a:hover > .ddf-mc { filter:grayscale(0); opacity:1; }
+.ddf-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.6rem; }
+@media (max-width: 900px) { .ddf { grid-template-columns:1fr; text-align:center; padding:3rem 2rem; } .ddf-left, .ddf-right { align-items:center; } }
+@media print { .ddf { display:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://designdistricthyd.com">
+    <img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd">
+  </a>
+  <nav><a href="https://designdistricthyd.com">← Back to site</a></nav>
+</header>
+
+<div class="hero">
+  <div class="season-tag">Season 4 · Designer Applications</div>
+  <h1>Apply for your<br><em>stall</em> at<br>Design District</h1>
+  <p>Tell us about your brand and we'll be in touch with your stall allocation and next steps. Applications are reviewed personally by Aishwarya.</p>
+</div>
+
+<div class="form-wrap" id="form-section">
+
+  <form id="apply-form" novalidate>
+
+    <div class="divider"><span>Your details</span></div>
+
+    <div class="grid">
+      <div class="field" id="field-designer-name">
+        <label>Designer name <span class="req">*</span></label>
+        <input type="text" name="designer_name" id="designer_name" placeholder="Your full name" autocomplete="name">
+        <span class="form-error">Enter your name</span>
+      </div>
+      <div class="field" id="field-brand-name">
+        <label>Brand name <span class="req">*</span></label>
+        <input type="text" name="brand_name" id="brand_name" placeholder="Your label">
+        <span class="form-error">Enter your brand name</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="field" id="field-email">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" name="email" id="email" placeholder="you@yourbrand.com" autocomplete="email">
+        <span class="form-error">Enter a valid email</span>
+      </div>
+      <div class="field" id="field-phone">
+        <label>WhatsApp / Phone <span class="req">*</span></label>
+        <input type="tel" name="phone" id="phone" placeholder="+91 98765 43210" autocomplete="tel">
+        <span class="form-error">Enter your phone number</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="field" id="field-instagram">
+        <label>Instagram handle <span class="req">*</span></label>
+        <div class="insta-wrap">
+          <span class="prefix">@</span>
+          <input type="text" name="instagram" id="instagram" placeholder="yourbrand">
+        </div>
+        <span class="form-error">Enter your Instagram handle</span>
+      </div>
+      <div class="field">
+        <label>City / State</label>
+        <input type="text" name="city" id="city" placeholder="e.g. Hyderabad, Telangana">
+        <span class="field-hint">Where are you based?</span>
+      </div>
+    </div>
+
+    <div class="divider"><span>About your brand</span></div>
+
+    <div class="grid one" style="margin-bottom:20px;">
+      <div class="field" id="field-category">
+        <label>Category <span class="req">*</span></label>
+        <div class="cat-pills" id="cat-pills" role="group" aria-label="Brand category">
+          <button type="button" class="cat-pill" data-val="Women's Indian Wear">Women's Indian Wear</button>
+          <button type="button" class="cat-pill" data-val="Western / Fusion">Western / Fusion</button>
+          <button type="button" class="cat-pill" data-val="Bridal & Couture">Bridal &amp; Couture</button>
+          <button type="button" class="cat-pill" data-val="Jewellery — Fine / Gold">Fine Jewellery</button>
+          <button type="button" class="cat-pill" data-val="Jewellery — Fashion / Lab-grown">Fashion Jewellery</button>
+          <button type="button" class="cat-pill" data-val="Bags & Footwear">Bags &amp; Footwear</button>
+          <button type="button" class="cat-pill" data-val="Lifestyle & Home">Lifestyle &amp; Home</button>
+          <button type="button" class="cat-pill" data-val="Skincare & Wellness">Skincare &amp; Wellness</button>
+          <button type="button" class="cat-pill" data-val="Men's Wear">Men's Wear</button>
+          <button type="button" class="cat-pill" data-val="Kids & Infants">Kids &amp; Infants</button>
+          <button type="button" class="cat-pill" data-val="Other">Other</button>
+        </div>
+        <input type="hidden" id="cat-value" name="category">
+        <span class="form-error" id="cat-error">Select a category</span>
+      </div>
+    </div>
+
+    <div class="grid one">
+      <div class="field">
+        <label>Tell us about your brand</label>
+        <textarea name="brand_bio" id="brand_bio" placeholder="Your aesthetic, what you sell, price points, past shows — whatever feels relevant…"></textarea>
+      </div>
+    </div>
+
+    <div class="divider"><span>Previous seasons</span></div>
+
+    <div class="grid one" style="margin-bottom:0">
+      <div class="field">
+        <label>Have you exhibited at Design District before?</label>
+        <div class="season-checks">
+          <label class="season-item">
+            <input type="checkbox" name="seasons" value="Season 1">
+            <span class="season-box"></span>
+            <span class="season-text">Season 1 <span class="season-meta">· September 2025</span></span>
+          </label>
+          <label class="season-item">
+            <input type="checkbox" name="seasons" value="Season 2">
+            <span class="season-box"></span>
+            <span class="season-text">Season 2 <span class="season-meta">· March 2026</span></span>
+          </label>
+          <label class="season-item">
+            <input type="checkbox" name="seasons" value="Season 3">
+            <span class="season-box"></span>
+            <span class="season-text">Season 3 <span class="season-meta">· October 2026</span></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"><span>Stall preference</span></div>
+
+    <div class="grid">
+      <div class="field">
+        <label>Preferred stall size</label>
+        <select name="stall_size" id="stall-size">
+          <option value="">No preference</option>
+          <option value="3×3 standard">3×3 standard</option>
+          <option value="3×3 corner">3×3 corner — 2-sided open</option>
+          <option value="4×3 standard">4×3 standard (with trial room)</option>
+          <option value="4×3 corner">4×3 corner — 2-sided open</option>
+          <option value="Table space">Table space — lounge area</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>How did you hear about us?</label>
+        <select name="source" id="source">
+          <option value="">Select</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Word of mouth">Word of mouth</option>
+          <option value="Past exhibitor">Past exhibitor</option>
+          <option value="WhatsApp broadcast">WhatsApp broadcast</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Honeypot -->
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit" id="submit-btn">
+        <span class="btn-text">Submit application</span>
+        <span class="spinner"></span>
+      </button>
+      <p class="submit-note">Reviewed personally by Aishwarya — you'll hear back within 3–5 days.</p>
+    </div>
+
+  </form>
+
+  <div id="success-state">
+    <div class="check-ring">✓</div>
+    <h2>Application<br><em>received.</em></h2>
+    <p>Thank you for applying to Design District Season 4.<br>We'll be in touch within 3–5 days.<br><br>Follow <a href="https://instagram.com/designdistrict.hyd" style="color:var(--teal)">@designdistrict.hyd</a> for updates.</p>
+  </div>
+</div>
+
+<!-- FOOTER (shared) -->
+<footer class="ddf">
+  <div class="ddf-left">
+    <a href="mailto:designdistricthyd@gmail.com" class="ddf-link">designdistricthyd@gmail.com</a>
+    <a href="https://www.instagram.com/designdistrict.hyd/" target="_blank" rel="noopener" class="ddf-link ddf-ig">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @designdistrict.hyd
+    </a>
+    <span class="ddf-link">Novotel HICC · 01 October 2026</span>
+  </div>
+  <div class="ddf-center">
+    <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+    <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
+    <p class="ddf-support">Strategic, creative and digital support by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener">MC Joint Agency</a></p>
+    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
+  </div>
+  <div class="ddf-right">
+    <a href="https://www.designdistricthyd.com/#rsvp" class="ddf-link">RSVP — Season 3 ↗</a>
+    <a href="https://www.designdistricthyd.com/s3-map" class="ddf-link">Floor Map ↗</a>
+  </div>
+</footer>
+
+
+<script>
+// ── UPDATE THIS with your Apps Script Web App URL ──
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-QvVFxIV5cIciZ7kRCWRrIUs1IiQpR6WfQFc5pDSxL5YBOvDNlqr5iWijt8XJ6srI/exec';
+
+const form = document.getElementById('apply-form');
+const submitBtn = document.getElementById('submit-btn');
+const successState = document.getElementById('success-state');
+
+// Category pills
+document.querySelectorAll('.cat-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    document.getElementById('cat-value').value = pill.dataset.val;
+    document.getElementById('field-category').classList.remove('has-error');
+  });
+});
+
+function validate() {
+  let valid = true;
+  [['designer_name','field-designer-name'],['brand_name','field-brand-name'],['instagram','field-instagram']].forEach(([id,fid]) => {
+    const el = document.getElementById(id), field = document.getElementById(fid);
+    if (!el.value.trim()) { field.classList.add('has-error'); valid = false; }
+    else field.classList.remove('has-error');
+  });
+  const email = document.getElementById('email');
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+  document.getElementById('field-email').classList.toggle('has-error', !emailOk);
+  if (!emailOk) valid = false;
+  const phone = document.getElementById('phone');
+  const phoneOk = phone.value.trim().length > 0;
+  document.getElementById('field-phone').classList.toggle('has-error', !phoneOk);
+  if (!phoneOk) valid = false;
+  const cat = document.getElementById('cat-value').value;
+  if (!cat) { document.getElementById('field-category').classList.add('has-error'); valid = false; }
+  return valid;
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+  if (document.querySelector('input[name="_honey"]').value) return;
+
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+
+  const seasons = Array.from(document.querySelectorAll('input[name="seasons"]:checked')).map(c => c.value);
+
+  const data = {
+    type: 's4_application',
+    designer_name: document.getElementById('designer_name').value.trim(),
+    brand_name:    document.getElementById('brand_name').value.trim(),
+    email:         document.getElementById('email').value.trim(),
+    phone:         document.getElementById('phone').value.trim(),
+    instagram:     '@' + document.getElementById('instagram').value.trim().replace(/^@/, ''),
+    city:          document.getElementById('city').value.trim(),
+    category:      document.getElementById('cat-value').value,
+    brand_bio:     document.getElementById('brand_bio').value.trim(),
+    previous_seasons: seasons.length ? seasons.join(', ') : 'First time',
+    stall_size:    document.getElementById('stall-size').value,
+    source:        document.getElementById('source').value,
+    submitted_at:  new Date().toISOString(),
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    form.style.display = 'none';
+    successState.classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    alert('Something went wrong. Please try again or email us directly.');
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+  }
+});
+
+document.querySelectorAll('input, textarea, select').forEach(el => {
+  el.addEventListener('input', () => { el.closest('.field')?.classList.remove('has-error'); });
+});
+</script>
+</body>
+</html>
