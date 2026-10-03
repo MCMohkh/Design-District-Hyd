@@ -352,7 +352,34 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
 .rsvp-submit { width:100%; padding:1rem; background: var(--charcoal); color: var(--warm-white); border:none; font-family:'Tenor Sans',sans-serif; font-size:0.55rem; letter-spacing:0.35em; text-transform:uppercase; cursor:pointer; transition: background 0.3s; margin-top:0.3rem; }
 .rsvp-submit:hover { background: var(--teal-dark); }
 .rsvp-note { font-size:0.48rem; letter-spacing:0.1em; color: var(--muted); text-align:center; margin: 1rem 0 0; }
-@media print { .site-nav, .mobile-nav, .rsvp-section { display:none !important; } }
+@media print { .site-nav, .mobile-nav, .rsvp-section, .ddf { display:none !important; } }
+
+/* ══════════ SHARED SITE FOOTER ══════════ */
+.ddf { --f-bg:#111110; --f-muted:#8A8070; --f-teal:#7AADA8; --f-teal-light:#B0CEC9; --f-cream:#F4EEE4;
+  background:var(--f-bg); border-top:1px solid rgba(122,173,168,0.15); padding:4rem; display:grid; grid-template-columns:1fr auto 1fr; gap:2rem; align-items:center;
+  font-family:'Tenor Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin-top:auto; width:100%; text-align:left; color:var(--f-muted); }
+.ddf * { box-sizing:border-box; }
+.ddf-left { display:flex; flex-direction:column; gap:0.6rem; }
+.ddf-link { font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--f-muted); text-decoration:none; transition:color 0.3s; line-height:1.6; }
+a.ddf-link:hover { color:var(--f-teal-light); }
+.ddf-ig { display:flex; align-items:center; gap:0.6rem; }
+.ddf-ig svg { flex-shrink:0; opacity:0.7; }
+.ddf-center { text-align:center; }
+.ddf-logo { height:52px; width:auto; filter:invert(1); opacity:0.85; display:block; margin:0 auto 0.8rem; }
+.ddf-tagline { font-size:0.45rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--f-teal); margin-top:0.5rem; }
+.ddf-support { font-size:0.48rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--f-muted); margin:0.8rem 0 0; line-height:1.8; }
+.ddf-support a { color:var(--f-teal-light); text-decoration:none; }
+.ddf-copy { font-size:0.42rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--f-muted); margin-top:1.5rem; line-height:2; }
+.ddf-copy a { text-decoration:none; }
+.ddf-mc { height:18px; width:auto; vertical-align:middle; filter:grayscale(1); opacity:0.6; transition:filter 0.4s, opacity 0.4s; }
+a:hover > .ddf-mc { filter:grayscale(0); opacity:1; }
+.ddf-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.6rem; }
+@media (max-width: 900px) { .ddf { grid-template-columns:1fr; text-align:center; padding:3rem 2rem; } .ddf-left, .ddf-right { align-items:center; } }
+@media print { .ddf { display:none !important; } }
+.nav-links a.nav-cta { border:1px solid var(--teal); color:var(--teal); opacity:1; padding:0.55rem 1rem; transition: background 0.3s, color 0.3s; }
+.nav-links a.nav-cta:hover { background:var(--teal); color:var(--black); }
+.mobile-nav a.nav-cta { border:1px solid var(--teal); color:var(--teal); opacity:1; padding:0.8rem 1.6rem; }
+@media (max-width: 1100px) { .nav-links { gap:1.1rem; } .nav-links a { letter-spacing:0.18em; } }
 </style>
 </head>
 <body>
@@ -391,6 +418,7 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
     <li><a href="https://designdistricthyd.com/#testimonials">Voices</a></li>
     <li><a href="#" class="current">Floor Map</a></li>
     <li><a href="#rsvp" class="rsvp-link">RSVP</a></li>
+    <li><a href="https://www.designdistricthyd.com/Season-4" class="nav-cta">Season 4</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
@@ -403,6 +431,7 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
   <a href="https://designdistricthyd.com/#testimonials">Voices</a>
   <a href="#" class="current" onclick="toggleMenu();return false;">Floor Map</a>
   <a href="#rsvp" onclick="toggleMenu()" style="color:var(--teal);opacity:1;">RSVP — Season 3</a>
+  <a href="https://www.designdistricthyd.com/Season-4" class="nav-cta">Season 4</a>
 </div>
 
 <div class="page-head">
@@ -498,6 +527,29 @@ h1,h2,h3 { font-family: 'Blanc', serif; font-weight: 400; margin: 0; }
     </div>
   </div>
 </section>
+
+<!-- FOOTER (shared) -->
+<footer class="ddf">
+  <div class="ddf-left">
+    <a href="mailto:designdistricthyd@gmail.com" class="ddf-link">designdistricthyd@gmail.com</a>
+    <a href="https://www.instagram.com/designdistrict.hyd/" target="_blank" rel="noopener" class="ddf-link ddf-ig">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @designdistrict.hyd
+    </a>
+    <span class="ddf-link">Novotel HICC · 01 October 2026</span>
+  </div>
+  <div class="ddf-center">
+    <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+    <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
+    <p class="ddf-support">Strategic, creative and digital support by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener">MC Joint Agency</a></p>
+    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
+  </div>
+  <div class="ddf-right">
+    <a href="#rsvp" class="ddf-link">RSVP — Season 3 ↗</a>
+    <a href="https://www.designdistricthyd.com/Season-4" class="ddf-link">Season 4 — Apply ↗</a>
+  </div>
+</footer>
+
 
 <script>
 // ── Gatsby-style intro control ──
