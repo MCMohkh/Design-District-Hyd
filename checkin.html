@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DDH Check-In | Design District Hyd</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -24,8 +25,9 @@ body {
   background: var(--black);
   color: var(--cream);
   min-height: 100vh;
-  padding-bottom: 2rem;
+  display: flex; flex-direction: column;
 }
+.main { width: 100%; padding-bottom: 3rem !important; }
 
 .header {
   background: linear-gradient(135deg, var(--teal-dark), var(--teal));
@@ -194,9 +196,147 @@ input[type="radio"]:checked + .radio-label { background: var(--teal); border-col
 .pass-valid { font-size: 0.7rem; color: var(--teal); font-weight: 600; }
 
 .screenshot-hint { text-align: center; font-size: 0.8rem; color: #666; margin-bottom: 1rem; }
+
+/* ══════════ SHARED SITE FOOTER ══════════ */
+.ddf { --f-bg:#111110; --f-muted:#8A8070; --f-teal:#7AADA8; --f-teal-light:#B0CEC9; --f-cream:#F4EEE4;
+  background:var(--f-bg); border-top:1px solid rgba(122,173,168,0.15); padding:4rem; display:grid; grid-template-columns:1fr auto 1fr; gap:2rem; align-items:center;
+  font-family:'Tenor Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; margin-top:auto; width:100%; text-align:left; color:var(--f-muted); }
+.ddf * { box-sizing:border-box; }
+.ddf-left { display:flex; flex-direction:column; gap:0.6rem; }
+.ddf-link { font-size:0.55rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--f-muted); text-decoration:none; transition:color 0.3s; line-height:1.6; }
+a.ddf-link:hover { color:var(--f-teal-light); }
+.ddf-ig { display:flex; align-items:center; gap:0.6rem; }
+.ddf-ig svg { flex-shrink:0; opacity:0.7; }
+.ddf-center { text-align:center; }
+.ddf-logo { height:52px; width:auto; filter:invert(1); opacity:0.85; display:block; margin:0 auto 0.8rem; }
+.ddf-tagline { font-size:0.45rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--f-teal); margin-top:0.5rem; }
+.ddf-support { font-size:0.48rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--f-muted); margin:0.8rem 0 0; line-height:1.8; }
+.ddf-support a { color:var(--f-teal-light); text-decoration:none; }
+.ddf-copy { font-size:0.42rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--f-muted); margin-top:1.5rem; line-height:2; }
+.ddf-copy a { text-decoration:none; }
+.ddf-mc { height:18px; width:auto; vertical-align:middle; filter:grayscale(1); opacity:0.6; transition:filter 0.4s, opacity 0.4s; }
+a:hover > .ddf-mc { filter:grayscale(0); opacity:1; }
+.ddf-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.6rem; }
+@media (max-width: 900px) { .ddf { grid-template-columns:1fr; text-align:center; padding:3rem 2rem; } .ddf-left, .ddf-right { align-items:center; } }
+@media print { .ddf { display:none !important; } }
+
+/* ═════════ DDH THEME — matches the home page ═════════ */
+@font-face { font-family:'Blanc'; src:url('https://ik.imagekit.io/mcjoint/Design%20District/Blanc-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+:root { --black:#0A0A0A; --off-black:#111110; --teal:#7AADA8; --teal-dark:#4E8A85; --teal-light:#B0CEC9; --cream:#F4EEE4; --bone:#E8E0D2; --warm-white:#FAF7F2; --terracotta:#C67B52; --gold:#C4A35A; --muted:#8A8070; --charcoal:#1E1D1A; }
+html { scroll-behavior:smooth; }
+body { background:var(--black); color:var(--cream); font-family:'Tenor Sans',sans-serif; }
+.ddh-nav { position:absolute; top:0; left:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.8rem 4rem; }
+.ddh-nav::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,10,10,0.75) 0%, transparent 100%); pointer-events:none; z-index:-1; }
+.ddh-nav.static { position:relative; background:var(--black); padding:0.7rem 2rem; border-bottom:1px solid rgba(122,173,168,0.15); }
+.ddh-nav.static::after { display:none; }
+.ddh-nav.static img { height:54px; }
+.ddh-nav img { height:84px; width:auto; display:block; filter:invert(1); }
+.ddh-links { display:flex; gap:2rem; list-style:none; margin:0; padding:0; align-items:center; }
+.ddh-links a { font-size:0.58rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--cream); text-decoration:none; opacity:0.65; transition:opacity 0.3s; }
+.ddh-links a:hover, .ddh-links a.current { opacity:1; }
+.ddh-links a.current { color:var(--teal); }
+.ddh-links a.cta { border:1px solid var(--teal); color:var(--teal); opacity:1; padding:0.55rem 1rem; transition:background 0.3s, color 0.3s; }
+.ddh-links a.cta:hover, .ddh-links a.cta.current { background:var(--teal); color:var(--black); }
+@media (max-width:1150px) { .ddh-links { gap:1.2rem; } .ddh-links a { letter-spacing:0.2em; } }
+.ddh-burger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:0.5rem; z-index:150; }
+.ddh-burger span { width:24px; height:1px; background:var(--cream); transition:all 0.3s; display:block; }
+.ddh-burger.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+.ddh-burger.open span:nth-child(2) { opacity:0; }
+.ddh-burger.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
+.ddh-mobile { display:none; position:fixed; inset:0; background:rgba(10,10,10,0.97); z-index:120; flex-direction:column; align-items:center; justify-content:center; gap:1.8rem; }
+.ddh-mobile.open { display:flex; }
+.ddh-mobile a { font-size:0.7rem; letter-spacing:0.45em; text-transform:uppercase; color:var(--cream); text-decoration:none; opacity:0.7; transition:opacity 0.3s; }
+.ddh-mobile a:hover, .ddh-mobile a.current { opacity:1; }
+.ddh-mobile a.cta { border:1px solid var(--teal); color:var(--teal); opacity:1; padding:0.8rem 1.6rem; }
+@media (max-width:900px) { .ddh-nav { padding:1.2rem 2rem; } .ddh-nav img { height:64px; } .ddh-nav.static { padding:0.6rem 1.2rem; } .ddh-nav.static img { height:46px; } .ddh-links { display:none; } .ddh-burger { display:flex; } }
+
+/* hero pattern */
+@keyframes ddhFadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes ddhLinePulse { 0%,100% { opacity:0.3; } 50% { opacity:0.7; } }
+.ddh-hero { position:relative; overflow:hidden; background:radial-gradient(ellipse at 78% 20%, rgba(78,138,133,0.22) 0%, rgba(10,10,10,0) 55%), var(--black); }
+.ddh-hero::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:0.5; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"); }
+.ddh-hero-line { position:absolute; top:22%; left:2rem; width:1px; height:42%; background:linear-gradient(to bottom, transparent, var(--teal) 40%, transparent); animation:ddhLinePulse 4s ease-in-out infinite; z-index:1; }
+.ddh-hero-inner { position:relative; z-index:2; }
+.ddh-eyebrow { display:flex; align-items:center; gap:1.2rem; margin-bottom:1.8rem; opacity:0; animation:ddhFadeUp 0.9s ease 0.2s forwards; }
+.ddh-eyebrow i { width:40px; height:1px; background:var(--teal); display:block; }
+.ddh-eyebrow span { font-size:0.55rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--teal); }
+.ddh-title { font-family:'Blanc','Playfair Display',serif; font-size:clamp(3rem,7.5vw,6.5rem); font-weight:400; line-height:0.92; letter-spacing:-0.02em; color:var(--cream); opacity:0; animation:ddhFadeUp 1.1s ease 0.4s forwards; }
+.ddh-title em { font-style:italic; color:var(--teal-light); }
+.ddh-lead { font-size:0.7rem; letter-spacing:0.16em; line-height:2.1; text-transform:uppercase; color:var(--muted); max-width:480px; margin-top:2rem; opacity:0; animation:ddhFadeUp 0.9s ease 0.7s forwards; }
+.ddh-meta { display:flex; gap:3rem; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(122,173,168,0.25); max-width:480px; opacity:0; animation:ddhFadeUp 0.9s ease 0.9s forwards; }
+.ddh-meta b { display:block; font-family:'Blanc',serif; font-weight:400; font-size:1.4rem; color:var(--cream); }
+.ddh-meta span { display:block; font-size:0.5rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-top:0.35rem; }
+@media (max-width:900px) { .ddh-hero-line { left:0.8rem; } }
+
+/* Check-in */
+body { display:flex; flex-direction:column; min-height:100vh; }
+.header { background:var(--off-black) !important; box-shadow:none !important; border-bottom:1px solid rgba(122,173,168,0.15); padding:1.4rem 1rem !important; }
+.header h1 { font-family:'Blanc',serif; font-weight:400 !important; font-size:1.7rem !important; letter-spacing:0.02em !important; color:var(--cream) !important; margin-bottom:0.5rem !important; }
+.header .subtitle { font-size:0.55rem !important; letter-spacing:0.45em !important; color:var(--teal) !important; }
+.stats-bar { background:var(--off-black) !important; padding:0.2rem 1rem 1.2rem !important; gap:0.8rem !important; border-bottom:1px solid rgba(122,173,168,0.1); }
+.stat-item { background:transparent !important; border-radius:0 !important; border-top:1px solid rgba(122,173,168,0.35) !important; padding:0.8rem 0.4rem 0.2rem !important; }
+.stat-number { font-family:'Blanc',serif; font-weight:400 !important; color:var(--teal-light) !important; font-size:1.9rem !important; }
+.stat-label { font-size:0.48rem !important; letter-spacing:0.3em !important; color:var(--muted) !important; margin-top:0.35rem !important; }
+.main { width:100%; padding-bottom:3rem !important; }
+.search-section, .result-card, .form-section, .complete-profile-section, .pass-display { border-radius:0 !important; background:var(--warm-white); color:var(--charcoal); border-top:2px solid var(--teal); }
+.search-label, .form-label { font-family:'Tenor Sans',sans-serif; font-size:0.5rem !important; font-weight:400 !important; letter-spacing:0.28em !important; color:var(--muted) !important; }
+.search-input { border:none !important; border-bottom:1px solid rgba(26,25,22,0.25) !important; border-radius:0 !important; background:transparent !important; font-family:'Blanc',serif; font-weight:400 !important; font-size:1.7rem !important; color:var(--charcoal) !important; }
+.search-input:focus { border-bottom-color:var(--teal-dark) !important; }
+.form-input { border:none !important; border-bottom:1px solid rgba(26,25,22,0.25) !important; border-radius:0 !important; background:transparent !important; font-family:'Blanc',serif; font-size:1.05rem !important; padding:0.7rem 0 !important; color:var(--charcoal) !important; }
+.form-input:focus { border-bottom-color:var(--teal-dark) !important; }
+.search-btn, .btn-primary { background:var(--charcoal) !important; color:var(--warm-white) !important; border-radius:0 !important; font-family:'Tenor Sans',sans-serif; font-size:0.6rem !important; font-weight:400 !important; letter-spacing:0.35em !important; padding:1.1rem !important; }
+.search-btn:hover, .btn-primary:hover { background:var(--teal-dark) !important; }
+.btn-secondary { border-radius:0 !important; border:1px solid rgba(26,25,22,0.25) !important; color:var(--charcoal) !important; font-family:'Tenor Sans',sans-serif; font-size:0.55rem !important; font-weight:400 !important; letter-spacing:0.3em !important; }
+.btn-secondary:hover { background:var(--teal); border-color:var(--teal) !important; }
+.btn-whatsapp { border-radius:0 !important; font-family:'Tenor Sans',sans-serif; font-size:0.58rem !important; font-weight:400 !important; letter-spacing:0.28em !important; text-transform:uppercase; }
+.visitor-badge { border-radius:0 !important; font-family:'Tenor Sans',sans-serif; font-size:0.5rem !important; font-weight:400 !important; letter-spacing:0.3em !important; padding:0.5rem 0.9rem !important; }
+.visitor-name { font-family:'Blanc',serif; font-weight:400 !important; font-size:1.8rem !important; }
+.visitor-detail { font-size:0.72rem !important; letter-spacing:0.06em; }
+.visitor-id { font-family:'Blanc',serif; font-weight:400 !important; border-radius:0 !important; color:var(--teal-dark) !important; letter-spacing:0.18em !important; }
+.radio-label { border-radius:0 !important; border:1px solid rgba(26,25,22,0.18) !important; font-family:'Tenor Sans',sans-serif; font-size:0.55rem !important; font-weight:400 !important; letter-spacing:0.2em; text-transform:uppercase; color:var(--charcoal) !important; }
+input[type="radio"]:checked + .radio-label { background:var(--teal) !important; border-color:var(--teal) !important; }
+.profile-notice { border-radius:0 !important; border:none !important; border-left:2px solid var(--terracotta) !important; font-size:0.75rem !important; line-height:1.8 !important; }
+.pass-display { padding:1rem; background:transparent !important; border-top:none !important; }
+.pass-card { border-radius:2px !important; }
+.pass-header { background:linear-gradient(180deg,#131312,var(--black)) !important; border-bottom:1px solid rgba(122,173,168,0.2); padding:1.8rem 1.2rem !important; }
+.pass-event-name { font-family:'Blanc',serif; font-weight:400 !important; font-size:1.7rem !important; letter-spacing:0 !important; text-transform:none !important; color:var(--cream) !important; }
+.pass-season-label { font-size:0.55rem !important; letter-spacing:0.4em !important; color:var(--teal) !important; margin-top:0.5rem !important; }
+.pass-visitor-name { font-family:'Blanc',serif; font-weight:400 !important; }
+.pass-visitor-id { font-family:'Tenor Sans',sans-serif; font-weight:400 !important; letter-spacing:0.3em !important; font-size:1.1rem !important; color:var(--teal-light) !important; }
+.pass-date, .pass-valid { font-size:0.52rem !important; letter-spacing:0.25em; text-transform:uppercase; font-weight:400 !important; }
+.screenshot-hint { font-size:0.55rem !important; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted) !important; }
+
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tenor+Sans&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- NAV (shared, same as home page) -->
+<nav class="ddh-nav static">
+  <a href="https://www.designdistricthyd.com/"><img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+  <ul class="ddh-links">
+    <li><a href="https://www.designdistricthyd.com/#about">About</a></li>
+    <li><a href="https://www.designdistricthyd.com/#past">Season 01</a></li>
+    <li><a href="https://www.designdistricthyd.com/#season-2">Season 02</a></li>
+    <li><a href="https://www.designdistricthyd.com/#season-3">Season 03</a></li>
+    <li><a href="https://www.designdistricthyd.com/s3-map">Floor Map</a></li>
+    <li><a href="https://www.designdistricthyd.com/#collabs">Designers</a></li>
+    <li><a href="https://www.designdistricthyd.com/#testimonials">Voices</a></li>
+    <li><a href="https://www.designdistricthyd.com/Season-4" class="cta">Season 4</a></li>
+  </ul>
+  <div class="ddh-burger" id="ddhBurger" onclick="ddhMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="ddh-mobile" id="ddhMobile">
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#about">About</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#past">Season 01</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#season-2">Season 02</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#season-3">Season 03</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/s3-map">Floor Map</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#collabs">Designers</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#testimonials">Voices</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/Season-4" class="cta">Season 4</a>
+</div>
 
 <div class="header">
   <h1>DDH CHECK-IN</h1>
@@ -349,6 +489,29 @@ input[type="radio"]:checked + .radio-label { background: var(--teal); border-col
   </div>
 
 </div>
+
+<!-- FOOTER (shared) -->
+<footer class="ddf">
+  <div class="ddf-left">
+    <a href="mailto:designdistricthyd@gmail.com" class="ddf-link">designdistricthyd@gmail.com</a>
+    <a href="https://www.instagram.com/designdistrict.hyd/" target="_blank" rel="noopener" class="ddf-link ddf-ig">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @designdistrict.hyd
+    </a>
+    <span class="ddf-link">Novotel HICC · 01 October 2026</span>
+  </div>
+  <div class="ddf-center">
+    <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+    <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
+    <p class="ddf-support">Strategic, creative and digital support by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener">MC Joint Agency</a></p>
+    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
+  </div>
+  <div class="ddf-right">
+    <a href="https://www.designdistricthyd.com/#rsvp" class="ddf-link">RSVP — Season 3 ↗</a>
+    <a href="https://www.designdistricthyd.com/Season-4" class="ddf-link">Season 4 — Apply ↗</a>
+    <a href="https://www.designdistricthyd.com/s3-map" class="ddf-link">Floor Map ↗</a>
+  </div>
+</footer>
 
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
@@ -584,6 +747,9 @@ const saved = localStorage.getItem('ddhStats');
 if (saved) { stats = JSON.parse(saved); updateStatsBar(); }
 document.getElementById('phoneInput').focus();
 try { if ('wakeLock' in navigator) navigator.wakeLock.request('screen'); } catch(e) {}
+</script>
+<script>
+function ddhMenu(){var o=document.getElementById('ddhMobile').classList.toggle('open');document.getElementById('ddhBurger').classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
 </script>
 </body>
 </html>
