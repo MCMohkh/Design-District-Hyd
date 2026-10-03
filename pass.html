@@ -154,9 +154,120 @@ a:hover > .ddf-mc { filter:grayscale(0); opacity:1; }
 .ddf-right { display:flex; flex-direction:column; align-items:flex-end; gap:0.6rem; }
 @media (max-width: 900px) { .ddf { grid-template-columns:1fr; text-align:center; padding:3rem 2rem; } .ddf-left, .ddf-right { align-items:center; } }
 @media print { .ddf { display:none !important; } }
+
+/* ═════════ DDH THEME — matches the home page ═════════ */
+@font-face { font-family:'Blanc'; src:url('https://ik.imagekit.io/mcjoint/Design%20District/Blanc-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+:root { --black:#0A0A0A; --off-black:#111110; --teal:#7AADA8; --teal-dark:#4E8A85; --teal-light:#B0CEC9; --cream:#F4EEE4; --bone:#E8E0D2; --warm-white:#FAF7F2; --terracotta:#C67B52; --gold:#C4A35A; --muted:#8A8070; --charcoal:#1E1D1A; }
+html { scroll-behavior:smooth; }
+body { background:var(--black); color:var(--cream); font-family:'Tenor Sans',sans-serif; }
+.ddh-nav { position:absolute; top:0; left:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.8rem 4rem; }
+.ddh-nav::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,10,10,0.75) 0%, transparent 100%); pointer-events:none; z-index:-1; }
+.ddh-nav.static { position:relative; background:var(--black); padding:0.7rem 2rem; border-bottom:1px solid rgba(122,173,168,0.15); }
+.ddh-nav.static::after { display:none; }
+.ddh-nav.static img { height:54px; }
+.ddh-nav img { height:84px; width:auto; display:block; filter:invert(1); }
+.ddh-links { display:flex; gap:2rem; list-style:none; margin:0; padding:0; align-items:center; }
+.ddh-links a { font-size:0.58rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--cream); text-decoration:none; opacity:0.65; transition:opacity 0.3s; }
+.ddh-links a:hover, .ddh-links a.current { opacity:1; }
+.ddh-links a.current { color:var(--teal); }
+.ddh-links a.cta { border:1px solid var(--teal); color:var(--teal); opacity:1; padding:0.55rem 1rem; transition:background 0.3s, color 0.3s; }
+.ddh-links a.cta:hover, .ddh-links a.cta.current { background:var(--teal); color:var(--black); }
+@media (max-width:1150px) { .ddh-links { gap:1.2rem; } .ddh-links a { letter-spacing:0.2em; } }
+.ddh-burger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:0.5rem; z-index:150; }
+.ddh-burger span { width:24px; height:1px; background:var(--cream); transition:all 0.3s; display:block; }
+.ddh-burger.open span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+.ddh-burger.open span:nth-child(2) { opacity:0; }
+.ddh-burger.open span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
+.ddh-mobile { display:none; position:fixed; inset:0; background:rgba(10,10,10,0.97); z-index:120; flex-direction:column; align-items:center; justify-content:center; gap:1.8rem; }
+.ddh-mobile.open { display:flex; }
+.ddh-mobile a { font-size:0.7rem; letter-spacing:0.45em; text-transform:uppercase; color:var(--cream); text-decoration:none; opacity:0.7; transition:opacity 0.3s; }
+.ddh-mobile a:hover, .ddh-mobile a.current { opacity:1; }
+.ddh-mobile a.cta { border:1px solid var(--teal); color:var(--teal); opacity:1; padding:0.8rem 1.6rem; }
+@media (max-width:900px) { .ddh-nav { padding:1.2rem 2rem; } .ddh-nav img { height:64px; } .ddh-nav.static { padding:0.6rem 1.2rem; } .ddh-nav.static img { height:46px; } .ddh-links { display:none; } .ddh-burger { display:flex; } }
+
+/* hero pattern */
+@keyframes ddhFadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes ddhLinePulse { 0%,100% { opacity:0.3; } 50% { opacity:0.7; } }
+.ddh-hero { position:relative; overflow:hidden; background:radial-gradient(ellipse at 78% 20%, rgba(78,138,133,0.22) 0%, rgba(10,10,10,0) 55%), var(--black); }
+.ddh-hero::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:0.5; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"); }
+.ddh-hero-line { position:absolute; top:22%; left:2rem; width:1px; height:42%; background:linear-gradient(to bottom, transparent, var(--teal) 40%, transparent); animation:ddhLinePulse 4s ease-in-out infinite; z-index:1; }
+.ddh-hero-inner { position:relative; z-index:2; }
+.ddh-eyebrow { display:flex; align-items:center; gap:1.2rem; margin-bottom:1.8rem; opacity:0; animation:ddhFadeUp 0.9s ease 0.2s forwards; }
+.ddh-eyebrow i { width:40px; height:1px; background:var(--teal); display:block; }
+.ddh-eyebrow span { font-size:0.55rem; letter-spacing:0.5em; text-transform:uppercase; color:var(--teal); }
+.ddh-title { font-family:'Blanc','Playfair Display',serif; font-size:clamp(3rem,7.5vw,6.5rem); font-weight:400; line-height:0.92; letter-spacing:-0.02em; color:var(--cream); opacity:0; animation:ddhFadeUp 1.1s ease 0.4s forwards; }
+.ddh-title em { font-style:italic; color:var(--teal-light); }
+.ddh-lead { font-size:0.7rem; letter-spacing:0.16em; line-height:2.1; text-transform:uppercase; color:var(--muted); max-width:480px; margin-top:2rem; opacity:0; animation:ddhFadeUp 0.9s ease 0.7s forwards; }
+.ddh-meta { display:flex; gap:3rem; margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid rgba(122,173,168,0.25); max-width:480px; opacity:0; animation:ddhFadeUp 0.9s ease 0.9s forwards; }
+.ddh-meta b { display:block; font-family:'Blanc',serif; font-weight:400; font-size:1.4rem; color:var(--cream); }
+.ddh-meta span { display:block; font-size:0.5rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--muted); margin-top:0.35rem; }
+@media (max-width:900px) { .ddh-hero-line { left:0.8rem; } }
+
+/* Pass */
+body { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:8rem 1rem 0 !important;
+  background:radial-gradient(ellipse at 50% 0%, rgba(78,138,133,0.18) 0%, rgba(10,10,10,0) 55%), var(--black); }
+.main { margin-bottom:4rem; }
+.pass-card { border-radius:2px; border:1px solid rgba(122,173,168,0.28); background:var(--black); }
+.pass-header { background:linear-gradient(180deg, #131312, var(--black)); border-bottom:1px solid rgba(122,173,168,0.2); padding:2.2rem 1.4rem 1.8rem; position:relative; }
+.pass-header::before { content:''; position:absolute; top:0; left:20%; right:20%; height:1px; background:linear-gradient(90deg, transparent, var(--teal), transparent); }
+.pass-eyebrow { font-family:'Tenor Sans',sans-serif; font-size:0.55rem; letter-spacing:0.5em; text-indent:0.5em; color:var(--teal); margin-bottom:0.9rem; }
+.pass-event-name { font-family:'Blanc',serif; font-size:2.6rem; font-weight:400; letter-spacing:-0.01em; text-transform:none; color:var(--cream); line-height:1; }
+.pass-season-label { font-size:0.58rem; letter-spacing:0.4em; color:var(--muted); margin-top:0.8rem; }
+.tier-ribbon { font-family:'Tenor Sans',sans-serif; font-size:0.55rem; font-weight:400; letter-spacing:0.45em; padding:0.7rem; }
+.tier-ribbon.visitor { background:transparent; color:var(--teal); border-bottom:1px solid rgba(122,173,168,0.2); }
+.tier-ribbon.vip { background:var(--gold); color:var(--black); }
+.pass-qr-area { background:var(--warm-white); padding:1.8rem; }
+.pass-qr-caption { font-family:'Tenor Sans',sans-serif; font-size:0.52rem; font-weight:400; letter-spacing:0.4em; color:var(--teal-dark); }
+.pass-visitor-name { font-family:'Blanc',serif; font-size:1.7rem; font-weight:400; color:var(--cream); }
+.pass-visitor-id { font-family:'Tenor Sans',sans-serif; font-size:1.05rem; font-weight:400; letter-spacing:0.35em; text-indent:0.35em; color:var(--teal-light); }
+.pass-detail-label { font-size:0.5rem; letter-spacing:0.3em; color:var(--muted); margin-bottom:0.35rem; }
+.pass-detail-value { font-family:'Blanc',serif; font-size:1rem; font-weight:400; }
+.pass-footer { font-size:0.6rem; letter-spacing:0.1em; line-height:1.9; background:rgba(122,173,168,0.05); }
+.pass-footer strong { font-weight:400; color:var(--teal-light); }
+.action-btn { border-radius:0; font-family:'Tenor Sans',sans-serif; font-size:0.56rem; font-weight:400; letter-spacing:0.28em; padding:1.05rem 0.8rem; line-height:1.6; }
+.download-btn { background:var(--cream); color:var(--black); }
+.calendar-btn { border:1px solid var(--teal) !important; color:var(--teal); }
+.venue-label { font-size:0.5rem; font-weight:400; letter-spacing:0.4em; }
+.venue-name { font-family:'Blanc',serif; font-weight:400; font-size:1.2rem; }
+.venue-address { font-size:0.68rem; letter-spacing:0.05em; line-height:1.8; }
+.map-link { font-size:0.52rem; font-weight:400; letter-spacing:0.28em; text-transform:uppercase; }
+.venue-hours { font-family:'Blanc',serif; font-weight:400; font-size:1.05rem; }
+.before-arrive { border-radius:0; border-left:2px solid var(--terracotta); }
+.before-arrive-label { font-size:0.5rem; font-weight:400; letter-spacing:0.4em; }
+.before-arrive li { font-size:0.68rem; letter-spacing:0.05em; line-height:1.8; }
+.delivery-banner { border-radius:0; }
+
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tenor+Sans&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- NAV (shared, same as home page) -->
+<nav class="ddh-nav">
+  <a href="https://www.designdistricthyd.com/"><img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+  <ul class="ddh-links">
+    <li><a href="https://www.designdistricthyd.com/#about">About</a></li>
+    <li><a href="https://www.designdistricthyd.com/#past">Season 01</a></li>
+    <li><a href="https://www.designdistricthyd.com/#season-2">Season 02</a></li>
+    <li><a href="https://www.designdistricthyd.com/#season-3">Season 03</a></li>
+    <li><a href="https://www.designdistricthyd.com/s3-map">Floor Map</a></li>
+    <li><a href="https://www.designdistricthyd.com/#collabs">Designers</a></li>
+    <li><a href="https://www.designdistricthyd.com/#testimonials">Voices</a></li>
+    <li><a href="https://www.designdistricthyd.com/Season-4" class="cta">Season 4</a></li>
+  </ul>
+  <div class="ddh-burger" id="ddhBurger" onclick="ddhMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="ddh-mobile" id="ddhMobile">
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#about">About</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#past">Season 01</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#season-2">Season 02</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#season-3">Season 03</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/s3-map">Floor Map</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#collabs">Designers</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#testimonials">Voices</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/Season-4" class="cta">Season 4</a>
+</div>
 
 <div class="main">
 
@@ -387,6 +498,9 @@ document.getElementById('calendarBtn').addEventListener('click', () => {
   link.click();
   URL.revokeObjectURL(link.href);
 });
+</script>
+<script>
+function ddhMenu(){var o=document.getElementById('ddhMobile').classList.toggle('open');document.getElementById('ddhBurger').classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
 </script>
 </body>
 </html>
