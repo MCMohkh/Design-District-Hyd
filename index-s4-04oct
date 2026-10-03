@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:type" content="website">
+  
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1055361800740013');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1055361800740013&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+  
+<link rel="preload" href="Blanc-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="Main%20images/DD%20-%20Logo%20Black%20(for%20web).png">
+<link rel="apple-touch-icon" href="Main%20images/DD%20-%20Logo%20Black%20(for%20web).png">
+<meta name="theme-color" content="#0A0A0A">
+<!-- =========================
+     SEO + SOCIAL META
+     ========================= -->
+
+<title>Design District Hyd — Season 3 | Curated Fashion Exhibition, Hyderabad</title>
+
+<meta name="description" content="Design District Hyd Season 3 takes place on 1 October 2026 at Novotel HICC, Hyderabad. A curated fashion exhibition by Aishwarya Agarwal featuring 100+ independent Indian designers across fashion, couture and lifestyle.">
+
+<meta name="keywords" content="Design District Hyd, Design District Hyderabad, Design District Season 3, fashion exhibition Hyderabad, curated fashion exhibition Hyderabad, fashion event Hyderabad 2026, luxury fashion Hyderabad, Indian designers Hyderabad, independent designers India, Novotel HICC fashion event, Aishwarya Agarwal, Hyderabad fashion exhibition, curated designers Hyderabad, Times Business Awards Hyderabad, Hyderabad's Outstanding Curated Fashion Exhibition">
+
+<meta name="author" content="Aishwarya Agarwal">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://www.designdistricthyd.com/">
+<meta name="theme-color" content="#0A0A0A">
+
+<!-- OPEN GRAPH -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Design District Hyd">
+<meta property="og:locale" content="en_IN">
+<meta property="og:title" content="Design District Hyd — Season 3 | 1 October 2026, Novotel HICC Hyderabad">
+<meta property="og:description" content="A curated fashion exhibition bringing together 100+ independent Indian designers across fashion, couture and lifestyle. 1 October 2026 · Novotel HICC Hyderabad.">
+<meta property="og:url" content="https://www.designdistricthyd.com/">
+<meta property="og:image" content="https://raw.githubusercontent.com/MCMohkh/Design-District-Hyd/main/DD%20-%20Something%20exceptional%20is%20coming.jpg">
+<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/MCMohkh/DDH-Public-Repo/main/DD%20-%20Something%20exceptional%20is%20coming.jpg">
+<meta property="og:image:alt" content="Design District Hyd Season 3 — 1 October 2026, Novotel HICC Hyderabad">
+<meta property="og:image:type" content="image/jpeg">
+
+<!-- X / TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Design District Hyd — Season 3 | 1 October 2026">
+<meta name="twitter:description" content="Curated fashion exhibition featuring 100+ independent Indian designers at Novotel HICC Hyderabad on 1 October 2026.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/MCMohkh/Design-District-Hyd/main/DD%20-%20Something%20exceptional%20is%20coming.jpg">
+<meta name="twitter:image:alt" content="Design District Hyd Season 3 — 1 October 2026, Novotel HICC Hyderabad">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Tenor+Sans&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  
+/* ── BLANC FONT ── */
+
+@font-face {
+  font-family: 'Blanc';
+  src: url('Blanc-Regular.woff2') format('woff2'),
+       url('Blanc-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+  :root {
+
+    --black: #0A0A0A;
+    --off-black: #111110;
+    --teal: #7AADA8;
+    --teal-dark: #4E8A85;
+    --teal-light: #B0CEC9;
+    --cream: #F4EEE4;
+    --bone: #E8E0D2;
+    --warm-white: #FAF7F2;
+    --terracotta: #C67B52;
+    --gold: #C4A35A;
+    --muted: #8A8070;
+    --charcoal: #1E1D1A;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+
+  /* ── FLOATING RSVP ── */
+.rsvp-float { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 200; display: flex; align-items: stretch; }
+  .rsvp-tab { writing-mode: vertical-rl; background: var(--teal); color: var(--black); font-size: 0.52rem; letter-spacing: 0.35em; text-transform: uppercase; padding: 1.5rem 0.7rem; cursor: pointer; transition: background 0.3s; user-select: none; display: flex; align-items: center; justify-content: center; gap: 0.8rem; }
+  .rsvp-tab:hover { background: var(--teal-dark); color: var(--cream); }
+  .tab-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--black); flex-shrink: 0; transition: background 0.3s; }
+  .rsvp-tab:hover .tab-dot { background: var(--cream); }
+  .rsvp-panel { width: 0; overflow: hidden; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); background: var(--warm-white); color: var(--charcoal); }
+  .rsvp-panel.open { width: 340px; }
+  .rsvp-inner { width: 340px; padding: 2.5rem 2rem; height: 100%; display: flex; flex-direction: column; gap: 1.4rem; }
+  .rsvp-heading { font-family: 'Blanc', serif; font-size: 1.5rem; font-weight: 400; line-height: 1.2; color: var(--charcoal); }
+  .rsvp-sub { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+  .intent-row { display: flex; gap: 0; border: 1px solid rgba(26,25,22,0.12); margin-top: 0.2rem; }
+  .intent-btn { flex: 1; padding: 0.65rem 0.4rem; font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; color: var(--muted); cursor: pointer; border-right: 1px solid rgba(26,25,22,0.12); transition: all 0.25s; user-select: none; }
+  .intent-btn:last-child { border-right: none; }
+  .intent-btn.active, .intent-btn:hover { background: var(--teal); color: var(--black); }
+  .rsvp-fields { display: flex; flex-direction: column; gap: 1.1rem; }
+  .rsvp-field label { display: block; font-size: 0.48rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  .rsvp-field input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(26,25,22,0.2); padding: 0.55rem 0; font-family: 'Blanc', serif; font-size: 0.95rem; color: var(--charcoal); outline: none; transition: border-color 0.3s; }
+  .rsvp-field input:focus { border-bottom-color: var(--teal-dark); }
+  .rsvp-field input::placeholder { color: rgba(26,25,22,0.25); font-style: italic; }
+  .rsvp-submit { width: 100%; padding: 1rem; background: var(--charcoal); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-top: 0.3rem; }
+  .rsvp-submit:hover { background: var(--teal-dark); }
+  .rsvp-note { font-size: 0.48rem; letter-spacing: 0.1em; color: var(--muted); text-align: center; }
+
+  /* ── NAV ── */
+  nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 4rem; }
+  nav::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.75) 0%, transparent 100%); pointer-events: none; z-index: -1; }
+
+  .nav-logo-img { height: 90px; width: auto; display: block; filter: invert(1); /* because logo is black and nav is dark */ }
+  .logo-mark { width: 38px; height: 38px; }
+  .logo-mark svg { width: 100%; height: 100%; }
+
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); text-decoration: none; opacity: 0.65; transition: opacity 0.3s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-links a.nav-cta { border: 1px solid var(--teal); color: var(--teal); opacity: 1; padding: 0.55rem 1rem; transition: background 0.3s, color 0.3s; }
+  .nav-links a.nav-cta:hover { background: var(--teal); color: var(--black); }
+  @media (max-width: 1100px) { .nav-links { gap: 1.1rem; } .nav-links a { letter-spacing: 0.18em; } }
+  @media (max-width: 1150px) { .nav-links { gap: 1.2rem; } }
+
+  /* ── HERO SLIDER ── */
+  #hero { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+  .hero-slides { position: absolute; inset: 0; }
+  .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  @media (min-width: 901px) { .hero-slide img { object-position: 50% 28%; } }
+  /* Dark overlay on slides */
+  .hero-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(10,10,10,0.45) 0%, rgba(10,10,10,0.65) 60%, rgba(10,10,10,0.88) 100%); }
+  
+  /* Grain */
+  .hero-grain { position: absolute; inset: 0; z-index: 2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); opacity:0.7; }
+  .hero-line { position: absolute; top: 15%; left: 4rem; width: 1px; height: 40%; background: linear-gradient(to bottom, transparent, var(--teal) 40%, transparent); z-index: 3; animation: linePulse 4s ease-in-out infinite; }
+  @keyframes linePulse { 0%,100% { opacity:0.3; } 50% { opacity:0.7; } }
+
+  .hero-content { position: absolute; bottom: 0; left: 0; right: 0; z-index: 4; padding: 0 4rem 5rem; display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 3rem; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.9s ease 0.2s forwards; }
+  .hero-eyebrow-line { width: 40px; height: 1px; background: var(--teal); }
+  .hero-eyebrow-text { font-size: 0.55rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--teal); }
+  .hero-title { font-family: 'Blanc', serif !important; font-size: clamp(4rem, 8vw, 7.5rem); font-weight: 400; line-height: 0.9; letter-spacing: -0.02em; color: var(--cream); opacity: 0; animation: fadeUp 1.1s ease 0.4s forwards; }
+  .hero-title em { font-style: italic; color: var(--teal-light); }
+  .hero-title .district-line { font-family: 'Blanc', serif !important; }
+  .hero-right { display: flex; flex-direction: column; gap: 2rem; align-items: flex-end; opacity: 0; animation: fadeUp 0.9s ease 0.7s forwards; }
+  .hero-venue { text-align: right; }
+  .hero-venue-name { font-family: 'Blanc', serif; font-size: 1.1rem; font-weight: 400; color: var(--cream); letter-spacing: 0.05em; }
+  .hero-venue-sub { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal-light); margin-top: 0.4rem; }
+  .hero-date-block { text-align: right; padding-top: 1.5rem; border-top: 1px solid rgba(122,173,168,0.25); }
+  .hero-date-main { font-family: 'Blanc', serif; font-size: 2rem; font-weight: 400; color: var(--cream); letter-spacing: 0.05em; }
+  .hero-date-year { font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 1.5rem; padding: 1.1rem 2.5rem; border: 1px solid var(--teal); color: var(--cream); text-decoration: none; font-size: 0.58rem; letter-spacing: 0.4em; text-transform: uppercase; transition: all 0.4s; position: relative; overflow: hidden; cursor: pointer; background: none; font-family: 'Tenor Sans', sans-serif; }
+  .hero-cta::before { content: ''; position: absolute; inset: 0; background: var(--teal); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); z-index: -1; }
+  .hero-cta:hover::before { transform: scaleX(1); }
+  .hero-cta:hover { color: var(--black); }
+
+  /* Slider dots */
+  .hero-dots { position: absolute; bottom: 5.5rem; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; gap: 0.6rem; }
+  .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(122,173,168,0.35); cursor: pointer; transition: all 0.3s; }
+  .hero-dot.active { background: var(--teal); width: 24px; border-radius: 3px; }
+
+  /* Slide arrows */
+  .hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; background: none; border: 1px solid rgba(122,173,168,0.3); color: var(--cream); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; font-size: 1rem; }
+  .hero-arrow:hover { background: var(--teal); border-color: var(--teal); color: var(--black); }
+  .hero-arrow-prev { left: 2rem; }
+  .hero-arrow-next { right: 5rem; }
+
+  /* Countdown */
+  .countdown-bar { position: absolute; bottom: 0; left: 0; width: 100%; z-index: 4; display: flex; justify-content: center; background: rgba(10,10,10,0.9); border-top: 1px solid rgba(122,173,168,0.15); }
+  .countdown-unit { padding: 1rem 3.5rem; text-align: center; border-right: 1px solid rgba(122,173,168,0.1); }
+  .countdown-unit:last-child { border-right: none; }
+  .countdown-num { font-family: 'Blanc', serif; font-size: 2rem; font-weight: 400; color: var(--teal-light); display: block; line-height: 1; }
+  .countdown-label { font-size: 0.45rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; display: block; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(35px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── INSTAGRAM SCROLL STRIP ── */
+  .ig-strip-section { background: var(--off-black); padding: 5rem 0; overflow: hidden; border-top: 1px solid rgba(122,173,168,0.1); border-bottom: 1px solid rgba(122,173,168,0.1); }
+  .ig-strip-label { text-align: center; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: center; gap: 2rem; }
+  .ig-strip-label::before, .ig-strip-label::after { content: ''; flex: 1; max-width: 80px; height: 1px; background: rgba(122,173,168,0.3); }
+  .ig-strip-label-text { font-size: 0.52rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--teal); }
+  .ig-scroll-wrapper { position: relative; overflow: hidden; padding-bottom: 1rem; }
+  .ig-scroll-wrapper::before, .ig-scroll-wrapper::after { content: ''; position: absolute; top: 0; width: 120px; height: 100%; z-index: 10; pointer-events: none; }
+  .ig-scroll-wrapper::before { left: 0; background: linear-gradient(to right, var(--off-black), transparent); }
+  .ig-scroll-wrapper::after { right: 0; background: linear-gradient(to left, var(--off-black), transparent); }
+  .ig-track { display: flex; gap: 1.2rem; width: max-content; animation: scrollLeft 80s linear infinite; align-items: flex-start; padding: 0 2rem; }
+  .ig-track:hover { animation-play-state: paused; }
+  @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .ig-embed-card { position: relative; flex-shrink: 0; width: 328px; border-radius: 3px; overflow: hidden; }
+  /* Override Instagram's default blockquote styles for our dark theme wrapper */
+  .ig-embed-card .instagram-media { border-radius: 3px !important; max-height: 500px; overflow: hidden; width: 328px !important; min-width: 328px !important; max-width: 328px !important; }
+  .ig-video-badge { position: absolute; top: 0.6rem; right: 0.6rem; z-index: 20; width: 22px; height: 22px; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); border-radius: 4px; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--black); padding: 13rem 4rem; display: grid; grid-template-columns: auto 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-vertical-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.5rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--teal); padding-top: 0.5rem; }
+  .about-copy { font-family: 'Blanc', serif; font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 400; line-height: 1.45; color: var(--cream); }
+  .about-copy em { font-style: italic; color: var(--teal-light); }
+  .about-copy .script { font-family: 'Great Vibes', cursive; font-size: 1.5em; color: var(--teal); display: block; margin: 0.3em 0; }
+  .about-details { display: flex; flex-direction: column; gap: 3rem; padding-top: 0.5rem; }
+  .about-stat { border-top: 1px solid rgba(122,173,168,0.2); padding-top: 1.5rem; }
+  .about-stat-num { font-family: 'Blanc', serif; font-size: 3rem; font-weight: 400; color: var(--teal-light); line-height: 1; }
+  .about-stat-text { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+  .about-details { gap: 2.5rem; }
+  .about-award.has-photo { display: grid; grid-template-columns: 170px 1fr; gap: 1.8rem; align-items: start; }
+  .about-award-photo { display: block; overflow: hidden; aspect-ratio: 4 / 5; }
+  .about-award-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-award-photo:hover img { animation: ddhWiggle 1.8s ease-in-out infinite; }
+  .about-award-event { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); line-height: 1.7; }
+  .about-award-title { font-family: 'Blanc', serif; font-size: clamp(1.6rem, 2.4vw, 2.2rem); font-weight: 400; line-height: 1.15; color: var(--teal-light); margin-top: 1.1rem; }
+  .about-award.has-photo .about-award-title { font-size: clamp(1.35rem, 1.9vw, 1.8rem); }
+  .about-award-winner { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream); margin-top: 1.1rem; }
+  .about-award-note { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-top: 1.4rem; line-height: 1.9; }
+  @media (max-width: 600px) { .about-award.has-photo { grid-template-columns: 110px 1fr; gap: 1.1rem; } }
+  .about-venue-card { padding: 2rem; border: 1px solid rgba(122,173,168,0.2); background: rgba(122,173,168,0.04); }
+  .avc-label { font-size: 0.48rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.8rem; }
+  .avc-name { font-family: 'Blanc', serif; font-size: 1.3rem; font-weight: 400; color: var(--cream); }
+  .avc-sub { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--muted); margin-top: 0.4rem; }
+
+
+
+  /* ── FOUNDER ── */
+#founder { background: var(--off-black); padding: 10rem 4rem; margin-top: 0; border-top: 1px solid rgba(122,173,168,0.1); }
+.founder-eyebrow { font-size: 0.5rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--teal); margin-bottom: 3rem; display: flex; align-items: center; gap: 1.5rem; }
+.founder-eyebrow::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: rgba(122,173,168,0.4); }
+.founder-inner { display: grid; grid-template-columns: 420px 1.6fr; gap: 6rem; align-items: start; }
+
+
+  .founder-image-placeholder { aspect-ratio: 3/4; background: rgba(122,173,168,0.06); border: 1px solid rgba(122,173,168,0.2); display: flex; align-items: center; justify-content: center; position: relative; }
+  .founder-image-placeholder::before { content: ''; position: absolute; top: 1rem; left: 1rem; right: 1rem; bottom: 1rem; border: 1px dashed rgba(122,173,168,0.2); pointer-events: none; }
+  .founder-img-hint { font-size: 0.48rem; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(122,173,168,0.35); text-align: center; }
+  .founder-content { display: flex; flex-direction: column; gap: 2rem; padding-top: 0.5rem; }
+  .founder-title { font-family: 'Blanc', serif; font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 400; line-height: 1.15; color: var(--cream); }
+  .founder-title em { font-style: italic; color: var(--teal-light); }
+  .founder-name { font-family: 'Blanc', serif; font-size: 1.3rem; font-weight: 400; color: var(--teal-light); letter-spacing: 0.04em; margin-bottom: 0.2rem; }
+  .founder-body { font-family: 'Blanc', serif; font-size: 1.05rem; font-weight: 400; line-height: 1.8; color: rgba(244,238,228,0.75); }
+  .founder-sig { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--teal); margin-top: 1rem; }
+  @media (max-width: 900px) {
+    #founder { padding: 6rem 2rem; }
+    .founder-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .founder-image-placeholder { max-width: 300px; margin: 0 auto; }
+  }
+
+  
+
+  /* ── COLLABS ── */
+  #collabs { background: var(--warm-white); color: var(--charcoal); padding: 10rem 4rem; }
+  .collab-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; }
+  .collab-title { font-family: 'Blanc', serif; font-size: clamp(2rem,3vw,2.8rem); font-weight: 400; color: var(--charcoal); }
+  .collab-title span { font-style: italic; color: var(--teal-dark); }
+  .collab-season-tag { font-size: 0.52rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); }
+  .collab-divider { width: 100%; height: 1px; background: rgba(26,25,22,0.1); margin: 2.5rem 0; }
+  .collab-section-label { font-size: 0.5rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 2rem; }
+  .designer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1px; background: rgba(26,25,22,0.08); margin-bottom: 4rem; }
+  .designer-card { background: var(--warm-white); padding: 1.8rem 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; text-align: center; cursor: default; transition: background 0.35s, color 0.35s; min-height: 90px; }
+  .designer-card:hover { background: var(--charcoal); }
+  .dc-name { font-family: 'Blanc', serif; font-size: 0.9rem; font-weight: 400; color: var(--charcoal); transition: color 0.35s; letter-spacing: 0.03em; }
+  .designer-card:hover .dc-name { color: var(--cream); }
+  .dc-type { font-size: 0.42rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); transition: color 0.35s; }
+  .designer-card:hover .dc-type { color: var(--teal-light); }
+  .season1-note { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: center; margin-top: 1.5rem; font-style: italic; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--black); padding: 10rem 4rem; }
+  .testimonials-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5rem; }
+  .testimonials-title { font-family: 'Blanc', serif; font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 400; color: var(--cream); }
+  .testimonials-title span { font-style: italic; color: var(--teal-light); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 4rem 6rem; }
+  .testimonial { border-top: 1px solid rgba(122,173,168,0.2); padding-top: 2.5rem; }
+  .testimonial-mark { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: rgba(122,173,168,0.25); line-height: 1; margin-bottom: 1rem; display: block; }
+  .testimonial-text { font-family: 'Blanc', serif; font-size: 1.15rem; font-style: italic; font-weight: 400; line-height: 1.7; color: var(--cream); margin-bottom: 2rem; }
+  .testimonial-author { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal); }
+  .testimonial-role { font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--off-black); border-top: 1px solid rgba(122,173,168,0.15); padding: 4rem; display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; }
+  .footer-left { display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-link { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+  .footer-link:hover { color: var(--teal-light); }
+  .footer-center { text-align: center; }
+  .footer-logo-text { font-family: 'Blanc', serif; font-size: 0.85rem; letter-spacing: 0.5em; text-transform: uppercase; color: var(--cream); }
+  .footer-tagline { font-size: 0.45rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--teal); margin-top: 0.5rem; }
+  .footer-copy { font-size: 0.42rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 1.5rem; }
+  .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.6rem; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; } .reveal-delay-2 { transition-delay: 0.3s; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(10,10,10,0.97); align-items: center; justify-content: center; backdrop-filter: blur(15px); }
+  .lightbox.open { display: flex; }
+  .lightbox-img { max-width: 85vw; max-height: 88vh; object-fit: contain; }
+  .lb-close { position: absolute; top: 2.5rem; right: 4rem; background: none; border: none; font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: color 0.3s; font-family: 'Tenor Sans', sans-serif; }
+  .lb-close:hover { color: var(--cream); }
+  .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 1px solid rgba(122,173,168,0.3); color: var(--cream); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; font-size: 1rem; }
+  .lb-prev { left: 2rem; } .lb-next { right: 2rem; }
+  .lb-prev:hover, .lb-next:hover { background: var(--teal); border-color: var(--teal); color: var(--black); }
+  .teal-divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(122,173,168,0.35) 30%, rgba(122,173,168,0.35) 70%, transparent); }
+
+  @media (max-width: 900px) {
+nav { padding: 1.5rem 2rem; }
+.nav-links { display: none; }
+.hamburger { display: flex; }
+    .rsvp-panel.open { width: 280px; } .rsvp-inner { width: 280px; padding: 2rem 1.5rem; }
+    .hero-content { grid-template-columns: 1fr; padding: 0 2rem 8rem; } .hero-right { align-items: flex-start; }
+    .hero-arrow-next { right: 5rem; }
+    #about { grid-template-columns: 1fr; padding: 6rem 2rem; } .about-vertical-label { display: none; }
+    .masonry { grid-template-columns: 1fr 1fr; } .m1,.m2,.m3,.m4,.m5,.m6 { grid-column: auto; height: 260px; }
+    .past-header { flex-direction: column; gap: 1rem; padding: 0 2rem 3rem; } #past { padding: 6rem 0 0; }
+    #collabs { padding: 6rem 2rem; } .collab-header { flex-direction: column; gap: 1rem; }
+    .testimonials-grid { grid-template-columns: 1fr; } #testimonials { padding: 6rem 2rem; }
+    footer { grid-template-columns: 1fr; text-align: center; padding: 3rem 2rem; } .footer-right { align-items: center; }
+    .countdown-unit { padding: 0.8rem 1.5rem; }
+  }
+/* ── GALLERY SCROLL ── */
+.gallery-shell { position: relative; background: var(--charcoal); margin-top: 0; }
+.gallery-shell::before, .gallery-shell::after { content: ''; position: absolute; top: 0; width: 100px; height: 100%; z-index: 10; pointer-events: none; }
+.gallery-shell::before { left: 0; background: linear-gradient(to right, var(--charcoal), transparent); }
+.gallery-shell::after { right: 0; background: linear-gradient(to left, var(--charcoal), transparent); }
+.gallery-shell[hidden], .past-header[hidden] { display: none !important; }
+.gallery-scroll-wrapper { contain: content; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; cursor: grab; scrollbar-width: thin; scrollbar-color: var(--teal-dark) transparent; }
+.gallery-scroll-wrapper.dragging { cursor: grabbing; user-select: none; }
+.gallery-scroll-wrapper::-webkit-scrollbar { height: 6px; }
+.gallery-scroll-wrapper::-webkit-scrollbar-thumb { background: var(--teal-dark); border-radius: 3px; }
+.gallery-track { display: flex; gap: 4px; width: max-content; padding: 4px; }
+.gallery-item { position: relative; flex-shrink: 0; width: 300px; height: 380px; overflow: hidden; cursor: pointer; }
+.gallery-item img { width: 300px; height: 100%; object-fit: cover; object-position: center center; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); -webkit-user-drag: none; user-select: none; }
+.gallery-item:hover img { transform: scale(1.04); }
+.gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.5rem; }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span { font-size: 0.52rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--cream); }
+.gs-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 11; background: rgba(10,10,10,0.55); border: 1px solid rgba(122,173,168,0.3); color: var(--cream); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; font-size: 1rem; }
+.gs-prev { left: 1.2rem; } .gs-next { right: 1.2rem; }
+.gs-arrow:hover { background: var(--teal); border-color: var(--teal); color: var(--black); }
+
+/* ── GALLERY LIGHTBOX (expanded) ── */
+.gallery-lightbox { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(10,10,10,0.97); align-items: center; justify-content: center; flex-direction: column; gap: 0.8rem; padding: 4.5rem 1rem 1rem; backdrop-filter: blur(15px); }
+.gallery-lightbox.open { display: flex; }
+.glb-stage { position: relative; flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; touch-action: pan-y; }
+.glb-img { max-width: 85vw; max-height: 100%; object-fit: contain; }
+.glb-meta { position: absolute; top: 2.7rem; left: 4rem; font-size: 0.52rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); }
+.glb-close { position: absolute; top: 2.5rem; right: 4rem; background: none; border: none; font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: color 0.3s; font-family: 'Tenor Sans', sans-serif; }
+.glb-close:hover { color: var(--cream); }
+.glb-prev, .glb-next { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 1px solid rgba(122,173,168,0.3); color: var(--cream); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; font-size: 1rem; }
+.glb-prev { left: 1rem; } .glb-next { right: 1rem; }
+.glb-prev:hover, .glb-next:hover { background: var(--teal); border-color: var(--teal); color: var(--black); }
+.glb-strip { position: relative; flex-shrink: 0; width: 100%; max-width: 1100px; display: flex; gap: 6px; padding: 6px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--teal-dark) transparent; }
+.glb-strip img { height: 48px; width: auto; flex-shrink: 0; opacity: 0.4; cursor: pointer; border: 1px solid transparent; transition: opacity 0.3s, border-color 0.3s; }
+.glb-strip img:hover { opacity: 0.8; }
+.glb-strip img.active { opacity: 1; border-color: var(--teal); }
+
+/* footer credit logo: desaturated, full colour on hover */
+.footer-mc-logo { height: 18px; width: auto; vertical-align: middle; filter: grayscale(1); opacity: 0.6; transition: filter 0.4s, opacity 0.4s; }
+a:hover > .footer-mc-logo { filter: grayscale(0); opacity: 1; }
+
+@media (max-width: 900px) {
+  .gallery-item { width: 170px; height: 220px; }
+  .gallery-item img { width: 170px; }
+  .gs-arrow { display: none; }
+  .glb-meta { left: 1.5rem; top: 1.9rem; } .glb-close { right: 1.5rem; top: 1.7rem; }
+  .glb-prev, .glb-next { width: 36px; height: 36px; } .glb-img { max-width: 100vw; }
+}
+
+/* ── HOVER: wiggle + zoom in/out on photos ── */
+@keyframes ddhWiggle {
+  0%   { transform: scale(1.05) rotate(0deg); }
+  20%  { transform: scale(1.10) rotate(-1.2deg); }
+  45%  { transform: scale(1.04) rotate(0.9deg); }
+  70%  { transform: scale(1.09) rotate(-0.7deg); }
+  100% { transform: scale(1.05) rotate(0deg); }
+}
+.gallery-item:hover img, #founder .reveal:hover > img { animation: ddhWiggle 1.8s ease-in-out infinite; will-change: transform; }
+.glb-strip img:hover { transform: scale(1.08); }
+
+/* ── GLINT: a soft light sweep that passes over a random element every few seconds ── */
+.ddh-glint { position: fixed; z-index: 450; pointer-events: none; overflow: hidden; }
+.ddh-glint::before { content: ''; position: absolute; top: -30%; bottom: -30%; left: 0; width: 55%;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0.05) 70%, rgba(255,255,255,0) 100%);
+  transform: translateX(-130%) skewX(-18deg); animation: ddhGlint 1.15s cubic-bezier(.4,.1,.3,1) forwards; }
+@keyframes ddhGlint { to { transform: translateX(300%) skewX(-18deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item:hover img, #founder .reveal:hover > img { animation: none; }
+  .ddh-glint { display: none; }
+}
+.past-cta-bar { text-align: center; padding: 4rem; border-top: 1px solid rgba(122,173,168,0.1); margin-top: 3px; }
+.past-cta-bar a { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+.past-cta-bar a:hover { color: var(--teal-light); }
+
+/* ── HAMBURGER MENU ── */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; z-index: 150; }
+.hamburger span { width: 24px; height: 1px; background: var(--cream); transition: all 0.3s; display: block; }
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.mobile-nav { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.97); z-index: 120; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+.mobile-nav.open { display: flex; }
+@media (max-width: 900px) { .hamburger { display: flex; } } /* fix: base rule above was overriding the mobile breakpoint, hiding the menu button */
+#season-2, #season-3 { scroll-margin-top: 50px; }
+.mobile-nav a { font-size: 0.7rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--cream); text-decoration: none; opacity: 0.7; transition: opacity 0.3s; }
+.mobile-nav a:hover { opacity: 1; }
+
+</style>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7RKF1HT7J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7RKF1HT7J');
+</script>
+  
+</head>
+<body>
+
+<!-- FLOATING RSVP -->
+<div class="rsvp-float" id="rsvpFloat">
+  <div class="rsvp-panel" id="rsvpPanel">
+    <div class="rsvp-inner">
+
+      <!-- Success state (hidden by default) -->
+      <div id="rsvpSuccess" style="display:none;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:1.5rem;text-align:center;padding:2rem 0;">
+        <div style="width:48px;height:48px;border:1px solid var(--teal-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--teal-dark);">✓</div>
+        <p style="font-family:'Blanc',serif;font-size:1.2rem;font-weight:400;color:var(--charcoal);line-height:1.4;">Request<br><em>Received</em></p>
+        <p style="font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);line-height:2;">We'll be in touch<br>shortly.</p>
+      </div>
+
+      <!-- Form state -->
+      <div id="rsvpFormWrap">
+        <div>
+          <h3 class="rsvp-heading">Reserve<br>Your Place</h3>
+          <p class="rsvp-sub" style="margin-top:0.8rem">Season 3 · 1 October 2026<br>Novotel HICC, Hyderabad</p>
+        </div>
+        <div class="intent-row">
+          <div class="intent-btn active" onclick="selectIntent(this,'Attend')">Attend</div>
+          <div class="intent-btn" onclick="selectIntent(this,'Update Me')">Update Me</div>
+          <div class="intent-btn" onclick="selectIntent(this,'Collaborate')">Collab</div>
+        </div>
+
+        <!-- Netlify form: data-netlify="true" enables Netlify form detection.
+             netlify-honeypot="bot-field" adds spam protection.
+             action="/thank-you" is optional — we handle success in JS instead. -->
+        <form
+          id="rsvpForm"
+          name="rsvp-season2"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onsubmit="handleRsvpSubmit(event)"
+          style="display:flex;flex-direction:column;gap:1.1rem;margin-top:0.2rem;"
+        >
+          <!-- Netlify hidden field — required for form detection -->
+          <input type="hidden" name="form-name" value="rsvp-season2">
+
+          <!-- Honeypot field — hidden from humans, catches bots -->
+          <p style="display:none"><label>Don't fill this: <input name="bot-field"></label></p>
+
+          <!-- Intent hidden field — updated by JS when user clicks intent buttons -->
+          <input type="hidden" name="intent" id="intentField" value="Attend">
+
+          <div class="rsvp-fields">
+            <div class="rsvp-field">
+              <label for="rsvp-name">Full Name</label>
+              <input type="text" id="rsvp-name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="rsvp-field">
+              <label for="rsvp-email">Email</label>
+              <input type="email" id="rsvp-email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="rsvp-field">
+              <label for="rsvp-phone">Phone</label>
+              <input type="tel" id="rsvp-phone" name="phone" placeholder="+91">
+            </div>
+            <div class="rsvp-field">
+              <label for="rsvp-ig">Instagram <span style="color:var(--muted);font-size:0.45rem">— optional</span></label>
+              <input type="text" id="rsvp-ig" name="instagram" placeholder="@handle">
+            </div>
+          </div>
+
+          <button type="submit" class="rsvp-submit" id="rsvpBtn">Submit Request</button>
+        </form>
+
+        <p class="rsvp-note">Limited seats. Curated access only.</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="rsvp-tab" onclick="toggleRsvp()">
+    <div class="tab-dot"></div>
+    <span>RSVP · Season 3</span>
+    <div class="tab-dot"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">
+      <img src="Main%20images/DD%20-%20Logo%20Black%20(for%20web).png"
+        alt="Design District Hyd Logo"
+        class="nav-logo-img"
+      />
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#past">Season 01</a></li>
+    <li><a href="#season-2">Season 02</a></li>
+    <li><a href="#season-3">Season 03</a></li>
+    <li><a href="https://www.designdistricthyd.com/s3-map">Floor Map</a></li>
+    <li><a href="#collabs">Designers</a></li>
+    <li><a href="#testimonials">Voices</a></li>
+    <li><a href="https://www.designdistricthyd.com/Season-4" class="nav-cta">Season 4</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#past" onclick="toggleMenu()">Season 01</a>
+  <a href="#season-2" onclick="toggleMenu()">Season 02</a>
+  <a href="#season-3" onclick="toggleMenu()">Season 03</a>
+  <a href="https://www.designdistricthyd.com/s3-map">Floor Map</a>
+  <a href="#collabs" onclick="toggleMenu()">Designers</a>
+  <a href="#testimonials" onclick="toggleMenu()">Voices</a>
+  <a href="https://www.designdistricthyd.com/Season-4" style="color:var(--teal);opacity:1;border:1px solid var(--teal);padding:0.8rem 1.6rem;">Season 4</a>
+  <a href="javascript:void(0)" onclick="toggleMenu();toggleRsvp();" style="color:var(--teal);opacity:1;">RSVP — Season 3</a>
+</div>
+<!-- HERO SLIDER -->
+<section id="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2844%29.webp" alt="Design District Hyd Season 3" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2844%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%284%29.webp" alt="Design District Hyd Season 3" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%284%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%2819%29.webp" alt="Design District Hyd Season 2" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%2819%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20%20%28Parul%20%26%20Preyanka%29.webp" alt="Design District Hyd Season 1 — Parul &amp; Preyanka" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20%20%28Parul%20%26%20Preyanka%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2877%29.webp" alt="Design District Hyd Season 3" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2877%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2825%29.webp" alt="Design District Hyd Season 3" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2825%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2829%29.webp" alt="Design District Hyd Season 3" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2829%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20%2812%29.webp" alt="Design District Hyd Season 1" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20%2812%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2815%29.webp" alt="Design District Hyd Season 3" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2815%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20%2843%29.webp" alt="Design District Hyd Season 1" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%201/Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-%20%2843%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2891%29.webp" alt="Design District Hyd Season 3" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2891%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2828%29.webp" alt="Design District Hyd Season 3" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2828%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%28120%29.webp" alt="Design District Hyd Season 2" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%28120%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%2839%29.webp" alt="Design District Hyd Season 2" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%2839%29.webp'"></div>
+
+    <div class="hero-slide"><img src="web/Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%2852%29.webp" alt="Design District Hyd Season 2" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='Season%202/Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery-%20%2852%29.webp'"></div>
+
+  </div>
+  <div class="hero-grain"></div>
+  <div class="hero-line"></div>
+
+<!-- DDH mark watermark -->
+<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;opacity:0.06;pointer-events:none">
+  <img src="Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="" style="width:420px;height:auto;filter:invert(1);">
+</div>
+  <button class="hero-arrow hero-arrow-prev" onclick="slideHero(-1)">&#8592;</button>
+  <button class="hero-arrow hero-arrow-next" onclick="slideHero(1)">&#8594;</button>
+
+
+<div class="hero-dots" id="heroDots">
+  <div class="hero-dot active" onclick="goToSlide(0)"></div>
+  <div class="hero-dot" onclick="goToSlide(1)"></div>
+  <div class="hero-dot" onclick="goToSlide(2)"></div>
+  <div class="hero-dot" onclick="goToSlide(3)"></div>
+  <div class="hero-dot" onclick="goToSlide(4)"></div>
+  <div class="hero-dot" onclick="goToSlide(5)"></div>
+  <div class="hero-dot" onclick="goToSlide(6)"></div>
+  <div class="hero-dot" onclick="goToSlide(7)"></div>
+  <div class="hero-dot" onclick="goToSlide(8)"></div>
+  <div class="hero-dot" onclick="goToSlide(9)"></div>
+  <div class="hero-dot" onclick="goToSlide(10)"></div>
+  <div class="hero-dot" onclick="goToSlide(11)"></div>
+  <div class="hero-dot" onclick="goToSlide(12)"></div>
+  <div class="hero-dot" onclick="goToSlide(13)"></div>
+  <div class="hero-dot" onclick="goToSlide(14)"></div>
+</div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Season 3 · 2026</span>
+      </div>
+      <h1 class="hero-title">Design<br><em>District</em><br><span class="district-line">Hyd</span></h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-venue">
+        <div class="hero-venue-name">Novotel HICC</div>
+        <div class="hero-venue-sub">Hyderabad, India</div>
+      </div>
+      <div class="hero-date-block">
+  <div class="hero-venue-sub">Season 3</div>
+        <div class="hero-date-main">01 October</div>
+        <div class="hero-date-year">2026 · 10 AM – 8 PM</div>
+      </div>
+      <button class="hero-cta" onclick="toggleRsvp()">Attend / Stay Updated <span>→</span></button>
+    </div>
+  </div>
+
+  <div class="countdown-bar">
+    <div class="countdown-unit"><span class="countdown-num" id="cd-d">27</span><span class="countdown-label">Days</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-h">14</span><span class="countdown-label">Hours</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-m">32</span><span class="countdown-label">Minutes</span></div>
+    <div class="countdown-unit"><span class="countdown-num" id="cd-s">08</span><span class="countdown-label">Seconds</span></div>
+  </div>
+</section>
+
+<!-- INSTAGRAM SCROLL STRIP -->
+<div class="ig-strip-section">
+  <div class="ig-strip-label">
+    <span class="ig-strip-label-text">@designdistrict.hyd · Season 3 Preview</span>
+  </div>
+  <div class="ig-scroll-wrapper">
+        <div class="ig-track" id="igTrack">
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Dd0xnGeR5hn/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Dd0QDZaBZvb/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdyDrw1uOsE/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddwml0hk_sJ/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Dbm7l8BmA-l/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdrLlWVsVqK/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddsxa-XBXiZ/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddn8GeeBDCF/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddp7JSRBzTM/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddn0XIDGG0W/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdVsv24BWPt/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdSwASmyA_-/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdA_gpnhz5I/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdMUTv3h6VS/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Dd0xnGeR5hn/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Dd0QDZaBZvb/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdyDrw1uOsE/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddwml0hk_sJ/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Dbm7l8BmA-l/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdrLlWVsVqK/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddsxa-XBXiZ/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddn8GeeBDCF/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddp7JSRBzTM/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Ddn0XIDGG0W/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdVsv24BWPt/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdSwASmyA_-/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdA_gpnhz5I/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+      <div class="ig-embed-card"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DdMUTv3h6VS/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;padding:0;width:328px;min-width:328px;max-width:328px;"></blockquote></div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ABOUT -->
+<section id="about">
+  <span class="about-vertical-label">The Concept</span>
+  <div class="about-copy reveal">
+    A bridge between emerging Indian luxury and the city's most design-forward audience.
+  </div>
+  <div class="about-details reveal reveal-delay-1">
+    <div class="about-stat about-award has-photo">
+      <a class="about-award-photo" href="https://www.instagram.com/p/Ddwml0hk_sJ/" target="_blank" rel="noopener" aria-label="View the award post on Instagram">
+        <img src="Times-Business-Awards-2026.webp" alt="Design District Hyderabad at the Times Business Awards Hyderabad 2026" loading="lazy" decoding="async"
+             onerror="var a=this.closest('.about-award');a.classList.remove('has-photo');this.parentNode.remove();">
+      </a>
+      <div class="about-award-body">
+        <div class="about-award-event">Times Business Awards Hyderabad 2026 &middot; 12th Edition</div>
+        <div class="about-award-title">Hyderabad's Outstanding Curated Fashion Exhibition</div>
+        <div class="about-award-winner">Design District Hyderabad</div>
+        <div class="about-award-note">100+ designers invited from across India, Season 03</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div class="teal-divider"></div>
+
+
+<!-- MEET THE FOUNDER -->
+<section id="founder">
+  <div class="founder-eyebrow reveal">Meet the Founder</div>
+  <div class="founder-inner">
+  <div class="reveal" style="width:420px;height:560px;overflow:hidden;flex-shrink:0;">
+      <img src="web/Aishwarya-Agarwal-DDH-001x1.webp" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/MCMohkh/DDH-Public-Repo/main/Aishwarya-Agarwal-DDH-001x1.jpg'" loading="lazy" decoding="async" alt="Aishwarya Agarwal — Founder, Design District Hyd" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+    </div>
+    <div class="founder-content">
+      <h2 class="founder-title reveal">A vision rooted in<br><em>Global fashion + Indian roots</em></h2>
+      <div class="reveal reveal-delay-1">
+        <p class="founder-name">Aishwarya Agarwal</p>
+        <p class="founder-body">Hi, I’m Aishwarya Agarwal. For over 15 years, I’ve built platforms that bring designers and dreamers together, guided by a deep love for Indian fashion and the creative minds shaping it.</p>
+      </div>
+      <p class="founder-body reveal reveal-delay-1">With <em style="color:var(--teal-light)">Design District</em>, I’m not curating another show. I’m opening a new chapter. A space where fashion meets purpose, talent is celebrated, and every label tells a story that goes beyond trends.</p>
+      <p class="founder-body reveal reveal-delay-1">For designers, it’s a stage before an engaged audience that values originality. For shoppers, it’s a chance to meet the creators and take home pieces that feel personal. Design District isn’t just a destination. It’s discovery, connection, and conversation. More than an event, it’s a vision to create experiences that linger long after the lights fade.</p>
+      <p class="founder-body reveal reveal-delay-1">I invite you to be part of this journey — because when we come together, we don't just elevate design. <em style="color:var(--teal-light)">We reshape culture.</em></p>
+      <div class="founder-sig reveal">Aishwarya</div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLABS -->
+<section id="collabs">
+  <div class="collab-header reveal">
+    <h2 class="collab-title">The <span>Collective</span></h2>
+  </div>
+  <div class="collab-divider"></div>
+  <div class="reveal">
+    <div class="collab-section-label">Season 3 Designers &amp; Labels · Hyderabad</div>
+    <div class="designer-grid">
+      <div class="designer-card"><span class="dc-name">Shobika Bhandari</span></div>
+      <div class="designer-card"><span class="dc-name">Moonray</span></div>
+      <div class="designer-card"><span class="dc-name">Abhishek Sharma</span></div>
+      <div class="designer-card"><span class="dc-name">Namrata Rajpal</span></div>
+      <div class="designer-card"><span class="dc-name">Nachiket Bharve</span></div>
+      <div class="designer-card"><span class="dc-name">Urban Pataka</span></div>
+      <div class="designer-card"><span class="dc-name">The Dramebaaz Company</span></div>
+      <div class="designer-card"><span class="dc-name">TIL by Ankur Verma</span></div>
+      <div class="designer-card"><span class="dc-name">Platinoiir</span></div>
+      <div class="designer-card"><span class="dc-name">Mehak Talreja</span></div>
+      <div class="designer-card"><span class="dc-name">Anuragh Gupta</span></div>
+      <div class="designer-card"><span class="dc-name">Dash &amp; Dot</span></div>
+      <div class="designer-card"><span class="dc-name">Mohammed Mazhar</span></div>
+      <div class="designer-card"><span class="dc-name">Jafer Jafry</span></div>
+      <div class="designer-card"><span class="dc-name">Kriti Maggon</span></div>
+      <div class="designer-card"><span class="dc-name">Aanchal Vijaywargi</span></div>
+      <div class="designer-card"><span class="dc-name">Krati Jain</span></div>
+      <div class="designer-card"><span class="dc-name">Shradha Prêt Line</span></div>
+      <div class="designer-card"><span class="dc-name">Our Love</span></div>
+      <div class="designer-card"><span class="dc-name">Chambray &amp; Co</span></div>
+      <div class="designer-card"><span class="dc-name">Pooja Rajgharia</span></div>
+      <div class="designer-card"><span class="dc-name">Parul &amp; Priyanka</span></div>
+      <div class="designer-card"><span class="dc-name">Gyaarah Baees</span></div>
+      <div class="designer-card"><span class="dc-name">Divisha Sharma</span></div>
+      <div class="designer-card"><span class="dc-name">Shivya K</span></div>
+      <div class="designer-card"><span class="dc-name">The Night Trend</span></div>
+      <div class="designer-card"><span class="dc-name">Angsa</span></div>
+      <div class="designer-card"><span class="dc-name">One 10 by Gaurangana</span></div>
+    </div>
+    <div class="season1-note">
+  <strong>Design District Hyd Season 3</strong><br>
+  A curated fashion exhibition in Hyderabad featuring 100+ independent Indian designers,
+  fashion labels, couture, jewellery and lifestyle brands.
+  <br><br>
+  <strong>1 October 2026</strong> · Novotel HICC Hyderabad · Hall #4
+</div>
+    <p class="season1-note" style="margin-top:1.5rem;">
+      <a href="https://www.designdistricthyd.com/s3-map"
+         style="color:var(--teal-dark);text-decoration:none;">
+        Explore the Season 3 Hall #4 Floor Map →
+      </a>
+    </p>
+  </div>
+</section>
+
+
+
+
+<!-- PAST EDITIONS -->
+<section id="past">
+  <div class="past-header reveal" style="padding-bottom: 5rem;">
+    <h2 class="past-title">Season 01 — <span>The Beginning</span></h2>
+    <div class="past-meta">29 September 2025<br>Park Hyatt · Hyderabad</div>
+  </div>
+
+  <!-- SEASON GALLERIES (files are listed in the DDH_GALLERIES array in the script below) -->
+  <div class="gallery-shell" data-season-block="s1">
+    <button class="gs-arrow gs-prev" type="button" aria-label="Scroll left" data-dir="-1">&#8592;</button>
+    <button class="gs-arrow gs-next" type="button" aria-label="Scroll right" data-dir="1">&#8594;</button>
+    <div class="gallery-scroll-wrapper"><div class="gallery-track" data-gallery="s1"></div></div>
+  </div>
+
+  <div class="past-header reveal" id="season-2" style="padding-top:6rem;padding-bottom:3rem;">
+    <h2 class="past-title">Season 02</h2>
+    <div class="past-meta">25 March 2026<br>Park Hyatt · Hyderabad</div>
+  </div>
+  <div class="gallery-shell" data-season-block="s2">
+    <button class="gs-arrow gs-prev" type="button" aria-label="Scroll left" data-dir="-1">&#8592;</button>
+    <button class="gs-arrow gs-next" type="button" aria-label="Scroll right" data-dir="1">&#8594;</button>
+    <div class="gallery-scroll-wrapper"><div class="gallery-track" data-gallery="s2"></div></div>
+  </div>
+
+  <div class="past-header reveal" id="season-3" data-season-block="s3" style="padding-top:6rem;padding-bottom:3rem;" hidden>
+    <h2 class="past-title">Season 03</h2>
+    <div class="past-meta">1 October 2026<br>Novotel HICC · Hyderabad</div>
+  </div>
+  <div class="gallery-shell" data-season-block="s3" hidden>
+    <button class="gs-arrow gs-prev" type="button" aria-label="Scroll left" data-dir="-1">&#8592;</button>
+    <button class="gs-arrow gs-next" type="button" aria-label="Scroll right" data-dir="1">&#8594;</button>
+    <div class="gallery-scroll-wrapper"><div class="gallery-track" data-gallery="s3"></div></div>
+  </div>
+
+  <div class="past-cta-bar">
+    <a href="https://instagram.com/designdistrict.hyd" target="_blank">View Full Gallery on Instagram &nbsp;↗</a>
+  </div>
+</section>
+
+<!-- Gallery Lightbox (expanded view) -->
+<div class="gallery-lightbox" id="galleryLightbox" style="display:none;">
+  <div class="glb-meta" id="glbMeta"></div>
+  <button class="glb-close" onclick="closeGallery()">Close ×</button>
+  <div class="glb-stage" id="glbStage">
+    <button class="glb-prev" onclick="galleryNav(-1)">&#8592;</button>
+    <img class="glb-img" id="glbImg" src="" alt="">
+    <button class="glb-next" onclick="galleryNav(1)">&#8594;</button>
+  </div>
+  <div class="glb-strip" id="glbStrip"></div>
+</div>
+
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header reveal">
+    <h2 class="testimonials-title">In <span>Their Words</span></h2>
+    <span style="font-size:0.52rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted)">
+      Voices from Season 01
+    </span>
+  </div>
+
+  <div class="testimonials-grid">
+
+    <div class="testimonial reveal">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Right from 9am we had nonstop footfall. An exhausting yet phenomenal debut. We cannot wait to return.
+      </p>
+      <div class="testimonial-author">Founder/Designer</div>
+      <div class="testimonial-role">
+        Aakanksha | 
+        <a href="https://www.instagram.com/pinkpeso_official/" target="_blank" rel="noopener">
+          PinkPeso
+        </a>
+      </div>
+    </div>
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Absolutely thrilled with the response. Could not have asked for a better platform. Thank you, Aishwarya.
+      </p>
+      <div class="testimonial-author">Founder/Designer</div>
+      <div class="testimonial-role">
+        Gunjan | 
+        <a href="https://www.instagram.com/anaydara/" target="_blank" rel="noopener">
+          Anaydara
+        </a>
+      </div>
+    </div>
+
+    <div class="testimonial reveal">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Loved the show and the warmth of Hyderabad. Thank you, Aishwarya, for building this incredible experience.
+      </p>
+      <div class="testimonial-author">Exhibitor/Designer</div>
+      <div class="testimonial-role">
+        Karan | Studio 22
+      </div>
+    </div>
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        The designer curation is exceptional. Aishwarya’s strong vision truly defines Design District. Proud to be part of it.
+      </p>
+      <div class="testimonial-author">Stylist</div>
+      <div class="testimonial-role">
+        <a href="https://www.instagram.com/bharatg18" target="_blank" rel="noopener">
+          Bharat Gupta
+        </a> | Lakmé
+      </div>
+    </div>
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        A fantastic show in Hyderabad. Wonderful returning clients and seamless organization by Aishwarya.
+      </p>
+      <div class="testimonial-author">Founder/Designer</div>
+      <div class="testimonial-role">
+        Mahek | 
+        <a href="https://www.instagram.com/platinoiir/" target="_blank" rel="noopener">
+          Platinoiir
+        </a>
+      </div>
+    </div>
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Our first time in Hyderabad with Design District. Incredible energy, amazing response, and we cannot wait to be back.
+      </p>
+      <div class="testimonial-author">Exhibitor/Designer</div>
+      <div class="testimonial-role">
+        Gaurangana | 
+        <a href="https://www.instagram.com/one10.bygaurangana/" target="_blank" rel="noopener">
+          One 10
+        </a>
+      </div>
+    </div>
+
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Aishwarya did a great job, Its an amazing show, Great Designers, and I just loved shopping here!
+      </p>
+      <div class="testimonial-author">Shreedevi Choudary</div>
+      <div class="testimonial-role">
+       Client
+      </div>
+    </div>
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Design District has a fabulous selection of all things Indian & Western.
+      </p>
+      <div class="testimonial-author">Rishita M Valiram</div>
+      <div class="testimonial-role">
+       Client
+      </div>
+    </div>
+
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        I've ben waiting for this exhibition. Its such an amazing lineup which Aishwarya has curated.
+      </p>
+      <div class="testimonial-author">Sakshi Goenka</div>
+      <div class="testimonial-role">
+       Client
+      </div>
+    </div>
+
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Such a beautiful gang of designers, we dont need to go anywhere now!
+      </p>
+      <div class="testimonial-author">Nisha Pitti</div>
+      <div class="testimonial-role">
+       Client
+      </div>
+    </div>
+
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        I am amazed and overwhelmed with the curation, the line up is just top-notch premium.
+      </p>
+      <div class="testimonial-author">Anchal Aggarwal</div>
+      <div class="testimonial-role">
+       Client
+      </div>
+    </div>
+
+    <div class="testimonial reveal reveal-delay-1">
+      <span class="testimonial-mark">"</span>
+      <p class="testimonial-text">
+        Its amazing meeting designers ang coming together. I love Design District!
+      </p>
+      <div class="testimonial-author">Manisha Koripalli</div>
+      <div class="testimonial-role">
+       Client
+      </div>
+    </div>
+
+
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <a href="/cdn-cgi/l/email-protection#a5d5c9c4c6c0cdcac9c1c0d7e5c1c1cd8bcccb" class="footer-link"><span class="__cf_email__" data-cfemail="9aeaf6fbf9fff2f5f6feffe8dafefef2b4f3f4">[email&#160;protected]</span></a>
+    <a href="https://www.instagram.com/designdistrict.hyd/" target="_blank" class="footer-link" style="display:flex;align-items:center;gap:0.6rem;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.7"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @designdistrict.hyd
+    </a>
+    <a href="#" class="footer-link">Novotel HICC · 01 October 2026</a>
+  </div>
+  <div class="footer-center">
+    <div style="display:flex;align-items:center;justify-content:center;gap:0.8rem;margin-bottom:0.8rem">
+      <img src="Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd" style="height:52px;width:auto;filter:invert(1);opacity:0.85;">
+    </div>
+    <div class="footer-tagline">One of a Kind Pop Up · Hyderabad</div>
+    <p style="font-size:0.48rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.8rem;line-height:1.8;">
+  Strategic, creative and digital support by
+  <a href="https://www.mcjoint.in/" target="_blank" rel="noopener"
+     style="color:var(--teal-light);text-decoration:none;">
+    MC Joint Agency
+  </a>
+</p>
+    <div class="footer-copy"> © 2026 Design District Hyd. All rights reserved.<br> Website designed by <a href="https://www.mcjoint.in/" class="footer-link" aria-label="MC Joint Agency"> <img class="footer-mc-logo" src="Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"> </a> </div>
+  </div>
+  <div class="footer-right">
+    <a href="javascript:void(0)" class="footer-link" onclick="toggleRsvp()">RSVP — Season 3 ↗</a>
+    <a href="https://www.designdistricthyd.com/Season-4" class="footer-link">Season 4 — Apply ↗</a>
+    <a href="https://www.designdistricthyd.com/s3-map" class="footer-link">Floor Map ↗</a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">Close ×</button>
+  <button class="lb-prev" onclick="lbNav(-1)">&#8592;</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="">
+  <button class="lb-next" onclick="lbNav(1)">&#8594;</button>
+</div>
+
+<!-- Instagram Embed Script -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  var strip=document.querySelector('.ig-strip-section'); if(!strip) return;
+  var track=document.getElementById('igTrack'), loaded=false;
+  function load(){ if(loaded) return; loaded=true;
+    var s=document.createElement('script'); s.async=true; s.src='https://www.instagram.com/embed.js';
+    s.onload=function(){ if(window.instgrm) window.instgrm.Embeds.process(); }; document.body.appendChild(s); }
+  if(!('IntersectionObserver' in window)){ load(); return; }
+  new IntersectionObserver(function(es){ es.forEach(function(e){
+    if(e.isIntersecting) load();
+    if(track) track.style.animationPlayState = e.isIntersecting ? '' : 'paused';
+  }); },{rootMargin:'400px 0px'}).observe(strip);
+})();
+</script>
+
+<script>
+  // ── MOBILE MENU ──
+  let menuOpen = false;
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('hamburger').classList.toggle('open', menuOpen);
+    document.getElementById('mobileNav').classList.toggle('open', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }
+
+  // ── RSVP ──
+  let rsvpOpen = false;
+  function toggleRsvp() {
+    rsvpOpen = !rsvpOpen;
+    document.getElementById('rsvpPanel').classList.toggle('open', rsvpOpen);
+  }
+  function selectIntent(el, value) {
+    document.querySelectorAll('.intent-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('intentField').value = value;
+  }
+
+  async function handleRsvpSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('rsvpForm');
+    const btn  = document.getElementById('rsvpBtn');
+
+    // Button loading state
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    try {
+      // Netlify Forms accepts fetch POST with URL-encoded body
+      const data = new FormData(form);
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data).toString()
+      });
+
+      // GA4 RSVP conversion
+      if (typeof gtag === 'function') {
+        gtag('event', 'rsvp_submit', {
+          event_category: 'RSVP',
+          event_label: document.getElementById('intentField').value
+        });
+      }
+
+      // Show success state
+      document.getElementById('rsvpFormWrap').style.display = 'none';
+      const success = document.getElementById('rsvpSuccess');
+      success.style.display = 'flex';
+    } catch (err) {
+      // Fallback: show error inline
+      btn.textContent = 'Try Again';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.background = '#c0392b';
+    }
+  }
+
+  // ── HERO SLIDER ──
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  let autoSlide = setInterval(() => slideHero(1), 5000);
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    clearInterval(autoSlide);
+    autoSlide = setInterval(() => slideHero(1), 5000);
+  }
+  function slideHero(dir) { goToSlide(currentSlide + dir); }
+
+  
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── LIGHTBOX ──
+  const lbImages = [];
+  let lbCurrent = 0;
+  function openLightbox(idx) {
+    lbCurrent = idx;
+    document.getElementById('lbImg').src = lbImages[idx];
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+  function lbNav(dir) {
+    lbCurrent = (lbCurrent + dir + lbImages.length) % lbImages.length;
+    document.getElementById('lbImg').src = lbImages[lbCurrent];
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  // ── REINIT INSTAGRAM EMBEDS after DOM ready ──
+  window.addEventListener('load', () => {
+    if (window.instgrm) window.instgrm.Embeds.process();
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // 1 October 2026, 10:00 AM IST
+  // IST = UTC + 5:30 → 10:00 IST = 04:30 UTC
+  const targetUTC = Date.UTC(2026, 9, 1, 4, 30, 0);
+
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = targetUTC - now;
+
+    if (diff <= 0) {
+      document.querySelector(".countdown-bar").innerHTML =
+        "<span style='font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:#7AADA8'>Season 3 · Live Now</span>";
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById("cd-d").textContent = String(d).padStart(2, "0");
+    document.getElementById("cd-h").textContent = String(h).padStart(2, "0");
+    document.getElementById("cd-m").textContent = String(m).padStart(2, "0");
+    document.getElementById("cd-s").textContent = String(s).padStart(2, "0");
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+});
+</script>
+
+<script>
+
+// ── SEASON GALLERIES ──
+// To add / remove photos, just edit the file names below (folder = "dir").
+// Season 3 stays hidden on the page until it has at least one file listed.
+const DDH_GALLERIES = {
+  s1: { dir: 'Season 1/', label: 'Season 01', files: ["Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-  (Parul & Preyanka).webp", "Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery- (11).webp", "Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery- (12).webp", "Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery- (18).webp", "Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery- (25).webp", "Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery- (43).webp", "Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery- (48).webp", "Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery- (56).webp"] },
+  s2: { dir: 'Season 2/', label: 'Season 02', files: ["Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (4).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (6).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (9).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (12).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (14).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (16).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (19).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (24).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (25).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (27).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (32).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (36).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (39).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (43).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (44).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (50).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (52).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (53).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (54).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (56).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (62).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (64).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (68).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (69).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (72).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (76).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (80).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (81).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (87).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (88).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (89).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (94).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (99).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (102).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (106).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (107).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (113).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (115).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (118).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (120).webp", "Design-District-Hyd-Season-2-Aishwarya-Agarwal-gallery- (123).webp"] },
+  s3: { dir: 'Season 3/', label: 'Season 03', files: ["Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (13).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (15).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (16).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (28).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (29).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (30).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (4).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (44).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (62).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (77).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (8).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (84).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (91).webp", "Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery- (93).webp"] }
+};
+const DDH_CAPTIONS = { 'Design-District-Hyd-Season1-Aishwarya-Agarwal-gallery-  (Parul & Preyanka).webp': 'Parul & Preyanka' };
+
+let glbKey = 's1';
+let glbCurrent = 0;
+const glbPath = (pre, k, f) => (pre + DDH_GALLERIES[k].dir + f).split('/').map(encodeURIComponent).join('/');
+const glbUrl   = (k, f) => glbPath('', k, f);            // original (fallback only)
+const glbThumb = (k, f) => glbPath('thumbs/', k, f);     // ~480px  -> gallery thumbnails
+const glbWeb   = (k, f) => glbPath('web/', k, f);        // ~1600px -> expanded viewer
+function glbSet(img, small, orig) { img.onerror = function () { img.onerror = null; img.src = orig; }; img.src = small; }
+
+(function buildGalleries() {
+  Object.keys(DDH_GALLERIES).forEach(function (key) {
+    const g = DDH_GALLERIES[key];
+    const track = document.querySelector('[data-gallery="' + key + '"]');
+    if (!track) return;
+    if (!g.files.length) return;                       // stays hidden (Season 3 until filled)
+    document.querySelectorAll('[data-season-block="' + key + '"]').forEach(function (el) { el.hidden = false; });
+    g.files.forEach(function (f, i) {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.tabIndex = 0;
+      item.setAttribute('role', 'button');
+      item.innerHTML = '<img loading="lazy" draggable="false"><div class="gallery-overlay"><span></span></div>';
+      const img = item.querySelector('img');
+      img.decoding = 'async';
+      glbSet(img, glbThumb(key, f), glbUrl(key, f));
+      img.alt = 'Design District Hyd ' + g.label + ' — curated fashion exhibition in Hyderabad — photo ' + (i + 1);
+      item.querySelector('span').textContent = DDH_CAPTIONS[f] || g.label;
+      item.addEventListener('click', function () { if (!track.parentNode.wasDragged) openGallery(key, i); });
+      item.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGallery(key, i); } });
+      track.appendChild(item);
+    });
+  });
+
+  // drag-to-scroll (mouse) + arrow buttons; touch / trackpad scroll natively
+  document.querySelectorAll('.gallery-shell').forEach(function (shellEl) {
+    const sc = shellEl.querySelector('.gallery-scroll-wrapper');
+    let down = false, startX = 0, startLeft = 0;
+    sc.addEventListener('mousedown', function (e) { down = true; sc.wasDragged = false; startX = e.pageX; startLeft = sc.scrollLeft; });
+    window.addEventListener('mousemove', function (e) {
+      if (!down) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 6) { sc.wasDragged = true; sc.classList.add('dragging'); }
+      if (sc.wasDragged) sc.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener('mouseup', function () {
+      if (!down) return; down = false; sc.classList.remove('dragging');
+      setTimeout(function () { sc.wasDragged = false; }, 0);
+    });
+    shellEl.querySelectorAll('.gs-arrow').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        sc.scrollBy({ left: Number(btn.dataset.dir) * sc.clientWidth * 0.8, behavior: 'smooth' });
+      });
+    });
+  });
+})();
+
+function glbRender() {
+  const g = DDH_GALLERIES[glbKey], f = g.files[glbCurrent];
+  const big = document.getElementById('glbImg');
+  glbSet(big, glbWeb(glbKey, f), glbUrl(glbKey, f));
+  big.alt = 'Design District Hyd ' + g.label + ' — curated fashion exhibition in Hyderabad — photo ' + (glbCurrent + 1);
+  document.getElementById('glbMeta').textContent = g.label + '  ·  ' + (glbCurrent + 1) + ' / ' + g.files.length;
+  const strip = document.getElementById('glbStrip');
+  Array.prototype.forEach.call(strip.children, function (el, i) { el.classList.toggle('active', i === glbCurrent); });
+  const cur = strip.children[glbCurrent];
+  if (cur) strip.scrollTo({ left: cur.offsetLeft - strip.clientWidth / 2 + cur.clientWidth / 2, behavior: 'smooth' });
+  [1, -1].forEach(function (d) { new Image().src = glbWeb(glbKey, g.files[(glbCurrent + d + g.files.length) % g.files.length]); });
+}
+function openGallery(key, idx) {
+  const g = DDH_GALLERIES[key]; if (!g || !g.files.length) return;
+  glbKey = key;
+  glbCurrent = ((idx % g.files.length) + g.files.length) % g.files.length;
+  const strip = document.getElementById('glbStrip');
+  strip.innerHTML = '';
+  g.files.forEach(function (f, i) {
+    const th = document.createElement('img');
+    th.loading = 'lazy';
+th.decoding = 'async';
+glbSet(th, glbThumb(key, f), glbUrl(key, f));
+th.alt = 'Design District Hyd ' + g.label + ' gallery thumbnail';
+    th.addEventListener('click', function () { glbCurrent = i; glbRender(); });
+    strip.appendChild(th);
+  });
+  const lb = document.getElementById('galleryLightbox');
+  lb.style.display = 'flex';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  glbRender();
+}
+function closeGallery() {
+  const lb = document.getElementById('galleryLightbox');
+  lb.classList.remove('open');
+  lb.style.display = 'none';
+  document.body.style.overflow = '';
+}
+function galleryNav(dir) {
+  const n = DDH_GALLERIES[glbKey].files.length;
+  glbCurrent = (glbCurrent + dir + n) % n;
+  glbRender();
+}
+document.getElementById('galleryLightbox').addEventListener('click', function (e) {
+  if (e.target === this || e.target.id === 'glbStage') closeGallery();
+});
+document.addEventListener('keydown', function (e) {
+  if (!document.getElementById('galleryLightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') galleryNav(1);
+  if (e.key === 'ArrowLeft')  galleryNav(-1);
+  if (e.key === 'Escape')     closeGallery();
+});
+// swipe + wheel inside the expanded view
+(function () {
+  const stage = document.getElementById('glbStage');
+  let x0 = null, wheelLock = false;
+  stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) galleryNav(dx < 0 ? 1 : -1);
+  });
+  stage.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    if (wheelLock) return; wheelLock = true; setTimeout(function () { wheelLock = false; }, 350);
+    galleryNav((Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) > 0 ? 1 : -1);
+  }, { passive: false });
+})();
+</script>
+
+
+
+<!-- STRUCTURED DATA — Google Rich Results -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Design District Hyd — Season 3",
+  "description": "Design District Hyd Season 3 is a curated fashion exhibition in Hyderabad featuring 100+ independent Indian designers across fashion, couture, jewellery and lifestyle. The event takes place on 1 October 2026 at Hall #4, Novotel HICC Hyderabad.",
+  "startDate": "2026-10-01T10:00:00+05:30",
+  "endDate": "2026-10-01T20:00:00+05:30",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "url": "https://www.designdistricthyd.com/",
+  "image": [
+    "https://www.designdistricthyd.com/Main%20images/DD%20-%20Something%20exceptional%20is%20coming.jpg",
+    "https://www.designdistricthyd.com/web/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2844%29.webp"
+  ],
+  "location": {
+    "@type": "Place",
+    "name": "Novotel HICC Hyderabad",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "addressCountry": "IN"
+    }
+  },
+  "organizer": {
+    "@type": "Person",
+    "name": "Aishwarya Agarwal",
+    "url": "https://www.designdistricthyd.com/"
+  },
+  "keywords": [
+    "Design District Hyd",
+    "Design District Hyderabad",
+    "Design District Season 3",
+    "fashion exhibition Hyderabad",
+    "curated fashion exhibition Hyderabad",
+    "Indian designers",
+    "luxury fashion Hyderabad",
+    "Aishwarya Agarwal",
+    "Novotel HICC Hyderabad"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aishwarya Agarwal",
+  "jobTitle": "Founder & Creative Director",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Design District Hyd"
+  },
+  "url": "https://www.designdistricthyd.com/",
+  "image": "https://www.designdistricthyd.com/web/Aishwarya-Agarwal-DDH-001x1.webp",
+  "sameAs": [
+    "https://www.instagram.com/designdistrict.hyd"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Design District Hyd",
+  "alternateName": ["Design District Hyderabad", "Design District", "DDH"],
+  "url": "https://www.designdistricthyd.com/",
+  "logo": "https://www.designdistricthyd.com/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png",
+  "image": "https://www.designdistricthyd.com/web/Aishwarya-Agarwal-DDH-001x1.webp",
+  "description": "Design District Hyd is a curated luxury fashion showcase founded by Aishwarya Agarwal, bringing together India's finest independent designers in Hyderabad.",
+  "founder": {
+    "@type": "Person",
+    "name": "Aishwarya Agarwal"
+  },
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Hyderabad, Telangana, India"
+  },
+  "sameAs": [
+    "https://www.instagram.com/designdistrict.hyd"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Design District Hyd — Season 3",
+  "description": "Official website for Design District Hyd Season 3, a curated fashion showcase at Novotel HICC Hyderabad on 1 October 2026.",
+  "url": "https://www.designdistricthyd.com/",
+  "inLanguage": "en-IN",
+  "author": {
+    "@type": "Person",
+    "name": "Aishwarya Agarwal"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Design District Hyd",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.designdistricthyd.com/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png"
+    }
+  },
+"about": {
+  "@type": "Thing",
+  "name": "Design District Hyd Season 3"
+}
+}
+</script>
+
+
+<script>
+// ── GLINT (one at a time, random timing, random element) ──
+(function () {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var TEXT = 'h1, h2, h3, .about-copy, .about-award-title, .founder-eyebrow, .hero-eyebrow-text, .footer-tagline';
+  var BOXES = 'button:not(.gs-arrow):not(.hero-arrow):not(.glb-prev):not(.glb-next):not(.glb-close), .hero-cta, .rsvp-submit, .designer-card, .gallery-item, #founder .reveal, input, select, textarea, .nav-logo-img, .footer-link';
+  function candidates() {
+    var vh = window.innerHeight, vw = window.innerWidth, out = [];
+    document.querySelectorAll(TEXT + ', ' + BOXES).forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.width < 24 || r.height < 12) return;
+      if (r.bottom < 40 || r.top > vh - 40 || r.right < 0 || r.left > vw) return;
+      var cs = getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.display === 'none' || parseFloat(cs.opacity) < 0.6) return;
+      out.push(el);
+    });
+    return out;
+  }
+  function rectFor(el) {
+    if (el.matches(TEXT)) { var rg = document.createRange(); rg.selectNodeContents(el); var rr = rg.getBoundingClientRect(); if (rr.width > 10) return rr; }
+    return el.getBoundingClientRect();
+  }
+  function fire() {
+    var open = document.getElementById('galleryLightbox'), mm = document.getElementById('mobileNav');
+    if (!document.hidden && !(open && open.classList.contains('open')) && !(mm && mm.classList.contains('open'))) {
+      var c = candidates();
+      if (c.length) {
+        var el = c[Math.floor(Math.random() * c.length)], r = rectFor(el);
+        var g = document.createElement('div');
+        g.className = 'ddh-glint';
+        g.style.cssText = 'left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px;border-radius:' + getComputedStyle(el).borderRadius;
+        document.body.appendChild(g);
+        setTimeout(function () { g.remove(); }, 1300);
+      }
+    }
+    setTimeout(fire, 1800 + Math.random() * 3800);
+  }
+  setTimeout(fire, 2500);
+})();
+</script>
+<script>
+// Footer links on other pages point here with #rsvp — open the RSVP panel
+if (location.hash === '#rsvp') window.addEventListener('load', function () { setTimeout(function () { if (!document.getElementById('rsvpPanel').classList.contains('open')) toggleRsvp(); }, 500); });
+</script>
+</body>
+</html>
