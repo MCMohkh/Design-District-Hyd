@@ -503,7 +503,6 @@ input[type="radio"]:checked + .radio-label { background:var(--teal) !important; 
   <div class="ddf-center">
     <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
     <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
-    <p class="ddf-support">Strategic, creative and digital support by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener">MC Joint Agency</a></p>
     <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
   </div>
   <div class="ddf-right">
@@ -514,13 +513,17 @@ input[type="radio"]:checked + .radio-label { background:var(--teal) !important; 
 </footer>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
+// ── DDH Apps Script backend ── paste your Web App URL here (the same URL goes in every page; see Code.gs)
+const DDH_API_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+function ddhApiReady() { return !!DDH_API_URL && DDH_API_URL.indexOf('PASTE_') !== 0; }
+const SCRIPT_URL = DDH_API_URL;
 
 let stats = { total: 0, new: 0, returning: 0 };
 let currentVisitor = null;
 
 // ── API ────────────────────────────────────
 async function callAPI(payload) {
+  if (!ddhApiReady()) throw new Error('API URL not configured');
   const res  = await fetch(SCRIPT_URL, {
     method: 'POST',
     body: JSON.stringify(payload),
