@@ -612,7 +612,6 @@ body { background:var(--black); color:var(--cream); font-family:'Tenor Sans',san
   <div class="ddf-center">
     <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
     <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
-    <p class="ddf-support">Strategic, creative and digital support by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener">MC Joint Agency</a></p>
     <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
   </div>
   <div class="ddf-right">
@@ -650,18 +649,40 @@ function selectIntent(el, value) {
   el.classList.add('active');
   document.getElementById('intentField').value = value;
 }
+const RSVP_SEASON = 'Season 3';
+// ── DDH Apps Script backend ── paste your Web App URL here (the same URL goes in every page; see Code.gs)
+const DDH_API_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+function ddhApiReady() { return !!DDH_API_URL && DDH_API_URL.indexOf('PASTE_') !== 0; }
 async function handleRsvpSubmit(e) {
   e.preventDefault();
   const form = document.getElementById('rsvpForm');
   const btn = document.getElementById('rsvpBtn');
   btn.textContent = 'Sending…'; btn.disabled = true; btn.style.opacity = '0.7';
   try {
-    const res = await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
-    });
-    if (!res.ok) throw new Error('bad status');
+    const fd = new FormData(form);
+    if (ddhApiReady()) {
+      // → Google Apps Script (Code.gs, action "rsvp")
+      const res = await fetch(DDH_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'rsvp', season: RSVP_SEASON, source: 'map',
+          intent: fd.get('intent'), name: fd.get('name'), email: fd.get('email'),
+          phone: fd.get('phone'), instagram: fd.get('instagram'), _honey: fd.get('bot-field') || ''
+        }),
+        redirect: 'follow'
+      });
+      const out = JSON.parse(await res.text());
+      if (!out.success) throw new Error(out.error || 'Request failed');
+    } else {
+      // Backend URL not set yet → legacy Netlify Forms POST
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(fd).toString()
+      });
+      if (!res.ok) throw new Error('bad status');
+    }
     document.getElementById('rsvpFormWrap').style.display = 'none';
     document.getElementById('rsvpSuccess').style.display = 'flex';
   } catch (err) {
