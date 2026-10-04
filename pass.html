@@ -372,7 +372,6 @@ body { display:flex; flex-direction:column; align-items:center; justify-content:
   <div class="ddf-center">
     <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
     <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
-    <p class="ddf-support">Strategic, creative and digital support by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener">MC Joint Agency</a></p>
     <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
   </div>
   <div class="ddf-right">
@@ -418,6 +417,32 @@ if (waSent || emSent) {
   document.getElementById('deliveryBanner').classList.add('show');
 }
 
+// ── Pass verification (Code.gs → verifyPass). Skipped until DDH_API_URL is set. ──
+// Confirms the Reg ID exists and corrects the tier if the link was edited. No personal data is fetched.
+// ── DDH Apps Script backend ── paste your Web App URL here (the same URL goes in every page; see Code.gs)
+const DDH_API_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+function ddhApiReady() { return !!DDH_API_URL && DDH_API_URL.indexOf('PASTE_') !== 0; }
+(async function verifyPass() {
+  if (!ddhApiReady() || !params.get('reg')) return;
+  try {
+    const res = await fetch(DDH_API_URL + '?action=verifyPass&reg=' + encodeURIComponent(reg));
+    const out = JSON.parse(await res.text());
+    if (!out.success) return;
+    if (out.valid) {
+      if (String(out.tier).toLowerCase() !== tier.toLowerCase()) {
+        const u = new URL(window.location.href);
+        u.searchParams.set('tier', out.tier);
+        window.location.replace(u.toString());
+      }
+    } else {
+      const banner = document.getElementById('deliveryBanner');
+      document.getElementById('deliveryBannerText').innerHTML =
+        '<strong style="color:#C67B52">Not verified online.</strong> Please show your confirmation message or photo ID at entry.';
+      banner.style.borderColor = '#C67B52';
+      banner.classList.add('show');
+    }
+  } catch (e) { /* offline or backend not reachable — pass still works as before */ }
+})();
 // Free QR generation service — no key required, generated live from the Reg ID
 const qrData = encodeURIComponent(reg);
 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${qrData}&bgcolor=F4EEE4&color=0A0A0A`;
