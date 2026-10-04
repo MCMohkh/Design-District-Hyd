@@ -66,21 +66,17 @@ header nav a:hover{color:var(--teal)}
 .season-item input:checked+.season-box::after{content:'';position:absolute;left:4px;top:1px;width:6px;height:9px;border:1.5px solid #0A0A0A;border-top:none;border-left:none;transform:rotate(40deg)}
 .season-text{font-size:14px;font-weight:300;color:var(--warm-white)}
 .season-meta{font-size:11px;color:var(--muted);margin-left:2px}
+/* Confirmation */
+.confirm-row{display:flex;align-items:flex-start;gap:12px;cursor:pointer;margin-top:28px;max-width:560px}
+.confirm-row input[type=checkbox]{display:none}
+.confirm-box{width:16px;height:16px;border:1px solid var(--line-strong);border-radius:2px;flex-shrink:0;position:relative;transition:all 0.15s;margin-top:1px}
+.confirm-row:hover .confirm-box{border-color:var(--teal)}
+.confirm-row input:checked+.confirm-box{background:var(--teal);border-color:var(--teal)}
+.confirm-row input:checked+.confirm-box::after{content:'';position:absolute;left:4px;top:1px;width:6px;height:9px;border:1.5px solid #0A0A0A;border-top:none;border-left:none;transform:rotate(40deg)}
+.confirm-text{font-size:12px;line-height:1.7;color:var(--muted)}
+.confirm-row.has-error .confirm-box{border-color:var(--terracotta)}
+
 /* Submit */
-/* ── Exclusivity clause ── */
-.clause-wrap{margin-top:40px;padding:20px 22px;border:1px solid var(--line-strong);background:rgba(122,173,168,0.04);position:relative;}
-.clause-wrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:rgba(122,173,168,0.4);}
-.clause-label{display:flex;align-items:flex-start;gap:14px;cursor:pointer;}
-.clause-label input[type=checkbox]{display:none;}
-.clause-box{width:17px;height:17px;flex-shrink:0;border:1px solid var(--line-strong);position:relative;margin-top:2px;transition:all 0.15s;}
-.clause-label:hover .clause-box{border-color:var(--teal);}
-.clause-label input:checked+.clause-box{background:var(--teal);border-color:var(--teal);}
-.clause-label input:checked+.clause-box::after{content:'';position:absolute;left:4px;top:1px;width:7px;height:10px;border:1.5px solid #0A0A0A;border-top:none;border-left:none;transform:rotate(40deg);}
-.clause-text{font-size:12px;line-height:1.75;color:rgba(250,247,242,0.7);font-weight:300;}
-.clause-text strong{color:var(--warm-white);font-weight:400;}
-.clause-error{font-size:11px;color:var(--terracotta);margin-top:8px;margin-left:31px;display:none;}
-.clause-wrap.has-error .clause-box{border-color:var(--terracotta);}
-.clause-wrap.has-error .clause-error{display:block;}
 .submit-row{margin-top:48px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
 .btn-submit{background:var(--teal);color:var(--black);border:none;padding:15px 40px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;display:inline-flex;align-items:center;gap:10px}
 .btn-submit:hover{background:var(--teal-light)}
@@ -206,6 +202,12 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
 .apply-section .season-item:hover .season-box { border-color:var(--teal-dark); }
 .apply-section .season-item input:checked+.season-box { background:var(--teal-dark); border-color:var(--teal-dark); }
 .apply-section .season-item input:checked+.season-box::after { border-color:#fff; }
+.apply-section .confirm-box { border:1px solid rgba(26,25,22,0.3); border-radius:0; }
+.apply-section .confirm-row:hover .confirm-box { border-color:var(--teal-dark); }
+.apply-section .confirm-row input:checked+.confirm-box { background:var(--teal-dark); border-color:var(--teal-dark); }
+.apply-section .confirm-row input:checked+.confirm-box::after { border-color:#fff; }
+.apply-section .confirm-text { font-family:'Tenor Sans',sans-serif; font-size:0.62rem; letter-spacing:0.04em; line-height:1.8; }
+.apply-section .confirm-row.has-error .confirm-box { border-color:var(--terracotta); }
 .apply-section .season-text { font-family:'Blanc',serif; font-size:1rem; font-weight:400; color:var(--charcoal); }
 .apply-section .season-meta { font-family:'Tenor Sans',sans-serif; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); }
 .apply-section .submit-row { margin-top:3.5rem; gap:2rem; }
@@ -394,21 +396,14 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
       </div>
     </div>
 
+    <label class="confirm-row" id="confirm-row">
+      <input type="checkbox" id="confirm-exclusivity" name="confirm_exclusivity">
+      <span class="confirm-box"></span>
+      <span class="confirm-text">I understand that once my stall is confirmed, I will not participate in any other event or exhibition in the 30 days prior to Design District's event date. Non-compliance may result in my stall being removed, with any advance paid treated as non-refundable.</span>
+    </label>
+
     <!-- Honeypot -->
     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-
-    <!-- Exclusivity clause -->
-    <div class="clause-wrap" id="clause-wrap">
-      <label class="clause-label">
-        <input type="checkbox" id="clause-check" name="exclusivity_agreed" value="yes">
-        <span class="clause-box"></span>
-        <span class="clause-text">
-          I understand that <strong>upon confirmation of my stall, I will not participate in any other pop-up, exhibition, or retail event within 30 days prior to Design District's event date</strong> in the same city. This helps us protect the exclusivity and curation of the show for all exhibitors and guests.<br><br>
-          <span style="font-size:11px;color:var(--muted);font-style:italic;">Should this condition not be met after confirmation, the allocated stall may be forfeited and any advance paid will be non-refundable.</span>
-        </span>
-      </label>
-      <div class="clause-error" id="clause-error">Please read and agree to the above before submitting.</div>
-    </div>
 
     <div class="submit-row">
       <button type="submit" class="btn-submit" id="submit-btn">
@@ -437,7 +432,7 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       @designdistrict.hyd
     </a>
-    <span class="ddf-link">Season 4 · Date TBD</span>
+    <span class="ddf-link">Novotel HICC · 01 October 2026</span>
   </div>
   <div class="ddf-center">
     <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
@@ -446,16 +441,15 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
     <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
   </div>
   <div class="ddf-right">
-    <a href="https://www.designdistricthyd.com/#rsvp" class="ddf-link">RSVP — Season 4 ↗</a>
+    <a href="https://www.designdistricthyd.com/#rsvp" class="ddf-link">RSVP — Season 3 ↗</a>
     <a href="https://www.designdistricthyd.com/s3-map" class="ddf-link">Floor Map ↗</a>
   </div>
 </footer>
 
 
 <script>
-// ── DDH Apps Script backend ── paste your Web App URL here (the same URL goes in every page; see Code.gs)
-const DDH_API_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
-function ddhApiReady() { return !!DDH_API_URL && DDH_API_URL.indexOf('PASTE_') !== 0; }
+// ── UPDATE THIS with your Apps Script Web App URL ──
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-QvVFxIV5cIciZ7kRCWRrIUs1IiQpR6WfQFc5pDSxL5YBOvDNlqr5iWijt8XJ6srI/exec';
 
 const form = document.getElementById('apply-form');
 const submitBtn = document.getElementById('submit-btn');
@@ -488,9 +482,10 @@ function validate() {
   if (!phoneOk) valid = false;
   const cat = document.getElementById('cat-value').value;
   if (!cat) { document.getElementById('field-category').classList.add('has-error'); valid = false; }
-  const clause = document.getElementById('clause-check');
-  if (!clause.checked) { document.getElementById('clause-wrap').classList.add('has-error'); valid = false; }
-  else document.getElementById('clause-wrap').classList.remove('has-error');
+  const confirmRow = document.getElementById('confirm-row');
+  const confirmOk = document.getElementById('confirm-exclusivity').checked;
+  confirmRow.classList.toggle('has-error', !confirmOk);
+  if (!confirmOk) valid = false;
   return valid;
 }
 
@@ -505,7 +500,7 @@ form.addEventListener('submit', async (e) => {
   const seasons = Array.from(document.querySelectorAll('input[name="seasons"]:checked')).map(c => c.value);
 
   const data = {
-    action: 's4_application',
+    type: 's4_application',
     designer_name: document.getElementById('designer_name').value.trim(),
     brand_name:    document.getElementById('brand_name').value.trim(),
     email:         document.getElementById('email').value.trim(),
@@ -517,20 +512,17 @@ form.addEventListener('submit', async (e) => {
     previous_seasons: seasons.length ? seasons.join(', ') : 'First time',
     stall_size:    document.getElementById('stall-size').value,
     source:        document.getElementById('source').value,
-    exclusivity_agreed: document.getElementById('clause-check').checked ? 'yes' : 'no',
+    accepted_exclusivity_clause: document.getElementById('confirm-exclusivity').checked,
     submitted_at:  new Date().toISOString(),
   };
 
   try {
-    if (!ddhApiReady()) throw new Error('API URL not configured');
-    const res = await fetch(DDH_API_URL, {
+    await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(data),
-      redirect: 'follow'
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
-    const out = JSON.parse(await res.text());
-    if (!out.success) throw new Error(out.error || 'Request failed');
     form.style.display = 'none';
     successState.classList.add('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -541,12 +533,11 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
-document.getElementById('clause-check').addEventListener('change', () => {
-  document.getElementById('clause-wrap').classList.remove('has-error');
-});
-
 document.querySelectorAll('input, textarea, select').forEach(el => {
   el.addEventListener('input', () => { el.closest('.field')?.classList.remove('has-error'); });
+});
+document.getElementById('confirm-exclusivity').addEventListener('change', (e) => {
+  if (e.target.checked) document.getElementById('confirm-row').classList.remove('has-error');
 });
 </script>
 <script>
