@@ -1082,6 +1082,11 @@ a:hover > .footer-mc-logo { filter: grayscale(0); opacity: 1; }
     document.getElementById('intentField').value = value;
   }
 
+  const RSVP_SEASON = 'Season 4';
+  // ── DDH Apps Script backend ── paste your Web App URL here (the same URL goes in every page; see Code.gs)
+  const DDH_API_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  function ddhApiReady() { return !!DDH_API_URL && DDH_API_URL.indexOf('PASTE_') !== 0; }
+
   async function handleRsvpSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('rsvpForm');
@@ -1093,13 +1098,29 @@ a:hover > .footer-mc-logo { filter: grayscale(0); opacity: 1; }
     btn.style.opacity = '0.7';
 
     try {
-      // Netlify Forms accepts fetch POST with URL-encoded body
-      const data = new FormData(form);
-      await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data).toString()
-      });
+      const fd = new FormData(form);
+      if (ddhApiReady()) {
+        // → Google Apps Script (Code.gs, action "rsvp")
+        const res = await fetch(DDH_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'rsvp', season: RSVP_SEASON, source: 'home',
+            intent: fd.get('intent'), name: fd.get('name'), email: fd.get('email'),
+            phone: fd.get('phone'), instagram: fd.get('instagram'), _honey: fd.get('bot-field') || ''
+          }),
+          redirect: 'follow'
+        });
+        const out = JSON.parse(await res.text());
+        if (!out.success) throw new Error(out.error || 'Request failed');
+      } else {
+        // Backend URL not set yet → keep the legacy Netlify Forms POST so RSVPs aren't lost
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(fd).toString()
+        });
+      }
 
       // GA4 RSVP conversion
       if (typeof gtag === 'function') {
