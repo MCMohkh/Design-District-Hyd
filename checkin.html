@@ -4,6 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DDH Check-In | Design District Hyd</title>
+<!-- DDH staff gate: passcode is verified by the Apps Script backend (never stored in this page) -->
+<script id="ddh-gate">
+(function(){
+  var API='https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec',K='ddh_staff_pass';
+  function get(){try{return sessionStorage.getItem(K)||''}catch(e){return ''}}
+  function put(v){try{v?sessionStorage.setItem(K,v):sessionStorage.removeItem(K)}catch(e){}}
+  var of=window.fetch.bind(window);
+  window.fetch=function(u,o){
+    var isApi=String(u&&u.url||u).indexOf('script.google.com/macros/s/')>-1;
+    try{if(isApi&&o&&typeof o.body==='string'&&get()){var b=JSON.parse(o.body);if(!b.pass){b.pass=get();o=Object.assign({},o,{body:JSON.stringify(b)});}}}catch(e){}
+    return of(u,o).then(function(r){
+      if(isApi){r.clone().text().then(function(t){if(t.indexOf('"unauthorized":true')>-1){put('');show('Session expired — enter the passcode again.');}}).catch(function(){});}
+      return r;});
+  };
+  var box;
+  function show(msg){
+    if(box&&box.parentNode){if(msg)box.querySelector('.m').textContent=msg;return;}
+    box=document.createElement('div');
+    box.style.cssText='position:fixed;inset:0;z-index:99999;background:#0A0A0A;display:flex;align-items:center;justify-content:center;padding:1.5rem;font-family:"Tenor Sans",Arial,sans-serif';
+    box.innerHTML='<form style="max-width:340px;width:100%;text-align:center;color:#F4EEE4"><img src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd" style="height:70px;margin:0 auto 1.4rem;filter:invert(1)"><div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#7AADA8;margin-bottom:1.2rem">Team access</div><input type="password" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode" style="width:100%;background:transparent;border:0;border-bottom:1px solid rgba(244,238,228,.4);color:#F4EEE4;font-size:1.1rem;padding:.7rem 0;text-align:center;outline:0"><button type="submit" style="margin-top:1.4rem;width:100%;background:#7AADA8;color:#0A0A0A;border:0;padding:.95rem;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer">Enter</button><div class="m" style="min-height:1.2rem;margin-top:1rem;font-size:.7rem;color:#e08a7a">'+(msg||'')+'</div></form>';
+    (document.body||document.documentElement).appendChild(box);
+    var f=box.querySelector('form'),i=box.querySelector('input'),m=box.querySelector('.m'),b=box.querySelector('button');
+    setTimeout(function(){i.focus()},50);
+    f.onsubmit=function(e){e.preventDefault();var v=i.value;if(!v)return;b.disabled=true;m.textContent='';
+      of(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'verifyPasscode',pass:v}),redirect:'follow'})
+       .then(function(r){return r.text()}).then(function(t){var o=JSON.parse(t);if(o.success){put(v);box.remove();location.reload();}else{m.textContent=o.message||'Wrong passcode';b.disabled=false;i.select();}})
+       .catch(function(){m.textContent='Could not reach the server — try again.';b.disabled=false;});};
+  }
+  function init(){if(!get())show('');}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
 <style>
@@ -333,7 +366,7 @@ fbq('track', 'PageView');
   gtag('config', 'G-X7RKF1HT7J');
 </script>
 <meta name="description" content="Check-in desk for Design District Hyd — search a guest by phone number or register a walk-in.">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://www.designdistricthyd.com/checkin.html">
 <meta property="og:title" content="DDH Check-In | Design District Hyd">
 <meta property="og:type" content="website">
@@ -551,7 +584,7 @@ fbq('track', 'PageView');
   <div class="ddf-center">
     <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
     <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
-    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
+    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC"><img class="ddf-mc" src="/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC"></a></div>
   </div>
   <div class="ddf-right">
     <a href="https://www.designdistricthyd.com/#rsvp" class="ddf-link">RSVP — Season 3 ↗</a>

@@ -1,5 +1,9 @@
 # Design District Hyd — robots.txt
 User-agent: *
 Allow: /
+Disallow: /scan.html
+Disallow: /checkin.html
+Disallow: /pass.html
+Disallow: /VIP-rsvp.html
 
 Sitemap: https://www.designdistricthyd.com/sitemap.xml

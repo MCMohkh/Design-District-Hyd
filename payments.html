@@ -91,19 +91,22 @@ table.pt{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.7rem}tab
 <div class="full"><button type="submit" class="btn solid">View my account</button><div class="msg" role="status"></div></div></form>
 <p class="note">Your application ID was emailed when you applied. Payment instructions are in your stall confirmation email.</p></div></section>
 <section id="account" style="display:none"><div class="wrap"><div class="eyebrow" id="a-brand"></div><h2 class="title">Your <span>account</span></h2>
+<div class="eyebrow" id="a-stage" style="margin-top:1.2rem"></div>
 <div class="sum" id="a-sum"></div>
-<table class="pt" id="a-tbl"><thead><tr><th>Date</th><th>Transaction ID</th><th>Amount</th><th>Status</th></tr></thead><tbody></tbody></table>
+<table class="pt" id="a-items"><thead><tr><th>Accessory</th><th>Buy / Rent</th><th>Qty</th><th>Amount (excl. GST)</th></tr></thead><tbody></tbody></table>
+<table class="pt" id="a-tbl"><thead><tr><th>Date</th><th>Transaction ID</th><th>For</th><th>Amount</th><th>Status</th></tr></thead><tbody></tbody></table>
 <div style="height:3rem"></div><div class="eyebrow">Step 2</div><h2 class="title">Add a <span>payment</span></h2>
 <form class="f" id="pform" novalidate><div class="hp" aria-hidden="true"><label>Leave empty <input name="_honey" tabindex="-1" autocomplete="off"></label></div>
+<div><label for="p-purpose">Payment is for</label><select id="p-purpose" name="purpose"><option>Advance (non-refundable)</option><option>Accessories</option><option>Final payment</option><option>Other</option></select></div>
 <div><label for="p-date">Payment date</label><input id="p-date" name="paymentDate" type="date" required></div>
-<div><label for="p-txn">Transaction ID / UTR</label><input id="p-txn" name="txnId" required maxlength="80"></div>
+<div><label for="p-txn">Transaction ID / UTR (not needed for cash)</label><input id="p-txn" name="txnId" maxlength="80"></div>
 <div><label for="p-amt">Amount paid (₹)</label><input id="p-amt" name="amount" type="number" min="1" step="0.01" required inputmode="decimal"></div>
 <div><label>This amount is</label><div class="radio"><label><input type="radio" name="basis" value="Inclusive" checked> Inclusive of GST</label><label><input type="radio" name="basis" value="Exclusive"> Exclusive of GST</label></div></div>
-<div><label for="p-mode">Mode</label><select id="p-mode" name="mode"><option>UPI</option><option>Bank transfer (NEFT/IMPS/RTGS)</option><option>Cheque</option><option>Cash</option></select></div>
+<div><label for="p-mode">Mode</label><select id="p-mode" name="mode"><option>UPI</option><option>Bank transfer</option><option>Cheque</option><option>Cash</option></select></div>
 <div><label for="p-proof">Note / screenshot link (optional)</label><input id="p-proof" name="proof" maxlength="300"></div>
 <div class="full"><div class="note" id="p-preview" style="margin:0"></div></div>
 <div class="full"><button type="submit" class="btn solid">Submit payment details</button><div class="msg" role="status"></div></div></form>
-<div class="done" id="pform-done"><h3>Payment details received</h3><p>Thank you — we'll verify it against our bank statement and it will show as paid once verified. <a href="/payments" style="color:var(--teal)">Add another or refresh</a></p></div>
+<div class="done" id="pform-done"><h3>Payment details received</h3><p>Thank you — we'll verify it against our bank statement / cash book and it will show as paid once verified. <a href="/payments" style="color:var(--teal)">Add another or refresh</a></p></div>
 </div></section>
 
 <script>
@@ -118,9 +121,10 @@ catch(err){m.className='msg err';m.textContent=err.message||'Something went wron
 
 let ACC=null;const inr=n=>'₹ '+(Number(n)||0).toLocaleString('en-IN',{maximumFractionDigits:2});
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function draw(a){ACC=a;document.getElementById('account').style.display='block';document.getElementById('a-brand').textContent=a.brand+' · '+a.appId;
- document.getElementById('a-sum').innerHTML=[['Stall fee (excl. GST)',a.fee,''],['GST @ '+(a.gstPct||a.gstDefault)+'%',a.gst,''],['Total payable',a.total,''],['Paid (verified)',a.paid,'hl'],['Pending',a.pending,'hl']].map(x=>'<div class="'+x[2]+'"><span>'+esc(x[0])+'</span><b>'+inr(x[1])+'</b></div>').join('');
- document.querySelector('#a-tbl tbody').innerHTML=(a.payments.length?a.payments:[{date:'—',txn:'No payments submitted yet',amount:'',status:''}]).map(p=>'<tr><td>'+esc(p.date)+'</td><td>'+esc(p.txn)+'</td><td>'+(p.amount===''?'':inr(p.amount)+' <small>('+esc(p.basis)+' GST)</small>')+'</td><td>'+esc(p.status)+'</td></tr>').join('');
+function draw(a){ACC=a;document.getElementById('account').style.display='block';document.getElementById('a-brand').textContent=a.brand+' · '+a.appId+(a.stall?' · Stall '+a.stall:'');document.getElementById('a-stage').textContent='Status: '+(a.stage||'—');
+ document.querySelector('#a-items tbody').innerHTML=(a.items.length?a.items:[{item:'No accessories added yet',type:'',qty:'',amount:''}]).map(x=>'<tr><td>'+esc(x.item)+'</td><td>'+esc(x.type)+'</td><td>'+esc(x.qty)+'</td><td>'+(x.amount===''?'':inr(x.amount))+'</td></tr>').join('');
+ document.getElementById('a-sum').innerHTML=[['Stall fee (excl. GST)',a.fee,''],['Accessories (excl. GST)',a.accessories,''],['GST @ '+(a.gstPct||a.gstDefault)+'%',a.gst,''],['Total payable',a.total,''],['Advance paid (verified)',a.advance,'hl'],['Paid in total (verified)',a.paid,'hl'],['Pending',a.pending,'hl']].map(x=>'<div class="'+x[2]+'"><span>'+esc(x[0])+'</span><b>'+inr(x[1])+'</b></div>').join('');
+ document.querySelector('#a-tbl tbody').innerHTML=(a.payments.length?a.payments:[{date:'—',txn:'No payments submitted yet',purpose:'',amount:'',status:''}]).map(p=>'<tr><td>'+esc(p.date)+'</td><td>'+esc(p.txn)+'</td><td>'+esc(p.purpose)+'</td><td>'+(p.amount===''?'':inr(p.amount)+' <small>('+esc(p.basis)+' GST)</small>')+'</td><td>'+esc(p.status)+'</td></tr>').join('');
  preview();document.getElementById('account').scrollIntoView({behavior:'smooth'})}
 function preview(){if(!ACC)return;const f=document.getElementById('pform'),amt=parseFloat(f.amount.value),ex=f.basis.value==='Exclusive',r=(Number(ACC.gstPct)||Number(ACC.gstDefault)||18)/100,el=document.getElementById('p-preview');
  if(!(amt>0)){el.textContent='';return}const gross=ex?amt*(1+r):amt,base=gross/(1+r);el.textContent='Credited toward your total: '+inr(gross)+' (base '+inr(base)+' + GST '+inr(gross-base)+') once verified.'}
@@ -128,7 +132,7 @@ document.getElementById('pform').addEventListener('input',preview);
 document.getElementById('lform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button');if(!f.checkValidity()){f.reportValidity();return}
  m.className='msg';m.textContent='';b.disabled=true;try{const o=await ddhPost({action:'paymentLookup',appId:f.appId.value.trim(),email:f.email.value.trim(),_honey:f._honey.value});window.ACCREQ={appId:f.appId.value.trim(),email:f.email.value.trim()};draw(o.data)}catch(err){m.className='msg err';m.textContent=err.message}b.disabled=false});
 document.getElementById('pform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button[type=submit]');if(!f.checkValidity()){f.reportValidity();return}
- m.className='msg';m.textContent='';b.disabled=true;try{await ddhPost(Object.assign({action:'paymentSubmit',paymentDate:f.paymentDate.value,txnId:f.txnId.value.trim(),amount:f.amount.value,basis:f.basis.value,mode:f.mode.value,proof:f.proof.value,_honey:f._honey.value},window.ACCREQ));
+ m.className='msg';m.textContent='';b.disabled=true;try{await ddhPost(Object.assign({action:'paymentSubmit',purpose:f.purpose.value,paymentDate:f.paymentDate.value,txnId:f.txnId.value.trim(),amount:f.amount.value,basis:f.basis.value,mode:f.mode.value,proof:f.proof.value,_honey:f._honey.value},window.ACCREQ));
  if(window.gtag)gtag('event','payment_submit',{event_category:'S4 payments'});f.style.display='none';document.getElementById('pform-done').style.display='block'}catch(err){m.className='msg err';m.textContent=err.message;b.disabled=false}});
 
 </script>
@@ -226,7 +230,7 @@ footer#ddh-footer{background:var(--off-black);border-top:1px solid rgba(122,173,
     '<a href="/" class="footer-link">Season 4 · Date TBD</a></div>' +
     '<div class="footer-center"><div style="display:flex;align-items:center;justify-content:center;gap:.8rem;margin-bottom:.8rem"><img src="' + logo + '" alt="Design District Hyd" style="height:52px;width:auto;filter:invert(1);opacity:.85"></div>' +
     '<div class="footer-tagline">One of a Kind Pop Up · Hyderabad</div>' +
-    '<div class="footer-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" class="footer-link" aria-label="MC Joint Agency"><img class="footer-mc-logo" src="' + CONFIG.assets + CONFIG.mcLogo + '" alt="MC Joint Agency"></a></div></div>' +
+    '<div class="footer-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" class="footer-link" aria-label="MC"><img class="footer-mc-logo" src="' + CONFIG.assets + CONFIG.mcLogo + '" alt="MC"></a></div></div>' +
     '<div class="footer-right"><a href="' + CONFIG.rsvp + '" class="footer-link">RSVP — Season 4 ↗</a>' +
     '<a href="' + CONFIG.cta[1] + '" class="footer-link">Season 4 — Apply ↗</a>' +
     '<a href="https://www.designdistricthyd.com/s3-map" class="footer-link">Floor Map ↗</a></div>';
