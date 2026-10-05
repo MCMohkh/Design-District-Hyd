@@ -1,22 +1,5 @@
 # Design District Hyd — robots.txt
-# Public website: https://www.designdistricthyd.com/
-
 User-agent: *
 Allow: /
-
-# Private/admin/internal utilities
-Disallow: /admin-dd-h.html
-Disallow: /ddh-admin-dashboard.html
-Disallow: /checkin.html
-Disallow: /checkin(draft-1).html
-Disallow: /ddh-checkin.html
-Disallow: /scan.html
-Disallow: /pass.html
-Disallow: /stall-setup.html
-Disallow: /Accessories/accessories-requirements.html
-Disallow: /index(23march).html
-
-# Images, CSS and JavaScript are intentionally NOT blocked.
-# This allows search engines to crawl and index visual assets.
 
 Sitemap: https://www.designdistricthyd.com/sitemap.xml

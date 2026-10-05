@@ -221,7 +221,7 @@ a:hover > .ddf-mc { filter:grayscale(0); opacity:1; }
 @media print { .ddf { display:none !important; } }
 
 /* ═════════ DDH THEME — matches the home page ═════════ */
-@font-face { font-family:'Blanc'; src:url('https://ik.imagekit.io/mcjoint/Design%20District/Blanc-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blanc'; src:url('/Blanc-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
 :root { --black:#0A0A0A; --off-black:#111110; --teal:#7AADA8; --teal-dark:#4E8A85; --teal-light:#B0CEC9; --cream:#F4EEE4; --bone:#E8E0D2; --warm-white:#FAF7F2; --terracotta:#C67B52; --gold:#C4A35A; --muted:#8A8070; --charcoal:#1E1D1A; }
 html { scroll-behavior:smooth; }
 body { background:var(--black); color:var(--cream); font-family:'Tenor Sans',sans-serif; }
@@ -309,24 +309,72 @@ input[type="radio"]:checked + .radio-label { background:var(--teal) !important; 
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tenor+Sans&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1055361800740013');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1055361800740013&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7RKF1HT7J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X7RKF1HT7J');
+</script>
+<meta name="description" content="Check-in desk for Design District Hyd — search a guest by phone number or register a walk-in.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.designdistricthyd.com/checkin.html">
+<meta property="og:title" content="DDH Check-In | Design District Hyd">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Design District Hyd">
+<meta property="og:url" content="https://www.designdistricthyd.com/checkin.html">
+<meta property="og:description" content="Check-in desk for Design District Hyd — search a guest by phone number or register a walk-in.">
+<meta property="og:image" content="https://www.designdistricthyd.com/Season%203/DD-season-3-Thumb.jpg">
+<meta property="og:image:alt" content="Models in designer outfits by a pool at Design District Hyd Season 3">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DDH Check-In | Design District Hyd">
+<meta name="twitter:description" content="Check-in desk for Design District Hyd — search a guest by phone number or register a walk-in.">
+<meta name="twitter:image" content="https://www.designdistricthyd.com/Season%203/DD-season-3-Thumb.jpg">
+<link rel="icon" type="image/png" href="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png">
+<style id="ddh-band-css">
+.ddh-band{position:relative;height:150px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#0A0A0A url("/thumbs/Season%203/Design-District-Hyd-Season-3-Aishwarya-Agarwal-gallery-%20%2828%29.webp") center 38%/cover}
+.ddh-band::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.55),rgba(10,10,10,.82))}
+.ddh-band a{position:relative;z-index:1;display:block}
+.ddh-band img{height:74px;width:auto;filter:invert(1);display:block}
+.ddh-foot{background:#111110;border-top:1px solid rgba(122,173,168,.15);padding:2rem 1.5rem;text-align:center;font-family:'Tenor Sans',Arial,sans-serif;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:#8A8070}
+.ddh-foot a{color:#B0CEC9;text-decoration:none}
+.ddh-foot img{height:18px;width:auto;vertical-align:middle;margin-left:.5rem;filter:grayscale(1);opacity:.7}
+</style>
 </head>
 <body>
 
 <!-- NAV (shared, same as home page) -->
 <nav class="ddh-nav static">
-  <a href="https://www.designdistricthyd.com/"><img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+  <a href="https://www.designdistricthyd.com/"><img src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
   <ul class="ddh-links">
-    <li><a href="https://www.designdistricthyd.com/#about">About</a></li>
-    <li><a href="https://www.designdistricthyd.com/#past">Season 01</a></li>
-    <li><a href="https://www.designdistricthyd.com/#season-2">Season 02</a></li>
-    <li><a href="https://www.designdistricthyd.com/#season-3">Season 03</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/Season%201/">Season 01</a></li>
+    <li><a href="/Season%202/">Season 02</a></li>
+    <li><a href="/Season%203/">Season 03</a></li>
     <li><a href="https://www.designdistricthyd.com/s3-map">Floor Map</a></li>
     <li><a href="https://www.designdistricthyd.com/#collabs">Designers</a></li>
     <li><a href="https://www.designdistricthyd.com/#testimonials">Voices</a></li>
-    <li><a href="https://www.designdistricthyd.com/Season-4" class="cta">Season 4</a></li>
+    <li><a href="https://www.designdistricthyd.com/apply" class="cta">Season 4</a></li>
   </ul>
   <div class="ddh-burger" id="ddhBurger" onclick="ddhMenu()"><span></span><span></span><span></span></div>
 </nav>
+<div class="ddh-band" role="banner"><a href="/" aria-label="Design District Hyd — home"><img src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a></div>
 <div class="ddh-mobile" id="ddhMobile">
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#about">About</a>
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#past">Season 01</a>
@@ -335,7 +383,7 @@ input[type="radio"]:checked + .radio-label { background:var(--teal) !important; 
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/s3-map">Floor Map</a>
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#collabs">Designers</a>
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#testimonials">Voices</a>
-  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/Season-4" class="cta">Season 4</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/apply" class="cta">Season 4</a>
 </div>
 
 <div class="header">
@@ -471,7 +519,7 @@ input[type="radio"]:checked + .radio-label { background:var(--teal) !important; 
         <div class="pass-visitor-detail" id="passArea">—</div>
       </div>
       <div class="pass-footer">
-        <span class="pass-date">24 March 2026</span>
+        <span class="pass-date">1 October 2026</span>
         <span class="pass-valid">✓ VALID PASS</span>
       </div>
     </div>
@@ -501,29 +549,25 @@ input[type="radio"]:checked + .radio-label { background:var(--teal) !important; 
     <span class="ddf-link">Novotel HICC · 01 October 2026</span>
   </div>
   <div class="ddf-center">
-    <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+    <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
     <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
-    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
+    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
   </div>
   <div class="ddf-right">
     <a href="https://www.designdistricthyd.com/#rsvp" class="ddf-link">RSVP — Season 3 ↗</a>
-    <a href="https://www.designdistricthyd.com/Season-4" class="ddf-link">Season 4 — Apply ↗</a>
+    <a href="https://www.designdistricthyd.com/apply" class="ddf-link">Season 4 — Apply ↗</a>
     <a href="https://www.designdistricthyd.com/s3-map" class="ddf-link">Floor Map ↗</a>
   </div>
 </footer>
 
 <script>
-// ── DDH Apps Script backend ── paste your Web App URL here (the same URL goes in every page; see Code.gs)
-const DDH_API_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
-function ddhApiReady() { return !!DDH_API_URL && DDH_API_URL.indexOf('PASTE_') !== 0; }
-const SCRIPT_URL = DDH_API_URL;
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
 
 let stats = { total: 0, new: 0, returning: 0 };
 let currentVisitor = null;
 
 // ── API ────────────────────────────────────
 async function callAPI(payload) {
-  if (!ddhApiReady()) throw new Error('API URL not configured');
   const res  = await fetch(SCRIPT_URL, {
     method: 'POST',
     body: JSON.stringify(payload),
@@ -714,7 +758,7 @@ Your digital entry pass is confirmed! ✨
 👤 *${name}*
 🎫 *Visitor ID: ${id}*
 📍 ${area || 'Hyderabad'}
-📅 March 24, 2026
+📅 October 1, 2026
 
 Show this ID at the entry gate, or have your QR code ready.
 

@@ -40,9 +40,9 @@ src="https://www.facebook.com/tr?id=1055361800740013&ev=PageView&noscript=1"
 <meta property="og:site_name" content="Design District Hyd">
 <meta property="og:title" content="Season 01 — The Beginning | Design District Hyd">
 <meta property="og:description" content="29 September 2025 · Park Hyatt, Hyderabad. 55 of India's finest designers, curated by Aishwarya Agarwal — see the line-up, reels and moments from the first Design District.">
-<meta property="og:url" content="https://www.designdistricthyd.com/season%201/">
-<meta property="og:image" content="https://raw.githubusercontent.com/MCMohkh/Design-District-Hyd/main/Season%201/DD-season-1-Thumb.jpg">
-<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/MCMohkh/Design-District-Hyd/main/Season%201/DD-season-1-Thumb.jpg">
+<meta property="og:url" content="https://www.designdistricthyd.com/Season%201/">
+<meta property="og:image" content="https://www.designdistricthyd.com/Season%201/DD-season-1-Thumb.jpg">
+<meta property="og:image:secure_url" content="https://www.designdistricthyd.com/Season%201/DD-season-1-Thumb.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:locale" content="en_IN">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -50,10 +50,10 @@ src="https://www.facebook.com/tr?id=1055361800740013&ev=PageView&noscript=1"
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Season 01 — The Beginning | Design District Hyd">
 <meta name="twitter:description" content="55 of India's finest designers under one roof at Park Hyatt, Hyderabad — 29 September 2025.">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/MCMohkh/Design-District-Hyd/main/Season%201/DD-season-1-Thumb.jpg">
+<meta name="twitter:image" content="https://www.designdistricthyd.com/Season%201/DD-season-1-Thumb.jpg">
 <meta name="twitter:image:alt" content="Designers Parul &amp; Preyanka, Ankur Verma's TIL studio and Studio Moonray at Design District Hyd Season 1">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Design District Hyd — Season 01","startDate":"2025-09-29","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"Park Hyatt Hyderabad","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"}},"description":"A one-day luxury designer pop-up in Hyderabad with 55 of India's finest fashion, jewellery and accessory labels, curated by Aishwarya Agarwal.","image":"https://raw.githubusercontent.com/MCMohkh/Design-District-Hyd/main/Season%201/DD-season-1-Thumb.jpg","organizer":{"@type":"Organization","name":"Design District Hyd","url":"https://www.designdistricthyd.com/"}}</script>
-<link rel="canonical" href="https://www.designdistricthyd.com/season%201/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Design District Hyd — Season 01","startDate":"2025-09-29","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","location":{"@type":"Place","name":"Park Hyatt Hyderabad","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"}},"description":"A one-day luxury designer pop-up in Hyderabad with 55 of India's finest fashion, jewellery and accessory labels, curated by Aishwarya Agarwal.","image":"https://www.designdistricthyd.com/Season%201/DD-season-1-Thumb.jpg","organizer":{"@type":"Organization","name":"Design District Hyd","url":"https://www.designdistricthyd.com/"}}</script>
+<link rel="canonical" href="https://www.designdistricthyd.com/Season%201/">
 <link rel="icon" type="image/png" href="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Tenor+Sans&display=swap" rel="stylesheet">
@@ -138,6 +138,7 @@ section{padding:6rem 4rem}
 .d .no{font-size:.55rem;letter-spacing:.15em;color:var(--teal-dark)}
 .d .nm{font-family:'Blanc','Playfair Display',serif;font-size:1.2rem;line-height:1.2}
 .d .hd{font-size:.58rem;letter-spacing:.12em;color:var(--muted);margin-top:.25rem;word-break:break-all}
+.d .ct{font-size:.56rem;letter-spacing:.05em;color:var(--teal-light);opacity:.75;margin-top:.35rem;line-height:1.5}
 .d .lk{display:flex;gap:.5rem;align-items:center;margin-top:.5rem;flex-wrap:wrap}
 .chip{font-size:.45rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line);padding:.35rem .6rem;color:var(--teal-light);transition:.25s;background:none;font-family:inherit;cursor:pointer}
 .chip:hover{background:var(--teal);color:var(--black);border-color:var(--teal)}
@@ -226,21 +227,13 @@ section.collapsed .sec-head p{display:none}
           <div class="intent-btn" onclick="selectIntent(this,'Update Me')">Update Me</div>
           <div class="intent-btn" onclick="selectIntent(this,'Collaborate')">Collab</div>
         </div>
-
-        <!-- Netlify form: data-netlify="true" enables Netlify form detection.
-             netlify-honeypot="bot-field" adds spam protection.
-             action="/thank-you" is optional — we handle success in JS instead. -->
         <form
           id="rsvpForm"
-          name="rsvp-season2"
+          name="rsvp"
           method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
           onsubmit="handleRsvpSubmit(event)"
           style="display:flex;flex-direction:column;gap:1.1rem;margin-top:0.2rem;"
         >
-          <!-- Netlify hidden field — required for form detection -->
-          <input type="hidden" name="form-name" value="rsvp-season2">
 
           <!-- Honeypot field — hidden from humans, catches bots -->
           <p style="display:none"><label>Don't fill this: <input name="bot-field"></label></p>
@@ -395,7 +388,7 @@ moreBtn.onclick=()=>render(false);render(true);
 const dList=document.getElementById('dList'),exList=document.getElementById('exList'),q=document.getElementById('q');
 function row(d,i,showNo){const el=document.createElement('div');el.className='d';
  const ig=d.h?'https://www.instagram.com/'+d.h+'/':'';
- el.innerHTML='<div class="no">'+(showNo?String(i+1).padStart(2,'0'):'·')+'</div><div><div class="nm">'+esc(d.n)+'</div><div class="hd">'+(d.h?'@'+esc(d.h):'Handle to be added')+'</div><div class="lk">'+
+ el.innerHTML='<div class="no">'+(showNo?String(i+1).padStart(2,'0'):'·')+'</div><div><div class="nm">'+esc(d.n)+'</div><div class="hd">'+(d.h?'@'+esc(d.h):'Handle to be added')+'</div>'+(d.c?'<div class="ct">'+esc(d.c)+'</div>':'')+'<div class="lk">'+
   (d.w?'<a class="chip" href="'+esc(d.w)+'" target="_blank" rel="noopener">Website ↗</a>':'')+
   (d.posts?'<button class="chip" data-d="'+esc(d.n)+'">'+d.posts+' post'+(d.posts>1?'s':'')+'</button>':'')+'</div></div>'+
   (d.h?'<a class="ig" href="'+ig+'" target="_blank" rel="noopener" aria-label="'+esc(d.n)+' on Instagram">'+IG_ICON+'</a>':'<span class="ig off">'+IG_ICON+'</span>');
@@ -449,14 +442,7 @@ document.getElementById('designers').addEventListener('click',e=>{const b=e.targ
         });
         const out = JSON.parse(await res.text());
         if (!out.success) throw new Error(out.error || 'Request failed');
-      } else {
-        // Backend URL not set yet → keep the legacy Netlify Forms POST so RSVPs aren't lost
-        await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(fd).toString()
-        });
-      }
+      } else { throw new Error("Backend URL missing"); }
 
       // GA4 RSVP conversion
       if (typeof gtag === 'function') {
@@ -516,15 +502,15 @@ if (location.hash === '#rsvp') addEventListener('load', function () { setTimeout
     contactEmail: '',                          // e.g. 'hello@designdistricthyd.com' — hidden while empty
     instagram: 'https://www.instagram.com/designdistrict.hyd/',
     links: [
-      ['About',      '/#about'],
-      ['Season 01',  '/season%201/'],
-      ['Season 02',  '/#season-2'],
-      ['Season 03',  '/#season-3'],
+      ['About',      '/about'],
+      ['Season 01',  '/Season%201/'],
+      ['Season 02',  '/Season%202/'],
+      ['Season 03',  '/Season%203/'],
       ['Floor Map',  'https://www.designdistricthyd.com/s3-map'],
       ['Designers',  '/#collabs'],
       ['Voices',     '/#testimonials']
     ],
-    cta: ['Season 4', 'https://www.designdistricthyd.com/Season-4'],
+    cta: ['Season 4', 'https://www.designdistricthyd.com/apply'],
     rsvp: '/#rsvp'                             // index.html opens its RSVP panel on #rsvp
   };
 

@@ -123,7 +123,7 @@ a:hover > .ddf-mc { filter:grayscale(0); opacity:1; }
 @media print { .ddf { display:none !important; } }
 
 /* ═════════ DDH THEME — matches the home page ═════════ */
-@font-face { font-family:'Blanc'; src:url('https://ik.imagekit.io/mcjoint/Design%20District/Blanc-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Blanc'; src:url('/Blanc-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
 :root { --black:#0A0A0A; --off-black:#111110; --teal:#7AADA8; --teal-dark:#4E8A85; --teal-light:#B0CEC9; --cream:#F4EEE4; --bone:#E8E0D2; --warm-white:#FAF7F2; --terracotta:#C67B52; --gold:#C4A35A; --muted:#8A8070; --charcoal:#1E1D1A; }
 html { scroll-behavior:smooth; }
 body { background:var(--black); color:var(--cream); font-family:'Tenor Sans',sans-serif; }
@@ -226,21 +226,59 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tenor+Sans&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1055361800740013');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1055361800740013&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7RKF1HT7J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-X7RKF1HT7J');
+</script>
+<meta name="description" content="Apply to showcase your label at Design District Hyd Season 4 — Hyderabad's curated designer exhibition. Share your brand details and the team will be in touch.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.designdistricthyd.com/apply">
+<meta property="og:title" content="Apply — Design District Hyd · Season 4">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Design District Hyd">
+<meta property="og:url" content="https://www.designdistricthyd.com/apply">
+<meta property="og:description" content="Apply to showcase your label at Design District Hyd Season 4 — Hyderabad's curated designer exhibition. Share your brand details and the team will be in touch.">
+<meta property="og:image" content="https://www.designdistricthyd.com/Season%203/DD-season-3-Thumb.jpg">
+<meta property="og:image:alt" content="Models in designer outfits by a pool at Design District Hyd Season 3">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Apply — Design District Hyd · Season 4">
+<meta name="twitter:description" content="Apply to showcase your label at Design District Hyd Season 4 — Hyderabad's curated designer exhibition. Share your brand details and the team will be in touch.">
+<meta name="twitter:image" content="https://www.designdistricthyd.com/Season%203/DD-season-3-Thumb.jpg">
+<link rel="icon" type="image/png" href="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png">
 </head>
 <body>
 
 <!-- NAV (shared, same as home page) -->
 <nav class="ddh-nav">
-  <a href="https://www.designdistricthyd.com/"><img src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+  <a href="https://www.designdistricthyd.com/"><img src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
   <ul class="ddh-links">
-    <li><a href="https://www.designdistricthyd.com/#about">About</a></li>
-    <li><a href="https://www.designdistricthyd.com/#past">Season 01</a></li>
-    <li><a href="https://www.designdistricthyd.com/#season-2">Season 02</a></li>
-    <li><a href="https://www.designdistricthyd.com/#season-3">Season 03</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/Season%201/">Season 01</a></li>
+    <li><a href="/Season%202/">Season 02</a></li>
+    <li><a href="/Season%203/">Season 03</a></li>
     <li><a href="https://www.designdistricthyd.com/s3-map">Floor Map</a></li>
     <li><a href="https://www.designdistricthyd.com/#collabs">Designers</a></li>
     <li><a href="https://www.designdistricthyd.com/#testimonials">Voices</a></li>
-    <li><a href="https://www.designdistricthyd.com/Season-4" class="cta current">Season 4</a></li>
+    <li><a href="https://www.designdistricthyd.com/apply" class="cta current">Season 4</a></li>
   </ul>
   <div class="ddh-burger" id="ddhBurger" onclick="ddhMenu()"><span></span><span></span><span></span></div>
 </nav>
@@ -252,7 +290,7 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/s3-map">Floor Map</a>
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#collabs">Designers</a>
   <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/#testimonials">Voices</a>
-  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/Season-4" class="cta current">Season 4</a>
+  <a onclick="ddhMenu()" href="https://www.designdistricthyd.com/apply" class="cta current">Season 4</a>
 </div>
 
 <section class="ddh-hero s4-hero">
@@ -417,6 +455,7 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
 
   <div id="success-state">
     <div class="check-ring">✓</div>
+    <p style="margin-bottom:1rem">Your application ID: <b id="app-id">—</b><br>Keep it — you'll need it to share payment details if your stall is confirmed.</p>
     <h2>Application<br><em>received.</em></h2>
     <p>Thank you for applying to Design District Season 4.<br>We'll be in touch within 3–5 days.<br><br>Follow <a href="https://instagram.com/designdistrict.hyd" style="color:var(--teal)">@designdistrict.hyd</a> for updates.</p>
   </div>
@@ -435,10 +474,9 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
     <span class="ddf-link">Novotel HICC · 01 October 2026</span>
   </div>
   <div class="ddf-center">
-    <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="https://ik.imagekit.io/mcjoint/Design%20District/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
+    <a href="https://www.designdistricthyd.com/"><img class="ddf-logo" src="/Main%20images/DD%20-%20Logo%20Black%20(for%20web).png" alt="Design District Hyd"></a>
     <div class="ddf-tagline">One of a Kind Pop Up · Hyderabad</div>
-    <p class="ddf-support">Strategic, creative and digital support by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener">MC Joint Agency</a></p>
-    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="https://www.designdistricthyd.com/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
+    <div class="ddf-copy">© 2026 Design District Hyd. All rights reserved.<br>Website designed by <a href="https://www.mcjoint.in/" target="_blank" rel="noopener" aria-label="MC Joint Agency"><img class="ddf-mc" src="/Main%20images/MC-Joint-Agency-logo-sonu-mohkh.png" alt="MC Joint Agency"></a></div>
   </div>
   <div class="ddf-right">
     <a href="https://www.designdistricthyd.com/#rsvp" class="ddf-link">RSVP — Season 3 ↗</a>
@@ -448,8 +486,8 @@ body { min-height:100vh; display:flex; flex-direction:column; font-weight:400; }
 
 
 <script>
-// ── UPDATE THIS with your Apps Script Web App URL ──
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-QvVFxIV5cIciZ7kRCWRrIUs1IiQpR6WfQFc5pDSxL5YBOvDNlqr5iWijt8XJ6srI/exec';
+// Shared DDH backend (same deployment as every other form; see Code.gs)
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzb14Vn7TQ3OXN3qzRVSqMyeqjIksF0415J4Ae4GFUQzxVwaM4nINZUt47bnsp1wdQA/exec';
 
 const form = document.getElementById('apply-form');
 const submitBtn = document.getElementById('submit-btn');
@@ -500,7 +538,9 @@ form.addEventListener('submit', async (e) => {
   const seasons = Array.from(document.querySelectorAll('input[name="seasons"]:checked')).map(c => c.value);
 
   const data = {
+    action: 's4_application',
     type: 's4_application',
+    _honey: document.querySelector('input[name="_honey"]').value,
     designer_name: document.getElementById('designer_name').value.trim(),
     brand_name:    document.getElementById('brand_name').value.trim(),
     email:         document.getElementById('email').value.trim(),
@@ -517,17 +557,22 @@ form.addEventListener('submit', async (e) => {
   };
 
   try {
-    await fetch(APPS_SCRIPT_URL, {
+    const res = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data),
+      redirect: 'follow'
     });
+    const out = JSON.parse(await res.text());
+    if (!out.success) throw new Error(out.message || 'Request failed');
+    if (window.fbq) fbq('track', 'Lead');
+    if (window.gtag) gtag('event', 'generate_lead', { event_category: 'S4 application' });
+    const idEl = document.getElementById('app-id'); if (idEl && out.data) idEl.textContent = out.data.id;
     form.style.display = 'none';
     successState.classList.add('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
-    alert('Something went wrong. Please try again or email us directly.');
+    alert('Something went wrong sending your application. Please try again in a moment.');
     submitBtn.classList.remove('loading');
     submitBtn.disabled = false;
   }

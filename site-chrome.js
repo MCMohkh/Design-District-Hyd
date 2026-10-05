@@ -11,15 +11,15 @@
     contactEmail: '',                          // e.g. 'hello@designdistricthyd.com' — hidden while empty
     instagram: 'https://www.instagram.com/designdistrict.hyd/',
     links: [
-      ['About',      '/#about'],
-      ['Season 01',  '/season%201/'],
-      ['Season 02',  '/#season-2'],
-      ['Season 03',  '/#season-3'],
+      ['About',      '/about'],
+      ['Season 01',  '/Season%201/'],
+      ['Season 02',  '/Season%202/'],
+      ['Season 03',  '/Season%203/'],
       ['Floor Map',  'https://www.designdistricthyd.com/s3-map'],
       ['Designers',  '/#collabs'],
       ['Voices',     '/#testimonials']
     ],
-    cta: ['Season 4', 'https://www.designdistricthyd.com/Season-4'],
+    cta: ['Season 4', 'https://www.designdistricthyd.com/apply'],
     rsvp: '/#rsvp'                             // index.html opens its RSVP panel on #rsvp
   };
 
