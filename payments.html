@@ -115,7 +115,7 @@ table.pt{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.7rem}tab
 <div><label>This amount is</label><div class="radio"><label><input type="radio" name="basis" value="Inclusive" checked> Inclusive of GST</label><label><input type="radio" name="basis" value="Exclusive"> Exclusive of GST</label></div></div>
 <div><label for="p-mode">Mode</label><select id="p-mode" name="mode"><option>UPI</option><option>Bank transfer</option><option>Cheque</option><option>Cash</option></select></div>
 <div><label for="p-proof">Note / screenshot link (optional)</label><input id="p-proof" name="proof" maxlength="300"></div>
-<div class="full"><div class="note" id="p-preview" style="margin:0"></div></div>
+<div class="full"><div class="note" style="margin:0 0 .5rem">Cash payments and accessories are always counted as inclusive of GST.</div><div class="note" id="p-preview" style="margin:0"></div></div>
 <div class="full"><button type="submit" class="btn solid">Submit payment details</button><div class="msg" role="status"></div></div></form>
 <style>.accg{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;margin-top:1.2rem}.acci{border:1px solid rgba(128,128,128,.35);padding:.7rem;text-align:center}.acci img{width:100%;height:120px;object-fit:contain;background:#fff}.acci b{display:block;margin-top:.4rem}.acci small{display:block;opacity:.75}.acci input{width:5rem;margin-top:.4rem;text-align:center}</style>
 <div class="done" id="pform-done"><h3>Payment details received</h3><p>Thank you — we'll verify it against our bank statement / cash book and it will show as paid once verified. <a href="/payments" style="color:var(--teal)">Add another or refresh</a></p></div>
@@ -143,7 +143,7 @@ document.getElementById('v-firm').value=(a.inv&&a.inv.firm)||a.brand||'';documen
  accTotal();
  preview();document.getElementById('account').scrollIntoView({behavior:'smooth'})}
 function preview(){if(!ACC)return;const f=document.getElementById('pform'),amt=parseFloat(f.amount.value),ex=f.basis.value==='Exclusive',r=(Number(ACC.gstPct)||Number(ACC.gstDefault)||18)/100,el=document.getElementById('p-preview');
- if(!(amt>0)){el.textContent='';return}const gross=(ex&&f.purpose.value!=='Accessories')?amt*(1+r):amt,base=gross/(1+r);el.textContent='Credited toward your total: '+inr(gross)+' (base '+inr(base)+' + GST '+inr(gross-base)+') once verified.'}
+ if(!(amt>0)){el.textContent='';return}const gross=(ex&&f.purpose.value!=='Accessories'&&f.mode.value!=='Cash')?amt*(1+r):amt,base=gross/(1+r);el.textContent='Credited toward your total: '+inr(gross)+' (base '+inr(base)+' + GST '+inr(gross-base)+') once verified.'}
 function accTotal(){let t=0;document.querySelectorAll('#acc-grid input').forEach(i=>t+=(parseInt(i.value)||0)*Number(i.dataset.price));document.getElementById('acc-total').textContent='Accessories selected: '+inr(t)+' (GST included)'}
 document.getElementById('acc-grid').addEventListener('input',accTotal);
 async function relookup(){try{const o=await ddhPost(Object.assign({action:'paymentLookup'},window.ACCREQ));draw(o.data)}catch(e){}}
@@ -152,7 +152,7 @@ document.getElementById('iv').addEventListener('submit',async e=>{e.preventDefau
 document.getElementById('af').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button');
  const lines=[...document.querySelectorAll('#acc-grid input')].map(i=>({key:i.dataset.key,qty:parseInt(i.value)||0})).filter(l=>l.qty>0);
  m.className='msg';m.textContent='';b.disabled=true;try{await ddhPost(Object.assign({action:'accessoriesOrder',lines:lines},window.ACCREQ));if(window.gtag)gtag('event','accessories_order',{event_category:'S4 payments'});m.className='msg ok';m.textContent='Saved — your account has been updated.';await relookup()}catch(err){m.className='msg err';m.textContent=err.message}b.disabled=false});
-document.getElementById('pform').addEventListener('input',e=>{const f=document.getElementById('pform'),acc=f.purpose.value==='Accessories';if(acc)f.basis.value='Inclusive';f.querySelectorAll('input[name=basis]').forEach(r=>r.disabled=acc);preview()});
+document.getElementById('pform').addEventListener('input',e=>{const f=document.getElementById('pform'),acc=f.purpose.value==='Accessories'||f.mode.value==='Cash';if(acc)f.basis.value='Inclusive';f.querySelectorAll('input[name=basis]').forEach(r=>r.disabled=acc);preview()});
 document.getElementById('lform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button');if(!f.checkValidity()){f.reportValidity();return}
  m.className='msg';m.textContent='';b.disabled=true;try{const o=await ddhPost({action:'paymentLookup',appId:f.appId.value.trim(),email:f.email.value.trim(),_honey:f._honey.value});window.ACCREQ={appId:f.appId.value.trim(),email:f.email.value.trim()};draw(o.data)}catch(err){m.className='msg err';m.textContent=err.message}b.disabled=false});
 document.getElementById('pform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button[type=submit]');if(!f.checkValidity()){f.reportValidity();return}
