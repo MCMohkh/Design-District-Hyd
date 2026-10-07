@@ -93,7 +93,7 @@ table.pt{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.7rem}tab
 <section id="account" style="display:none"><div class="wrap"><div class="eyebrow" id="a-brand"></div><h2 class="title">Your <span>account</span></h2>
 <div class="eyebrow" id="a-stage" style="margin-top:1.2rem"></div>
 <div class="sum" id="a-sum"></div>
-<table class="pt" id="a-items"><thead><tr><th>Accessory</th><th>Buy / Rent</th><th>Qty</th><th>Amount (excl. GST)</th></tr></thead><tbody></tbody></table>
+<table class="pt" id="a-items"><thead><tr><th>Accessory</th><th>Buy / Rent</th><th>Qty</th><th>Amount (incl. GST)</th></tr></thead><tbody></tbody></table>
 <table class="pt" id="a-tbl"><thead><tr><th>Date</th><th>Transaction ID</th><th>For</th><th>Amount</th><th>Status</th></tr></thead><tbody></tbody></table>
 <div style="height:3rem"></div><div class="eyebrow">Step 2</div><h2 class="title">Invoice <span>details</span></h2>
 <p class="note" style="margin-top:.6rem">Your invoice is issued to the name and address below. Add a GSTIN only if you have one. We never ask for bank account details here.</p>
@@ -103,7 +103,7 @@ table.pt{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.7rem}tab
 <div class="full"><label for="v-addr">Billing address</label><textarea id="v-addr" name="address" required maxlength="400"></textarea></div>
 <div class="full"><button type="submit" class="btn solid">Save invoice details</button><div class="msg" role="status"></div></div></form>
 <div style="height:3rem"></div><div class="eyebrow">Step 3</div><h2 class="title">Accessories for <span>your stall</span></h2>
-<p class="note" style="margin-top:.6rem">Included with participation: 1 billing table, 2 chairs and 2 food &amp; beverage coupons (breakfast / morning tea and high tea). Stall guidelines: a 4×3 stall holds up to 8 rods plus 1 trial room; a 3×3 stall holds a maximum of 6 rods. Anything extra is at additional cost, per unit, subject to availability and confirmation by the team. Prices are before GST.</p>
+<p class="note" style="margin-top:.6rem">Included with participation: 1 billing table, 2 chairs and 2 food &amp; beverage coupons (breakfast / morning tea and high tea). Stall guidelines: a 4×3 stall holds up to 8 rods plus 1 trial room; a 3×3 stall holds a maximum of 6 rods. Anything extra is at additional cost, per unit, subject to availability and confirmation by the team. Prices include GST and are paid and tracked separately from your stall fee.</p>
 <form id="af" novalidate><div class="accg" id="acc-grid"></div><div class="note" id="acc-total" style="margin:1rem 0"></div>
 <button type="submit" class="btn solid">Save accessories</button><div class="msg" role="status"></div></form>
 <div style="height:3rem"></div><div class="eyebrow">Step 4</div><h2 class="title">Add a <span>payment</span></h2>
@@ -135,7 +135,7 @@ let ACC=null;const inr=n=>'₹ '+(Number(n)||0).toLocaleString('en-IN',{maximumF
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function draw(a){ACC=a;document.getElementById('account').style.display='block';document.getElementById('a-brand').textContent=a.brand+' · '+a.appId+(a.stall?' · Stall '+a.stall:'');document.getElementById('a-stage').textContent='Status: '+(a.stage||'—');
  document.querySelector('#a-items tbody').innerHTML=(a.items.length?a.items:[{item:'No accessories added yet',type:'',qty:'',amount:''}]).map(x=>'<tr><td>'+esc(x.item)+'</td><td>'+esc(x.type)+'</td><td>'+esc(x.qty)+'</td><td>'+(x.amount===''?'':inr(x.amount))+'</td></tr>').join('');
- document.getElementById('a-sum').innerHTML=[['Stall fee (excl. GST)',a.fee,''],['Accessories (excl. GST)',a.accessories,''],['GST @ '+(a.gstPct||a.gstDefault)+'%',a.gst,''],['Total payable',a.total,''],['Advance paid (verified)',a.advance,'hl'],['Paid in total (verified)',a.paid,'hl'],['Pending',a.pending,'hl']].map(x=>'<div class="'+x[2]+'"><span>'+esc(x[0])+'</span><b>'+inr(x[1])+'</b></div>').join('');
+ document.getElementById('a-sum').innerHTML=[['Stall fee agreed ('+(a.feeBasis==='GST included'?'GST included':'GST extra')+')',a.fee,''],['of which / plus GST @ '+(a.gstPct||a.gstDefault)+'%',a.gst,''],['Stall total',a.stallTotal,''],['Stall paid (verified)',a.stallPaid,'hl'],['Stall pending',a.stallPending,'hl'],['Accessories (GST included)',a.accessories,''],['Accessories paid',a.accPaid,'hl'],['Accessories pending',a.accPending,'hl'],['Total pending',a.totalPending,'hl']].map(x=>'<div class="'+x[2]+'"><span>'+esc(x[0])+'</span><b>'+inr(x[1])+'</b></div>').join('');
  document.querySelector('#a-tbl tbody').innerHTML=(a.payments.length?a.payments:[{date:'—',txn:'No payments submitted yet',purpose:'',amount:'',status:''}]).map(p=>'<tr><td>'+esc(p.date)+'</td><td>'+esc(p.txn)+'</td><td>'+esc(p.purpose)+'</td><td>'+(p.amount===''?'':inr(p.amount)+' <small>('+esc(p.basis)+' GST)</small>')+'</td><td>'+esc(p.status)+'</td></tr>').join('');
 document.getElementById('v-firm').value=(a.inv&&a.inv.firm)||a.brand||'';document.getElementById('v-gstin').value=(a.inv&&a.inv.gstin)||'';document.getElementById('v-addr').value=(a.inv&&a.inv.address)||'';
  const mine={};a.items.forEach(x=>{if(x.by==='Designer')mine[x.item]=x.qty});
@@ -143,8 +143,8 @@ document.getElementById('v-firm').value=(a.inv&&a.inv.firm)||a.brand||'';documen
  accTotal();
  preview();document.getElementById('account').scrollIntoView({behavior:'smooth'})}
 function preview(){if(!ACC)return;const f=document.getElementById('pform'),amt=parseFloat(f.amount.value),ex=f.basis.value==='Exclusive',r=(Number(ACC.gstPct)||Number(ACC.gstDefault)||18)/100,el=document.getElementById('p-preview');
- if(!(amt>0)){el.textContent='';return}const gross=ex?amt*(1+r):amt,base=gross/(1+r);el.textContent='Credited toward your total: '+inr(gross)+' (base '+inr(base)+' + GST '+inr(gross-base)+') once verified.'}
-function accTotal(){let t=0;document.querySelectorAll('#acc-grid input').forEach(i=>t+=(parseInt(i.value)||0)*Number(i.dataset.price));document.getElementById('acc-total').textContent='Accessories selected: '+inr(t)+' before GST'+(ACC?' ('+inr(t*(1+(Number(ACC.gstPct)||Number(ACC.gstDefault)||18)/100))+' with GST)':'')}
+ if(!(amt>0)){el.textContent='';return}const gross=(ex&&f.purpose.value!=='Accessories')?amt*(1+r):amt,base=gross/(1+r);el.textContent='Credited toward your total: '+inr(gross)+' (base '+inr(base)+' + GST '+inr(gross-base)+') once verified.'}
+function accTotal(){let t=0;document.querySelectorAll('#acc-grid input').forEach(i=>t+=(parseInt(i.value)||0)*Number(i.dataset.price));document.getElementById('acc-total').textContent='Accessories selected: '+inr(t)+' (GST included)'}
 document.getElementById('acc-grid').addEventListener('input',accTotal);
 async function relookup(){try{const o=await ddhPost(Object.assign({action:'paymentLookup'},window.ACCREQ));draw(o.data)}catch(e){}}
 document.getElementById('iv').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button');if(!f.checkValidity()){f.reportValidity();return}
@@ -152,7 +152,7 @@ document.getElementById('iv').addEventListener('submit',async e=>{e.preventDefau
 document.getElementById('af').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button');
  const lines=[...document.querySelectorAll('#acc-grid input')].map(i=>({key:i.dataset.key,qty:parseInt(i.value)||0})).filter(l=>l.qty>0);
  m.className='msg';m.textContent='';b.disabled=true;try{await ddhPost(Object.assign({action:'accessoriesOrder',lines:lines},window.ACCREQ));if(window.gtag)gtag('event','accessories_order',{event_category:'S4 payments'});m.className='msg ok';m.textContent='Saved — your account has been updated.';await relookup()}catch(err){m.className='msg err';m.textContent=err.message}b.disabled=false});
-document.getElementById('pform').addEventListener('input',preview);
+document.getElementById('pform').addEventListener('input',e=>{const f=document.getElementById('pform'),acc=f.purpose.value==='Accessories';if(acc)f.basis.value='Inclusive';f.querySelectorAll('input[name=basis]').forEach(r=>r.disabled=acc);preview()});
 document.getElementById('lform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button');if(!f.checkValidity()){f.reportValidity();return}
  m.className='msg';m.textContent='';b.disabled=true;try{const o=await ddhPost({action:'paymentLookup',appId:f.appId.value.trim(),email:f.email.value.trim(),_honey:f._honey.value});window.ACCREQ={appId:f.appId.value.trim(),email:f.email.value.trim()};draw(o.data)}catch(err){m.className='msg err';m.textContent=err.message}b.disabled=false});
 document.getElementById('pform').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=f.querySelector('.msg'),b=f.querySelector('button[type=submit]');if(!f.checkValidity()){f.reportValidity();return}
@@ -258,6 +258,7 @@ footer#ddh-footer{background:var(--off-black);border-top:1px solid rgba(122,173,
     '<div class="footer-right"><a href="' + CONFIG.rsvp + '" class="footer-link">RSVP — Season 4 ↗</a>' +
     '<a href="' + CONFIG.cta[1] + '" class="footer-link">Season 4 — Apply ↗</a>' +
     '<a href="https://www.designdistricthyd.com/s3-map" class="footer-link">Floor Map ↗</a></div>';
+  /* The address is assembled at click time so it never appears in the HTML (stops "[email protected]" obfuscation and scrapers). */
   var mailEl = f.querySelector('#ddh-mail');
   if (mailEl) mailEl.addEventListener('click', function (e) { e.preventDefault(); location.href = 'mail' + 'to:' + ['designdistricthyd', 'gmail.com'].join('@') + '?subject=' + encodeURIComponent('Hello from the website'); });
   var old = document.querySelector('footer:not(#ddh-footer)'); if (old) old.remove();
