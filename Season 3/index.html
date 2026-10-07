@@ -551,6 +551,7 @@ footer#ddh-footer{background:var(--off-black);border-top:1px solid rgba(122,173,
     '<div class="footer-right"><a href="' + CONFIG.rsvp + '" class="footer-link">RSVP — Season 4 ↗</a>' +
     '<a href="' + CONFIG.cta[1] + '" class="footer-link">Season 4 — Apply ↗</a>' +
     '<a href="https://www.designdistricthyd.com/s3-map" class="footer-link">Floor Map ↗</a></div>';
+  /* The address is assembled at click time so it never appears in the HTML (stops "[email protected]" obfuscation and scrapers). */
   var mailEl = f.querySelector('#ddh-mail');
   if (mailEl) mailEl.addEventListener('click', function (e) { e.preventDefault(); location.href = 'mail' + 'to:' + ['designdistricthyd', 'gmail.com'].join('@') + '?subject=' + encodeURIComponent('Hello from the website'); });
   var old = document.querySelector('footer:not(#ddh-footer)'); if (old) old.remove();
