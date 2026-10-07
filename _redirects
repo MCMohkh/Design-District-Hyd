@@ -1,4 +1,4 @@
-# Cloudflare Pages / Netlify style redirects (ignored by hosts that don't support them)
+# Netlify redirects (also valid on Cloudflare Pages)
 /Season-4        /apply          301
 /Season-4.html   /apply          301
 /S3-map          /s3-map         301

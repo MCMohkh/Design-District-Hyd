@@ -1,0 +1,20 @@
+# Netlify config — _redirects is also read by Netlify; pretty URLs (/apply → apply.html) are on by default.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/thumbs/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/web/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/accessories/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
