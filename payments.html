@@ -249,7 +249,7 @@ footer#ddh-footer{background:var(--off-black);border-top:1px solid rgba(122,173,
   var igIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:.7"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
   var f = document.createElement('footer'); f.id = 'ddh-footer';
   f.innerHTML = '<div class="footer-left">' +
-    (CONFIG.contactEmail ? '<a href="mailto:' + CONFIG.contactEmail + '" class="footer-link">' + CONFIG.contactEmail + '</a>' : '') +
+    '<a href="/about#contact" id="ddh-mail" class="footer-link">Send an email</a>' +
     '<a href="' + CONFIG.instagram + '" target="_blank" rel="noopener" class="footer-link" style="display:flex;align-items:center;gap:.6rem">' + igIcon + '@designdistrict.hyd</a>' +
     '<a href="/" class="footer-link">Season 4 · Date TBD</a></div>' +
     '<div class="footer-center"><div style="display:flex;align-items:center;justify-content:center;gap:.8rem;margin-bottom:.8rem"><img src="' + logo + '" alt="Design District Hyd" style="height:52px;width:auto;filter:invert(1);opacity:.85"></div>' +
@@ -258,6 +258,8 @@ footer#ddh-footer{background:var(--off-black);border-top:1px solid rgba(122,173,
     '<div class="footer-right"><a href="' + CONFIG.rsvp + '" class="footer-link">RSVP — Season 4 ↗</a>' +
     '<a href="' + CONFIG.cta[1] + '" class="footer-link">Season 4 — Apply ↗</a>' +
     '<a href="https://www.designdistricthyd.com/s3-map" class="footer-link">Floor Map ↗</a></div>';
+  var mailEl = f.querySelector('#ddh-mail');
+  if (mailEl) mailEl.addEventListener('click', function (e) { e.preventDefault(); location.href = 'mail' + 'to:' + ['designdistricthyd', 'gmail.com'].join('@') + '?subject=' + encodeURIComponent('Hello from the website'); });
   var old = document.querySelector('footer:not(#ddh-footer)'); if (old) old.remove();
   var scripts = document.querySelectorAll('body > script'); document.body.insertBefore(f, scripts.length ? scripts[0] : null);
 

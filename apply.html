@@ -466,7 +466,7 @@ fbq('track', 'PageView');
 <!-- FOOTER (shared) -->
 <footer class="ddf">
   <div class="ddf-left">
-    <a href="mailto:designdistricthyd@gmail.com" class="ddf-link">designdistricthyd@gmail.com</a>
+    <a href="/about#contact" id="ddh-mail" class="ddf-link">Send an email</a>
     <a href="https://www.instagram.com/designdistrict.hyd/" target="_blank" rel="noopener" class="ddf-link ddf-ig">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       @designdistrict.hyd
@@ -588,5 +588,6 @@ document.getElementById('confirm-exclusivity').addEventListener('change', (e) =>
 <script>
 function ddhMenu(){var o=document.getElementById('ddhMobile').classList.toggle('open');document.getElementById('ddhBurger').classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
 </script>
+<script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('#ddh-mail').forEach(function(m){m.addEventListener('click',function(e){e.preventDefault();location.href='mail'+'to:'+['designdistricthyd','gmail.com'].join('@')+'?subject='+encodeURIComponent('Hello from the website')})})})</script>
 </body>
 </html>
